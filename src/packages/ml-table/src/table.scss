@@ -1,0 +1,192 @@
+.ml-table {
+  padding: 0 8px;
+  overflow: hidden;
+  .ml-table-empty {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    &-img {
+      width: 160px;
+      display: block;
+      margin: 0 auto 10px;
+    }
+  }
+  .outer-btn-box{
+    margin-bottom: 16px;
+  }
+  .el-table {
+    width: 100%;
+    .cell {
+      .td-text {
+        // @include text-overflow();
+        // overflow: hidden; //超出的文本隐藏
+        // text-overflow: ellipsis; //溢出用省略号显示
+        // white-space: nowrap; //溢出不换行
+        line-height: 20px;
+      }
+      .td-img-box{
+        display: flex;
+        align-items: center;
+      }
+      .td-img {
+        height: 20px;
+        width: 20px;
+        margin-left: 4px;
+        display: inline-block;
+        &:first-child{
+          margin-left: 0;
+        }
+        .el-icon-circle-close {
+          color: #fff;
+        }
+      }
+      .success,.error,.warning,.done,.failed{
+        &::before{
+          content: '';
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          display: inline-block;
+          margin: 0px 4px 2px 0;
+        }
+      }
+      .success::before{
+        background-color: #19cc96;
+      }
+      .error::before{
+        background-color: #ff5b63;
+      }
+      .warning::before{
+        background-color: #ff8f33;
+      }
+      .done::before{
+        background-color: #3786fd;
+      }
+      .failed::before{
+        background-color: #c0c0c0;
+      }
+    }
+    
+    thead th {
+      color: #909399;
+      font-weight: 500;
+      background-color: #f1f5f7;
+      position: relative; //loading层级问题
+    }
+  }
+}
+
+// 因为优先级的问题。放在外层来
+.ml-table-pagination {
+  text-align: right;
+  margin-top: 10px;
+  padding: 0;
+  font-weight: normal;
+  &.is-background {
+    .btn-next,  .btn-prev,  .el-pager li{
+      height: 32px;
+      line-height: 32px;
+      background: none;
+      border: 1px solid #d9d9d9;
+      
+      min-width: 32px;
+      &.active{
+        border: 0;
+      }
+    }
+    .el-pagination__jump,.el-pagination__total{
+      height: 32px;
+      line-height: 32px;
+      font-size: 12px;
+      color: #666666;
+    }
+    .el-input__inner{
+      line-height: 32px;
+      height: 32px;
+      font-size: 12px;
+      color: #666666;
+    }
+    .el-pagination__sizes .el-input__inner{
+      padding-left: 12px;
+      
+      text-align: left;
+    }
+  }
+}
+
+.ml-table-search {
+  display: flex;
+  align-items: flex-start;
+  max-width: 1400px;
+  &.btn-in-form {
+    max-width: 1200px;
+    .ml-form {
+      .search-btn-box {
+        text-align: right;
+        flex: 1;
+        margin: 0 15px;
+        min-width: 120px;
+      }
+    }
+    .ml-form.label-top {
+      .search-btn-box {
+        margin-top: 26px;
+      }
+    }
+  }
+  &.hide-more {
+    .ml-form {
+      overflow: hidden;
+      height: 62px;
+      &.medium {
+        height: 58px;
+      }
+      &.small {
+        height: 51px;
+      }
+      &.mini {
+        height: 47px;
+      }
+    }
+    .ml-form.label-top {
+      height: 88px;
+      &.medium {
+        height: 84px;
+      }
+      &.small {
+        height: 67px;
+      }
+      &.mini {
+        height: 63px;
+      }
+    }
+  }
+  .search-form-box {
+    flex: 1;
+    &.hide-more {
+      .more {
+        margin: 5px auto 0;
+      }
+    }
+    .more {
+      width: 120px;
+      font-size: 14px;
+      height: 16px;
+      margin: -10px auto 0;
+      color: #d3dce6;
+      cursor: pointer;
+      &:hover {
+        color: #409eff;
+      }
+    }
+  }
+  > .search-btn-box {
+    margin-left: 20px;
+  }
+  &.label-top {
+    > .search-btn-box {
+      margin-top: 26px;
+    }
+  }
+}

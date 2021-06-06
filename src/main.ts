@@ -3,6 +3,6 @@ import VueCompositionAPI from '@vue/composition-api'
 
 Vue.use(VueCompositionAPI)
 
-import test from './components/test';
+import test from './components/test'
 
-new Vue(test).$mount('#app')
+new Vue(test).$mount('#app') 

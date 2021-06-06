@@ -4,11 +4,18 @@
     "module": "esnext",
     "moduleResolution": "node",
     "strict": true,
+    // 运行通过对象的aa.bb的方式取值
+    "suppressImplicitAnyIndexErrors": true,
     "jsx": "preserve",
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "lib": ["esnext", "dom"]
+    "lib": ["esnext", "dom"],
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [ "src/*"],
+      "types/*": ["types/*"]
+    }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }
