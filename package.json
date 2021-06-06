@@ -1,0 +1,36 @@
+{
+  "name": "ml-components",
+  "version": "1.0.0",
+  "description": "ml组件库",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/menglimu/ml-components.git"
+  },
+  "keywords": [
+    "rollup",
+    "vite",
+    "vue2",
+    "mlcomponents"
+  ],
+  "author": "wenlin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/menglimu/ml-components/issues"
+  },
+  "homepage": "https://github.com/menglimu/ml-components#readme",
+  "devDependencies": {
+    "@vue/composition-api": "^1.0.0-rc.11",
+    "rollup": "^2.50.6",
+    "typescript": "^4.1.3",
+    "vite": "^2.3.5",
+    "vite-plugin-vue2": "^1.6.2"
+  },
+  "dependencies": {
+    "vue": "^2.6.13"
+  }
+}
