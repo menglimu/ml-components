@@ -14,7 +14,7 @@ import { AnyObj, Partial } from '.'
 /** mlForm 对象定义 */
 export class MlForm extends ElForm {
   /** 重置初始值 */
-  reset(): void
+  private reset(): void
 }
 
 /** mlForm的prop对象集合 */
@@ -59,7 +59,7 @@ interface MlColumnBase<O = AnyObj> {
   options?: Array<O>
 
   /** 异步获取的数据选项函数 */
-  optionsGet?(): Promise<{ content: O[] }>
+  optionsGet?: () => Promise<{ content: O[] }>
 
   /** 下拉显示的名字key 默认label
    * @default label
@@ -85,8 +85,8 @@ interface MlFormRule {
   required?: boolean
   min?: number
   max?: number
-  validator?(rule: any, value: any, callback: { (error?: Error): void }): void
-  asyncValidator?(rule: any, value: any, callback: { (error?: Error): void }): void
+  validator?: (rule: any, value: any, callback: (error?: Error) => void) => void
+  asyncValidator?: (rule: any, value: any, callback: (error?: Error) => void) => void
   // validator(value:any, rootValue?:any): boolean
 }
 
@@ -132,8 +132,8 @@ interface MlFormColumn<D> extends MlColumnBase {
    * @see https://element.eleme.cn/#/zh-CN/component/form
    */
   rules?: Array<MlFormRule>
-  /** 是否展示，默认 true，可传方法，通过其他值或条件来控制 rootValue：根对象,*/
-  show?: boolean | { (rootValue: D): boolean }
+  /** 是否展示，默认 true，可传方法，通过其他值或条件来控制 rootValue：根对象, */
+  show?: boolean | ((rootValue: D) => boolean)
   /** form-item的类名，自定义样式的时候可以使用 */
   className?: string
   /** uiType为round的时候。控制时候显示round
@@ -143,9 +143,9 @@ interface MlFormColumn<D> extends MlColumnBase {
   /** 对输入的值进行格式化 */
   format?: {
     /** 自己的值格式化为组件的正常值 */
-    toEleValue?(value: any, rootValue: D): any
+    toEleValue?: (value: any, rootValue: D) => any
     /** 组件的值转为自己的格式 */
-    toValue?(value: any, rootValue: D): any
+    toValue?: (value: any, rootValue: D) => any
   }
   /** 标签名，不填会从组件内匹配，自定义标签的时候，使用 */
   tag?: string
@@ -158,9 +158,9 @@ interface MlFormColumn<D> extends MlColumnBase {
   /** nodeData的props的代理 */
   props?: AnyObj
   /** 输入项的子对象 */
-  children?: VNode | Element | { (h: CreateElement): VNode | Element }
+  children?: VNode | Element | ((h: CreateElement) => VNode | Element)
   /** 自定义输入项的渲染 */
-  render?(h: CreateElement, value: any, onInput: { (value?: any): void }): VNode | Element
+  render?: (h: CreateElement, value: any, onInput: (value?: any) => void) => VNode | Element
 }
 
 /** 表单的配置项,D为输出的data对象的类型 */
@@ -183,7 +183,7 @@ export interface MlFormConfig<D = AnyObj> {
   /** 每个输入项的长度，
    * @default  33.33%, block 默认100%
    */
-  itemBoxWidth?: string //输入项宽度
+  itemBoxWidth?: string // 输入项宽度
 
   /** 输入项内容的长度
    * @default 100%
@@ -216,9 +216,9 @@ export interface MlFormConfig<D = AnyObj> {
   /** 数据格式化函数 */
   format?: {
     /** 自己的值格式化为组件的正常值 */
-    toEleValue?(value: any): D
+    toEleValue?: (value: any) => D
     /** 组件的值转为自己的格式 */
-    toValue?(value: D): any
+    toValue?: (value: D) => any
   }
 
   /** 具体表单项的配置 */
@@ -263,7 +263,7 @@ interface ComponentsPreset {
   [key: string]: {
     tag?: string
     nodeData?: VNodeData
-    children?: VNode[] | Element[] | { (h: CreateElement): VNode[] | Element[] }
+    children?: VNode[] | Element[] | ((h: CreateElement) => VNode[] | Element[])
   }
 }
 

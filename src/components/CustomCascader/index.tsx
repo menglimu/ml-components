@@ -1,26 +1,25 @@
-import Vue from 'vue';
-export default Vue.ex({
+import Vue from 'vue'
+import moduleName from 'index.module.scss'
+
+export default Vue.extend({
   name: 'CustomCascader',
   props: {
     options: { type: Array, required: true },
     optionLabel: { type: String, default: 'label' },
     optionValue: { type: String, default: 'value' },
-    value: { type: null, dault: null },
+    value: { type: String, default: null },
     props: { type: Object, default: () => ({}) }
   },
   computed: {
     propsObj(this: any) {
-      return Object.assign(
-        {},
-        {
-          checkStrictly: true,
-          expandTrigger: 'hover',
-          emitPath: false,
-          value: this.optionValue,
-          label: this.optionLabel
-        },
-        this.props
-      )
+      return {
+        checkStrictly: true,
+        expandTrigger: 'hover',
+        emitPath: false,
+        value: this.optionValue,
+        label: this.optionLabel,
+        ...this.props
+      }
     }
   },
   methods: {
@@ -38,7 +37,7 @@ export default Vue.ex({
     return (
       <el-cascader
         ref="cascader"
-        class="custom-cascader"
+        class={['custom-cascader', moduleName.aa]}
         popper-class="custom-cascader-popper"
         value={this.value}
         onInput={this.onInput}
@@ -48,7 +47,8 @@ export default Vue.ex({
           default: ({ data }) => (
             <div onClick={() => this.onClick(data[this.propsObj.value])}>{data[this.propsObj.label]}</div>
           )
-        }}></el-cascader>
+        }}
+      ></el-cascader>
     )
   }
 })

@@ -1,8 +1,7 @@
-
-/** 
-* 右侧视频播放弹窗
-* TODO: 添加播放视频流。对象。判断重复
-*/
+/**
+ * 右侧视频播放弹窗
+ * TODO: 添加播放视频流。对象。判断重复
+ */
 import Vue from 'vue'
 import Dplayer from '@/components/Dplayer'
 require('./index.scss')
@@ -28,15 +27,17 @@ export default Vue.extend({
     }
   },
   render() {
-    return <div class='global-video-player'>
-      {this.urls.map((item, index) => 
-        <div class='player-box'>
-          <Dplayer url={item}></Dplayer>
-          <button class='el-dialog__headerbtn' circle onClick={() => this.remove(index)}>
-            <i class='el-icon-close'></i>
-          </button>
-        </div>
-      )}
-    </div>
+    return (
+      <div class="global-video-player">
+        {this.urls.map((item, index) => (
+          <div class="player-box">
+            <Dplayer url={item}></Dplayer>
+            <button class="el-dialog__headerbtn" circle onClick={() => this.remove(index)}>
+              <i class="el-icon-close"></i>
+            </button>
+          </div>
+        ))}
+      </div>
+    )
   }
 })

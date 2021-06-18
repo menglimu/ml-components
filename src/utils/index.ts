@@ -10,13 +10,13 @@
 
 export function parseTime(time: Date | number | string, format = 'yyyy-mm-dd hh:ii:ss') {
   if (!time) return ''
-  let date
-  if (typeof time === 'object') {
+  let date: Date
+  if (time instanceof Date) {
     date = time
   } else {
-    time = typeof time === 'string' ? parseInt(time) : time
-    if (('' + time).length === 10) time = time * 1000
-    date = new Date(time)
+    let _time = typeof time === 'string' ? parseInt(time, 10) : time
+    if (String(_time).length === 10) _time = _time * 1000
+    date = new Date(_time)
   }
   const formatObj: any = {
     y: date.getFullYear(),
@@ -38,9 +38,9 @@ export function parseTime(time: Date | number | string, format = 'yyyy-mm-dd hh:
   return time_str
 }
 
-export function formatTime(time: any, option: any) {
-  time = +time * 1000
-  const d = new Date(time)
+export function formatTime(time: string | number, option: any) {
+  let time_ = Number(time) * 1000
+  const d = new Date(time_)
   const now = Date.now()
 
   const diff = (now - d.getTime()) / 1000
@@ -56,7 +56,7 @@ export function formatTime(time: any, option: any) {
     return '1天前'
   }
   if (option) {
-    return parseTime(time, option)
+    return parseTime(time_, option)
   } else {
     return d.getMonth() + 1 + '月' + d.getDate() + '日' + d.getHours() + '时' + d.getMinutes() + '分'
   }
@@ -86,7 +86,7 @@ export function Throttle(delay: number): Function {
   return (target: Function, propertyKey: string, propertyDesciptor: PropertyDescriptor) => {
     const method = propertyDesciptor.value
     let timer: any = null
-    propertyDesciptor.value = function(this: any, ...args: any[]) {
+    propertyDesciptor.value = function (this: any, ...args: any[]) {
       if (timer) {
         return
       }
@@ -111,9 +111,7 @@ export function createRandomId() {
     '-' +
     new Date().getTime() +
     '-' +
-    Math.random()
-      .toString()
-      .substr(2, 5)
+    Math.random().toString().substr(2, 5)
   )
 }
 

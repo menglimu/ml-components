@@ -6,7 +6,7 @@
  * @Description:  防止重复点击指令
  */
 
-import { DirectiveOptions } from "vue"
+import { DirectiveOptions } from 'vue'
 
 const preventReClick: DirectiveOptions = {
   inserted(el: HTMLElement, value: any) {

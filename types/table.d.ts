@@ -60,9 +60,9 @@ export interface MlTableProps<D = AnyObj, S = AnyObj> {
   outerBtn?: MlTableOuterBtn<D>[]
 
   /** 数据加载前的钩子函数，可处理请求参数，也可在api中的list方法中处理请求 */
-  beforeGetList?: { (type: string, params: S & TableParams): AnyObj }
+  beforeGetList?: (type: string, params: S & TableParams) => AnyObj
   /** 数据加载后的钩子函数 */
-  afterGetList?: { (type: string, res: AnyObj): void }
+  afterGetList?: (type: string, res: AnyObj) => void
 }
 
 interface TableParams {
@@ -90,9 +90,9 @@ interface MlTableInnerBtn<D> extends Partial<ElButton> {
   icon?: string
 
   /** 可使用函数返回true/false，判断显示，参数为行数据，使用对象的时候，对象内的每个属性和行数据相等时可用 */
-  showJudge?: AnyObj | { (data: D): boolean } // {status: 1,title: '123'}
+  showJudge?: AnyObj | ((data: D) => boolean) // {status: 1,title: '123'}
 
-  render?(h: CreateElement, scoped?: any): VNode | Element
+  render?: (h: CreateElement, scoped?: any) => VNode | Element
 }
 
 /** 表格外按钮配置 */
@@ -101,7 +101,7 @@ interface MlTableOuterBtn<D> extends MlTableInnerBtn<D> {
   selection?: 'none' | 'single' | 'multiple' | ''
 
   /** 与 innerBtn不同，只能使用函数返回true/false */
-  showJudge?: { (data: D[]): boolean }
+  showJudge?: (data: D[]) => boolean
 }
 
 /** 重新element的单项配置，解决兼容性 */
@@ -129,7 +129,7 @@ interface MlColumnBase<O = AnyObj> {
   options?: Array<O>
 
   /** 异步获取的数据选项函数 */
-  optionsGet?(): Promise<{ content: O[] }>
+  optionsGet?: () => Promise<{ content: O[] }>
 
   /** 下拉显示的名字key 默认label
    * @default label
@@ -164,7 +164,7 @@ interface MlTableColumn<D> extends MlColumnBase, ElTableColumnAny {
         failed?: AnyObj
         [key: string]: AnyObj
       }
-    | { (data: D): string | 'success' | 'error' | 'warning' | 'done' | 'failed' }
+    | ((data: D) => string | 'success' | 'error' | 'warning' | 'done' | 'failed')
 
   /** 图片的时候，是否使用预览 */
   noPre?: boolean
@@ -173,16 +173,16 @@ interface MlTableColumn<D> extends MlColumnBase, ElTableColumnAny {
   baseUrl?: string
 
   /** 自定义表格内容的展示 */
-  render?(
+  render?: (
     h: CreateElement,
     params: {
       column: MlTableColumn<D>
       row: D
       index: number
     }
-  ): VNode | Element
+  ) => VNode | Element
   /** 自定义整列内容，应返回<c-table-column></c-table-column> */
-  renderColumn?(h: CreateElement): VNode | Element
+  renderColumn?: (h: CreateElement) => VNode | Element
 }
 
 /** 搜索相关配置 */
@@ -227,12 +227,10 @@ export interface MlTableConfig<D = AnyObj, S = AnyObj> extends Partial<ElTable> 
      * @param {String} ids id拼接的字符串
      * @param {Array} data 要删除的数据列表
      */
-    delete?(ids: string, data?: D[]): Promise<any>
+    delete?: (ids: string, data?: D[]) => Promise<any>
 
     /** 查询列表数据 */
-    list?(
-      data: S & TableParams
-    ): Promise<{
+    list?: (data: S & TableParams) => Promise<{
       total: number
       content: D[]
     }>
@@ -245,10 +243,10 @@ export interface MlTableConfig<D = AnyObj, S = AnyObj> extends Partial<ElTable> 
     // }>
 
     /** TODO：导入数据 */
-    import?(data: S & TableParams): Promise<any>
+    import?: (data: S & TableParams) => Promise<any>
 
     /** TODO：导出数据 */
-    export?(data: S & TableParams): Promise<any>
+    export?: (data: S & TableParams) => Promise<any>
   }
   /** 初始化的时候，是否直接请求数据，默认 true */
   initSearch?: boolean

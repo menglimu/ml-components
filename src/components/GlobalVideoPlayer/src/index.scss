@@ -1,19 +1,21 @@
 .global-video-player {
   position: fixed;
-  z-index: 500;
-  right: 24px;
   top: 155px;
-  .player-box{
+  right: 24px;
+  z-index: 500;
+
+  .player-box {
     position: relative;
     width: 345px;
     height: 190px;
-    .el-dialog__headerbtn{
+
+    .el-dialog__headerbtn {
       position: absolute;
-      padding: 5px;
       top: 5px;
       right: 5px;
+      padding: 5px;
+      color: #fff;
       background: none;
-      color: #ffffff;
     }
   }
 }
