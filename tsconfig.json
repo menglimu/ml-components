@@ -10,6 +10,9 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "isolatedModules": true,
+    "noImplicitAny": false, // 允许隐式any
+    "strictNullChecks": false, // 不检测null和undefined的赋值
     "lib": ["esnext", "dom"],
     "baseUrl": "./",
     "paths": {
