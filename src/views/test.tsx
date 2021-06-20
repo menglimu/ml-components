@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import CustomCascader from '@/components/CustomCascader'
-import MlForm from '@/packages/MlForm'
+import MlForm from '@/packages/ml-form'
 import { MlFormConfig } from 'types/form'
 
 export default Vue.extend({

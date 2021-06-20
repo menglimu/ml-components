@@ -15,16 +15,16 @@ const components = {
   MlTable
 }
 // 因为ts和混淆的原因，不能使用name
-const install = function(Vue: VueConstructor, opts = {}) {
+const install = function (Vue: VueConstructor, opts = {}) {
   for (const key in components) {
     Vue.prototype[key] = opts[key]
     Vue.component(key, components[key])
   }
-  Vue.directive('preventReClick', preventReClick) 
+  Vue.directive('preventReClick', preventReClick)
 }
 // 为所有组件添加注册方法
 for (const key in components) {
-  components[key].install = function(Vue: VueConstructor, opts = {}) {
+  components[key].install = function (Vue: VueConstructor, opts = {}) {
     Vue.prototype[key] = opts
     Vue.component(key, components[key])
   }
