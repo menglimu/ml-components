@@ -1,13 +1,15 @@
 class Tags {
-  TagButton = 'button'
-  TagForm = 'form'
-  TagFormItem = 'form-item'
-  TagOption = 'option'
-  prefix = ''
-  constructor(framework = 'cui') {
+  public prefix = ''
+
+  public TagButton = 'button'
+  public TagForm = 'form'
+  public TagFormItem = 'form-item'
+  public TagOption = 'option'
+
+  public constructor(framework = 'element-ui') {
     this.setTags(framework)
   }
-  setTags(framework = 'cui') {
+  private setTags(framework = 'element-ui') {
     this.prefix = { cui: 'c-', 'element-ui': 'el-' }[framework]
     this.TagButton = this.prefix + this.TagButton
     this.TagForm = this.prefix + this.TagForm

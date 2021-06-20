@@ -26,7 +26,7 @@ import { cloneDeep } from 'lodash'
 import { columnsHandler } from './columnsContent'
 import merge from 'webpack-merge'
 @Component({
-  inheritAttrs: false //禁止继承attribute
+  inheritAttrs: false // 禁止继承attribute
 })
 export default class MlTable<D = AnyObj, S = AnyObj> extends Vue implements MlTableProps<D, S>, MlTableImp<D, S> {
   /** 表格配置项 */
@@ -55,11 +55,11 @@ export default class MlTable<D = AnyObj, S = AnyObj> extends Vue implements MlTa
 
   /** 数据加载前的钩子函数 */
   @Prop({ type: Function })
-  readonly beforeGetList?: { (type: string, params: any): any }
+  readonly beforeGetList?: (type: string, params: any) => any
 
   /** 数据加载后的钩子函数 */
   @Prop({ type: Function })
-  readonly afterGetList?: { (type: string, res: any): void }
+  readonly afterGetList?: (type: string, res: any) => void
 
   config_: MlTableConfig<D, S> = null
   data: D[] = []
@@ -77,7 +77,7 @@ export default class MlTable<D = AnyObj, S = AnyObj> extends Vue implements MlTa
   searchInput: S = {} as any
 
   defaultOptions: MlTableDefaultOptions
-  //表格组件默认配置项
+  // 表格组件默认配置项
   paginationConfigDefault = {
     pageSizes: [10, 20, 30],
     pageSize: 10,
@@ -325,7 +325,7 @@ export default class MlTable<D = AnyObj, S = AnyObj> extends Vue implements MlTa
     let res
     try {
       res = await this.config_.api.list(params)
-      this.total = res.total * 1 || 0
+      this.total = Number(res.total) || 0
       this.data = res?.content || []
       if (this.data.length === 0 && this.currentPage > (Math.ceil(this.total / this.pageSize) || 1)) {
         this.currentPage = 1
@@ -382,7 +382,8 @@ export default class MlTable<D = AnyObj, S = AnyObj> extends Vue implements MlTa
                   (btn.selection === 'single' && this.multipleSelection.length !== 1) ||
                   (btn.selection === 'multiple' && this.multipleSelection.length < 1)
                 }
-                onClick={() => this.handleOuterBtn(btn.evtType)}>
+                onClick={() => this.handleOuterBtn(btn.evtType)}
+              >
                 {btn.Elicon && <i class={['el-icon-' + btn.Elicon]} />}
                 {btn.icon && <svg-icon icon-class={btn.icon} />}
                 {btn.name}
@@ -415,14 +416,16 @@ export default class MlTable<D = AnyObj, S = AnyObj> extends Vue implements MlTa
                     key={index}
                     {...{ attrs: { ...this.innerBtnDefault, ...btn } }}
                     class="inner-btn"
-                    onClick={() => this.handleInnerBtn(btn.evtType, scope.$index, scope.row)}>
+                    onClick={() => this.handleInnerBtn(btn.evtType, scope.$index, scope.row)}
+                  >
                     {btn.Elicon && <i class={['el-icon-' + btn.Elicon]} />}
                     {btn.icon && <svg-icon icon-class={btn.icon} />}
                     {btn.name}
                   </TagButton>
                 )
               })
-        }}></TagTableColumn>
+        }}
+      ></TagTableColumn>
     )
   }
   renderColumn(h: CreateElement) {

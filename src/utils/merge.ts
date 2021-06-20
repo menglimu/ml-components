@@ -6,10 +6,19 @@
  * @Description: 调用 lodash 的 merge 并自定义合并function的逻辑
  */
 
-import merge from 'webpack-merge'
+import { mergeWith, cloneDeep } from 'lodash'
 
-const customMerge: <T>(...obj: any) => T = merge({
-  customizeArray: (a: any, b: any) => b
-})
+const merge = function <T>(...obj) {
+  // 数组的合并方式
+  let customMerge = (a, b) => {
+    if (b === undefined) {
+      return cloneDeep(a)
+    }
+    Array.isArray(a) && Array.isArray(b) && cloneDeep(b)
+  }
+  return Object.values(obj)
+    .reverse()
+    .reduce((a, b) => mergeWith(a, b, customMerge)) as T
+}
 
-export default customMerge
+export default merge

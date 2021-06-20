@@ -15,6 +15,4 @@
  * FIXME: form 的rules不生效
  */
 
-import component from './src/form'
-
-export default component
+export { default } from './src/'

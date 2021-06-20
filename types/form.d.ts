@@ -91,7 +91,7 @@ interface MlFormRule {
 }
 
 /** 表单的具体项配置 */
-interface MlFormColumn<D> extends MlColumnBase {
+interface MlFormColumn<D = AnyObj> extends MlColumnBase {
   /** 是否必填
    * @default false
    */

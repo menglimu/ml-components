@@ -130,7 +130,8 @@ export default class FormItem<D> extends Vue {
             {...{ props: option }}
             key={index}
             label={this.config_.optionLabel ? option[this.config_.optionLabel] : option.label}
-            value={this.config_.optionValue ? option[this.config_.optionValue] : option.value}></TagOption>
+            value={this.config_.optionValue ? option[this.config_.optionValue] : option.value}
+          ></TagOption>
         ))
       } else if (this.config_.type === 'radio' || this.config_.type === 'checkbox') {
         const tag = this.tags.prefix + this.config_.type
@@ -140,7 +141,8 @@ export default class FormItem<D> extends Vue {
             {...{
               props: { ...option, label: this.config_.optionValue ? option[this.config_.optionValue] : option.value }
             }}
-            key={index}>
+            key={index}
+          >
             {this.config_.optionLabel ? option[this.config_.optionLabel] : option.label}
           </tag>
         ))
@@ -243,7 +245,8 @@ export default class FormItem<D> extends Vue {
             'hide-round': this.config_.hideRound,
             hide: !this.isShow
           }
-        ]}>
+        ]}
+      >
         <TagFormItem
           class={{
             'ml-form-item': true,
@@ -255,7 +258,8 @@ export default class FormItem<D> extends Vue {
           style={{ width: this.itemWidth, maxWidth: this.itemMaxWidth }}
           label={this.config_.label}
           prop={this.config_.prop}
-          labelWidth={this.config_.labelWidth === undefined ? this.rootConfig.labelWidth : this.config_.labelWidth}>
+          labelWidth={this.config_.labelWidth === undefined ? this.rootConfig.labelWidth : this.config_.labelWidth}
+        >
           {vnode}
         </TagFormItem>
       </div>

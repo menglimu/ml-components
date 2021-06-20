@@ -18,7 +18,3 @@ interface AnyObj {
 }
 declare module '@cci/cui'
 declare module '@cci/cp-svg-icon'
-
-declare module 'webpack-merge' {
-  export default function merge<T>(...obj: any): T
-}

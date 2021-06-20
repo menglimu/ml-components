@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import moduleName from 'index.module.scss'
+import './index.scss'
 
 export default Vue.extend({
   name: 'CustomCascader',
@@ -7,7 +7,7 @@ export default Vue.extend({
     options: { type: Array, required: true },
     optionLabel: { type: String, default: 'label' },
     optionValue: { type: String, default: 'value' },
-    value: { type: String, default: null },
+    value: { type: String, default: '' },
     props: { type: Object, default: () => ({}) }
   },
   computed: {
@@ -23,10 +23,20 @@ export default Vue.extend({
     }
   },
   methods: {
+    computedProps() {
+      return {
+        checkStrictly: true,
+        expandTrigger: 'hover',
+        emitPath: false,
+        value: this.optionValue,
+        label: this.optionLabel,
+        ...this.props
+      }
+    },
     onClick(value) {
       // const value_ = this.value === value ? null : value
       this.$emit('input', value)
-      const cascader = this.$refs.cascader as any
+      const cascader: any = this.$refs.cascader
       cascader.toggleDropDownVisible(false)
     },
     onInput(value) {
@@ -37,7 +47,7 @@ export default Vue.extend({
     return (
       <el-cascader
         ref="cascader"
-        class={['custom-cascader', moduleName.aa]}
+        class={'custom-cascader'}
         popper-class="custom-cascader-popper"
         value={this.value}
         onInput={this.onInput}
