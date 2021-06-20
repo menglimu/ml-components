@@ -77,7 +77,7 @@ interface TableParams {
 interface Pagination extends AnyObj, Partial<ElPagination> {}
 
 /** 表格内按钮配置。其他配置内容可参考 按钮组件参数 */
-interface MlTableInnerBtn<D> extends Partial<ElButton> {
+interface MlTableInnerBtn<D = AnyObj> extends Partial<ElButton> {
   /** 触发的事件类型，在表格组件上使用@xxx来监听事件 */
   evtType: string
 
@@ -96,7 +96,7 @@ interface MlTableInnerBtn<D> extends Partial<ElButton> {
 }
 
 /** 表格外按钮配置 */
-interface MlTableOuterBtn<D> extends MlTableInnerBtn<D> {
+interface MlTableOuterBtn<D = AnyObj> extends MlTableInnerBtn<D> {
   /** false   不选,(其他值)， 单选，多选， */
   selection?: 'none' | 'single' | 'multiple' | ''
 
@@ -186,7 +186,7 @@ interface MlTableColumn<D> extends MlColumnBase, ElTableColumnAny {
 }
 
 /** 搜索相关配置 */
-export interface TableSearchProp<D> {
+export interface TableSearchProp<D = AnyObj> {
   /** 搜索和重置按钮在输入项后显示，！输入项不能占满元素 默认 true */
   isBtnInForm?: boolean
 

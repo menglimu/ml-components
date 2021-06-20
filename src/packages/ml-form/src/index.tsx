@@ -17,21 +17,16 @@ export default Vue.extend({
   name: 'MlForm',
   props: {
     value: { type: null, default: null },
+    /** 表单配置项 */
     config: { type: Object as PropType<MlFormConfig>, required: true }
   },
   data() {
-    const initValue: AnyObj = {} // 初始值
-    const config_: MlFormConfig = null // form的配置项
-    const value_: AnyObj = {} // form的值
-    const tags: Tags = null
-    const defaultOptions: MlFormDefaultOptions = null
-
     return {
-      initValue,
-      config_,
-      value_,
-      tags,
-      defaultOptions, // 一些默认值的配置。可通过use的时候进行修改
+      initValue: {}, // 初始值
+      config_: null as MlFormConfig, // form的配置项
+      value_: {}, // form的值
+      tags: null as Tags,
+      defaultOptions: null as MlFormDefaultOptions, // 一些默认值的配置。可通过use的时候进行修改
       framework: 'element-ui', // ui框架类型
       componentsPreset: {},
       // config 默认值

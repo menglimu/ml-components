@@ -48,10 +48,10 @@ export function formatterFormValue<D>(
     const value: string[] = []
     config.options
       .filter(
-        (obj) =>
-          valueArr.filter((val) => (config.optionValue ? obj[config.optionValue] == val : val == obj.value)).length > 0
+        obj =>
+          valueArr.filter(val => (config.optionValue ? obj[config.optionValue] == val : val == obj.value)).length > 0
       )
-      .forEach((obj) => {
+      .forEach(obj => {
         config.optionLabel ? value.push(obj[config.optionLabel]) : value.push(obj.label)
       })
     return value.join(',')
@@ -61,7 +61,7 @@ export function formatterFormValue<D>(
     let obj = null
     for (let i = 0; i < valueArr.length; i++) {
       const id = valueArr[i]
-      obj = ary.find((obj) => obj[config.optionValue || 'value'] == id)
+      obj = ary.find(obj => obj[config.optionValue || 'value'] == id)
       if (obj) {
         val = obj[config.optionLabel || 'label']
         ary = obj[config.optionChildren || 'children'] || []
@@ -72,7 +72,7 @@ export function formatterFormValue<D>(
     return val
   } else if (['tree'].includes(config.type) && Array.isArray(config.options)) {
     if (Array.isArray(cellValue)) {
-      cellValue.map((id) =>
+      cellValue.map(id =>
         getTreeVal(
           id,
           config.options || [],
@@ -176,10 +176,10 @@ function getBaseRender<D>(column: MlTableColumn<D>) {
 }
 
 export function columnsHandler(config: MlTableConfig<any, any>) {
-  config.columns.forEach((column) => {
+  config.columns.forEach(column => {
     if (typeof column.optionsGet === 'function') {
       column.options = []
-      column.optionsGet().then((res) => {
+      column.optionsGet().then(res => {
         if (Array.isArray(res.content)) {
           column.options = res.content
         }
