@@ -74,7 +74,7 @@ export function setComponentsPreset(prefix: string, others: ComponentsPreset = {
 function getPreset(config: MlFormColumn) {
   // 根据不同类型，匹配不同默认配置，多种类型共用一个配置的情况
   let defaultConfig: AnyObj = { nodeData: { props: {} } }
-
+  
   // 没有类型时。默认为input输入框
   if (!(config.type || config.tag || config.render)) {
     defaultConfig = componentsPreset['input']
@@ -114,6 +114,7 @@ function getPreset(config: MlFormColumn) {
       defaultConfig.nodeData.props['end-placeholder'] = '结束时间'
     }
   }
+  return defaultConfig
 }
 // 设置表单项的校验规则
 function getRules(config: MlFormColumn) {

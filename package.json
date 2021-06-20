@@ -26,6 +26,7 @@
   "devDependencies": {
     "@ml/lint": "^1.1.2",
     "@types/lodash": "^4.14.170",
+    "element-ui": "^2.15.2",
     "ml-eslint": "^1.0.1",
     "sass": "^1.35.1",
     "typescript": "^4.1.3",

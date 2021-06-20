@@ -148,7 +148,7 @@ interface MlColumnBase<O = AnyObj> {
 }
 
 /** 表格的具体项配置，更多内容可参考 UI框架中的表格组件 */
-interface MlTableColumn<D> extends MlColumnBase, ElTableColumnAny {
+interface MlTableColumn<D = AnyObj> extends MlColumnBase, ElTableColumnAny {
   /** 表格中的类型包括 */
   type?: MlTableType | TableColumnType
 
