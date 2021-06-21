@@ -1,8 +1,10 @@
 {
   "name": "@ml/ml-components",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "ml组件库",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "./dist/ml-components.umd.js",
   "module": "./dist/ml-components.es.js",
   "exports": {
