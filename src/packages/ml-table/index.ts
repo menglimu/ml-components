@@ -10,6 +10,4 @@
  * TODO: 自定义table的基础内容render
  */
 
-import component from './src/table'
-
-export default component
+export { default } from './src/'

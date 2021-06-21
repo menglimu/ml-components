@@ -21,7 +21,7 @@ import { columnsHandler } from './columnsContent'
 import merge from '@/utils/merge'
 import { cloneDeep } from 'lodash'
 import { getJudge } from '@/utils'
-import TableSearch from './TableSearch'
+import TableSearch from './table-search'
 
 export default Vue.extend({
   name: 'MlTable',
@@ -125,11 +125,11 @@ export default Vue.extend({
       return obj
     },
     /** 表格内按钮 */
-    innerBtn_(this: any) {
+    innerBtn_(this: any): MlTableInnerBtn[] {
       return this.innerBtn
     },
     /** 表格外按钮 */
-    outerBtn_(this: any) {
+    outerBtn_(this: any): MlTableOuterBtn[] {
       return this.outerBtn
     }
   },

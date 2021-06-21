@@ -15,4 +15,4 @@
  * FIXME: form 的rules不生效
  */
 
-export { default } from './src'
+export { default } from './src/form'

@@ -2,9 +2,18 @@
   "name": "ml-components",
   "version": "1.0.0",
   "description": "ml组件库",
-  "main": "index.js",
+  "files": ["dist"],
+  "main": "./dist/ml-components.es.umd.js",
+  "module": "./dist/ml-components.es.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/ml-components.es.es.js",
+      "require": "./dist/ml-components.es.umd.js"
+    }
+  },
   "scripts": {
     "dev": "vite",
+    "build": "vite build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -35,7 +44,6 @@
   },
   "dependencies": {
     "lodash": "^4.17.21",
-    "vue": "^2.6.13",
-    "webpack-merge": "^5.8.0"
+    "vue": "^2.6.13"
   }
 }

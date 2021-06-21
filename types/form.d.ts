@@ -14,7 +14,7 @@ import { AnyObj, Partial } from '.'
 /** mlForm 对象定义 */
 export class MlForm extends ElForm {
   /** 重置初始值 */
-  private reset(): void
+  public reset(): void
 }
 
 /** mlForm的prop对象集合 */
