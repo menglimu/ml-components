@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import CustomCascader from '@/components/CustomCascader'
-import MlForm from '@/packages/ml-form'
 import { MlFormConfig } from 'types/form'
 
 export default Vue.extend({
@@ -21,7 +20,7 @@ export default Vue.extend({
     return (
       <div>
         <CustomCascader v-model={this.value} options={[]} />
-        <MlForm config={this.formConfig} v-model={this.formValue}></MlForm>
+        <ml-form config={this.formConfig} v-model={this.formValue}></ml-form>
       </div>
     )
   }
