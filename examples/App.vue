@@ -9,6 +9,17 @@ export default {
 </template>
 
 <style lang="scss">
+body,
+html {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+#app {
+  width: 100%;
+}
+
 table:not(.el-table__header):not(.el-table__body) {
   width: 100%;
   margin-bottom: 45px;

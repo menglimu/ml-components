@@ -2,12 +2,13 @@ import Vue from 'vue';
 import CustomCascader from '@/components/CustomCascader';
 import { MlFormConfig } from 'types/form';
 
+// 左侧自动导入时，菜单的名称
+export const title = '快速上手';
 export default Vue.extend({
   data() {
-    let formConfig: MlFormConfig;
     return {
       value: null,
-      formConfig,
+      formConfig: null as MlFormConfig,
       formValue: {}
     };
   },

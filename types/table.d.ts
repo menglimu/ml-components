@@ -181,7 +181,7 @@ interface MlTableColumn<D = AnyObj> extends MlColumnBase, ElTableColumnAny {
       index: number
     }
   ) => VNode | Element
-  /** 自定义整列内容，应返回<c-table-column></c-table-column> */
+  /** 自定义整列内容，应返回<el-table-column></c-table-column> */
   renderColumn?: (h: CreateElement) => VNode | Element
 }
 

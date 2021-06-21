@@ -396,7 +396,7 @@ export default Vue.extend({
                     return btn.render(h, scope)
                   }
                   return (
-                    //     <!-- <c-tooltip v-for="(btn, index) in innerBtnGroup" :key="index" :content="btn.name" effect="dark" placement="top"> -->
+                    //     <!-- <el-tooltip v-for="(btn, index) in innerBtnGroup" :key="index" :content="btn.name" effect="dark" placement="top"> -->
                     <TagButton
                       key={index}
                       {...{ attrs: { ...this.innerBtnDefault, ...btn } }}

@@ -158,7 +158,7 @@ export default class FormTest extends Vue {
           prop: 'checkbox',
           itemBoxWidth: '200px',
           render() {
-            return <c-checkbox>需要xxx审批</c-checkbox>
+            return <el-checkbox>需要xxx审批</c-checkbox>
           }
         },
         {
@@ -170,7 +170,7 @@ export default class FormTest extends Vue {
           render(h: CreateElement, value: any, onInput: { (value: any): void }) {
             return (
               <div>
-                <c-button
+                <el-button
                   onClick={() => {
                     const val = [...value]
                     val.push(val.length + 1)
@@ -191,7 +191,7 @@ export default class FormTest extends Vue {
           // eslint-disable-next-line
           render() {
             // 自定义组件。会自动绑定value和input事件。上面的细化指标demo。可通过自定义组件来实现。
-            return <c-input />
+            return <el-input />
           }
         },
         {
@@ -286,8 +286,8 @@ export default class FormTest extends Vue {
         {JSON.stringify(this.value)}
         <div>
           {this.renderC()}
-          <c-button onClick={this.onClick}>校验</c-button>
-          <c-button onClick={this.onClearValidate}>清除校验</c-button>
+          <el-button onClick={this.onClick}>校验</c-button>
+          <el-button onClick={this.onClearValidate}>清除校验</c-button>
         </div>
       </div>
     )

@@ -13,13 +13,13 @@
     flex: 1;
     height: 0;
 
-    &-siderbar {
+    .siderbar {
       flex-shrink: 0;
       width: 240px;
       height: 100%;
     }
 
-    &-page {
+    .page {
       position: relative;
       flex: 1;
       height: 100%;
