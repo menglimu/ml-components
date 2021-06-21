@@ -9,6 +9,7 @@ import { cloneDeep, isEqual } from 'lodash'
 import { MlFormConfig, MlFormColumn, MlFormDefaultOptions } from 'types/form'
 import { ElForm } from 'element-ui/types/form'
 import merge from '@/utils/merge'
+import './form.scss'
 
 import { setComponentsPreset } from './config'
 // import style from 'index.module.scss'
