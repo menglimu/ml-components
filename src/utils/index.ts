@@ -9,14 +9,14 @@
  */
 
 export function parseTime(time: Date | number | string, format = 'yyyy-mm-dd hh:ii:ss') {
-  if (!time) return ''
-  let date: Date
+  if (!time) return '';
+  let date: Date;
   if (time instanceof Date) {
-    date = time
+    date = time;
   } else {
-    let _time = typeof time === 'string' ? parseInt(time, 10) : time
-    if (String(_time).length === 10) _time = _time * 1000
-    date = new Date(_time)
+    let _time = typeof time === 'string' ? parseInt(time, 10) : time;
+    if (String(_time).length === 10) _time = _time * 1000;
+    date = new Date(_time);
   }
   const formatObj: any = {
     y: date.getFullYear(),
@@ -26,78 +26,78 @@ export function parseTime(time: Date | number | string, format = 'yyyy-mm-dd hh:
     i: date.getMinutes(),
     s: date.getSeconds(),
     a: date.getDay()
-  }
+  };
   const time_str = format.replace(/(y|m|d|h|i|s|a)+/gi, (result, key) => {
-    let value = formatObj[key]
-    if (key === 'a') return ['一', '二', '三', '四', '五', '六', '日'][value - 1]
+    let value = formatObj[key];
+    if (key === 'a') return ['一', '二', '三', '四', '五', '六', '日'][value - 1];
     if (result.length > 0 && value < 10) {
-      value = '0' + value
+      value = '0' + value;
     }
-    return value || 0
-  })
-  return time_str
+    return value || 0;
+  });
+  return time_str;
 }
 
 export function formatTime(time: string | number, option: any) {
-  let time_ = Number(time) * 1000
-  const d = new Date(time_)
-  const now = Date.now()
+  let time_ = Number(time) * 1000;
+  const d = new Date(time_);
+  const now = Date.now();
 
-  const diff = (now - d.getTime()) / 1000
+  const diff = (now - d.getTime()) / 1000;
 
   if (diff < 30) {
-    return '刚刚'
+    return '刚刚';
   } else if (diff < 3600) {
     // less 1 hour
-    return Math.ceil(diff / 60) + '分钟前'
+    return Math.ceil(diff / 60) + '分钟前';
   } else if (diff < 3600 * 24) {
-    return Math.ceil(diff / 3600) + '小时前'
+    return Math.ceil(diff / 3600) + '小时前';
   } else if (diff < 3600 * 24 * 2) {
-    return '1天前'
+    return '1天前';
   }
   if (option) {
-    return parseTime(time_, option)
+    return parseTime(time_, option);
   } else {
-    return d.getMonth() + 1 + '月' + d.getDate() + '日' + d.getHours() + '时' + d.getMinutes() + '分'
+    return d.getMonth() + 1 + '月' + d.getDate() + '日' + d.getHours() + '时' + d.getMinutes() + '分';
   }
 }
 
 // 数组去重
 export function distinct(a: Array<any>, b: Array<any>, id: number) {
-  const arr = a.concat(b)
-  const arrId: Array<any> = []
-  const result = []
+  const arr = a.concat(b);
+  const arrId: Array<any> = [];
+  const result = [];
   for (const i of arr) {
     if (arrId.length) {
       if (!arrId.includes(i[id])) {
-        arrId.push(i[id])
-        result.push(i)
+        arrId.push(i[id]);
+        result.push(i);
       }
     } else {
-      arrId.push(i[id])
-      result.push(i)
+      arrId.push(i[id]);
+      result.push(i);
     }
   }
-  return result
+  return result;
 }
 
 /** 装饰器的节流 Throttle */
 export function Throttle(delay: number): Function {
   return (target: Function, propertyKey: string, propertyDesciptor: PropertyDescriptor) => {
-    const method = propertyDesciptor.value
-    let timer: any = null
+    const method = propertyDesciptor.value;
+    let timer: any = null;
     propertyDesciptor.value = function (this: any, ...args: any[]) {
       if (timer) {
-        return
+        return;
       }
       timer = setTimeout(() => {
-        method.call(this, ...args)
-        clearTimeout(timer)
-        timer = null
-      }, delay)
-    }
+        method.call(this, ...args);
+        clearTimeout(timer);
+        timer = null;
+      }, delay);
+    };
     // return propertyDesciptor;
-  }
+  };
 }
 
 /**
@@ -112,7 +112,7 @@ export function createRandomId() {
     new Date().getTime() +
     '-' +
     Math.random().toString().substr(2, 5)
-  )
+  );
 }
 
 /**
@@ -122,13 +122,13 @@ export function createRandomId() {
  */
 export function isNull(str: any): boolean {
   if (str === undefined || str === null || str === '') {
-    return true
+    return true;
   } else if (Array.isArray(str) && str.length === 0) {
-    return true
+    return true;
   } else if (typeof str === 'object' && Object.keys(str).length === 0) {
-    return true
+    return true;
   }
-  return false
+  return false;
 }
 /**
  * @description: 判断一个对象时候符合judge的条件。所有值相等是为true，任一值不相等返回false
@@ -139,8 +139,8 @@ export function isNull(str: any): boolean {
 export function getJudge(judge: AnyObj, data: AnyObj): boolean {
   for (const key in judge) {
     if (data[key] !== judge[key]) {
-      return false
+      return false;
     }
   }
-  return true
+  return true;
 }

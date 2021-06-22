@@ -7,12 +7,13 @@ test('merge 基础测试', () => {
 test('merge function', () => {
   let a = 1;
   let b = 1;
-  let data: any = merge(
+  let data = merge(
     {
       a: function () {
         a = 2;
-        return a;
-      }
+        return String(a);
+      },
+      b: 2346
     },
     {
       a: function () {
@@ -21,7 +22,7 @@ test('merge function', () => {
       }
     }
   );
-
+  expect(data.b).toBe(2346);
   expect(data.a()).toBe(2);
   expect(a).toBe(1);
   expect(b).toBe(2);

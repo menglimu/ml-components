@@ -8,7 +8,7 @@
 
 import { mergeWith, cloneDeep } from 'lodash';
 
-const merge = function <T>(...obj) {
+const merge = function <T>(...obj: T[]) {
   // 数组的合并方式
   let customMerge = (a, b) => {
     if (b === undefined) {
