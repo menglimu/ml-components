@@ -9,7 +9,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import { VueConstructor } from 'vue/types/umd';
-import MdPage from './md-demo-src.vue';
 
 Vue.use(VueRouter);
 
@@ -37,7 +36,7 @@ Object.keys(files).forEach((key: string) => {
     views.push({
       name,
       path: name,
-      component: { render: h => <MdPage path={name} /> },
+      component: { render: h => <md-demo path={name} /> },
       text: title,
       sort: files[key].sort || 100000
     });
