@@ -7,7 +7,11 @@
  * js-cookie：操作cookie的js库  https://www.npmjs.com/package/js-cookie
  * sockjs：websocket需后端同时使用   https://www.npmjs.com/package/sockjs-client
  */
-
+/**
+ * 将日期按格式进行格式化为字符串
+ * @param time 需要格式的日期
+ * @param format 格式化的格式
+ */
 export function parseTime(time: Date | number | string, format = 'yyyy-mm-dd hh:ii:ss') {
   if (!time) return '';
   let date: Date;
@@ -37,13 +41,20 @@ export function parseTime(time: Date | number | string, format = 'yyyy-mm-dd hh:
   });
   return time_str;
 }
+/**
+ * 将时间格式化为中午，如刚刚，**分钟前
+ * @param time 时间
+ * @param format 自定义格式的格式内容
+ */
+export function formatTime(time: string | number | Date, format?: string) {
+  let date: Date = null;
+  if (time instanceof Date) {
+    date = time;
+  } else {
+    date = new Date(Number(time));
+  }
 
-export function formatTime(time: string | number, option: any) {
-  let time_ = Number(time) * 1000;
-  const d = new Date(time_);
-  const now = Date.now();
-
-  const diff = (now - d.getTime()) / 1000;
+  const diff = (Date.now() - date.getTime()) / 1000;
 
   if (diff < 30) {
     return '刚刚';
@@ -55,54 +66,15 @@ export function formatTime(time: string | number, option: any) {
   } else if (diff < 3600 * 24 * 2) {
     return '1天前';
   }
-  if (option) {
-    return parseTime(time_, option);
+  if (format) {
+    return parseTime(date, format);
   } else {
-    return d.getMonth() + 1 + '月' + d.getDate() + '日' + d.getHours() + '时' + d.getMinutes() + '分';
+    return date.getMonth() + 1 + '月' + date.getDate() + '日' + date.getHours() + '时' + date.getMinutes() + '分';
   }
-}
-
-// 数组去重
-export function distinct(a: Array<any>, b: Array<any>, id: number) {
-  const arr = a.concat(b);
-  const arrId: Array<any> = [];
-  const result = [];
-  for (const i of arr) {
-    if (arrId.length) {
-      if (!arrId.includes(i[id])) {
-        arrId.push(i[id]);
-        result.push(i);
-      }
-    } else {
-      arrId.push(i[id]);
-      result.push(i);
-    }
-  }
-  return result;
-}
-
-/** 装饰器的节流 Throttle */
-export function Throttle(delay: number): Function {
-  return (target: Function, propertyKey: string, propertyDesciptor: PropertyDescriptor) => {
-    const method = propertyDesciptor.value;
-    let timer: any = null;
-    propertyDesciptor.value = function (this: any, ...args: any[]) {
-      if (timer) {
-        return;
-      }
-      timer = setTimeout(() => {
-        method.call(this, ...args);
-        clearTimeout(timer);
-        timer = null;
-      }, delay);
-    };
-    // return propertyDesciptor;
-  };
 }
 
 /**
- * @description: 生成随机id
- * @return {String}
+ * 生成随机id
  */
 export function createRandomId() {
   return (

@@ -7,7 +7,6 @@
  */
 
 /**
- * TODO: form的render可静态的VNode
  * TODO: options去掉content那一层
  */
 
@@ -15,4 +14,4 @@
  * FIXME: form 的rules不生效
  */
 
-export { default } from './src/form'
+export { default } from './src/form';

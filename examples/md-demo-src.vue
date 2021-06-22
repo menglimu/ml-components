@@ -39,24 +39,20 @@ export default Vue.extend({
 
   mounted() {
     document.querySelector('.container-page').addEventListener('scroll', this.onScroll);
-    // ;(window as any).eventBus.$on('scroll', this.onScroll)
   },
   beforeDestroy() {
     document.querySelector('.container-page').removeEventListener('scroll', this.onScroll);
-    // ;(window as any).eventBus.$off('scroll', this.onScroll)
-    // this.$parent.$el.removeEventListener('scroll', this.onScroll)
   },
   methods: {
-    // @Throttle(100)
     onScroll() {
       this.$nextTick(() => {
         let sourceDom: any = this.$refs.sourceDom;
         if (!sourceDom) {
           return;
         }
-        const sourcePre: any = sourceDom; // this.$el.querySelector(`#${this.id} .pre-code-source`)
+        const sourcePre: HTMLElement = sourceDom; // this.$el.querySelector(`#${this.id} .pre-code-source`)
         const container = document.querySelector('.container-page');
-        // console.log(sourcePre)
+
         this.btnWidth = sourcePre.clientWidth;
         // 当底部在屏幕下&&顶部在屏幕内时
         if (
