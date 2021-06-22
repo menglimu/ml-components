@@ -29,7 +29,7 @@ export default Vue.extend({
 
   created() {
     import(`./views/${this.path}.tsx?raw`).then(res => {
-      this.source = hljs.highlight(res.default, { language: 'xml' }).value;
+      this.source = hljs.highlight(res.default, { language: 'javascript' }).value;
     });
     // const bb = require(`!!text-loader!./components/form.vue`)
     // console.log(bb)
@@ -78,9 +78,9 @@ export default Vue.extend({
   render() {
     return (
       <div class="pre-code">
-        <div class="pre-code-view">{this.path && <this.path />}</div>
+        <div class="pre-code-view">{this.$slots.default ? this.$slots.default : this.path && <this.path />}</div>
         <div class="pre-code-source">
-          <pre ref="sourceDom" v-show={this.showSource} domPropsInnerHTML={this.source} />
+          <pre class="source-box" ref="sourceDom" v-show={this.showSource} domPropsInnerHTML={this.source} />
           <el-button
             class={{ 'is-fixed': this.isFixed, 'pre-code-source-showbtn': true }}
             style={{ width: this.isFixed ? this.btnWidth + 'px' : '100%' }}
@@ -103,12 +103,10 @@ export default Vue.extend({
   border-radius: 3px;
   transition: 0.2s;
 
-  &:hover {
-    color: #409eff;
-
-    .pre-code-source-showbtn-text {
-      display: inline;
-    }
+  .source-box {
+    padding: 0.5em;
+    color: #abb2bf;
+    background: #282c34;
   }
 
   &-view {
@@ -135,6 +133,14 @@ export default Vue.extend({
         display: none;
         padding-left: 5px;
       }
+    }
+  }
+
+  &:hover {
+    color: #409eff;
+
+    .pre-code-source-showbtn-text {
+      display: inline;
     }
   }
 

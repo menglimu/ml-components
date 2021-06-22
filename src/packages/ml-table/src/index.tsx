@@ -1,9 +1,9 @@
 /**
  * 表格组件
  */
-import Vue from 'vue'
-import './table.scss'
-import { CreateElement, PropType, VNode } from 'vue/types/umd'
+import Vue from 'vue';
+import './table.scss';
+import { CreateElement, PropType, VNode } from 'vue/types/umd';
 import {
   TableSearchProp,
   MlTableConfig,
@@ -12,16 +12,16 @@ import {
   MlTableDefaultOptions,
   MlTableColumn,
   TableParams
-} from 'types/table'
-import Tags from './tags'
-import emptyImg from './../assets/no-data.png'
-import { Pagination } from 'element-ui'
-import { ElTable } from 'element-ui/types/table'
-import { columnsHandler } from './columnsContent'
-import merge from '@/utils/merge'
-import { cloneDeep } from 'lodash'
-import { getJudge } from '@/utils'
-import TableSearch from './table-search'
+} from 'types/table';
+import Tags from './tags';
+import emptyImg from './../assets/no-data.png';
+import { Pagination } from 'element-ui';
+import { ElTable } from 'element-ui/types/table';
+import { columnsHandler } from './columnsContent';
+import merge from '@/utils/merge';
+import { cloneDeep } from 'lodash';
+import { getJudge } from '@/utils';
+import TableSearch from './table-search';
 
 export default Vue.extend({
   name: 'MlTable',
@@ -114,77 +114,77 @@ export default Vue.extend({
         size: 'samll'
       },
       elTable: null as ElTable
-    }
+    };
   },
   computed: {
     paginationConfig_(this: any) {
-      const obj = Object.assign(this.paginationConfigDefault, this.paginationConfig || {})
+      const obj = Object.assign(this.paginationConfigDefault, this.paginationConfig || {});
       if (!this.pageSize) {
-        this.pageSize = obj.pageSize
+        this.pageSize = obj.pageSize;
       }
-      return obj
+      return obj;
     },
     /** 表格内按钮 */
     innerBtn_(this: any): MlTableInnerBtn[] {
-      return this.innerBtn
+      return this.innerBtn;
     },
     /** 表格外按钮 */
     outerBtn_(this: any): MlTableOuterBtn[] {
-      return this.outerBtn
+      return this.outerBtn;
     }
   },
   created() {
-    this.$watch('config', this.onConfigChange, { deep: true, immediate: true })
-    this.defaultOptions = (this as any).MlTable
+    this.$watch('config', this.onConfigChange, { deep: true, immediate: true });
+    this.defaultOptions = (this as any).MlTable;
     if (this.defaultOptions) {
       for (const key in this.defaultOptions) {
         if (typeof this.defaultOptions[key] === 'object') {
-          this[key] = merge(this[key], this.defaultOptions[key])
+          this[key] = merge(this[key], this.defaultOptions[key]);
         } else {
-          this[key] = this.defaultOptions[key]
+          this[key] = this.defaultOptions[key];
         }
       }
     }
-    this.tags = new Tags(this.framework)
+    this.tags = new Tags(this.framework);
   },
   mounted() {
     // 初始化的时候，是否直接搜索数据
     if (this.config_.initSearch === true) {
-      this.search('init')
+      this.search('init');
     }
-    this.elTable = this.$refs.table as ElTable
+    this.elTable = this.$refs.table as ElTable;
     // this.$nextTick(() => (this.elTable = this.$refs.table))
   },
   methods: {
     onConfigChange() {
-      const config = Object.assign(this.configDefault, cloneDeep(this.config))
+      const config = Object.assign(this.configDefault, cloneDeep(this.config));
       // 处理表格中每一项的值的显示
-      columnsHandler(config)
-      this.config_ = config
+      columnsHandler(config);
+      this.config_ = config;
     },
     // 内部处理删除逻辑
     async onDelete(data: any[], type?: string) {
       if (!data || data.length === 0) {
-        this.$message.warning('请选择要删除的内容')
-        return
+        this.$message.warning('请选择要删除的内容');
+        return;
       }
       if (this.config_.api?.delete) {
-        const ids = data.map(_ => _[this.config_.tableKey]).join(',')
+        const ids = data.map(_ => _[this.config_.tableKey]).join(',');
         try {
-          await this.$confirm('此操作将永久删除该数据, 是否继续?')
-          await this.config_.api?.delete(ids, data)
-          this.refresh()
-          this.$message.success('删除成功')
-          this.$emit('delete-success', ids, data)
+          await this.$confirm('此操作将永久删除该数据, 是否继续?');
+          await this.config_.api?.delete(ids, data);
+          this.refresh();
+          this.$message.success('删除成功');
+          this.$emit('delete-success', ids, data);
         } catch (error) {
-          console.log(error)
-          this.$emit('delete-error', ids, data)
+          console.log(error);
+          this.$emit('delete-error', ids, data);
         }
       } else {
         if (type === 'inner') {
-          this.$emit(type, data[0])
+          this.$emit(type, data[0]);
         } else {
-          this.$emit(type, this.multipleSelection)
+          this.$emit(type, this.multipleSelection);
         }
       }
     },
@@ -192,140 +192,140 @@ export default Vue.extend({
     handleInnerBtn(type: string, index: number, row: AnyObj) {
       switch (type) {
         case 'mldelete':
-          this.onDelete([row], 'inner')
-          break
+          this.onDelete([row], 'inner');
+          break;
         default:
-          this.$emit(type, row)
-          break
+          this.$emit(type, row);
+          break;
       }
     },
     // 表格外按钮点击处理
     handleOuterBtn(type: string) {
       switch (type) {
         case 'mldelete':
-          this.onDelete(this.multipleSelection)
-          break
+          this.onDelete(this.multipleSelection);
+          break;
         default:
-          this.$emit(type, this.multipleSelection)
-          break
+          this.$emit(type, this.multipleSelection);
+          break;
       }
     },
     // 按钮显示、可用判断
     showJudgeInner(btn: MlTableInnerBtn, row: AnyObj): boolean {
       if (btn.showJudge) {
         if (typeof btn.showJudge === 'function') {
-          return btn.showJudge(row)
+          return btn.showJudge(row);
         }
-        return getJudge(btn.showJudge, row)
+        return getJudge(btn.showJudge, row);
       }
-      return true
+      return true;
     },
 
     // 获取选择的项
     handleSelectionChange(val: AnyObj[]) {
-      this.multipleSelection = val
+      this.multipleSelection = val;
     },
 
     // 刷新表格数据
     refresh() {
-      this.search('refresh')
+      this.search('refresh');
     },
 
     // 重置查询条件并搜索
     // @Provide()
     onReset(data: AnyObj = {}) {
-      this.resetSort()
-      this.resetPageNum()
-      this.search('reset', data || {})
+      this.resetSort();
+      this.resetPageNum();
+      this.search('reset', data || {});
     },
     // @Provide()
     onSearch(data: AnyObj = {}) {
-      this.resetPageNum()
-      this.search('searchBtn', data || {})
+      this.resetPageNum();
+      this.search('searchBtn', data || {});
     },
     // 重置排序相关
     resetSort() {
-      this.elTable?.clearSort()
-      this.forceUpdateTableHeader()
-      this.sortProp = ''
-      this.sortType = ''
+      this.elTable?.clearSort();
+      this.forceUpdateTableHeader();
+      this.sortProp = '';
+      this.sortType = '';
     },
     // 如果是由搜索/重置按钮触发的,重置分页相关参数
     resetPageNum() {
       // this.pageSize = 10
-      this.currentPage = 1
+      this.currentPage = 1;
     },
 
     // 分页改变
     handleSizeChange(val: number) {
-      this.pageSize = val
-      this.search('size-change')
-      this.$emit('size-change', val)
+      this.pageSize = val;
+      this.search('size-change');
+      this.$emit('size-change', val);
     },
     handleCurrentChange(val: number) {
-      this.currentPage = val
-      this.search('current-change')
-      this.$emit('current-change', val)
+      this.currentPage = val;
+      this.search('current-change');
+      this.$emit('current-change', val);
     },
     // 排序
     onSortChange({ column, prop, order }: { column: MlTableColumn; prop: string; order: string }) {
       // const column = this.config_.columns.find(item => item.prop === prop)
       if (column?.sortable === 'custom') {
-        this.sortProp = prop
-        this.sortType = { descending: 'DESC', ascending: 'ASC' }[order] || '' // ACS 顺序，从小到大， DESC倒序，从大到小
-        this.search('sort')
+        this.sortProp = prop;
+        this.sortType = { descending: 'DESC', ascending: 'ASC' }[order] || ''; // ACS 顺序，从小到大， DESC倒序，从大到小
+        this.search('sort');
       }
     },
 
     // 刷新头部状态
     forceUpdateTableHeader() {
-      ;(this.$refs?.table as any)?.$refs?.tableHeader?.$forceUpdate()
+      (this.$refs?.table as any)?.$refs?.tableHeader?.$forceUpdate();
     },
 
     // 搜索
     async search(type = '', data: AnyObj = {}) {
       if (!this.config_.api || !this.config_.api.list) {
-        return
+        return;
       }
       // expand-row-keys
-      this.loading = true
-      this.data = []
+      this.loading = true;
+      this.data = [];
       const pager: TableParams = this.config_.showPagination
         ? { pageSize: this.pageSize, pageNum: this.currentPage }
-        : {}
+        : {};
       let params = {
         ...pager,
         ...this.searchData,
         ...this.searchInput,
         ...data
-      }
+      };
       if (this.sortProp && this.sortType) {
-        params.sortColumn = this.sortProp
-        params.sortAsc = this.sortType === 'ASC' ? true : false
+        params.sortColumn = this.sortProp;
+        params.sortAsc = this.sortType === 'ASC' ? true : false;
       }
 
       if (this.beforeGetList) {
-        params = this.beforeGetList(type, params) || params
+        params = this.beforeGetList(type, params) || params;
       }
-      let res
+      let res;
       try {
-        res = await this.config_.api.list(params)
-        this.total = Number(res.total) || 0
-        this.data = res?.content || []
+        res = await this.config_.api.list(params);
+        this.total = Number(res.total) || 0;
+        this.data = res?.content || [];
         if (this.data.length === 0 && this.currentPage > (Math.ceil(this.total / this.pageSize) || 1)) {
-          this.currentPage = 1
-          this.search('errorPage-reset')
+          this.currentPage = 1;
+          this.search('errorPage-reset');
         }
       } catch (error) {
-        console.error(error)
-        res = error
+        console.error(error);
+        res = error;
       }
       if (type === 'sort') {
-        this.forceUpdateTableHeader()
+        this.forceUpdateTableHeader();
       }
-      this.loading = false
+      this.loading = false;
       if (this.afterGetList) {
-        this.afterGetList(type, res)
+        this.afterGetList(type, res);
       }
     },
 
@@ -342,21 +342,21 @@ export default Vue.extend({
           onReset={this.onReset}
           {...{ props: this.searchConfig }}
         />
-      )
+      );
     },
     // 外部按钮
     renderOuerBtn(h: CreateElement) {
       if (!this.outerBtn_ || this.outerBtn_.length === 0) {
-        return
+        return;
       }
-      const { TagButton } = this.tags
+      const { TagButton } = this.tags;
       return (
         <div class="outer-btn-box">
           {this.outerBtn_
             .filter(btn => (btn.showJudge ? btn.showJudge(this.data) : true))
             .map((btn, index) => {
               if (btn.render) {
-                return btn.render(h)
+                return btn.render(h);
               }
               return (
                 <TagButton
@@ -373,16 +373,16 @@ export default Vue.extend({
                   {btn.icon && <svg-icon icon-class={btn.icon} />}
                   {btn.name}
                 </TagButton>
-              )
+              );
             })}
         </div>
-      )
+      );
     },
     renderInnerBtn(h: CreateElement) {
       if (!this.innerBtn_ || this.innerBtn_.length === 0) {
-        return
+        return;
       }
-      const { TagTableColumn, TagButton } = this.tags
+      const { TagTableColumn, TagButton } = this.tags;
       return (
         <TagTableColumn
           {...{ attrs: this.columnDefaultControl }}
@@ -393,7 +393,7 @@ export default Vue.extend({
                 .filter(btn => this.showJudgeInner(btn, scope.row))
                 .map((btn, index) => {
                   if (btn.render) {
-                    return btn.render(h, scope)
+                    return btn.render(h, scope);
                   }
                   return (
                     //     <!-- <el-tooltip v-for="(btn, index) in innerBtnGroup" :key="index" :content="btn.name" effect="dark" placement="top"> -->
@@ -407,20 +407,20 @@ export default Vue.extend({
                       {btn.icon && <svg-icon icon-class={btn.icon} />}
                       {btn.name}
                     </TagButton>
-                  )
+                  );
                 })
           }}
         ></TagTableColumn>
-      )
+      );
     },
     renderColumn(h: CreateElement) {
-      const { TagTableColumn } = this.tags
+      const { TagTableColumn } = this.tags;
       return this.config_.columns.map((item, index) => {
         if (item.type === 'index' || item.type === 'selection') {
-          return <TagTableColumn align="center" {...{ props: item }} />
+          return <TagTableColumn align="center" {...{ props: item }} />;
         }
         if (item.renderColumn) {
-          return item.renderColumn(h)
+          return item.renderColumn(h);
         }
         return (
           <TagTableColumn
@@ -435,8 +435,8 @@ export default Vue.extend({
                 )
             }}
           />
-        )
-      })
+        );
+      });
     },
 
     renderTableSlot() {
@@ -447,20 +447,20 @@ export default Vue.extend({
             <div>{this.emptyWord}</div>
           </div>
         ) as VNode
-      ]
+      ];
 
-      const slots: { [key: string]: VNode[] | undefined } = { empty, ...this.$slots }
+      const slots: { [key: string]: VNode[] | undefined } = { empty, ...this.$slots };
       if (slots.default) {
-        delete slots.default
+        delete slots.default;
       }
 
-      const ary: VNode[] = []
+      const ary: VNode[] = [];
       for (const key in slots) {
         if (Object.prototype.hasOwnProperty.call(slots, key)) {
-          ary.push(<template slot={key}>{slots[key]}</template>)
+          ary.push(<template slot={key}>{slots[key]}</template>);
         }
       }
-      return ary.map(item => item)
+      return ary.map(item => item);
     },
 
     //   <!-- 表格内容 -->
@@ -481,9 +481,9 @@ export default Vue.extend({
           on: this.$listeners,
           attrs: this.$attrs
         }
-      )
+      );
 
-      const { TagTable, TagTableColumn } = this.tags
+      const { TagTable, TagTableColumn } = this.tags;
       return (
         <TagTable ref="table" data={this.data} row-key={this.config_.tableKey} {...tableNodeData}>
           {this.config_.selection && (
@@ -497,14 +497,14 @@ export default Vue.extend({
           {this.renderInnerBtn(h)}
           {this.renderTableSlot()}
         </TagTable>
-      )
+      );
     },
     //   <!-- 分页 -->
     renderPagination() {
       if (!this.config_.showPagination) {
-        return
+        return;
       }
-      const { TagPagination } = this.tags
+      const { TagPagination } = this.tags;
       return (
         <TagPagination
           current-page={this.currentPage}
@@ -515,7 +515,7 @@ export default Vue.extend({
             on: { 'size-change': this.handleSizeChange, 'current-change': this.handleCurrentChange }
           }}
         />
-      )
+      );
     }
   },
   render(h: CreateElement) {
@@ -527,6 +527,6 @@ export default Vue.extend({
         {this.renderTable(h)}
         {this.renderPagination()}
       </div>
-    )
+    );
   }
-})
+});

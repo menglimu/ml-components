@@ -2,8 +2,8 @@ import Vue from 'vue';
 import CustomCascader from '@/components/CustomCascader';
 import { MlFormConfig } from 'types/form';
 
-// 左侧自动导入时，菜单的名称
-export const title = '快速上手';
+export const title = '快速上手'; // 左侧自动导入时，菜单的名称
+export const sort = 2000; // 菜单的排序
 export default Vue.extend({
   data() {
     return {

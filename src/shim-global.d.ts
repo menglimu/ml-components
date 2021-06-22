@@ -14,7 +14,7 @@
 // declare module '*.bmp'
 // declare module '*.tiff'
 interface AnyObj {
-  [key: string]: any
+  [key: string]: any;
 }
-declare module '@cci/cui'
-declare module '@cci/cp-svg-icon'
+declare module '@cci/cui';
+declare module '@cci/cp-svg-icon';

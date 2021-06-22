@@ -13,7 +13,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/packages'),
-      name: 'ml-components'
+      name: 'ml-components',
+      formats: ['es']
     },
     rollupOptions: {
       external: ['vue', 'lodash']

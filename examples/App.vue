@@ -16,6 +16,10 @@ html {
   margin: 0;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 #app {
   width: 100%;
 }

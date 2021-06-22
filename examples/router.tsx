@@ -16,18 +16,40 @@ Vue.use(VueRouter);
 let views = []; // 路由菜单，根据views下面的文件自动生成。
 
 interface FileType {
-  [key: string]: VueConstructor;
+  // [key: string]: VueConstructor;
+  title?: string;
+  isMd?: boolean;
+  sort: number;
+  default: VueConstructor;
 }
 
 // 导入 views 下面的 所有文件
-const files: Record<string, FileType> = import.meta.globEager('./views/*');
+const files: Record<string, FileType> = import.meta.globEager('./views/*') as any;
 
 // 因为通过 import.meta.globEager 返回的列表不能迭代所以直接使用 Object.keys 拿到 key 遍历
 Object.keys(files).forEach((key: string) => {
   const component = files[key]?.default;
-  let name = key.match(/views\/(.*)\.tsx/)[1];
+  const name = key.match(/views\/(.*)\.tsx/)[1];
   // 挂载全局控件
   Vue.component(name, component);
+  let title: string = files[key].title;
+  if (!files[key].isMd) {
+    views.push({
+      name,
+      path: name,
+      component: { render: h => <MdPage path={name} /> },
+      text: title,
+      sort: files[key].sort || 100000
+    });
+  } else {
+    views.push({
+      name,
+      path: name,
+      component,
+      text: title,
+      sort: files[key].sort || 100000
+    });
+  }
 });
 
 export const constantRouterMap = [
@@ -35,16 +57,8 @@ export const constantRouterMap = [
     name: 'index',
     path: '/',
     component: () => import('./layout'),
-    redirect: '/form/formbase',
-    children: [
-      {
-        name: 'form',
-        path: '/form/formbase',
-        component: { render: h => <MdPage path="formbase" /> },
-        text: '快速上手',
-        children: []
-      }
-    ],
+    redirect: '/formbase',
+    children: views.sort((a, b) => a.sort - b.sort),
     hidden: true
   }
 ];
