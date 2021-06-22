@@ -4,7 +4,6 @@
 import Vue from 'vue';
 export const title = '项目简介'; // 左侧自动导入时，菜单的名称
 export const sort = 1000; // 菜单的排序
-export const isMd = true; // 单独的组件，不需要源码展示组件处理
 export default Vue.extend({
   name: 'Index',
   data() {

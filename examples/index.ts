@@ -2,10 +2,9 @@ import Vue from 'vue';
 import router from './router';
 import mlComponents from '@/main';
 import App from './App.vue';
-import MdDemo from './components/MdDemo';
+import BaseSourceView from './components/BaseSourceView';
 
-Vue.use(mlComponents);
-Vue.component('MdDemo', MdDemo);
+Vue.use(mlComponents).component('BaseSourceView', BaseSourceView);
 
 new Vue({
   router,

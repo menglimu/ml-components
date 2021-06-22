@@ -5,8 +5,9 @@ import './index.scss';
 // views下面的所有源码
 export default Vue.extend({
   props: {
-    source: { type: String, required: true },
-    component: { type: String, required: true }
+    source: { type: String, required: false },
+    sourceName: { type: String, required: false },
+    component: { type: String, required: false }
   },
   data() {
     return {
@@ -27,7 +28,14 @@ export default Vue.extend({
     // import(`./../../views/${this.path}.tsx?raw`).then(res => {
     //   this.source = hljs.highlight(res.default, { language: 'javascript' }).value;
     // });
-    this.sourceHighLight = hljs.highlight(this.source, { language: 'javascript' }).value;
+    this.$watch(
+      'source',
+      () => {
+        this.sourceHighLight = hljs.highlight(this.source, { language: 'javascript' }).value;
+      },
+      { immediate: true }
+    );
+
     // let sources = import.meta.glob(`./../../views/${this.path}.tsx?raw`);
     // console.log(`./views/`, sources);
     // Object.values(res)[0]().then(res => {

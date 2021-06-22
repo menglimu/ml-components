@@ -17,7 +17,6 @@ let views = []; // 路由菜单，根据views下面的文件自动生成。
 interface FileType {
   // [key: string]: VueConstructor;
   title?: string;
-  isMd?: boolean;
   sort: number;
   default: VueConstructor;
 }
@@ -29,30 +28,15 @@ const files: Record<string, FileType> = import.meta.globEager('./views/*') as an
 Object.keys(files).forEach((key: string) => {
   const component = files[key]?.default;
   const name = key.match(/views\/(.*)\.tsx/)[1];
-  let source = '';
-  import(`./views/${name}.tsx?raw`).then(res => {
-    source = res.default;
-  });
   // 挂载全局控件
-  Vue.component(name, component);
   let title: string = files[key].title;
-  if (!files[key].isMd) {
-    views.push({
-      name,
-      path: name,
-      component: { render: h => <md-demo source={source} component={name} /> },
-      text: title,
-      sort: files[key].sort || 100000
-    });
-  } else {
-    views.push({
-      name,
-      path: name,
-      component,
-      text: title,
-      sort: files[key].sort || 100000
-    });
-  }
+  views.push({
+    name,
+    path: name,
+    component,
+    text: title,
+    sort: files[key].sort || 100000
+  });
 });
 
 export const constantRouterMap = [
