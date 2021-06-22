@@ -6,7 +6,7 @@
  * @Description:  防止重复点击指令
  */
 
-import { DirectiveOptions } from 'vue'
+import { DirectiveOptions } from 'vue';
 
 const preventReClick: DirectiveOptions = {
   inserted(el: HTMLElement, value: any) {
@@ -14,13 +14,13 @@ const preventReClick: DirectiveOptions = {
     if (el instanceof HTMLButtonElement) {
       el.addEventListener('click', () => {
         if (!el.disabled) {
-          el.disabled = true
+          el.disabled = true;
           setTimeout(() => {
-            el.disabled = false
-          }, value || 500)
+            el.disabled = false;
+          }, value || 500);
         }
-      })
+      });
     }
   }
-}
-export default preventReClick
+};
+export default preventReClick;

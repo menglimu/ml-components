@@ -1,5 +1,5 @@
-import { defineComponent, ref, computed } from '@vue/composition-api'
-import 'index.scss'
+import { defineComponent, ref, computed } from '@vue/composition-api';
+import 'index.scss';
 
 let Component = defineComponent({
   props: {
@@ -17,15 +17,15 @@ let Component = defineComponent({
       value: props.optionValue,
       label: props.optionLabel,
       ...props.props
-    }))
+    }));
     function onClick(value) {
       // const value_ = this.value === value ? null : value
-      onInput(value)
-      const cascader = ref(null)
-      cascader.toggleDropDownVisible(false)
+      onInput(value);
+      const cascader = ref(null);
+      cascader.toggleDropDownVisible(false);
     }
     function onInput(value) {
-      emit('input', value)
+      emit('input', value);
     }
     return (
       <el-cascader
@@ -42,9 +42,9 @@ let Component = defineComponent({
           )
         }}
       ></el-cascader>
-    )
+    );
   }
-})
-let com = new Component({ propsData: { value: 1 } })
-console.log(com)
-export default Component
+});
+let com = new Component({ propsData: { value: 1 } });
+console.log(com);
+export default Component;

@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import './index.scss'
+import Vue from 'vue';
+import './index.scss';
 
 export default Vue.extend({
   name: 'CustomCascader',
@@ -19,7 +19,7 @@ export default Vue.extend({
         value: this.optionValue,
         label: this.optionLabel,
         ...this.props
-      }
+      };
     }
   },
   methods: {
@@ -31,16 +31,16 @@ export default Vue.extend({
         value: this.optionValue,
         label: this.optionLabel,
         ...this.props
-      }
+      };
     },
     onClick(value) {
       // const value_ = this.value === value ? null : value
-      this.$emit('input', value)
-      const cascader: any = this.$refs.cascader
-      cascader.toggleDropDownVisible(false)
+      this.$emit('input', value);
+      const cascader: any = this.$refs.cascader;
+      cascader.toggleDropDownVisible(false);
     },
     onInput(value) {
-      this.$emit('input', value)
+      this.$emit('input', value);
     }
   },
   render() {
@@ -59,6 +59,6 @@ export default Vue.extend({
           )
         }}
       ></el-cascader>
-    )
+    );
   }
-})
+});

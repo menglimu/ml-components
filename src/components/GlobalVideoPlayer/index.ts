@@ -3,10 +3,10 @@
  * 组件名命名规则: GlobalXXX
  */
 
-import Component from './src/index'
+import Component from './src/index';
 
 // 创建vue实例
-const instance = new Component()
+const instance = new Component();
 
 // 使用注册组件的方式
 // export default {
@@ -21,5 +21,5 @@ const instance = new Component()
 
 // 使用方法的方式
 // 在文档外进行挂载，将虚拟挂载的元素加载到body中
-document.body.appendChild(instance.$mount().$el)
-export default instance
+document.body.appendChild(instance.$mount().$el);
+export default instance;
