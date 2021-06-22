@@ -28,7 +28,8 @@ export default Vue.extend({
   },
 
   created() {
-    import(`./views/${this.path}.tsx?raw`).then(res => {
+    let res = import.meta.glob(`./views/${this.path}.tsx?raw`);
+    Object.values(res)[0]().then(res => {
       this.source = hljs.highlight(res.default, { language: 'javascript' }).value;
     });
     // const bb = require(`!!text-loader!./components/form.vue`)
