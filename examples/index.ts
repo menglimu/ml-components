@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import router from './router';
-import mlComponents from '@/packages';
+import mlComponents from '@/main';
 import App from './App.vue';
-import MdDemo from './md-demo-src.vue';
+import MdDemo from './components/MdDemo';
 
 Vue.use(mlComponents);
 Vue.component('MdDemo', MdDemo);

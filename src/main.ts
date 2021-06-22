@@ -6,8 +6,10 @@
  * @Description: 导出所有组件
  */
 
-import MlTable from './components/BaseMlForm';
-import MlForm from './components/BaseMlTable';
+// TODO: 加入webpack 打包浏览器运行代码。 import.meta
+
+import MlTable from './components/BaseMlTable';
+import MlForm from './components/BaseMlForm';
 import { VueConstructor } from 'vue/types/umd';
 
 import preventReClick from '@/directives/preventReClick';

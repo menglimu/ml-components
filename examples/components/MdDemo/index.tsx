@@ -1,15 +1,9 @@
-<!--
- * @Author: wenlin
- * @Date: 2021-01-10 10:15:22
- * @LastEditors: wenlin
- * @LastEditTime: 2021-01-10 21:51:46
- * @Description:  
--->
-<script lang="tsx">
 import Vue from 'vue';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/atom-one-dark.css';
-
+import './index.scss';
+// views下面的所有源码
+let sources = import.meta.glob('./../../views/*.tsx?raw');
 export default Vue.extend({
   props: {
     path: { type: String, required: true }
@@ -28,10 +22,14 @@ export default Vue.extend({
   },
 
   created() {
-    let res = import.meta.glob(`./views/${this.path}.tsx?raw`);
-    Object.values(res)[0]().then(res => {
+    import(`./../../views/${this.path}.tsx?raw`).then(res => {
       this.source = hljs.highlight(res.default, { language: 'javascript' }).value;
     });
+    // let sources = import.meta.glob(`./../../views/${this.path}.tsx?raw`);
+    console.log(`./views/`, sources);
+    // Object.values(res)[0]().then(res => {
+    //   this.source = hljs.highlight(res.default, { language: 'javascript' }).value;
+    // });
     // const bb = require(`!!text-loader!./components/form.vue`)
     // console.log(bb)
     // this.source = require(`!!text-loader!./components/${this.path}`);
@@ -93,56 +91,3 @@ export default Vue.extend({
     );
   }
 });
-</script>
-<style lang="scss">
-.pre-code {
-  border: 1px solid #ebebeb;
-  border-radius: 3px;
-  transition: 0.2s;
-
-  .source-box {
-    padding: 0.5em;
-    color: #abb2bf;
-    background: #282c34;
-  }
-
-  &-view {
-    padding: 24px;
-  }
-
-  &-source {
-    &-showbtn {
-      &.is-fixed {
-        position: fixed;
-        bottom: 0;
-        z-index: 100;
-      }
-
-      display: block;
-      width: 100%;
-      color: #d3dce6;
-      text-align: center;
-      cursor: pointer;
-      border: 0;
-      border-top: 1px solid #eaeefb;
-
-      &-text {
-        display: none;
-        padding-left: 5px;
-      }
-    }
-  }
-
-  &:hover {
-    color: #409eff;
-
-    .pre-code-source-showbtn-text {
-      display: inline;
-    }
-  }
-
-  pre {
-    margin: 0 auto;
-  }
-}
-</style>

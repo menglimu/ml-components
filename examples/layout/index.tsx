@@ -10,7 +10,7 @@ export default Vue.extend({
       <div class={style.layout}>
         <header class={style.layoutHeader} />
         <div class={[style.container, 'container-page']}>
-          <siderbar class={style.sidebar} />
+          <siderbar class={style.siderbar} />
           <router-view class={[style.page]} />
         </div>
       </div>

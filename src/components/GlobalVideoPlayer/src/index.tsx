@@ -8,9 +8,6 @@ import './index.scss';
 
 export default Vue.extend({
   name: 'VideoPlayer',
-  props: {
-    aaa: { type: String, default: '' }
-  },
   data() {
     return {
       urls: []
@@ -23,7 +20,6 @@ export default Vue.extend({
         this.urls.shift();
       }
       this.urls.push(url);
-      console.log(this.aaa);
     },
     // 从播放列表删除
     remove(index) {

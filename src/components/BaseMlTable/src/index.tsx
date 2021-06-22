@@ -106,7 +106,7 @@ export default Vue.extend({
       },
       emptyWord: '暂无数据',
       emptyImg,
-      framework: 'cui',
+      framework: 'element-ui',
       outerBtnDefault: {
         size: 'samll'
       },

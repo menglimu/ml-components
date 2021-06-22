@@ -131,7 +131,6 @@ export default Vue.extend({
 
     // 合并表单配置项， 通过 Object.assign 简写初始化
     getConfig_() {
-      console.log(JSON.stringify(this.config));
       const config = merge<MlFormConfig>(
         this.configDefault,
         {
@@ -146,7 +145,6 @@ export default Vue.extend({
       if (this.config_?.autoSize && this.config_?.size) {
         config.size = this.config_.size;
       }
-      console.log(config);
       return config;
     },
 
