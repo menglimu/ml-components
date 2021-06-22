@@ -9,8 +9,8 @@ export default defineConfig({
       types: '/types'
     }
   },
+  base: '/ml-components/',
   build: {
-    base: '/ml-components/',
     outDir: 'docs'
   }
 });
