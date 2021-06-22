@@ -29,6 +29,10 @@ const files: Record<string, FileType> = import.meta.globEager('./views/*') as an
 Object.keys(files).forEach((key: string) => {
   const component = files[key]?.default;
   const name = key.match(/views\/(.*)\.tsx/)[1];
+  let source = '';
+  import(`./views/${name}.tsx?raw`).then(res => {
+    source = res.default;
+  });
   // 挂载全局控件
   Vue.component(name, component);
   let title: string = files[key].title;
@@ -36,7 +40,7 @@ Object.keys(files).forEach((key: string) => {
     views.push({
       name,
       path: name,
-      component: { render: h => <md-demo path={name} /> },
+      component: { render: h => <md-demo source={source} component={name} /> },
       text: title,
       sort: files[key].sort || 100000
     });

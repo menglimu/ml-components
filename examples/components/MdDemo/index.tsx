@@ -3,10 +3,10 @@ import hljs from 'highlight.js';
 import 'highlight.js/styles/atom-one-dark.css';
 import './index.scss';
 // views下面的所有源码
-let sources = import.meta.glob('./../../views/*.tsx?raw');
 export default Vue.extend({
   props: {
-    path: { type: String, required: true }
+    source: { type: String, required: true },
+    component: { type: String, required: true }
   },
   data() {
     return {
@@ -15,18 +15,21 @@ export default Vue.extend({
       isFixed: false,
       btnWidth: 300,
 
-      source: '',
+      sourceHighLight: '',
 
       container: null
     };
   },
 
   created() {
-    import(`./../../views/${this.path}.tsx?raw`).then(res => {
-      this.source = hljs.highlight(res.default, { language: 'javascript' }).value;
-    });
+    // const files = import.meta.globEager('./views/*.tsx?raw') as any;
+    // console.log(files,23547587);
+    // import(`./../../views/${this.path}.tsx?raw`).then(res => {
+    //   this.source = hljs.highlight(res.default, { language: 'javascript' }).value;
+    // });
+    this.sourceHighLight = hljs.highlight(this.source, { language: 'javascript' }).value;
     // let sources = import.meta.glob(`./../../views/${this.path}.tsx?raw`);
-    console.log(`./views/`, sources);
+    // console.log(`./views/`, sources);
     // Object.values(res)[0]().then(res => {
     //   this.source = hljs.highlight(res.default, { language: 'javascript' }).value;
     // });
@@ -73,9 +76,11 @@ export default Vue.extend({
   render() {
     return (
       <div class="pre-code">
-        <div class="pre-code-view">{this.$slots.default ? this.$slots.default : this.path && <this.path />}</div>
+        <div class="pre-code-view">
+          {this.$slots.default ? this.$slots.default : this.component && <this.component />}
+        </div>
         <div class="pre-code-source">
-          <pre class="source-box" ref="sourceDom" v-show={this.showSource} domPropsInnerHTML={this.source} />
+          <pre class="source-box" ref="sourceDom" v-show={this.showSource} domPropsInnerHTML={this.sourceHighLight} />
           <el-button
             class={{ 'is-fixed': this.isFixed, 'pre-code-source-showbtn': true }}
             style={{ width: this.isFixed ? this.btnWidth + 'px' : '100%' }}
