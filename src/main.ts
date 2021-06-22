@@ -1,5 +1,38 @@
-import Vue from 'vue';
-window.Vue = Vue;
-// import elementUi from 'element-ui/lib/index.js'
-// Vue.use(elementUi)
-// 直接通过以前的方式引入vue2版本的element-ui会，先走common.js的引入，通过浏览器引入
+/*
+ * @Author: wenlin
+ * @Date: 2020-01-16 15:48:47
+ * @LastEditors: wenlin
+ * @LastEditTime: 2020-12-28 10:00:00
+ * @Description: 导出所有组件
+ */
+
+import MlTable from './components/BaseMlForm';
+import MlForm from './components/BaseMlTable';
+import { VueConstructor } from 'vue/types/umd';
+
+import preventReClick from '@/directives/preventReClick';
+
+const components = {
+  MlTable,
+  MlForm
+};
+// 因为ts和混淆的原因，不能使用name
+const install = function (Vue: VueConstructor, opts = {}) {
+  Object.keys(components).forEach(key => {
+    Vue.prototype[key] = opts[key];
+    Vue.component(key, components[key]);
+  });
+  Vue.directive('preventReClick', preventReClick);
+};
+// 为所有组件添加注册方法
+Object.keys(components).forEach(key => {
+  components[key].install = function (Vue: VueConstructor, opts = {}) {
+    Vue.prototype[key] = opts;
+    Vue.component(key, components[key]);
+  };
+});
+
+export default {
+  install,
+  ...components
+};

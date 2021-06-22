@@ -1,6 +1,7 @@
-import { defineConfig } from 'vite'
-import { createVuePlugin } from 'vite-plugin-vue2'
-const path = require('path')
+import { defineConfig } from 'vite';
+import { createVuePlugin } from 'vite-plugin-vue2';
+// eslint-disable-next-line
+const path = require('path');
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [createVuePlugin({ jsx: true })],
@@ -17,7 +18,7 @@ export default defineConfig({
       formats: ['es']
     },
     rollupOptions: {
-      external: ['vue', 'lodash']
+      external: ['vue', 'lodash', 'element-ui', 'echarts', 'dplayer']
     }
   }
-})
+});

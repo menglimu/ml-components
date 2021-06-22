@@ -1,3 +1,8 @@
+/**
+ * 自定义联级选择，主要修改了样式和单选的交互
+ * 适用于选择一个项返回单个id的时候
+ */
+
 import Vue from 'vue';
 import './index.scss';
 

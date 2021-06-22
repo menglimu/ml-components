@@ -6,25 +6,22 @@ import style from 'index.module.scss';
 import Vue from 'vue';
 
 export default Vue.extend({
-  name: 'InfiniteScrollPage',
+  name: 'BaseInfiniteScroll',
   props: {
     page: { type: Number, default: 0 },
     size: { type: Number, default: 10 },
-    data: { type: Array, default: [] },
-    getList: { type: Function, default: null },
-    initSearch: { default: true }
+    data: { type: Array, default: [] }, // 静态数据
+    getList: { type: Function, default: null }, // 获取数据列表
+    initSearch: { default: true } // 初始化的时候，是否直接搜索
   },
   data() {
     return {
       pageNum: 0,
       pageSize: 10,
-      dataList: [],
-      isAll: false,
-      loading: false
+      dataList: [], // 数据列表
+      isAll: false, // 是否加载完所有数据
+      loading: false // 加载中
     };
-  },
-  watch: {
-    data() {}
   },
   created() {
     this.$watch('data', () => {
@@ -36,6 +33,7 @@ export default Vue.extend({
     this.initSearch && this.load();
   },
   methods: {
+    // 加载数据
     async load() {
       this.$emit('load');
       if (!this.getList || this.isAll || this.loading) {
@@ -60,6 +58,7 @@ export default Vue.extend({
       }
       this.loading = false;
     },
+    // 刷新
     async refresh() {
       if (!this.getList) return;
       this.pageNum = 0;
