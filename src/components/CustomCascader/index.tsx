@@ -7,7 +7,7 @@ import Vue from 'vue';
 import './index.scss';
 
 export default Vue.extend({
-  name: 'CustomCascader',
+  name: 'MlCascader',
   props: {
     options: { type: Array, required: true },
     optionLabel: { type: String, default: 'label' },

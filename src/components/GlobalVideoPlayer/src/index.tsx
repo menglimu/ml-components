@@ -7,7 +7,7 @@ import Dplayer from '@/components/BaseDplayer';
 import './index.scss';
 
 export default Vue.extend({
-  name: 'VideoPlayer',
+  name: 'GlobalVideoPlayer',
   data() {
     return {
       urls: []

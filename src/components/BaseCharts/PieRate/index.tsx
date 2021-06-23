@@ -2,11 +2,11 @@
  * 圆环，中间百分比
  */
 
-import BaseEcharts from '../BaseEcharts';
+import BaseEcharts from '..';
 import Vue from 'vue';
 
 export default Vue.extend({
-  name: 'EchartsLineArea',
+  name: 'MlEchartsPieRate',
   mixins: [BaseEcharts],
   props: {
     rate: { default: 0 },

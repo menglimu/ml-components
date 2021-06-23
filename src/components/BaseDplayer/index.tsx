@@ -3,7 +3,7 @@ import Vue from 'vue';
 
 /** 视频弹窗播放，依赖于dplayer */
 export default Vue.extend({
-  name: 'Dplayer',
+  name: 'MlDplayer',
   props: {
     // 传入一个字符串列表时。会按顺序挨个播放
     url: {
@@ -54,6 +54,6 @@ export default Vue.extend({
     }
   },
   render() {
-    return <div ref="container" class="container"></div>;
+    return <div ref="container"></div>;
   }
 });

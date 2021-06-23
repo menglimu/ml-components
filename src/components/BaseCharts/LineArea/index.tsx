@@ -1,11 +1,11 @@
 /**
  * 线状图,下面有区域颜色
  */
-import BaseEcharts from '../BaseEcharts';
+import BaseEcharts from '..';
 import Vue from 'vue';
 
 export default Vue.extend({
-  name: 'EchartsLineArea',
+  name: 'MlEchartsLineArea',
   mixins: [BaseEcharts],
   props: { seriesLength: { default: 1 }, chartOptions: {} },
   methods: {

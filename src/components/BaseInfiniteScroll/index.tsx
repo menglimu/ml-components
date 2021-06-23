@@ -6,7 +6,7 @@ import style from 'index.module.scss';
 import Vue from 'vue';
 
 export default Vue.extend({
-  name: 'BaseInfiniteScroll',
+  name: 'MlInfiniteScroll',
   props: {
     page: { type: Number, default: 0 },
     size: { type: Number, default: 10 },

@@ -8,7 +8,7 @@ class Tags {
   public TagTableColumn = 'table-column';
   public TagPagination = 'pagination';
 
-  private prefix = '';
+  public prefix = '';
 
   public constructor(framework = 'element-ui') {
     this.setTags(framework);

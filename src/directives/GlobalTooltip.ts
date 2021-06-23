@@ -5,20 +5,26 @@
 import Vue, { DirectiveOptions } from 'vue';
 import { Tooltip } from 'element-ui';
 
-// 创建vue实例
-const Component = Vue.extend(Tooltip);
-const tooltip: any = new Component({
-  propsData: {
-    placement: 'top-start',
-    content: ''
-  }
-});
-// 在文档外进行挂载，将虚拟挂载的元素加载到body中
-document.body.appendChild(tooltip.$mount().$el);
+// tooltip 的实例
+let tooltip = null;
+// 挂载tooltip
+function mountTooltip() {
+  // 创建vue实例
+  const Component = Vue.extend(Tooltip);
+  const tooltip = new Component({
+    propsData: {
+      placement: 'top-start',
+      content: ''
+    }
+  });
+  // 在文档外进行挂载，将虚拟挂载的元素加载到body中
+  document.body.appendChild(tooltip.$mount().$el);
+}
 
 // 全局指令处理
 const directive: DirectiveOptions = {
   bind: function (el: HTMLElement) {
+    if (!tooltip) mountTooltip();
     el.addEventListener('mouseenter', onMouseEnter);
     el.addEventListener('mouseleave', onMouseLeave);
   },
@@ -44,4 +50,6 @@ function onMouseLeave(this: HTMLElement, e: MouseEvent) {
   tooltip.handleClosePopper();
 }
 
-Vue.directive('global-tooltip', directive);
+export default directive;
+
+// Vue.directive('global-tooltip', directive);

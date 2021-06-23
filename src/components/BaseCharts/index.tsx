@@ -10,7 +10,7 @@ import style from './index.module.scss';
 import { ECharts } from 'echarts';
 
 export default resize.extend({
-  name: 'EchartsBase',
+  name: 'MlEcharts',
   mixins: [resize],
   props: {
     option: {
