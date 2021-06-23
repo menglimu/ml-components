@@ -12,19 +12,17 @@ import { CreateElement } from 'vue/types/umd';
 // 获取树形的值
 function getTreeVal(
   id: string | number,
-  items: any[],
-  optionLabel = 'label',
-  optionValue = 'value',
-  optionChildren = 'children'
+  options: any[],
+  { optionLabel = 'label', optionValue = 'value', optionChildren = 'children' } = {}
 ): string {
   let result;
-  for (const i in items) {
-    const item = items[i];
+  for (const item of options) {
     if (item[optionValue] === id) {
       result = item[optionLabel];
       break;
     } else if (item.children) {
-      result = getTreeVal(id, item[optionChildren], optionLabel, optionValue, optionChildren);
+      result = getTreeVal(id, item[optionChildren], { optionLabel, optionValue, optionChildren });
+      if (result) break;
     }
   }
   return result;
@@ -47,48 +45,29 @@ export function formatterFormValue<D>(
   if (['select'].includes(config.type) && Array.isArray(config.options)) {
     const value: string[] = [];
     config.options
-      .filter(
-        obj =>
-          valueArr.filter(val => (config.optionValue ? obj[config.optionValue] == val : val == obj.value)).length > 0
-      )
+      .filter(obj => valueArr.filter(val => obj[config.optionValue || 'value'] == val).length > 0)
       .forEach(obj => {
         config.optionLabel ? value.push(obj[config.optionLabel]) : value.push(obj.label);
       });
     return value.join(',');
   } else if (config.type === 'cascader') {
     let ary = config.options || [];
-    let val = null;
-    let obj = null;
-    for (let i = 0; i < valueArr.length; i++) {
-      const id = valueArr[i];
-      obj = ary.find(obj => obj[config.optionValue || 'value'] == id);
+    let label = null;
+    for (const val of valueArr) {
+      let obj = ary.find(obj => obj[config.optionValue || 'value'] == val);
       if (obj) {
-        val = obj[config.optionLabel || 'label'];
+        label = obj[config.optionLabel || 'label'];
         ary = obj[config.optionChildren || 'children'] || [];
       } else {
-        val = '';
+        label = '';
       }
     }
-    return val;
+    return label;
   } else if (['tree'].includes(config.type) && Array.isArray(config.options)) {
     if (Array.isArray(cellValue)) {
-      cellValue.map(id =>
-        getTreeVal(
-          id,
-          config.options || [],
-          config.optionLabel || 'label',
-          config.optionValue || 'value',
-          config.optionChildren || 'children'
-        )
-      );
+      cellValue.map(id => getTreeVal(id, config.options || [], config));
     } else {
-      return getTreeVal(
-        cellValue,
-        config.options || [],
-        config.optionLabel || 'label',
-        config.optionValue || 'value',
-        config.optionChildren || 'children'
-      );
+      return getTreeVal(cellValue, config.options || [], config);
     }
   }
   if (Array.isArray(cellValue)) {
@@ -113,9 +92,7 @@ function getStatusNames(className: string[], statusJudge: AnyObj, row: AnyObj) {
     return statusJudge(row);
   }
   if (statusJudge) {
-    for (const status in statusJudge) {
-      getJudge(statusJudge[status], row) && className.push(status);
-    }
+    Object.keys(statusJudge).map(status => getJudge(statusJudge[status], row) && className.push(status));
   }
   return className;
 }

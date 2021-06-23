@@ -1,9 +1,9 @@
 /**
  * 表格搜索
  */
-import Vue from 'vue'
-import { PropType } from 'vue/types/umd'
-import { MlFormConfig, MlForm } from 'types/form'
+import Vue from 'vue';
+import { PropType } from 'vue/types/umd';
+import { MlFormConfig, MlForm } from 'types/form';
 // import style from 'index.module.scss'
 
 export default Vue.extend({
@@ -19,60 +19,60 @@ export default Vue.extend({
   data() {
     return {
       showMoreStatus: false
-    }
+    };
   },
   created() {
     if (this.isOverHide) {
-      this.showMoreStatus = true
+      this.showMoreStatus = true;
     }
   },
   methods: {
     getSize() {
-      return this.config.size || (this.$refs.searchForm && (this.$refs.searchForm as any).config_.size) || ''
+      return this.config.size || (this.$refs.searchForm && (this.$refs.searchForm as any).config_.size) || '';
     },
 
     reset() {
-      ;(this.$refs.searchForm as MlForm)?.reset()
+      (this.$refs.searchForm as MlForm)?.reset();
     },
 
     onChangeHideStatus() {
-      this.showMoreStatus = !this.showMoreStatus
+      this.showMoreStatus = !this.showMoreStatus;
     },
 
     onSubmit(e: KeyboardEvent) {
-      e.preventDefault()
-      e.stopPropagation()
-      return false
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
     },
 
     onKeyup(e: KeyboardEvent) {
       if (e.keyCode === 13) {
-        this.onSearch_()
+        this.onSearch_();
       }
     },
 
     async onSearch_() {
       // 存在搜索项，先校验表单加载完全和表单验证
       try {
-        await (this.$refs.searchForm as MlForm)?.validate()
+        await (this.$refs.searchForm as MlForm)?.validate();
       } catch (error) {
-        return
+        return;
       }
-      this.$emit('search')
+      this.$emit('search');
     },
 
     onReset_() {
-      ;(this.$refs.searchForm as MlForm)?.reset()
-      this.$emit('reset')
+      (this.$refs.searchForm as MlForm)?.reset();
+      this.$emit('reset');
     }
   },
   render() {
     if (!this.config || !this.config.columns || this.config.columns.length === 0) {
-      return
+      return;
     }
 
-    const size = this.getSize()
-    const TagButton = { cui: 'c-button', 'element-ui': 'el-button' }[this.framework]
+    const size = this.getSize();
+    const TagButton = { cui: 'c-button', 'element-ui': 'el-button' }[this.framework];
     const btn = (
       <div class="search-btn-box">
         <TagButton type="primary" class="search" size={size} onClick={this.onSearch_} v-preventReClick>
@@ -87,7 +87,7 @@ export default Vue.extend({
           </TagButton>
         )}
       </div>
-    )
+    );
 
     // v-preventReClick
     return (
@@ -123,6 +123,6 @@ export default Vue.extend({
         </div>
         {(!this.isBtnInForm || (this.isOverHide && this.showMoreStatus)) && btn}
       </div>
-    )
+    );
   }
-})
+});

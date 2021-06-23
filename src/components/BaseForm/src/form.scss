@@ -14,9 +14,62 @@
   }
 }
 
+.ml-form-textarea {
+  .el-form-item__content {
+    .text-input {
+      width: 100%;
+      max-width: 600px;
+    }
+  }
+}
+
 .ml-form {
   display: flex;
   flex-wrap: wrap;
+
+  &.line {
+    .el-input__inner,
+    .el-textarea {
+      border-bottom: 1px solid #d8e0e6;
+    }
+  }
+
+  &.border {
+    .el-input__inner,
+    .el-textarea {
+      border: 1px solid #d8e0e6;
+    }
+  }
+  // label的位置
+  &.label-left {
+    .el-form-item__label {
+      text-align: left;
+    }
+  }
+
+  &.label-right {
+    .el-form-item__label {
+      text-align: right;
+    }
+  }
+
+  &.label-center {
+    .el-form-item__label {
+      text-align: center;
+    }
+  }
+
+  &.label-top {
+    .ml-form-item {
+      flex-wrap: wrap;
+
+      .el-form-item__label {
+        width: 100%;
+        padding-bottom: 4px;
+        line-height: 22px;
+      }
+    }
+  }
 
   .ml-form-item-box {
     box-sizing: border-box;
@@ -96,49 +149,6 @@
     }
   }
 
-  &.line {
-    .el-input__inner,
-    .el-textarea {
-      border-bottom: 1px solid #d8e0e6;
-    }
-  }
-
-  &.border {
-    .el-input__inner,
-    .el-textarea {
-      border: 1px solid #d8e0e6;
-    }
-  }
-  // label的位置
-  &.label-left {
-    .el-form-item__label {
-      text-align: left;
-    }
-  }
-
-  &.label-right {
-    .el-form-item__label {
-      text-align: right;
-    }
-  }
-
-  &.label-center {
-    .el-form-item__label {
-      text-align: center;
-    }
-  }
-
-  &.label-top {
-    .ml-form-item {
-      flex-wrap: wrap;
-
-      .el-form-item__label {
-        width: 100%;
-        padding-bottom: 4px;
-        line-height: 22px;
-      }
-    }
-  }
   // 下面是各个组件的单独样式
   .el-date-editor.el-input,
   .el-date-editor.el-input__inner {
@@ -151,21 +161,6 @@
 
   .el-select {
     display: block;
-  }
-
-  .ml-form-editor {
-    .el-form-item__content {
-      width: 80%;
-    }
-  }
-
-  .ml-form-textarea {
-    .el-form-item__content {
-      .text-input {
-        width: 100%;
-        max-width: 600px;
-      }
-    }
   }
 
   .ml-form-color .el-color-picker {

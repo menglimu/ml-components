@@ -158,8 +158,9 @@ export default Vue.extend({
     // 渲染vnode
     let vnode: VNode | Element;
     // 按钮等其他元素的渲染。 无prop属性名
-    if (!this.config_.prop && this.config_.render) {
-      return this.config_.render(h, this.value, this.onInput);
+    if (this.config_.render && !this.config_.prop) {
+      let vnode = this.config_.render(h, this.value, this.onInput) as VNode;
+      return vnode;
     } else if (this.config_.prop && this.config_.render) {
       // 有prop属性名和render同时存在的时候。render作为输入元素
       vnode = this.config_.render(h, this.value, this.onInput) as VNode;
