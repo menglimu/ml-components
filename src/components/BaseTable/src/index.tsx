@@ -13,7 +13,7 @@ import {
   MlTableColumn,
   TableParams
 } from 'types/table';
-import Tags from './tags';
+import Tags from '../../../utils/tags';
 import emptyImg from './../assets/no-data.png';
 import { Pagination } from 'element-ui';
 import { ElTable } from 'element-ui/types/table';
@@ -272,7 +272,7 @@ export default Vue.extend({
       // const column = this.config_.columns.find(item => item.prop === prop)
       if (column?.sortable === 'custom') {
         this.sortProp = prop;
-        this.sortType = { descending: 'DESC', ascending: 'ASC' }[order] || ''; // ACS 顺序，从小到大， DESC倒序，从大到小
+        this.sortType = order === 'descending' ? 'DESC' : order === 'ascending' ? 'ASC' : ''; // ACS 顺序，从小到大， DESC倒序，从大到小
         this.search('sort');
       }
     },

@@ -14,7 +14,22 @@ export default Vue.extend({
   },
   created() {
     this.formConfig = {
-      columns: [{ label: '名字', prop: 'name' }]
+      columns: [
+        {
+          type: 'input',
+          label: '姓名',
+          prop: 'name'
+        },
+        {
+          type: 'select',
+          label: '性别',
+          prop: 'type',
+          options: [
+            { value: 1, label: '男' },
+            { value: 0, label: '女' }
+          ]
+        }
+      ]
     };
   },
   methods: {},

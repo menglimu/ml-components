@@ -3,7 +3,7 @@
  */
 import Vue from 'vue';
 import { PropType } from 'vue/types/umd';
-import Tags from './tags';
+import Tags from '../../../utils/tags';
 import FormItem from './formItem';
 import { cloneDeep, isEqual } from 'lodash';
 import { MlFormConfig, MlFormColumn, MlFormDefaultOptions } from 'types/form';

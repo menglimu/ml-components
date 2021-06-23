@@ -41,10 +41,10 @@ Object.keys(files).forEach((key: string) => {
 
 export const constantRouterMap = [
   {
-    name: 'index',
+    name: 'main',
     path: '/',
     component: () => import('./layout'),
-    redirect: '/formbase',
+    redirect: '/index',
     children: views.sort((a, b) => a.sort - b.sort),
     hidden: true
   }

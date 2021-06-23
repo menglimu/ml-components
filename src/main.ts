@@ -8,8 +8,8 @@
 
 // TODO: 加入webpack 打包浏览器运行代码。 import.meta
 
-import MlTable from './components/BaseMlTable';
-import MlForm from './components/BaseMlForm';
+import MlTable from './components/BaseTable';
+import MlForm from './components/BaseForm';
 import { VueConstructor } from 'vue/types/umd';
 
 import preventReClick from '@/directives/preventReClick';
@@ -20,14 +20,16 @@ const components = {
 };
 // 因为ts和混淆的原因，不能使用name
 const install = function (Vue: VueConstructor, opts = {}) {
-  Object.keys(components).forEach(key => {
+  Object.values(components).forEach((component: any) => {
+    let key = component.options.name;
     Vue.prototype[key] = opts[key];
     Vue.component(key, components[key]);
   });
   Vue.directive('preventReClick', preventReClick);
 };
 // 为所有组件添加注册方法
-Object.keys(components).forEach(key => {
+Object.values(components).forEach((component: any) => {
+  let key = component.options.name;
   components[key].install = function (Vue: VueConstructor, opts = {}) {
     Vue.prototype[key] = opts;
     Vue.component(key, components[key]);

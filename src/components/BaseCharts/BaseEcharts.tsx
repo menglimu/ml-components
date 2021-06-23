@@ -7,9 +7,10 @@ import * as echarts from 'echarts';
 import resize from './mixins/resize';
 import merge from '@/utils/merge';
 import style from './index.module.scss';
+import { ECharts } from 'echarts';
 
 export default resize.extend({
-  name: 'BaseChart',
+  name: 'EchartsBase',
   mixins: [resize],
   props: {
     option: {
@@ -19,7 +20,7 @@ export default resize.extend({
   },
   data() {
     return {
-      chart: null,
+      chart: null as ECharts,
       defaultOption: {
         color: ['#009dff', '#11c372', '#ffa542', '#ff4f5c'],
         title: {
@@ -68,25 +69,10 @@ export default resize.extend({
       }
     };
   },
-  watch: {
-    'option.series': {
-      deep: true,
-      handler(this: any) {
-        this.$nextTick(this.setOption);
-      }
-    },
-    'option.xAxis': {
-      deep: true,
-      handler(this: any) {
-        this.$nextTick(this.setOption);
-      }
-    },
-    'option.dataset': {
-      deep: true,
-      handler(this: any) {
-        this.$nextTick(this.setOption);
-      }
-    }
+  created() {
+    this.$watch('option.series', this.refresh, { deep: true });
+    this.$watch('option.xAxis', this.refresh, { deep: true });
+    this.$watch('option.dataset', this.refresh, { deep: true });
   },
   mounted() {
     if (this.option) {
@@ -101,13 +87,18 @@ export default resize.extend({
     this.chart = null;
   },
   methods: {
-    merge,
+    // 初始化
     initChart() {
       this.chart = echarts.init(this.$el as HTMLElement);
       this.setOption();
     },
+    // 数据更改后的刷新
+    refresh() {
+      this.$nextTick(this.setOption);
+    },
+    // 设置echart的option
     setOption() {
-      const mergeOption = this.merge(this.defaultOption, this.option);
+      const mergeOption = merge(this.defaultOption, this.option);
       this.chart.setOption(mergeOption);
     }
   },

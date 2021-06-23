@@ -8,19 +8,47 @@
 
 import { mergeWith, cloneDeep } from 'lodash';
 
-const merge = function <T>(...obj: any) {
-  // 数组的合并方式
-  let customMerge = (a, b) => {
-    if (b === undefined) {
-      return cloneDeep(a);
-    }
-    Array.isArray(a) && Array.isArray(b) && cloneDeep(b);
-  };
-  return (
-    Object.values(obj)
-      // .reverse()
-      .reduce((a, b) => mergeWith(a, b, customMerge)) as T
-  );
+let customMerge = (a, b) => {
+  if (Array.isArray(a) && Array.isArray(b)) return cloneDeep(b);
 };
+
+function merge<TSource1 extends Object, TSource2 extends Object>(
+  source1: TSource1,
+  source2: TSource2
+): TSource1 & TSource2;
+function merge<TSource1 extends Object, TSource2 extends Object, TSource3 extends Object>(
+  source1: TSource1,
+  source2: TSource2,
+  source3: TSource3
+): TSource1 & TSource2 & TSource3;
+function merge<TSource1 extends Object, TSource2 extends Object, TSource3 extends Object, TSource4 extends Object>(
+  source1: TSource1,
+  source2: TSource2,
+  source3: TSource3,
+  source4: TSource4
+): TSource1 & TSource2 & TSource3 & TSource3;
+function merge<T = any>(...options: any[]): T;
+/**
+ * 合并多个对象，后面会覆盖前面的(undefined不会覆盖，需要置空前对象的值时，使用null)。2个function会合并执行。
+ * @param base 基础类型，返回的类型。默认为该类型，可通过指定泛型
+ * @param options 要merge的东西，可以多个
+ * @returns T
+ */
+function merge(...options: any[]) {
+  // 数组的合并方式
+  if (
+    options.length > 1 &&
+    Object.prototype.toString.call(options[0]) === '[object Object]' &&
+    Object.prototype.toString.call(options[1]) === '[object Object]'
+  ) {
+    return mergeWith({}, ...options, customMerge);
+  }
+  if (options.length === 1) {
+    return cloneDeep(options[0]);
+  } else if (options.length > 1) {
+    let [obj, source] = options;
+    return mergeWith(obj, ...source, customMerge);
+  }
+}
 
 export default merge;

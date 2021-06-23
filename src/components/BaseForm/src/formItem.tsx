@@ -9,7 +9,7 @@ import { MlFormColumn, MlFormConfig } from 'types/form';
 import { getFormColumn } from './config';
 
 import MlForm from './form';
-import Tags from './tags';
+import Tags from '../../../utils/tags';
 import { PropType } from 'vue/types/umd';
 
 export default Vue.extend({

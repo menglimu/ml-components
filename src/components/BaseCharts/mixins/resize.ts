@@ -1,3 +1,4 @@
+import { ECharts } from 'echarts';
 import { debounce } from 'lodash';
 import Vue from 'vue';
 
@@ -6,7 +7,7 @@ export default Vue.extend({
     return {
       sidebarElm: null,
       resizeHandler: null,
-      chart: null
+      chart: null as ECharts
     };
   },
   mounted() {
