@@ -6,13 +6,14 @@
  * @Description:  只保留form中的公共方法
  */
 import { getJudge } from '@/utils';
+import { isNull } from 'lodash';
 import { MlTableColumn, MlTableConfig } from 'types/table';
 import { CreateElement } from 'vue/types/umd';
 
 // 获取树形的值
-function getTreeVal(
+function getTreeLabel(
   id: string | number,
-  options: any[],
+  options: any[] = [],
   { optionLabel = 'label', optionValue = 'value', optionChildren = 'children' } = {}
 ): string {
   let result;
@@ -20,8 +21,8 @@ function getTreeVal(
     if (item[optionValue] === id) {
       result = item[optionLabel];
       break;
-    } else if (item.children) {
-      result = getTreeVal(id, item[optionChildren], { optionLabel, optionValue, optionChildren });
+    } else if (item[optionChildren]) {
+      result = getTreeLabel(id, item[optionChildren], { optionLabel, optionValue, optionChildren });
       if (result) break;
     }
   }
@@ -38,42 +39,12 @@ export function formatterFormValue<D>(
   cellValue: string | number | Array<string | number>,
   config: MlTableColumn<D>
 ): string | number {
-  if (!['select', 'cascader', 'tree'].includes(config.type) && !Array.isArray(cellValue)) {
-    return cellValue;
+  let label = cellValue;
+  if (config.type === 'select') {
+    const valueArr = Array.isArray(cellValue) ? cellValue : [cellValue];
+    label = valueArr.map(id => getTreeLabel(id, config.options, config)).filter(label => !isNull(label));
   }
-  const valueArr: Array<string | number> = Array.isArray(cellValue) ? cellValue : [cellValue];
-  if (['select'].includes(config.type) && Array.isArray(config.options)) {
-    const value: string[] = [];
-    config.options
-      .filter(obj => valueArr.filter(val => obj[config.optionValue || 'value'] == val).length > 0)
-      .forEach(obj => {
-        config.optionLabel ? value.push(obj[config.optionLabel]) : value.push(obj.label);
-      });
-    return value.join(',');
-  } else if (config.type === 'cascader') {
-    let ary = config.options || [];
-    let label = null;
-    for (const val of valueArr) {
-      let obj = ary.find(obj => obj[config.optionValue || 'value'] == val);
-      if (obj) {
-        label = obj[config.optionLabel || 'label'];
-        ary = obj[config.optionChildren || 'children'] || [];
-      } else {
-        label = '';
-      }
-    }
-    return label;
-  } else if (['tree'].includes(config.type) && Array.isArray(config.options)) {
-    if (Array.isArray(cellValue)) {
-      cellValue.map(id => getTreeVal(id, config.options || [], config));
-    } else {
-      return getTreeVal(cellValue, config.options || [], config);
-    }
-  }
-  if (Array.isArray(cellValue)) {
-    return cellValue.join(',');
-  }
-  return cellValue;
+  return Array.isArray(label) ? label.join(',') : label;
 }
 
 /**

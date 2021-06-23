@@ -7,7 +7,8 @@
  */
 
 /**
- * TODO: 自定义table的基础内容render
+ *
+ * TODO: 表格按钮增加事件处理回调。兼容事件触发和直接回调2种方式
  */
 
 export { default } from './src';
