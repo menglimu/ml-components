@@ -63,9 +63,6 @@ export function setComponentsPreset(prefix: string, others: ComponentsPreset = {
     time: {
       tag: prefix + 'time-picker'
     },
-    color: {
-      tag: prefix + 'color-picker'
-    },
     ...others
   };
 }
