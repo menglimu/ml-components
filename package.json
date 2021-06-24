@@ -3,14 +3,14 @@
   "version": "1.0.4",
   "description": "ml组件库",
   "files": [
-    "dist"
+    "dist",
+    "types"
   ],
-  "main": "./dist/ml-components.umd.js",
-  "module": "./dist/ml-components.es.js",
+  "types": "types",
+  "main": "./dist/ml-components.es.js",
   "exports": {
     ".": {
-      "import": "./dist/ml-components.es.js",
-      "require": "./dist/ml-components.umd.js"
+      "import": "./dist/ml-components.es.js"
     }
   },
   "scripts": {
