@@ -8,7 +8,6 @@ import merge from '@/utils/merge';
 import { MlFormColumn, MlFormConfig } from 'types/form';
 import { getFormColumn } from './config';
 
-import MlForm from './form';
 import Tags from '../../../utils/tags';
 import { PropType } from 'vue/types/umd';
 
@@ -128,21 +127,16 @@ export default Vue.extend({
             <TagOption
               {...{ props: option }}
               key={index}
-              label={this.config_.optionLabel ? option[this.config_.optionLabel] : option.label}
-              value={this.config_.optionValue ? option[this.config_.optionValue] : option.value}
+              label={option[this.config_.optionLabel || 'label']}
+              value={option[this.config_.optionValue || 'value']}
             ></TagOption>
           ));
         } else if (this.config_.type === 'radio' || this.config_.type === 'checkbox') {
           const tag = this.tags.prefix + this.config_.type;
           // 单选框、多选框
           return options.map((option, index) => (
-            <tag
-              {...{
-                props: { ...option, label: this.config_.optionValue ? option[this.config_.optionValue] : option.value }
-              }}
-              key={index}
-            >
-              {this.config_.optionLabel ? option[this.config_.optionLabel] : option.label}
+            <tag props={{ ...option, label: option[this.config_.optionValue || 'value'] }} key={index}>
+              {option[this.config_.optionLabel || 'label']}
             </tag>
           ));
         }

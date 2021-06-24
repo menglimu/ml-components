@@ -120,29 +120,6 @@ interface ElTableColumnAny extends Partial<ElTableColumn> {
 
 type MlTableType = '' | 'string' | 'image' | 'svg' | 'select';
 
-interface MlColumnBase<O = AnyObj> {
-  /** 下拉，单选多选等数据的选项 */
-  options?: Array<O>;
-
-  /** 异步获取的数据选项函数 */
-  optionsGet?: () => Promise<{ content: O[] }>;
-
-  /** 下拉显示的名字key 默认label
-   * @default label
-   */
-  optionLabel?: string;
-
-  /** 下拉取值得key 默认value
-   * @default value
-   */
-  optionValue?: string;
-
-  /** 树形的children取值 默认children
-   * @default children
-   */
-  optionChildren?: string;
-}
-
 /** 表格的具体项配置，更多内容可参考 UI框架中的表格组件 */
 interface MlTableColumn<D = AnyObj> extends MlOptions, ElTableColumnAny {
   /** 表格项的label名 */

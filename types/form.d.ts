@@ -15,47 +15,6 @@ export class MlForm extends ElForm {
   public reset(): void;
 }
 
-/** mlForm的prop对象集合 */
-export interface MlFormProp<D = AnyObj> {
-  config: MlFormConfig<D>;
-  value: D;
-}
-
-/** 表单的类型 */
-type MlFormType =
-  | ''
-  | 'input'
-  | 'string'
-  | 'textarea'
-  | 'select'
-  | 'radio'
-  | 'checkbox'
-  | 'tree'
-  | 'upload'
-  | 'date'
-  | 'dates'
-  | 'daterange'
-  | 'time'
-  | 'timerange'
-  | 'datetime'
-  | 'datetimerange'
-  | 'color'
-  | 'cascader';
-
-/** 具体可参考element中的form的校验 */
-interface MlFormRule {
-  message?: string;
-  trigger?: 'blur' | 'change';
-  pattern?: RegExp;
-  type?: string;
-  required?: boolean;
-  min?: number;
-  max?: number;
-  validator?: (rule: any, value: any, callback: (error?: Error) => void) => void;
-  asyncValidator?: (rule: any, value: any, callback: (error?: Error) => void) => void;
-  // validator(value:any, rootValue?:any): boolean
-}
-
 /** 表单的具体项配置 */
 interface MlFormColumn<D = AnyObj> extends MlOptions {
   /** 表单项左侧提示的label名 */
@@ -247,6 +206,47 @@ export interface MlFormConfig<D = AnyObj> {
    * @default true
    */
   validateOnRuleChange?: boolean;
+}
+
+/** mlForm的prop对象集合 */
+export interface MlFormProp<D = AnyObj> {
+  config: MlFormConfig<D>;
+  value: D;
+}
+
+/** 表单的类型 */
+type MlFormType =
+  | ''
+  | 'input'
+  | 'string'
+  | 'textarea'
+  | 'select'
+  | 'radio'
+  | 'checkbox'
+  | 'tree'
+  | 'upload'
+  | 'date'
+  | 'dates'
+  | 'daterange'
+  | 'time'
+  | 'timerange'
+  | 'datetime'
+  | 'datetimerange'
+  | 'color'
+  | 'cascader';
+
+/** 具体可参考element中的form的校验 */
+interface MlFormRule {
+  message?: string;
+  trigger?: 'blur' | 'change';
+  pattern?: RegExp;
+  type?: string;
+  required?: boolean;
+  min?: number;
+  max?: number;
+  validator?: (rule: any, value: any, callback: (error?: Error) => void) => void;
+  asyncValidator?: (rule: any, value: any, callback: (error?: Error) => void) => void;
+  // validator(value:any, rootValue?:any): boolean
 }
 
 // 预制组件配置
