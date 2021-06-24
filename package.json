@@ -24,7 +24,6 @@
     "url": "git+https://github.com/menglimu/ml-components.git"
   },
   "keywords": [
-    "rollup",
     "vite",
     "vue2",
     "mlcomponents"
