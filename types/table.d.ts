@@ -12,7 +12,7 @@ import { ElButton } from 'element-ui/types/button';
 import { ElPagination } from 'element-ui/types/pagination';
 import { VNode, CreateElement, VNodeData } from 'vue/types/umd';
 import { MlFormConfig } from './form';
-import { AnyObj, MlOptions, Partial } from '.';
+import { AnyObj, MlOptions, Partial } from './common';
 import { VueComponentInstall } from './components';
 
 /** D为表格内容类型。S为搜索条件类型 */

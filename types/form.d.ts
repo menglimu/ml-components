@@ -7,7 +7,7 @@
  */
 import { ElForm } from 'element-ui/types/form';
 import { VNode, CreateElement, VNodeData } from 'vue/types/umd';
-import { AnyObj, MlOptions, Partial } from '.';
+import { AnyObj, MlOptions, Partial } from './common';
 
 /** mlForm 对象定义 */
 export class MlForm extends ElForm {
