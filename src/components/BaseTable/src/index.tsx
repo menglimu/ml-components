@@ -424,7 +424,7 @@ export default Vue.extend({
         }
         return (
           <TagTableColumn
-            key={index}
+            key={item.key || item.prop || index}
             {...{ props: { ...this.columnDefaultNormal, ...item } }}
             scopedSlots={{
               default: (scope: any) =>

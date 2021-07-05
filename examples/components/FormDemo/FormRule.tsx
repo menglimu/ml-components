@@ -30,6 +30,7 @@ export default Vue.extend({
           type: 'select',
           label: '性别',
           prop: 'type',
+          required: true,
           options: [
             { value: 1, label: '男' },
             { value: 0, label: '女' }
