@@ -150,7 +150,9 @@ function getRules(config: MlFormColumn) {
       trigger: trigger
     });
   }
-  config.rules = [...(config.rules || []), ...rules];
+  if (rules.length > 0) {
+    config.rules = [...(config.rules || []), ...rules];
+  }
 }
 
 export function getFormColumn(mlFormColumn: MlFormColumn): MlFormColumn {

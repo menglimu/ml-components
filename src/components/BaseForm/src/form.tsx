@@ -210,8 +210,8 @@ export default Vue.extend({
       // 通过解构。将所有用户属性解构到form中
       <TagForm
         ref="form"
-        attrs={formAttrs}
-        props={{ model: this.value_ }}
+        // attrs={formAttrs}
+        props={{ model: this.value_, ...formAttrs }}
         class={[uiType, this.config_.size, 'label-' + this.config_.labelPosition, 'ml-form']}
       >
         {columns.map((item, index) => {

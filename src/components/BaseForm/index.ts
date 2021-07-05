@@ -5,8 +5,5 @@
  * @LastEditTime: 2020-12-26 11:54:52
  * @Description: 导出组件
  */
-/**
- * FIXME: form 的rules不生效
- */
 
 export { default } from './src/form';
