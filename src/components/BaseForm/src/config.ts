@@ -5,7 +5,7 @@
  * @LastEditTime: 2020-12-28 16:59:13
  * @Description:  获取表单子项的配置
  */
-import { MlFormRule, MlFormColumn, ComponentsPreset } from 'types/form';
+import { MlFormRule, MlFormColumn, ComponentsPreset, MlFormType } from 'types/form';
 import { cloneDeep } from 'lodash';
 import merge from '@/utils/merge';
 
@@ -114,7 +114,7 @@ function getPreset(config: MlFormColumn) {
   return defaultConfig;
 }
 // 设置表单项的校验规则
-function getRules(config: MlFormColumn) {
+function getRules(config: MlFormColumn, prefix) {
   // 因为空校验和错误校验，UI颜色区别，所以要实时判空的原因，将所有的校验trigger修改为change
   const trigger: 'blur' | 'change' = 'blur';
 
@@ -124,7 +124,7 @@ function getRules(config: MlFormColumn) {
     rules.push({
       pattern: new RegExp(`^(.|\n){${config.minlength},}$`),
       // min: config.minlength,
-      message: `输入字符不能少于${config.minlength}个字符`,
+      message: `不能少于${config.minlength}个字`,
       trigger: trigger
     });
   }
@@ -132,21 +132,21 @@ function getRules(config: MlFormColumn) {
     rules.push({
       pattern: new RegExp(`^(.|\n){0,${config.maxlength}}$`),
       // max: config.maxlength,
-      message: `输入字符不能大于${config.maxlength}个字符`,
+      message: `不能大于${config.maxlength}个字`,
       trigger: trigger
     });
   }
   if (config.reg) {
     rules.push({
       pattern: new RegExp(config.reg), // /^\[\d+,\d+\]$/
-      message: config.error,
+      message: config.error || `${config.label}${prefix}有误`,
       trigger: trigger
     });
   }
   if (config.required) {
     rules.push({
       required: true,
-      message: config.error,
+      message: config.error || `请${prefix}${config.label}`,
       trigger: trigger
     });
   }
@@ -154,14 +154,12 @@ function getRules(config: MlFormColumn) {
     config.rules = [...(config.rules || []), ...rules];
   }
 }
-
-export function getFormColumn(mlFormColumn: MlFormColumn): MlFormColumn {
-  let config = cloneDeep(mlFormColumn);
-
+// 根据类型获取是输入还是选择的
+function getPrefix(type: MlFormType) {
   let placeholderPrefix = '输入';
 
   if (
-    config.type &&
+    type &&
     [
       'date',
       'dates',
@@ -173,23 +171,25 @@ export function getFormColumn(mlFormColumn: MlFormColumn): MlFormColumn {
       'select',
       'tree',
       'cascader'
-    ].includes(config.type)
+    ].includes(type)
   ) {
     placeholderPrefix = '选择';
   }
-
+  return placeholderPrefix;
+}
+// 获取表单某项的配置
+export function getFormColumn(mlFormColumn: MlFormColumn): MlFormColumn {
+  let config = cloneDeep(mlFormColumn);
+  let prefix = getPrefix(config.type);
   // 初始化正则验证及提示
   if (!config.placeholder && config.label) {
-    config.placeholder = `请${placeholderPrefix}${config.label}`;
-  }
-  if (!config.error && config.label) {
-    config.error = `请核对${placeholderPrefix}项${config.label}`;
+    config.placeholder = `请${prefix}${config.label}`;
   }
   // 初始化显示条件
   if (!config.hasOwnProperty('show')) {
     config.show = true;
   }
   // 通过config类型，初始化规则和匹配预设组件默认值
-  getRules(config);
+  getRules(config, prefix);
   return merge(getPreset(config), config);
 }
