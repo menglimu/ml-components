@@ -5,11 +5,6 @@
  * @LastEditTime: 2020-12-26 11:54:52
  * @Description: 导出组件
  */
-
-/**
- * TODO: options去掉content那一层
- */
-
 /**
  * FIXME: form 的rules不生效
  */

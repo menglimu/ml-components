@@ -98,7 +98,10 @@ export default Vue.extend({
     async onOptionsGetChange() {
       if (typeof this.config_.optionsGet === 'function') {
         const res = await this.config_.optionsGet();
-        if (Array.isArray(res.content)) {
+        if (Array.isArray(res)) {
+          this.options = res;
+        }
+        if (res?.content && Array.isArray(res.content)) {
           this.options = res.content;
         }
       }
