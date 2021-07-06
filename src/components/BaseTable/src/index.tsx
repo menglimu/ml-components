@@ -189,23 +189,25 @@ export default Vue.extend({
       }
     },
     // 表格内部按钮点击处理
-    handleInnerBtn(type: string, index: number, row: AnyObj) {
+    handleInnerBtn(type: string, row: AnyObj, btn: MlTableInnerBtn) {
       switch (type) {
         case 'mldelete':
           this.onDelete([row], 'inner');
           break;
         default:
+          btn?.callback?.(row);
           this.$emit(type, row);
           break;
       }
     },
     // 表格外按钮点击处理
-    handleOuterBtn(type: string) {
+    handleOuterBtn(type: string, btn: MlTableOuterBtn) {
       switch (type) {
         case 'mldelete':
           this.onDelete(this.multipleSelection);
           break;
         default:
+          btn?.callback?.(this.multipleSelection);
           this.$emit(type, this.multipleSelection);
           break;
       }
@@ -367,7 +369,7 @@ export default Vue.extend({
                     (btn.selection === 'single' && this.multipleSelection.length !== 1) ||
                     (btn.selection === 'multiple' && this.multipleSelection.length < 1)
                   }
-                  onClick={() => this.handleOuterBtn(btn.evtType)}
+                  onClick={() => this.handleOuterBtn(btn.evtType, btn)}
                 >
                   {btn.Elicon && <i class={['el-icon-' + btn.Elicon]} />}
                   {btn.icon && <svg-icon icon-class={btn.icon} />}
@@ -401,7 +403,7 @@ export default Vue.extend({
                       key={index}
                       {...{ attrs: { ...this.innerBtnDefault, ...btn } }}
                       class="inner-btn"
-                      onClick={() => this.handleInnerBtn(btn.evtType, scope.$index, scope.row)}
+                      onClick={() => this.handleInnerBtn(btn.evtType, scope.row, btn)}
                     >
                       {btn.Elicon && <i class={['el-icon-' + btn.Elicon]} />}
                       {btn.icon && <svg-icon icon-class={btn.icon} />}

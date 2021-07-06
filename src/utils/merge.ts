@@ -8,7 +8,7 @@
 
 import { mergeWith, cloneDeep } from 'lodash';
 
-let customMerge = (a, b) => {
+let customMerge = (a: any, b: any) => {
   if (Array.isArray(a) && Array.isArray(b)) return cloneDeep(b);
 };
 

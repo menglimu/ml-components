@@ -83,32 +83,40 @@ interface TableParams {
 /** 分页相关配置。其他配置内容可参考 分页组件参数 */
 interface Pagination extends AnyObj, Partial<ElPagination> {}
 
-/** 表格内按钮配置。其他配置内容可参考 按钮组件参数 */
-interface MlTableInnerBtn<D = AnyObj> extends Partial<ElButton> {
-  /** 触发的事件类型，在表格组件上使用@xxx来监听事件 */
-  evtType: string;
-
+interface TableButton<D = AnyObj> extends Partial<ElButton> {
   /** 按钮内的文字 */
   name: string;
+
+  /** 触发的事件类型，在表格组件上使用@xxx来监听事件 */
+  evtType?: string;
 
   /** element所支持的图标，查看element内的文档 */
   Elicon?: string;
   /** svg图标，参考svg-icon的实现 */
   icon?: string;
 
-  /** 可使用函数返回true/false，判断显示，参数为行数据，使用对象的时候，对象内的每个属性和行数据相等时可用 */
-  showJudge?: AnyObj | ((data: D) => boolean); // {status: 1,title: '123'}
-
   render?: (h: CreateElement, scoped?: any) => VNode | Element;
 }
 
+/** 表格内按钮配置。其他配置内容可参考 按钮组件参数 */
+interface MlTableInnerBtn<D = AnyObj> extends TableButton<D> {
+  /** 点击的回调函数，可以不通过事件监听的方式 */
+  callback?: (row: D) => void;
+
+  /** 可使用函数返回true/false，判断显示，参数为行数据，使用对象的时候，对象内的每个属性和行数据相等时可用 */
+  showJudge?: AnyObj | ((data: D) => boolean); // {status: 1,title: '123'}
+}
+
 /** 表格外按钮配置 */
-interface MlTableOuterBtn<D = AnyObj> extends MlTableInnerBtn<D> {
+interface MlTableOuterBtn<D = AnyObj> extends TableButton<D> {
   /** false   不选,(其他值)， 单选，多选， */
   selection?: 'none' | 'single' | 'multiple' | '';
 
   /** 与 innerBtn不同，只能使用函数返回true/false */
   showJudge?: (data: D[]) => boolean;
+
+  /** 点击的回调函数，可以不通过事件监听的方式 */
+  callback?: (row: D[]) => void;
 }
 
 /** 重新element的单项配置，解决兼容性 */

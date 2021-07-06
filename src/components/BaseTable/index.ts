@@ -6,9 +6,4 @@
  * @Description: 导出组件
  */
 
-/**
- *
- * TODO: 表格按钮增加事件处理回调。兼容事件触发和直接回调2种方式
- */
-
 export { default } from './src';
