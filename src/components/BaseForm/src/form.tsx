@@ -73,14 +73,14 @@ export default Vue.extend({
     // 自动size相关
     autoSize() {
       // 自适应form的size
-      let timer = null;
+      let timer: number;
       if (this.config_.autoSize) {
         this.getSize();
         window.onresize = () => {
           if (timer) {
             clearTimeout(timer);
           }
-          timer = setTimeout(this.getSize, 200);
+          timer = window.setTimeout(this.getSize, 200);
         };
       }
     },
