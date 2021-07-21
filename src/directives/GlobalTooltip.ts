@@ -6,7 +6,7 @@ import Vue, { DirectiveOptions } from 'vue';
 import { Tooltip } from 'element-ui';
 
 // tooltip 的实例
-let tooltip = null;
+let tooltip: any = null;
 // 挂载tooltip
 function mountTooltip() {
   // 创建vue实例

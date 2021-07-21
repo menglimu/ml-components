@@ -560,10 +560,10 @@
     "@types/yargs" "^16.0.0"
     chalk "^4.0.0"
 
-"@ml/lint@^1.1.7":
-  version "1.1.7"
-  resolved "http://10.12.102.194:4873/@ml%2flint/-/lint-1.1.7.tgz#bbf3f63d3a55b4672dd55232bd4a9622b47ecac7"
-  integrity sha512-t3/k5/RTArhwrOIEVWezEBQ67LGGtWO/9SU3e0zwIbympVTK4nrmWPxTAgtPqnjYYR5pxh/dIxwBJRD0bqsIAg==
+"@ml/lint@^1.1.10":
+  version "1.1.10"
+  resolved "http://10.12.102.194:4873/@ml%2flint/-/lint-1.1.10.tgz#8dd8e56391ca032743b3d2072bea23d6efd3d77a"
+  integrity sha512-5subgV4Nuqv5sjhFju24UlILcmzmIMpp+TZrXsFzL0DWbO6GEZZfABiQs41AgexBXtxc68KV9uezIiwZ1nvsCg==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^4.26.1"
     "@typescript-eslint/parser" "^4.26.1"
@@ -571,9 +571,7 @@
     babel-eslint "^10.1.0"
     eslint "^7.28.0"
     eslint-config-alloy "^3.10.0"
-    eslint-plugin-prettier "^3.4.0"
     eslint-plugin-vue "^7.11.0"
-    prettier "^2.3.1"
     stylelint "^13.13.1"
     stylelint-config-recess-order "^2.4.0"
     stylelint-config-standard "^22.0.0"
@@ -2243,13 +2241,6 @@ eslint-config-alloy@^3.10.0:
   resolved "http://10.12.102.194:4873/eslint-config-alloy/-/eslint-config-alloy-3.10.0.tgz#b2d85ba3bd7dddcc6d7fc79088c192a646f4f246"
   integrity sha1-sthbo7193cxtf8eQiMGSpkb08kY=
 
-eslint-plugin-prettier@^3.4.0:
-  version "3.4.0"
-  resolved "http://10.12.102.194:4873/eslint-plugin-prettier/-/eslint-plugin-prettier-3.4.0.tgz#cdbad3bf1dbd2b177e9825737fe63b476a08f0c7"
-  integrity sha1-zbrTvx29Kxd+mCVzf+Y7R2oI8Mc=
-  dependencies:
-    prettier-linter-helpers "^1.0.0"
-
 eslint-plugin-vue@^7.11.0:
   version "7.11.1"
   resolved "http://10.12.102.194:4873/eslint-plugin-vue/-/eslint-plugin-vue-7.11.1.tgz#77eb4b44032d5cca79f9af21d06991d8694a314a"
@@ -2442,11 +2433,6 @@ fast-deep-equal@^3.1.1, fast-deep-equal@^3.1.3:
   version "3.1.3"
   resolved "http://10.12.102.194:4873/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz#3a7d56b559d6cbc3eb512325244e619a65c6c525"
   integrity sha1-On1WtVnWy8PrUSMlJE5hmmXGxSU=
-
-fast-diff@^1.1.2:
-  version "1.2.0"
-  resolved "http://10.12.102.194:4873/fast-diff/-/fast-diff-1.2.0.tgz#73ee11982d86caaf7959828d519cfe927fac5f03"
-  integrity sha1-c+4RmC2Gyq95WYKNUZz+kn+sXwM=
 
 fast-glob@^3.1.1, fast-glob@^3.2.5:
   version "3.2.5"
@@ -4157,19 +4143,12 @@ prelude-ls@~1.1.2:
   resolved "http://10.12.102.194:4873/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
   integrity sha1-IZMqVJ9eUv/ZqCf1cOBL5iqX2lQ=
 
-prettier-linter-helpers@^1.0.0:
-  version "1.0.0"
-  resolved "http://10.12.102.194:4873/prettier-linter-helpers/-/prettier-linter-helpers-1.0.0.tgz#d23d41fe1375646de2d0104d3454a3008802cf7b"
-  integrity sha1-0j1B/hN1ZG3i0BBNNFSjAIgCz3s=
-  dependencies:
-    fast-diff "^1.1.2"
-
 prettier@^1.18.2:
   version "1.19.1"
   resolved "http://ccinpm.citycloud.com.cn/prettier/-/prettier-1.19.1.tgz#f7d7f5ff8a9cd872a7be4ca142095956a60797cb"
   integrity sha1-99f1/4qc2HKnvkyhQglZVqYHl8s=
 
-prettier@^2.0.5, prettier@^2.3.1:
+prettier@^2.0.5:
   version "2.3.1"
   resolved "http://10.12.102.194:4873/prettier/-/prettier-2.3.1.tgz#76903c3f8c4449bc9ac597acefa24dc5ad4cbea6"
   integrity sha1-dpA8P4xESbyaxZes76JNxa1MvqY=

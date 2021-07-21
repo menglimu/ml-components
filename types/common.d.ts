@@ -16,7 +16,7 @@ export interface MlOptions<O = AnyObj> {
   options?: Array<O>;
 
   /** 异步获取的数据选项函数 */
-  optionsGet?: () => Promise<{ content: O[] }>;
+  optionsGet?: () => Promise<{ content: O[] } | O[]>;
 
   /** 下拉显示的名字key 默认label
    * @default label

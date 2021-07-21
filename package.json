@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/menglimu/ml-components#readme",
   "devDependencies": {
-    "@ml/lint": "^1.1.7",
+    "@ml/lint": "^1.1.10",
     "@types/jest": "^26.0.23",
     "@types/lodash": "^4.14.170",
     "@types/node": "^15.12.4",

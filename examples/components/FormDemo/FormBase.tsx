@@ -1,8 +1,15 @@
 /**
- * 表格基础
+ * 表单基础
  */
 import Vue from 'vue';
 import { MlFormConfig } from 'types/form';
+
+function optionsGet() {
+  return Promise.resolve([
+    { value: 1, label: '男' },
+    { value: 0, label: '女' }
+  ]);
+}
 
 export default Vue.extend({
   name: 'FormBase',
@@ -16,7 +23,6 @@ export default Vue.extend({
     this.formConfig = {
       columns: [
         {
-          type: 'input',
           label: '姓名',
           prop: 'name'
         },
@@ -28,7 +34,9 @@ export default Vue.extend({
             { value: 1, label: '男' },
             { value: 0, label: '女' }
           ]
-        }
+        },
+        { label: '性别', prop: 'sex', type: 'select', optionsGet },
+        { label: '备注', prop: 'marks', type: 'textarea', block: true }
       ]
     };
   },
