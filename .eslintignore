@@ -1,2 +1,4 @@
 shim-tsx.d.ts
+dist
+docs
 # vite.config.ts

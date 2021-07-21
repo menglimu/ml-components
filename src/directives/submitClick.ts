@@ -22,6 +22,7 @@ const submitBtn: DirectiveOptions = {
     if (!(el instanceof HTMLButtonElement)) {
       return;
     }
+    console.log(binding);
     const fn = async () => {
       try {
         addLoadingStatus(el);

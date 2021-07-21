@@ -116,7 +116,10 @@ function getPreset(config: MlFormColumn) {
 // 设置表单项的校验规则
 function getRules(config: MlFormColumn, prefix: string) {
   // 因为空校验和错误校验，UI颜色区别，所以要实时判空的原因，将所有的校验trigger修改为change
-  const trigger: "blur" | "change" = "blur";
+  let trigger: "blur" | "change" = "change";
+  if (prefix === "选择") {
+    trigger = "change";
+  }
 
   // 生成默认的一些校验规则
   const rules: Array<MlFormRule> = [];

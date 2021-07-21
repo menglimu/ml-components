@@ -36,6 +36,8 @@ export default Vue.extend({
         labelWidth: "100px",
         // uiType: 'round',
         clearable: true,
+        "label-suffix": "：",
+        // size: "small",
       },
     };
   },
@@ -187,7 +189,7 @@ export default Vue.extend({
     getDefaultValue(): any {
       // const list = this.config_.columns.filter(item => item.type !== 'special')
       const defaultValue = {};
-      this.config_.columns.forEach(column => {
+      this.config_.columns.forEach((column) => {
         if (column.prop) {
           defaultValue[column.prop] = this.getValByType(column);
         }

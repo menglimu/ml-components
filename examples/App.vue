@@ -24,6 +24,14 @@ html {
   width: 100%;
 }
 
+p {
+  margin-top: 50px;
+}
+
+.el-textarea__inner {
+  font-family: inherit;
+}
+
 table:not(.el-table__header):not(.el-table__body) {
   width: 100%;
   margin-bottom: 45px;

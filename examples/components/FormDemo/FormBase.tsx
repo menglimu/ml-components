@@ -2,7 +2,7 @@
  * 表单基础
  */
 import Vue from "vue";
-import { MlFormConfig } from "types/form";
+import { MlForm, MlFormConfig } from "types/form";
 
 function optionsGet() {
   return Promise.resolve([
@@ -41,8 +41,32 @@ export default Vue.extend({
       ],
     };
   },
-  methods: {},
+  methods: {
+    async onSubmit() {
+      await (this.$refs.form as MlForm).validate();
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          this.$message.success("提交成功");
+          resolve(1);
+        }, 5000);
+      });
+    },
+    onReset() {
+      (this.$refs.form as MlForm).reset();
+    },
+  },
   render() {
-    return <ml-form config={this.formConfig} v-model={this.formValue}></ml-form>;
+    return (
+      <div>
+        <ml-form ref="form" config={this.formConfig} v-model={this.formValue}></ml-form>
+        <div>
+          <el-button type="primary" v-submitClick={this.onSubmit}>
+            提交
+          </el-button>
+          <el-button onClick={this.onReset}>重置</el-button>
+        </div>
+        <div>当前表单输出值：{JSON.stringify(this.formValue)}</div>
+      </div>
+    );
   },
 });
