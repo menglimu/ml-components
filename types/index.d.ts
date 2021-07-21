@@ -1,6 +1,6 @@
-import Vue from 'vue';
-import { MlForm } from './form';
-import { MlTable } from './table';
+import Vue from "vue";
+import { MlForm } from "./form";
+import { MlTable } from "./table";
 
 interface MlComponents {
   install: (vue: typeof Vue, options: AnyObj) => void;

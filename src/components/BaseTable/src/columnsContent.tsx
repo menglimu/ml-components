@@ -5,16 +5,16 @@
  * @LastEditTime: 2020-12-28 11:36:43
  * @Description:  只保留form中的公共方法
  */
-import { getJudge } from '@/utils';
-import { isNull } from 'lodash';
-import { MlTableColumn, MlTableConfig } from 'types/table';
-import { CreateElement } from 'vue/types/umd';
+import { getJudge } from "@/utils";
+import { isNull } from "lodash";
+import { MlTableColumn, MlTableConfig } from "types/table";
+import { CreateElement } from "vue/types/umd";
 
 // 获取树形的值
 function getTreeLabel(
   id: string | number,
   options: any[] = [],
-  { optionLabel = 'label', optionValue = 'value', optionChildren = 'children' } = {}
+  { optionLabel = "label", optionValue = "value", optionChildren = "children" } = {},
 ): string {
   let result;
   for (const item of options) {
@@ -37,14 +37,14 @@ function getTreeLabel(
  */
 export function formatterFormValue<D>(
   cellValue: string | number | Array<string | number>,
-  config: MlTableColumn<D>
+  config: MlTableColumn<D>,
 ): string | number {
   let label = cellValue;
-  if (config.type === 'select') {
+  if (config.type === "select") {
     const valueArr = Array.isArray(cellValue) ? cellValue : [cellValue];
     label = valueArr.map(id => getTreeLabel(id, config.options, config)).filter(label => !isNull(label));
   }
-  return Array.isArray(label) ? label.join(',') : label;
+  return Array.isArray(label) ? label.join(",") : label;
 }
 
 /**
@@ -59,7 +59,7 @@ interface RowParams<D> {
 }
 
 function getStatusNames(className: string[], statusJudge: AnyObj, row: AnyObj) {
-  if (typeof statusJudge === 'function') {
+  if (typeof statusJudge === "function") {
     return statusJudge(row);
   }
   if (statusJudge) {
@@ -69,7 +69,7 @@ function getStatusNames(className: string[], statusJudge: AnyObj, row: AnyObj) {
 }
 
 function getBaseRender<D>(column: MlTableColumn<D>) {
-  if (column.type === 'image') {
+  if (column.type === "image") {
     return (h: CreateElement, params: RowParams<D>) => {
       let preList = params.row[column.prop];
       if (preList) {
@@ -80,7 +80,7 @@ function getBaseRender<D>(column: MlTableColumn<D>) {
         if (column.baseUrl) {
           preList = preList.map((url: string) => column.baseUrl + url);
         }
-        const className = getStatusNames(['td-img-box'], column.statusJudge, params.row);
+        const className = getStatusNames(["td-img-box"], column.statusJudge, params.row);
         return (
           <div class={className}>
             {preList.map((item: string) => {
@@ -96,10 +96,10 @@ function getBaseRender<D>(column: MlTableColumn<D>) {
         return <span></span>;
       }
     };
-  } else if (column.type === 'svg') {
+  } else if (column.type === "svg") {
     return (h: CreateElement, params: RowParams<D>) => {
       if (params.row[column.prop]) {
-        const className = getStatusNames(['td-svg-box'], column.statusJudge, params.row);
+        const className = getStatusNames(["td-svg-box"], column.statusJudge, params.row);
         return (
           <div class={className}>
             <svg-icon class="td-svg" icon-class={params.row[column.prop]} />
@@ -111,7 +111,7 @@ function getBaseRender<D>(column: MlTableColumn<D>) {
     };
   } else {
     return (h: CreateElement, params: RowParams<D>) => {
-      const className = getStatusNames(['td-text'], column.statusJudge, params.row);
+      const className = getStatusNames(["td-text"], column.statusJudge, params.row);
 
       if (column.formatter) {
         return <div class={className}>{column.formatter(params.row, column as any)}</div>;
@@ -125,7 +125,7 @@ function getBaseRender<D>(column: MlTableColumn<D>) {
 
 export function columnsHandler(config: MlTableConfig<any, any>) {
   config.columns.forEach(column => {
-    if (typeof column.optionsGet === 'function') {
+    if (typeof column.optionsGet === "function") {
       column.options = [];
       column.optionsGet().then(res => {
         if (Array.isArray(res.content)) {

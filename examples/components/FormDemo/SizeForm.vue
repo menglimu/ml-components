@@ -13,50 +13,50 @@
 
 <script>
 export default {
-  name: 'SizeForm',
+  name: "SizeForm",
   data() {
     return {
-      size: 'small',
+      size: "small",
       form: {
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
+        name: "",
+        region: "",
+        date1: "",
+        date2: "",
         type: [],
-        resource: '',
+        resource: "",
       },
       formConfig: {
-        size: 'small',
-        uiType: 'border',
+        size: "small",
+        uiType: "border",
         // labelWidth: '100px',
         // inline: false,
-        itemMaxWidth: '500px',
-        itemBoxWidth: '100%',
-        itemWidth: '100%',
+        itemMaxWidth: "500px",
+        itemBoxWidth: "100%",
+        itemWidth: "100%",
         columns: [
           {
-            type: 'input',
-            label: '活动名称',
-            prop: 'name',
+            type: "input",
+            label: "活动名称",
+            prop: "name",
             nodeData: {
               props: {
-                size: 'large',
+                size: "large",
               },
-            }
+            },
           },
           {
-            type: 'select',
-            label: '活动名称',
-            prop: 'region',
+            type: "select",
+            label: "活动名称",
+            prop: "region",
             options: [
-              { label: '区域一', value: 'shanghai' },
-              { label: '区域二', value: 'beijing' },
+              { label: "区域一", value: "shanghai" },
+              { label: "区域二", value: "beijing" },
             ],
           },
           {
-            type: '',
-            label: '活动时间',
-            prop: 'date1',
+            type: "",
+            label: "活动时间",
+            prop: "date1",
             render: (h, value) => {
               return (
                 <div>
@@ -66,58 +66,54 @@ export default {
                     v-model={this.form.date1}
                     style="width: 50%;"
                   ></c-date-picker>
-                  <c-time-picker
-                    placeholder="选择时间"
-                    v-model={this.form.date2}
-                    style="width: 50%;"
-                  ></c-time-picker>
+                  <c-time-picker placeholder="选择时间" v-model={this.form.date2} style="width: 50%;"></c-time-picker>
                 </div>
-              )
+              );
             },
           },
           {
-            type: 'checkbox',
-            label: '活动性质',
-            prop: 'type',
+            type: "checkbox",
+            label: "活动性质",
+            prop: "type",
             value: [],
-            placeholder: '选择活动性质',
+            placeholder: "选择活动性质",
             options: [
-              { label: '美食/餐厅线上活动', value: '1' },
-              { label: '地推活动', value: '2' },
-              { label: '线下主题活动', value: '3' },
+              { label: "美食/餐厅线上活动", value: "1" },
+              { label: "地推活动", value: "2" },
+              { label: "线下主题活动", value: "3" },
             ],
           },
           {
-            type: 'radio',
-            label: '特殊资源',
-            prop: 'resource',
-            placeholder: '选择特殊资源',
+            type: "radio",
+            label: "特殊资源",
+            prop: "resource",
+            placeholder: "选择特殊资源",
             options: [
-              { label: '线上品牌商赞助', value: '1' },
-              { label: '线下场地免费', value: '2' },
+              { label: "线上品牌商赞助", value: "1" },
+              { label: "线下场地免费", value: "2" },
             ],
             nodeData: {
               props: {
-                size: 'mini',
-                'text-color': '#245a91',
-                fill: '#e35cb7',
+                size: "mini",
+                "text-color": "#245a91",
+                fill: "#e35cb7",
               },
               attrs: {
-                size: 'mini',
+                size: "mini",
                 disabled: true,
-                'text-color': '#245a91',
-                fill: '#e35cb7',
-              }
-            }
+                "text-color": "#245a91",
+                fill: "#e35cb7",
+              },
+            },
           },
         ],
       },
-    }
+    };
   },
   watch: {
     size(v) {
-      this.formConfig.size = v
+      this.formConfig.size = v;
     },
-  }
-}
+  },
+};
 </script>

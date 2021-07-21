@@ -1,10 +1,10 @@
 module.exports = {
   root: true,
   env: {
-    node: true
+    node: true,
   },
   globals: {},
-  extends: ['./node_modules/@ml/lint']
+  extends: ["./node_modules/@ml/lint/.eslintrc.js"],
   // overrides: [
   //   {
   //     files: ['*.ts', '*.tsx'],

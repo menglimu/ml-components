@@ -2,77 +2,77 @@
  * 基础EChart组件
  */
 
-import * as echarts from 'echarts';
+import * as echarts from "echarts";
 
-import resize from './mixins/resize';
-import merge from '@/utils/merge';
-import style from './index.module.scss';
-import { ECharts } from 'echarts';
+import resize from "./mixins/resize";
+import merge from "@/utils/merge";
+import style from "./index.module.scss";
+import { ECharts } from "echarts";
 
 export default resize.extend({
-  name: 'MlEcharts',
+  name: "MlEcharts",
   mixins: [resize],
   props: {
     option: {
       type: Object,
-      default: null
-    }
+      default: null,
+    },
   },
   data() {
     return {
       chart: null as ECharts,
       defaultOption: {
-        color: ['#009dff', '#11c372', '#ffa542', '#ff4f5c'],
+        color: ["#009dff", "#11c372", "#ffa542", "#ff4f5c"],
         title: {
           textStyle: {
-            color: '#ffffff',
+            color: "#ffffff",
             fontSize: 14,
-            fontWeight: 'normal'
+            fontWeight: "normal",
           },
-          textAlign: 'left'
+          textAlign: "left",
         },
         legend: {
           textStyle: {
-            color: 'rgba(255,255,255,0.65)'
+            color: "rgba(255,255,255,0.65)",
           },
           bottom: 10,
-          left: 45
+          left: 45,
         },
         tooltip: {},
         grid: {
           right: 24,
           left: 50,
-          top: 40
+          top: 40,
         },
         xAxis: {
-          type: 'category',
+          type: "category",
           axisTick: {
-            show: false
+            show: false,
           },
           axisLine: {
             lineStyle: {
-              color: '#cccccc'
-            }
-          }
+              color: "#cccccc",
+            },
+          },
         },
         yAxis: {
           axisLabel: {
-            color: 'rgba(255,255,255,0.65)'
+            color: "rgba(255,255,255,0.65)",
           },
           splitLine: {
             lineStyle: {
-              color: ['#d7d7d7'],
-              type: 'dashed'
-            }
-          }
-        }
-      }
+              color: ["#d7d7d7"],
+              type: "dashed",
+            },
+          },
+        },
+      },
     };
   },
   created() {
-    this.$watch('option.series', this.refresh, { deep: true });
-    this.$watch('option.xAxis', this.refresh, { deep: true });
-    this.$watch('option.dataset', this.refresh, { deep: true });
+    this.$watch("option.series", this.refresh, { deep: true });
+    this.$watch("option.xAxis", this.refresh, { deep: true });
+    this.$watch("option.dataset", this.refresh, { deep: true });
   },
   mounted() {
     if (this.option) {
@@ -100,9 +100,9 @@ export default resize.extend({
     setOption() {
       const mergeOption = merge(this.defaultOption, this.option);
       this.chart.setOption(mergeOption);
-    }
+    },
   },
   render() {
     return <div class={style.charts}></div>;
-  }
+  },
 });

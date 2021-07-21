@@ -1,32 +1,32 @@
 <script>
 export default {
-  name: 'BaseForm',
+  name: "BaseForm",
   data() {
     return {
       form: {
-        name: '',
-        type: null
+        name: "",
+        type: null,
       },
       formConfig: {
         columns: [
           {
-            type: 'input',
-            label: '姓名',
-            prop: 'name'
+            type: "input",
+            label: "姓名",
+            prop: "name",
           },
           {
-            type: 'select',
-            label: '性别',
-            prop: 'type',
+            type: "select",
+            label: "性别",
+            prop: "type",
             options: [
-              { value: 1, label: '男' },
-              { value: 0, label: '女' }
-            ]
-          }
-        ]
-      }
+              { value: 1, label: "男" },
+              { value: 0, label: "女" },
+            ],
+          },
+        ],
+      },
     };
-  }
+  },
 };
 </script>
 <template>

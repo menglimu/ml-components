@@ -1,13 +1,13 @@
-import Vue from 'vue';
-import hljs from 'highlight.js';
-import 'highlight.js/styles/atom-one-dark.css';
-import './index.scss';
+import Vue from "vue";
+import hljs from "highlight.js";
+import "highlight.js/styles/atom-one-dark.css";
+import "./index.scss";
 // views下面的所有源码
 export default Vue.extend({
   props: {
     source: { type: String, required: false },
     sourceName: { type: String, required: false },
-    component: { type: String, required: false }
+    component: { type: String, required: false },
   },
   data() {
     return {
@@ -16,9 +16,9 @@ export default Vue.extend({
       isFixed: false,
       btnWidth: 300,
 
-      sourceHighLight: '',
+      sourceHighLight: "",
 
-      container: null
+      container: null,
     };
   },
 
@@ -29,11 +29,11 @@ export default Vue.extend({
     //   this.source = hljs.highlight(res.default, { language: 'javascript' }).value;
     // });
     this.$watch(
-      'source',
+      "source",
       () => {
-        this.sourceHighLight = hljs.highlight(this.source, { language: 'javascript' }).value;
+        this.sourceHighLight = hljs.highlight(this.source, { language: "javascript" }).value;
       },
-      { immediate: true }
+      { immediate: true },
     );
 
     // let sources = import.meta.glob(`./../../views/${this.path}.tsx?raw`);
@@ -47,10 +47,10 @@ export default Vue.extend({
   },
 
   mounted() {
-    document.querySelector('.container-page').addEventListener('scroll', this.onScroll);
+    document.querySelector(".container-page").addEventListener("scroll", this.onScroll);
   },
   beforeDestroy() {
-    document.querySelector('.container-page').removeEventListener('scroll', this.onScroll);
+    document.querySelector(".container-page").removeEventListener("scroll", this.onScroll);
   },
   methods: {
     onScroll() {
@@ -60,7 +60,7 @@ export default Vue.extend({
           return;
         }
         const sourcePre: HTMLElement = sourceDom; // this.$el.querySelector(`#${this.id} .pre-code-source`)
-        const container = document.querySelector('.container-page');
+        const container = document.querySelector(".container-page");
 
         this.btnWidth = sourcePre.clientWidth;
         // 当底部在屏幕下&&顶部在屏幕内时
@@ -78,7 +78,7 @@ export default Vue.extend({
     onSwitchShow() {
       this.showSource = !this.showSource;
       this.onScroll();
-    }
+    },
   },
 
   render() {
@@ -90,17 +90,17 @@ export default Vue.extend({
         <div class="pre-code-source">
           <pre class="source-box" ref="sourceDom" v-show={this.showSource} domPropsInnerHTML={this.sourceHighLight} />
           <el-button
-            class={{ 'is-fixed': this.isFixed, 'pre-code-source-showbtn': true }}
-            style={{ width: this.isFixed ? this.btnWidth + 'px' : '100%' }}
+            class={{ "is-fixed": this.isFixed, "pre-code-source-showbtn": true }}
+            style={{ width: this.isFixed ? this.btnWidth + "px" : "100%" }}
             onClick={this.onSwitchShow}
           >
-            <i class={[this.showSource ? 'el-icon-caret-top' : 'el-icon-caret-bottom']}></i>
-            <span class="pre-code-source-showbtn-text">{this.showSource ? '隐藏源码' : '显示源码'}</span>
+            <i class={[this.showSource ? "el-icon-caret-top" : "el-icon-caret-bottom"]}></i>
+            <span class="pre-code-source-showbtn-text">{this.showSource ? "隐藏源码" : "显示源码"}</span>
           </el-button>
 
           {/** <highlightjs language='javascript' code="var x = 5;" /> */}
         </div>
       </div>
     );
-  }
+  },
 });

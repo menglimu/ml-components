@@ -5,9 +5,9 @@
  * @LastEditTime: 2020-12-28 16:59:13
  * @Description:  获取表单子项的配置
  */
-import { MlFormRule, MlFormColumn, ComponentsPreset, MlFormType } from 'types/form';
-import { cloneDeep } from 'lodash';
-import merge from '@/utils/merge';
+import { MlFormRule, MlFormColumn, ComponentsPreset, MlFormType } from "types/form";
+import { cloneDeep } from "lodash";
+import merge from "@/utils/merge";
 
 /**
  * @description:  // 一些类型的基本属性
@@ -22,48 +22,48 @@ let componentsPreset = {};
 export function setComponentsPreset(prefix: string, others: ComponentsPreset = {}) {
   componentsPreset = {
     input: {
-      tag: prefix + 'input',
+      tag: prefix + "input",
       nodeData: {
         props: {
-          type: 'text'
-        }
-      }
+          type: "text",
+        },
+      },
     },
     textarea: {
-      tag: prefix + 'input',
+      tag: prefix + "input",
       nodeData: {
         class: {
-          'text-input': true
+          "text-input": true,
         },
         props: {
-          type: 'textarea'
+          type: "textarea",
         },
         attrs: {
-          rows: 4
-        }
-      }
+          rows: 4,
+        },
+      },
     },
     select: {
-      tag: prefix + 'select',
+      tag: prefix + "select",
       nodeData: {
         props: {
-          'popper-append-to-body': true
-        }
-      }
+          "popper-append-to-body": true,
+        },
+      },
     },
     radio: {
-      tag: prefix + 'radio-group'
+      tag: prefix + "radio-group",
     },
     checkbox: {
-      tag: prefix + 'checkbox-group'
+      tag: prefix + "checkbox-group",
     },
     date: {
-      tag: prefix + 'date-picker'
+      tag: prefix + "date-picker",
     },
     time: {
-      tag: prefix + 'time-picker'
+      tag: prefix + "time-picker",
     },
-    ...others
+    ...others,
   };
 }
 
@@ -74,41 +74,41 @@ function getPreset(config: MlFormColumn) {
 
   // 没有类型时。默认为input输入框
   if (!(config.type || config.tag || config.render)) {
-    defaultConfig = componentsPreset['input'];
+    defaultConfig = componentsPreset["input"];
   }
 
   if (config.type) {
-    if (['string'].includes(config.type)) {
-      defaultConfig = componentsPreset['input'];
-    } else if (['date', 'dates', 'daterange', 'datetime', 'datetimerange'].includes(config.type)) {
-      defaultConfig = componentsPreset[config.type] || componentsPreset['date'];
+    if (["string"].includes(config.type)) {
+      defaultConfig = componentsPreset["input"];
+    } else if (["date", "dates", "daterange", "datetime", "datetimerange"].includes(config.type)) {
+      defaultConfig = componentsPreset[config.type] || componentsPreset["date"];
       defaultConfig.nodeData = { props: { type: config.type } };
-    } else if (['time', 'timerange'].includes(config.type)) {
-      defaultConfig = componentsPreset[config.type] || componentsPreset['time'];
+    } else if (["time", "timerange"].includes(config.type)) {
+      defaultConfig = componentsPreset[config.type] || componentsPreset["time"];
       defaultConfig.nodeData = { props: { type: config.type } };
     } else {
       defaultConfig = componentsPreset[config.type] || {};
     }
 
     // 时间，日期的数据初始化
-    if (['time', 'timerange'].includes(config.type)) {
-      defaultConfig.nodeData.props['value-format'] = 'HH:mm:ss';
-      if (config.type === 'timerange') {
-        defaultConfig.nodeData.props['is-range'] = true;
+    if (["time", "timerange"].includes(config.type)) {
+      defaultConfig.nodeData.props["value-format"] = "HH:mm:ss";
+      if (config.type === "timerange") {
+        defaultConfig.nodeData.props["is-range"] = true;
       }
-    } else if (['date', 'dates', 'daterange'].includes(config.type)) {
-      defaultConfig.nodeData.props['value-format'] = 'yyyy-MM-dd';
-    } else if (['datetime', 'datetimerange'].includes(config.type)) {
-      defaultConfig.nodeData.props['value-format'] = 'yyyy-MM-dd HH:mm:ss';
+    } else if (["date", "dates", "daterange"].includes(config.type)) {
+      defaultConfig.nodeData.props["value-format"] = "yyyy-MM-dd";
+    } else if (["datetime", "datetimerange"].includes(config.type)) {
+      defaultConfig.nodeData.props["value-format"] = "yyyy-MM-dd HH:mm:ss";
     }
-    if (['datetimerange'].includes(config.type)) {
-      defaultConfig.nodeData.props['default-time'] = ['00:00:00', '23:59:59'];
+    if (["datetimerange"].includes(config.type)) {
+      defaultConfig.nodeData.props["default-time"] = ["00:00:00", "23:59:59"];
     }
 
-    if (['datetimerange', 'daterange'].includes(config.type)) {
-      defaultConfig.nodeData.props['range-separator'] = '至';
-      defaultConfig.nodeData.props['start-placeholder'] = '开始时间';
-      defaultConfig.nodeData.props['end-placeholder'] = '结束时间';
+    if (["datetimerange", "daterange"].includes(config.type)) {
+      defaultConfig.nodeData.props["range-separator"] = "至";
+      defaultConfig.nodeData.props["start-placeholder"] = "开始时间";
+      defaultConfig.nodeData.props["end-placeholder"] = "结束时间";
     }
   }
   return defaultConfig;
@@ -116,7 +116,7 @@ function getPreset(config: MlFormColumn) {
 // 设置表单项的校验规则
 function getRules(config: MlFormColumn, prefix: string) {
   // 因为空校验和错误校验，UI颜色区别，所以要实时判空的原因，将所有的校验trigger修改为change
-  const trigger: 'blur' | 'change' = 'blur';
+  const trigger: "blur" | "change" = "blur";
 
   // 生成默认的一些校验规则
   const rules: Array<MlFormRule> = [];
@@ -125,7 +125,7 @@ function getRules(config: MlFormColumn, prefix: string) {
       pattern: new RegExp(`^(.|\n){${config.minlength},}$`),
       // min: config.minlength,
       message: `不能少于${config.minlength}个字`,
-      trigger: trigger
+      trigger: trigger,
     });
   }
   if (config.maxlength !== undefined) {
@@ -133,21 +133,21 @@ function getRules(config: MlFormColumn, prefix: string) {
       pattern: new RegExp(`^(.|\n){0,${config.maxlength}}$`),
       // max: config.maxlength,
       message: `不能大于${config.maxlength}个字`,
-      trigger: trigger
+      trigger: trigger,
     });
   }
   if (config.reg) {
     rules.push({
       pattern: new RegExp(config.reg), // /^\[\d+,\d+\]$/
       message: config.error || `${config.label}${prefix}有误`,
-      trigger: trigger
+      trigger: trigger,
     });
   }
   if (config.required) {
     rules.push({
       required: true,
       message: config.error || `请${prefix}${config.label}`,
-      trigger: trigger
+      trigger: trigger,
     });
   }
   if (rules.length > 0) {
@@ -156,24 +156,24 @@ function getRules(config: MlFormColumn, prefix: string) {
 }
 // 根据类型获取是输入还是选择的
 function getPrefix(type?: MlFormType) {
-  let placeholderPrefix = '输入';
+  let placeholderPrefix = "输入";
 
   if (
     type &&
     [
-      'date',
-      'dates',
-      'daterange',
-      'datetime',
-      'datetimerange',
-      'time',
-      'timerange',
-      'select',
-      'tree',
-      'cascader'
+      "date",
+      "dates",
+      "daterange",
+      "datetime",
+      "datetimerange",
+      "time",
+      "timerange",
+      "select",
+      "tree",
+      "cascader",
     ].includes(type)
   ) {
-    placeholderPrefix = '选择';
+    placeholderPrefix = "选择";
   }
   return placeholderPrefix;
 }
@@ -186,7 +186,7 @@ export function getFormColumn(mlFormColumn: MlFormColumn): MlFormColumn {
     config.placeholder = `请${prefix}${config.label}`;
   }
   // 初始化显示条件
-  if (!config.hasOwnProperty('show')) {
+  if (!config.hasOwnProperty("show")) {
     config.show = true;
   }
   // 通过config类型，初始化规则和匹配预设组件默认值

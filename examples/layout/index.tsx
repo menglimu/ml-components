@@ -1,19 +1,19 @@
-import Vue from 'vue';
-import siderbar from './siderbar';
-import style from './index.module.scss';
+import Vue from "vue";
+import siderbar from "./siderbar";
+import style from "./index.module.scss";
 
 export default Vue.extend({
-  name: 'Layout',
+  name: "Layout",
   components: { siderbar },
   render() {
     return (
       <div class={style.layout}>
         <header class={style.layoutHeader} />
-        <div class={[style.container, 'container-page']}>
+        <div class={[style.container, "container-page"]}>
           <siderbar class={style.siderbar} />
           <router-view class={[style.page]} />
         </div>
       </div>
     );
-  }
+  },
 });

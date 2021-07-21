@@ -6,88 +6,77 @@
 
 <script>
 export default {
-  name: 'RenderForm',
+  name: "RenderForm",
   data() {
     return {
-      uiType: 'border',
+      uiType: "border",
       form: {
         name: [],
-        height: '',
-        height2: '',
-        date1: '',
-        date2: '',
+        height: "",
+        height2: "",
+        date1: "",
+        date2: "",
       },
       formConfig: {
-        size: 'small',
-        uiType: 'border',
+        size: "small",
+        uiType: "border",
         // labelWidth: '100px',
         // inline: false,
-        itemMaxWidth: '500px',
-        itemBoxWidth: '100%',
-        itemWidth: '100%',
+        itemMaxWidth: "500px",
+        itemBoxWidth: "100%",
+        itemWidth: "100%",
         columns: [
           {
-            type: '',
-            label: '姓名',
-            prop: 'name',
+            type: "",
+            label: "姓名",
+            prop: "name",
             value: [],
             render: (h, value) => {
               return (
                 <div class="custom-item">
-                  <c-input
-                    v-model={value[0]}
-                    class="m-input"
-                    placeholder="请输入姓"
-                  />
-                  <c-input
-                    v-model={value[1]}
-                    class="m-input"
-                    placeholder="请输入名"
-                  />
+                  <c-input v-model={value[0]} class="m-input" placeholder="请输入姓" />
+                  <c-input v-model={value[1]} class="m-input" placeholder="请输入名" />
                 </div>
-              )
+              );
             },
           },
           {
-            type: 'input',
-            label: '身高',
-            prop: 'height',
+            type: "input",
+            label: "身高",
+            prop: "height",
             render: (h, value) => {
               return (
                 <div class="custom-item">
                   <c-input v-model={value} class="m-input" />
                   <span class="suffix">cm</span>
                 </div>
-              )
+              );
             },
           },
           {
-            type: 'input',
-            label: '身高2',
-            prop: 'height2',
+            type: "input",
+            label: "身高2",
+            prop: "height2",
             render: (h, value) => {
               return h(
-                'div',
+                "div",
                 {
-                  class: 'custom-item',
+                  class: "custom-item",
                   props: { value: value },
                   on: {
                     input(v) {
-                      value = v
+                      value = v;
                     },
                   },
                 },
-                [
-                  h('c-input', { class: 'm-input' }),
-                  h('span', { class: 'suffix' }, 'cm'),
-                ]
-              )
+                [h("c-input", { class: "m-input" }), h("span", { class: "suffix" }, "cm")],
+              );
             },
           },
           {
-            type: '',
-            label: '活动时间',
-            prop: 'date1',
+            type: "",
+            label: "活动时间",
+            prop: "date1",
             render: (h, value) => {
               return (
                 <div class="custom-item">
@@ -105,19 +94,19 @@ export default {
                     style="width: 50%;"
                   ></c-time-picker>
                 </div>
-              )
+              );
             },
           },
         ],
       },
-    }
+    };
   },
   watch: {
     uiType(v) {
-      this.formConfig.uiType = v
+      this.formConfig.uiType = v;
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

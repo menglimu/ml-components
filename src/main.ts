@@ -11,19 +11,19 @@
 // TODO: loading按钮
 // TODO: form宽度优化
 
-import { VueConstructor } from 'vue/types/umd';
+import { VueConstructor } from "vue/types/umd";
 // 所有基础组件
-import MlTable from './components/BaseTable';
-import MlForm from './components/BaseForm';
-import MlEcharts from './components/BaseCharts';
-import MlEchartsLineArea from './components/BaseCharts/LineArea';
-import MlEchartsPieRate from './components/BaseCharts/PieRate';
-import MlCascader from './components/CustomCascader';
+import MlTable from "./components/BaseTable";
+import MlForm from "./components/BaseForm";
+import MlEcharts from "./components/BaseCharts";
+import MlEchartsLineArea from "./components/BaseCharts/LineArea";
+import MlEchartsPieRate from "./components/BaseCharts/PieRate";
+import MlCascader from "./components/CustomCascader";
 // 全局组件
-import GlobalVideoPlayer from './components/GlobalVideoPlayer';
+import GlobalVideoPlayer from "./components/GlobalVideoPlayer";
 // 指令
-import preventReClick from '@/directives/preventReClick';
-import globalTooltip from '@/directives/globalTooltip';
+import preventReClick from "@/directives/preventReClick";
+import globalTooltip from "@/directives/globalTooltip";
 
 export const components = {
   MlTable,
@@ -31,20 +31,20 @@ export const components = {
   MlEcharts,
   MlEchartsLineArea,
   MlEchartsPieRate,
-  MlCascader
+  MlCascader,
 };
 
 // 为所有基础组件添加注册方法
 Object.values(components).forEach((component: any) => {
   let key = component.options.name;
-  components[key].install = function (Vue: VueConstructor, opts = {}) {
+  components[key].install = function(Vue: VueConstructor, opts = {}) {
     Vue.prototype[key] = opts;
     Vue.component(key, components[key]);
   };
 });
 
 // 因为ts和混淆的原因，不能使用name
-const install = function (Vue: VueConstructor, opts = {}) {
+const install = function(Vue: VueConstructor, opts = {}) {
   Object.values(components).forEach((component: any) => {
     let key = component.options.name;
     Vue.use(component, opts[key]);
@@ -52,8 +52,8 @@ const install = function (Vue: VueConstructor, opts = {}) {
 
   Vue.use(GlobalVideoPlayer);
 
-  Vue.directive('preventReClick', preventReClick);
-  Vue.directive('globalTooltip', globalTooltip);
+  Vue.directive("preventReClick", preventReClick);
+  Vue.directive("globalTooltip", globalTooltip);
 };
 
 export default {
@@ -61,5 +61,5 @@ export default {
   ...components,
   GlobalVideoPlayer,
   preventReClick,
-  globalTooltip
+  globalTooltip,
 };

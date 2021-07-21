@@ -17,7 +17,8 @@
     "dev": "vite",
     "build": "vite build",
     "docs": "vite build --config vite.docs.ts",
-    "test": "jest"
+    "test": "jest",
+    "prettier": "prettier --write ./**"
   },
   "repository": {
     "type": "git",

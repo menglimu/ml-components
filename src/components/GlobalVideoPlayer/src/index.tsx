@@ -2,15 +2,15 @@
  * 右侧视频播放弹窗
  * TODO: 添加播放视频流。对象。判断重复
  */
-import Vue from 'vue';
-import Dplayer from '@/components/BaseDplayer';
-import './index.scss';
+import Vue from "vue";
+import Dplayer from "@/components/BaseDplayer";
+import "./index.scss";
 
 export default Vue.extend({
-  name: 'GlobalVideoPlayer',
+  name: "GlobalVideoPlayer",
   data() {
     return {
-      urls: []
+      urls: [],
     };
   },
   methods: {
@@ -24,7 +24,7 @@ export default Vue.extend({
     // 从播放列表删除
     remove(index) {
       this.urls.splice(index, 1);
-    }
+    },
   },
   render() {
     return (
@@ -39,5 +39,5 @@ export default Vue.extend({
         ))}
       </div>
     );
-  }
+  },
 });

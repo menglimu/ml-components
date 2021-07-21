@@ -1,9 +1,9 @@
-import Vue, { CreateElement } from 'vue';
-import { constantRouterMap } from './../router';
-import style from './index.module.scss';
+import Vue, { CreateElement } from "vue";
+import { constantRouterMap } from "./../router";
+import style from "./index.module.scss";
 
 export default Vue.extend({
-  name: 'Sidebar',
+  name: "Sidebar",
   methods: {
     onSelect() {
       // console.log("click", index, indexPath)
@@ -40,7 +40,7 @@ export default Vue.extend({
           </el-menu-item>
         );
       }
-    }
+    },
   },
 
   render(h: CreateElement) {
@@ -54,5 +54,5 @@ export default Vue.extend({
         </el-menu>
       </div>
     );
-  }
+  },
 });

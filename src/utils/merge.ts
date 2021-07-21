@@ -6,7 +6,7 @@
  * @Description: 调用 lodash 的 merge 并自定义合并function的逻辑
  */
 
-import { mergeWith, cloneDeep } from 'lodash';
+import { mergeWith, cloneDeep } from "lodash";
 
 let customMerge = (a: any, b: any) => {
   if (Array.isArray(a) && Array.isArray(b)) return cloneDeep(b);
@@ -14,18 +14,18 @@ let customMerge = (a: any, b: any) => {
 
 function merge<TSource1 extends Object, TSource2 extends Object>(
   source1: TSource1,
-  source2: TSource2
+  source2: TSource2,
 ): TSource1 & TSource2;
 function merge<TSource1 extends Object, TSource2 extends Object, TSource3 extends Object>(
   source1: TSource1,
   source2: TSource2,
-  source3: TSource3
+  source3: TSource3,
 ): TSource1 & TSource2 & TSource3;
 function merge<TSource1 extends Object, TSource2 extends Object, TSource3 extends Object, TSource4 extends Object>(
   source1: TSource1,
   source2: TSource2,
   source3: TSource3,
-  source4: TSource4
+  source4: TSource4,
 ): TSource1 & TSource2 & TSource3 & TSource3;
 function merge<T = any>(...options: any[]): T;
 /**
@@ -38,8 +38,8 @@ function merge(...options: any[]) {
   // 数组的合并方式
   if (
     options.length > 1 &&
-    Object.prototype.toString.call(options[0]) === '[object Object]' &&
-    Object.prototype.toString.call(options[1]) === '[object Object]'
+    Object.prototype.toString.call(options[0]) === "[object Object]" &&
+    Object.prototype.toString.call(options[1]) === "[object Object]"
   ) {
     return mergeWith({}, ...options, customMerge);
   }

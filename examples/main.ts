@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue from "vue";
 window.Vue = Vue;
 // import elementUi from 'element-ui/lib/index.js'
 // Vue.use(elementUi)

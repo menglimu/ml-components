@@ -5,9 +5,9 @@
  * @LastEditTime: 2020-12-28 18:20:49
  * @Description: 表单相关定义
  */
-import { ElForm } from 'element-ui/types/form';
-import { VNode, CreateElement, VNodeData } from 'vue/types/umd';
-import { AnyObj, MlOptions, Partial } from './common';
+import { ElForm } from "element-ui/types/form";
+import { VNode, CreateElement, VNodeData } from "vue/types/umd";
+import { AnyObj, MlOptions, Partial } from "./common";
 
 /** mlForm 对象定义 */
 export class MlForm extends ElForm {
@@ -116,7 +116,7 @@ export interface MlFormConfig<D = AnyObj> {
   /** 表单的基础样式，默认line为下划线，round为圆角, border为边框
    * @default line
    */
-  uiType?: 'line' | 'round' | 'border';
+  uiType?: "line" | "round" | "border";
 
   /** label的长度
    * @default 100px
@@ -126,7 +126,7 @@ export interface MlFormConfig<D = AnyObj> {
   /** label的对齐方式
    * @default 下划线默认左对齐，圆角默认居中
    */
-  labelPosition?: 'left' | 'right' | 'center' | 'top';
+  labelPosition?: "left" | "right" | "center" | "top";
 
   /** 每个输入项的长度，
    * @default  33.33%, block 默认100%
@@ -154,7 +154,7 @@ export interface MlFormConfig<D = AnyObj> {
   clearable?: boolean;
 
   /** 元素的size，默认40高，medium为36px，small为32px，mini为28px */
-  size?: 'large' | 'medium' | 'small' | 'mini';
+  size?: "large" | "medium" | "small" | "mini";
 
   /** 自适应表单大小
    * @default false
@@ -216,29 +216,29 @@ export interface MlFormProp<D = AnyObj> {
 
 /** 表单的类型 */
 type MlFormType =
-  | ''
-  | 'input'
-  | 'string'
-  | 'textarea'
-  | 'select'
-  | 'radio'
-  | 'checkbox'
-  | 'tree'
-  | 'upload'
-  | 'date'
-  | 'dates'
-  | 'daterange'
-  | 'time'
-  | 'timerange'
-  | 'datetime'
-  | 'datetimerange'
-  | 'color'
-  | 'cascader';
+  | ""
+  | "input"
+  | "string"
+  | "textarea"
+  | "select"
+  | "radio"
+  | "checkbox"
+  | "tree"
+  | "upload"
+  | "date"
+  | "dates"
+  | "daterange"
+  | "time"
+  | "timerange"
+  | "datetime"
+  | "datetimerange"
+  | "color"
+  | "cascader";
 
 /** 具体可参考element中的form的校验 */
 interface MlFormRule {
   message?: string;
-  trigger?: 'blur' | 'change';
+  trigger?: "blur" | "change";
   pattern?: RegExp;
   type?: string;
   required?: boolean;
@@ -260,7 +260,7 @@ interface ComponentsPreset {
 
 /** use的时候使用的一些默认配置项 */
 interface MlFormDefaultOptions {
-  framework?: 'cui' | 'element-ui';
+  framework?: "cui" | "element-ui";
   componentsPreset?: ComponentsPreset;
   configDefault?: Partial<MlFormConfig>;
 }

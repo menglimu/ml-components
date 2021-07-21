@@ -12,13 +12,13 @@
  * @param time 需要格式的日期
  * @param format 格式化的格式
  */
-export function parseTime(time: Date | number | string, format = 'yyyy-mm-dd hh:ii:ss') {
-  if (!time) return '';
+export function parseTime(time: Date | number | string, format = "yyyy-mm-dd hh:ii:ss") {
+  if (!time) return "";
   let date: Date;
   if (time instanceof Date) {
     date = time;
   } else {
-    let _time = typeof time === 'string' ? parseInt(time, 10) : time;
+    let _time = typeof time === "string" ? parseInt(time, 10) : time;
     if (String(_time).length === 10) _time = _time * 1000;
     date = new Date(_time);
   }
@@ -29,13 +29,13 @@ export function parseTime(time: Date | number | string, format = 'yyyy-mm-dd hh:
     h: date.getHours(),
     i: date.getMinutes(),
     s: date.getSeconds(),
-    a: date.getDay()
+    a: date.getDay(),
   };
   const time_str = format.replace(/(y|m|d|h|i|s|a)+/gi, (result, key) => {
     let value = formatObj[key];
-    if (key === 'a') return ['一', '二', '三', '四', '五', '六', '日'][value - 1];
+    if (key === "a") return ["一", "二", "三", "四", "五", "六", "日"][value - 1];
     if (result.length > 0 && value < 10) {
-      value = '0' + value;
+      value = "0" + value;
     }
     return value || 0;
   });
@@ -57,19 +57,19 @@ export function formatTime(time: string | number | Date, format?: string) {
   const diff = (Date.now() - date.getTime()) / 1000;
 
   if (diff < 30) {
-    return '刚刚';
+    return "刚刚";
   } else if (diff < 3600) {
     // less 1 hour
-    return Math.ceil(diff / 60) + '分钟前';
+    return Math.ceil(diff / 60) + "分钟前";
   } else if (diff < 3600 * 24) {
-    return Math.ceil(diff / 3600) + '小时前';
+    return Math.ceil(diff / 3600) + "小时前";
   } else if (diff < 3600 * 24 * 2) {
-    return '1天前';
+    return "1天前";
   }
   if (format) {
     return parseTime(date, format);
   } else {
-    return date.getMonth() + 1 + '月' + date.getDate() + '日' + date.getHours() + '时' + date.getMinutes() + '分';
+    return date.getMonth() + 1 + "月" + date.getDate() + "日" + date.getHours() + "时" + date.getMinutes() + "分";
   }
 }
 
@@ -78,12 +78,14 @@ export function formatTime(time: string | number | Date, format?: string) {
  */
 export function createRandomId() {
   return (
-    'id-' +
+    "id-" +
     (Math.random() * 10000000).toString(16).substr(0, 4) +
-    '-' +
+    "-" +
     new Date().getTime() +
-    '-' +
-    Math.random().toString().substr(2, 5)
+    "-" +
+    Math.random()
+      .toString()
+      .substr(2, 5)
   );
 }
 
@@ -93,11 +95,11 @@ export function createRandomId() {
  * @return {Boolean} 是否为空
  */
 export function isNull(str: any): boolean {
-  if (str === undefined || str === null || str === '') {
+  if (str === undefined || str === null || str === "") {
     return true;
   } else if (Array.isArray(str) && str.length === 0) {
     return true;
-  } else if (typeof str === 'object' && Object.keys(str).length === 0) {
+  } else if (typeof str === "object" && Object.keys(str).length === 0) {
     return true;
   }
   return false;

@@ -3,8 +3,8 @@
  * 组件名命名规则: GlobalXXX
  */
 
-import { VueConstructor } from 'vue/types/umd';
-import Component from './src/index';
+import { VueConstructor } from "vue/types/umd";
+import Component from "./src/index";
 
 // 创建vue实例
 const instance = new Component();
@@ -17,7 +17,7 @@ export default {
     // 方法挂载到window还是vue上。待定
     Vue.prototype.$GlobalVideoPlayer = instance;
     return instance;
-  }
+  },
 };
 
 // 使用方法的方式

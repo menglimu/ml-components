@@ -6,14 +6,14 @@
  * @Description:
  */
 
-import { ElTableColumn, TableColumnType } from 'element-ui/types/table-column';
-import { ElTable } from 'element-ui/types/table';
-import { ElButton } from 'element-ui/types/button';
-import { ElPagination } from 'element-ui/types/pagination';
-import { VNode, CreateElement, VNodeData } from 'vue/types/umd';
-import { MlFormConfig } from './form';
-import { AnyObj, MlOptions, Partial } from './common';
-import { VueComponentInstall } from './components';
+import { ElTableColumn, TableColumnType } from "element-ui/types/table-column";
+import { ElTable } from "element-ui/types/table";
+import { ElButton } from "element-ui/types/button";
+import { ElPagination } from "element-ui/types/pagination";
+import { VNode, CreateElement, VNodeData } from "vue/types/umd";
+import { MlFormConfig } from "./form";
+import { AnyObj, MlOptions, Partial } from "./common";
+import { VueComponentInstall } from "./components";
 
 /** D为表格内容类型。S为搜索条件类型 */
 export class MlTable<D = AnyObj, S = AnyObj> extends VueComponentInstall {
@@ -110,7 +110,7 @@ interface MlTableInnerBtn<D = AnyObj> extends TableButton<D> {
 /** 表格外按钮配置 */
 interface MlTableOuterBtn<D = AnyObj> extends TableButton<D> {
   /** false   不选,(其他值)， 单选，多选， */
-  selection?: 'none' | 'single' | 'multiple' | '';
+  selection?: "none" | "single" | "multiple" | "";
 
   /** 与 innerBtn不同，只能使用函数返回true/false */
   showJudge?: (data: D[]) => boolean;
@@ -126,7 +126,7 @@ interface ElTableColumnAny extends Partial<ElTableColumn> {
   // prop?: string;
 }
 
-type MlTableType = '' | 'string' | 'image' | 'svg' | 'select';
+type MlTableType = "" | "string" | "image" | "svg" | "select";
 
 /** 表格的具体项配置，更多内容可参考 UI框架中的表格组件 */
 interface MlTableColumn<D = AnyObj> extends MlOptions, ElTableColumnAny {
@@ -154,7 +154,7 @@ interface MlTableColumn<D = AnyObj> extends MlOptions, ElTableColumnAny {
         failed?: AnyObj;
         [key: string]: AnyObj;
       }
-    | ((data: D) => string | 'success' | 'error' | 'warning' | 'done' | 'failed');
+    | ((data: D) => string | "success" | "error" | "warning" | "done" | "failed");
 
   /** 图片的时候，是否使用预览 */
   noPre?: boolean;
@@ -169,7 +169,7 @@ interface MlTableColumn<D = AnyObj> extends MlOptions, ElTableColumnAny {
       column: MlTableColumn<D>;
       row: D;
       index: number;
-    }
+    },
   ) => VNode | Element;
   /** 自定义整列内容，应返回<el-table-column></c-table-column> */
   renderColumn?: (h: CreateElement) => VNode | Element;
@@ -187,7 +187,7 @@ export interface TableSearchProp<D = AnyObj> {
   config?: MlFormConfig<D>;
 
   /** 隐藏按钮的样式 */
-  hideUIType?: 'button' | 'bottom';
+  hideUIType?: "button" | "bottom";
 }
 
 /** 表格配置 */
@@ -220,7 +220,9 @@ export interface MlTableConfig<D = AnyObj, S = AnyObj> extends Partial<ElTable> 
     delete?: (ids: string, data?: D[]) => Promise<any>;
 
     /** 查询列表数据 */
-    list?: (data: S & TableParams) => Promise<{
+    list?: (
+      data: S & TableParams,
+    ) => Promise<{
       total: number;
       content: D[];
     }>;
@@ -262,7 +264,7 @@ export interface MlTableDefaultOptions {
   columnDefaultControl?: ElTableColumnAny;
   emptyWord?: string;
   emptyImg?: any;
-  framework?: 'cui' | 'element-ui';
+  framework?: "cui" | "element-ui";
   outerBtnDefault?: Partial<ElButton>;
   innerBtnDefault?: Partial<ElButton>;
 }

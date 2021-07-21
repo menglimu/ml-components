@@ -2,44 +2,42 @@
 
 ### 1.介绍
 
-通过配置config，生成表格
+通过配置 config，生成表格
 
 ### 2.说明
 
-
-参数 | 说明 | 类型 | 可选值 | 默认值 |
----|---|---|---|---|
-config | 表格配置项 | object | —— | ——
-searchConfig | 表格顶部搜索配置项 | object | —— | ——
-searchData | 搜索数据 | object | —— | ——
-searchBtnInForm | 搜索和重置按钮在输入项后显示，！输入项不能占满元素 | Boolean | —— | false
-innerBtn | 内部按钮组 | array | —— | ——
-outerBtn | 外部按钮组 | array | —— | ——
-deleteBtn | 删除按钮文本 | string | —— | ——
-beforeGetList | 获取数据前的钩子函数 | function | —— | ——
-afterGetList | 获取数据后的钩子函数 | function | —— | ——
+| 参数            | 说明                                               | 类型     | 可选值 | 默认值 |
+| --------------- | -------------------------------------------------- | -------- | ------ | ------ |
+| config          | 表格配置项                                         | object   | ——     | ——     |
+| searchConfig    | 表格顶部搜索配置项                                 | object   | ——     | ——     |
+| searchData      | 搜索数据                                           | object   | ——     | ——     |
+| searchBtnInForm | 搜索和重置按钮在输入项后显示，！输入项不能占满元素 | Boolean  | ——     | false  |
+| innerBtn        | 内部按钮组                                         | array    | ——     | ——     |
+| outerBtn        | 外部按钮组                                         | array    | ——     | ——     |
+| deleteBtn       | 删除按钮文本                                       | string   | ——     | ——     |
+| beforeGetList   | 获取数据前的钩子函数                               | function | ——     | ——     |
+| afterGetList    | 获取数据后的钩子函数                               | function | ——     | ——     |
 
 **slot**
-名字 | 说明 
+名字 | 说明
 outerTable | 搜索栏和表格中间部分
 
 **outerBtn/innerBtn**
 参数 | 说明 | 类型 | 可选值 | 默认值 |
 ---|---|---|---|---|
 evtType | 事件类型 | string | —— | —— |
-Elicon | elementUI的图标库 | string  | —— | —— |
-icon | svg图标 | string  | —— | —— |
-name | 按钮名 | string  | —— | —— |
-selection | 多选类型，仅外部按钮可用 | string  | none / single / multiple | none   |
-showJudge | 按钮显示隐藏 | object/function  | —— | showJudge : {name: 1 ,type: 2} // showJudge: function(data){return false/true} // 可使用函数返回true/false，判断显示，参数为行数据 |
-
+Elicon | elementUI 的图标库 | string | —— | —— |
+icon | svg 图标 | string | —— | —— |
+name | 按钮名 | string | —— | —— |
+selection | 多选类型，仅外部按钮可用 | string | none / single / multiple | none |
+showJudge | 按钮显示隐藏 | object/function | —— | showJudge : {name: 1 ,type: 2} // showJudge: function(data){return false/true} // 可使用函数返回 true/false，判断显示，参数为行数据 |
 
 **config**
 参数 | 说明 | 类型 | 可选值 | 默认值 |
 ---|---|---|---|---|
 selection | 是否显示多选框 | boolean | —— | true |
-index | 是否显示序列号 | boolean  | —— | false |
-tableTree | 是否tree，属性表格 | boolean  | —— | false |
+index | 是否显示序列号 | boolean | —— | false |
+tableTree | 是否 tree，属性表格 | boolean | —— | false |
 tableKey | 主键 | string | —— | 'id'
 tableOptWidth | 操作栏宽度 | string | —— | ''
 api | 表格操作接口 | object | —— | object:{list,delete,tree,import,export}
@@ -51,22 +49,23 @@ searchData | 搜索的默认值 | object | —— | —— |
 columns | 具体配置项列表 | array | —— | —— |
 
 **columns**
-参数 | 说明 | 类型 | 可选值 | 默认值 | 是否必填 | 
+参数 | 说明 | 类型 | 可选值 | 默认值 | 是否必填 |
 ---|---|---|---|---|---|
-type | 输入项类型 | string | 基本输入：string / phone / mail / bankCode / idCard / number / password / textarea <br>时间日期：date / dates / daterange / datetime / datetimerange / time / timerange<br> 选择类型：radio / checkbox / select / selectTree(下拉树形) / tree(树形) / svg(svg图标选择) / color | —— | 是 
-prop | key值 | string  | —— | —— |  是 
-label | label文本 | string  | —— | —— | 是 
-showTable | 显示表格中 | boolean  | —— | true |
-searchForm | 显示在搜索框中 | boolean  | —— | false |
-noPre | 图片不使用预览 | boolean  | —— | true |
-render | 自定义表格列渲染 | function  | —— | render: (h, params) => {//params: {column,index,row}//配置数据，序列号，行数据} |
-其他值参考form配置项 | 
+type | 输入项类型 | string | 基本输入：string / phone / mail / bankCode / idCard / number / password / textarea <br>时间日期：date / dates / daterange / datetime / datetimerange / time / timerange<br> 选择类型：radio / checkbox / select / selectTree(下拉树形) / tree(树形) / svg(svg 图标选择) / color | —— | 是
+prop | key 值 | string | —— | —— | 是
+label | label 文本 | string | —— | —— | 是
+showTable | 显示表格中 | boolean | —— | true |
+searchForm | 显示在搜索框中 | boolean | —— | false |
+noPre | 图片不使用预览 | boolean | —— | true |
+render | 自定义表格列渲染 | function | —— | render: (h, params) => {//params: {column,index,row}//配置数据，序列号，行数据} |
+其他值参考 form 配置项 |
 
 **slot**
 
 default：表格上和搜索框下的外部自定义
 
 ### 3.在项目中使用:
+
 MlTable
 
 ```
@@ -371,4 +370,3 @@ export default class TablePage extends Vue {
 <style lang="scss" scoped></style>
 
 ```
-

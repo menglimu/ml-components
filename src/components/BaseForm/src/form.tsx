@@ -1,25 +1,25 @@
 /**
  * 表单组件
  */
-import Vue from 'vue';
-import { PropType } from 'vue/types/umd';
-import Tags from '../../../utils/tags';
-import FormItem from './formItem';
-import { cloneDeep, isEqual } from 'lodash';
-import { MlFormConfig, MlFormColumn, MlFormDefaultOptions } from 'types/form';
-import { ElForm } from 'element-ui/types/form';
-import merge from '@/utils/merge';
-import './form.scss';
+import Vue from "vue";
+import { PropType } from "vue/types/umd";
+import Tags from "../../../utils/tags";
+import FormItem from "./formItem";
+import { cloneDeep, isEqual } from "lodash";
+import { MlFormConfig, MlFormColumn, MlFormDefaultOptions } from "types/form";
+import { ElForm } from "element-ui/types/form";
+import merge from "@/utils/merge";
+import "./form.scss";
 
-import { setComponentsPreset } from './config';
+import { setComponentsPreset } from "./config";
 // import style from 'index.module.scss'
 
 export default Vue.extend({
-  name: 'MlForm',
+  name: "MlForm",
   props: {
     value: { type: null, default: null },
     /** 表单配置项 */
-    config: { type: Object as PropType<MlFormConfig>, required: true }
+    config: { type: Object as PropType<MlFormConfig>, required: true },
   },
   data() {
     return {
@@ -28,21 +28,21 @@ export default Vue.extend({
       value_: {}, // form的值
       tags: null as Tags,
       defaultOptions: null as MlFormDefaultOptions, // 一些默认值的配置。可通过use的时候进行修改
-      framework: 'element-ui', // ui框架类型
+      framework: "element-ui", // ui框架类型
       componentsPreset: {},
       // config 默认值
       configDefault: {
         inline: true,
-        labelWidth: '100px',
+        labelWidth: "100px",
         // uiType: 'round',
-        clearable: true
-      }
+        clearable: true,
+      },
     };
   },
   created() {
     this.initDefault();
-    this.$watch('config', this.onConfigChange, { deep: true, immediate: true });
-    this.$watch('value', this.onParentValueChange, { deep: true });
+    this.$watch("config", this.onConfigChange, { deep: true, immediate: true });
+    this.$watch("value", this.onParentValueChange, { deep: true });
   },
   mounted() {
     // 对于form里表单的属性采用代理引入。避免重复引用
@@ -51,7 +51,7 @@ export default Vue.extend({
         Object.defineProperty(this, key, {
           get: () => {
             return this.$refs.form[key];
-          }
+          },
         });
       }
     }
@@ -91,13 +91,13 @@ export default Vue.extend({
         document.body.clientWidth;
       if (Width < 1366) {
         // this.size = 'mini'
-        this.$set(this.config_, 'size', 'mini');
+        this.$set(this.config_, "size", "mini");
       } else if (Width < 1600) {
         // this.size = 'small'
-        this.$set(this.config_, 'size', 'small');
+        this.$set(this.config_, "size", "small");
       } else if (Width < 1680) {
         // this.size = 'medium'
-        this.$set(this.config_, 'size', 'medium');
+        this.$set(this.config_, "size", "medium");
       }
     },
 
@@ -106,7 +106,7 @@ export default Vue.extend({
       this.defaultOptions = (this as any).MlForm;
       if (this.defaultOptions) {
         for (const key in this.defaultOptions) {
-          if (typeof this.defaultOptions[key] === 'object') {
+          if (typeof this.defaultOptions[key] === "object") {
             this[key] = merge(this[key], this.defaultOptions[key]);
           } else {
             this[key] = this.defaultOptions[key];
@@ -135,12 +135,12 @@ export default Vue.extend({
         this.configDefault,
         {
           // autoSize: this.config.size ? false : true,
-          labelPosition: this.config.uiType === 'round' ? 'center' : 'right'
+          labelPosition: this.config.uiType === "round" ? "center" : "right",
         },
-        this.config
+        this.config,
       );
       if (!config.inline) {
-        config.itemMaxWidth = 'inherit';
+        config.itemMaxWidth = "inherit";
       }
       if (this.config_?.autoSize && this.config_?.size) {
         config.size = this.config_.size;
@@ -150,7 +150,7 @@ export default Vue.extend({
 
     // 重置初始值
     reset() {
-      this.$emit('input', cloneDeep(this.initValue));
+      this.$emit("input", cloneDeep(this.initValue));
       this.clearValidate();
     },
     // 验证数据 使用表单默认的验证
@@ -174,7 +174,7 @@ export default Vue.extend({
         value_ = this.config_.format.toValue(this.value_);
       }
       if (isEqual(this.value, value_)) return;
-      this.$emit('input', value_);
+      this.$emit("input", value_);
     },
     // 监听值改变设置某一项value_的值
     onInput(prop: string, value: any) {
@@ -196,15 +196,15 @@ export default Vue.extend({
     },
     // 注释掉一些初始值的处理。代码尽量简洁
     getValByType(column: MlFormColumn) {
-      if (column.hasOwnProperty('value')) {
+      if (column.hasOwnProperty("value")) {
         return column.value;
       }
       return null;
-    }
+    },
   },
   render() {
     // eslint-disable-next-line
-    const { uiType, columns, format, ...formAttrs } = this.config_
+    const { uiType, columns, format, ...formAttrs } = this.config_;
     const { TagForm } = this.tags;
     return (
       // 通过解构。将所有用户属性解构到form中
@@ -212,7 +212,7 @@ export default Vue.extend({
         ref="form"
         // attrs={formAttrs}
         props={{ model: this.value_, ...formAttrs }}
-        class={[uiType, this.config_.size, 'label-' + this.config_.labelPosition, 'ml-form']}
+        class={[uiType, this.config_.size, "label-" + this.config_.labelPosition, "ml-form"]}
       >
         {columns.map((item, index) => {
           return (
@@ -232,5 +232,5 @@ export default Vue.extend({
         {this.$slots.default}
       </TagForm>
     );
-  }
+  },
 });

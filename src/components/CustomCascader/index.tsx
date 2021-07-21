@@ -3,56 +3,56 @@
  * 适用于选择一个项返回单个id的时候
  */
 
-import Vue from 'vue';
-import './index.scss';
+import Vue from "vue";
+import "./index.scss";
 
 export default Vue.extend({
-  name: 'MlCascader',
+  name: "MlCascader",
   props: {
     options: { type: Array, required: true },
-    optionLabel: { type: String, default: 'label' },
-    optionValue: { type: String, default: 'value' },
-    value: { type: String, default: '' },
-    props: { type: Object, default: () => ({}) }
+    optionLabel: { type: String, default: "label" },
+    optionValue: { type: String, default: "value" },
+    value: { type: String, default: "" },
+    props: { type: Object, default: () => ({}) },
   },
   computed: {
     propsObj(this: any) {
       return {
         checkStrictly: true,
-        expandTrigger: 'hover',
+        expandTrigger: "hover",
         emitPath: false,
         value: this.optionValue,
         label: this.optionLabel,
-        ...this.props
+        ...this.props,
       };
-    }
+    },
   },
   methods: {
     computedProps() {
       return {
         checkStrictly: true,
-        expandTrigger: 'hover',
+        expandTrigger: "hover",
         emitPath: false,
         value: this.optionValue,
         label: this.optionLabel,
-        ...this.props
+        ...this.props,
       };
     },
     onClick(value) {
       // const value_ = this.value === value ? null : value
-      this.$emit('input', value);
+      this.$emit("input", value);
       const cascader: any = this.$refs.cascader;
       cascader.toggleDropDownVisible(false);
     },
     onInput(value) {
-      this.$emit('input', value);
-    }
+      this.$emit("input", value);
+    },
   },
   render() {
     return (
       <el-cascader
         ref="cascader"
-        class={'custom-cascader'}
+        class={"custom-cascader"}
         popper-class="custom-cascader-popper"
         value={this.value}
         onInput={this.onInput}
@@ -61,9 +61,9 @@ export default Vue.extend({
         scopedSlots={{
           default: ({ data }) => (
             <div onClick={() => this.onClick(data[this.propsObj.value])}>{data[this.propsObj.label]}</div>
-          )
+          ),
         }}
       ></el-cascader>
     );
-  }
+  },
 });

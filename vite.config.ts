@@ -1,24 +1,24 @@
-import { defineConfig } from 'vite';
-import { createVuePlugin } from 'vite-plugin-vue2';
+import { defineConfig } from "vite";
+import { createVuePlugin } from "vite-plugin-vue2";
 // eslint-disable-next-line
-const path = require('path');
+const path = require("path");
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [createVuePlugin({ jsx: true })],
   resolve: {
     alias: {
-      '@': '/src',
-      types: '/types'
-    }
+      "@": "/src",
+      types: "/types",
+    },
   },
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/main'),
-      name: 'ml-components',
-      formats: ['es']
+      entry: path.resolve(__dirname, "src/main"),
+      name: "ml-components",
+      formats: ["es"],
     },
     rollupOptions: {
-      external: ['vue', 'lodash', 'element-ui', 'echarts', 'dplayer']
-    }
-  }
+      external: ["vue", "lodash", "element-ui", "echarts", "dplayer"],
+    },
+  },
 });

@@ -6,4 +6,4 @@
  * @Description: 导出组件
  */
 
-export { default } from './src';
+export { default } from "./src";

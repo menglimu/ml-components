@@ -6,7 +6,7 @@
  * @Description:
  */
 
-import Vue from 'vue';
+import Vue from "vue";
 export class VueComponentInstall extends Vue {
   /** Install component into Vue */
   public static install(vue: typeof Vue): void;

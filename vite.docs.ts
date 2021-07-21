@@ -1,16 +1,16 @@
-import { defineConfig } from 'vite';
-import { createVuePlugin } from 'vite-plugin-vue2';
+import { defineConfig } from "vite";
+import { createVuePlugin } from "vite-plugin-vue2";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [createVuePlugin({ jsx: true })],
   resolve: {
     alias: {
-      '@': '/src',
-      types: '/types'
-    }
+      "@": "/src",
+      types: "/types",
+    },
   },
-  base: '/ml-components/',
+  base: "/ml-components/",
   build: {
-    outDir: 'docs'
-  }
+    outDir: "docs",
+  },
 });

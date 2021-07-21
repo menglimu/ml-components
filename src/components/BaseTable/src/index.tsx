@@ -1,9 +1,9 @@
 /**
  * 表格组件
  */
-import Vue from 'vue';
-import './table.scss';
-import { CreateElement, PropType, VNode } from 'vue/types/umd';
+import Vue from "vue";
+import "./table.scss";
+import { CreateElement, PropType, VNode } from "vue/types/umd";
 import {
   TableSearchProp,
   MlTableConfig,
@@ -11,20 +11,20 @@ import {
   MlTableOuterBtn,
   MlTableDefaultOptions,
   MlTableColumn,
-  TableParams
-} from 'types/table';
-import Tags from '../../../utils/tags';
-import emptyImg from './../assets/no-data.png';
-import { Pagination } from 'element-ui';
-import { ElTable } from 'element-ui/types/table';
-import { columnsHandler } from './columnsContent';
-import merge from '@/utils/merge';
-import { cloneDeep } from 'lodash';
-import { getJudge } from '@/utils';
-import TableSearch from './table-search';
+  TableParams,
+} from "types/table";
+import Tags from "../../../utils/tags";
+import emptyImg from "./../assets/no-data.png";
+import { Pagination } from "element-ui";
+import { ElTable } from "element-ui/types/table";
+import { columnsHandler } from "./columnsContent";
+import merge from "@/utils/merge";
+import { cloneDeep } from "lodash";
+import { getJudge } from "@/utils";
+import TableSearch from "./table-search";
 
 export default Vue.extend({
-  name: 'MlTable',
+  name: "MlTable",
   inheritAttrs: false,
   props: {
     /** 表格搜索配置项  */
@@ -46,7 +46,7 @@ export default Vue.extend({
     beforeGetList: { type: Function as PropType<(type: string, params: any) => any> },
 
     /** 数据加载后的钩子函数 */
-    afterGetList: { type: Function as PropType<(type: string, res: any) => void> }
+    afterGetList: { type: Function as PropType<(type: string, res: any) => void> },
   },
   data() {
     return {
@@ -56,8 +56,8 @@ export default Vue.extend({
       pageSize: 0,
       currentPage: 1,
       total: 0,
-      sortProp: '',
-      sortType: '' as '' | 'DESC' | 'ASC',
+      sortProp: "",
+      sortType: "" as "" | "DESC" | "ASC",
       multipleSelection: [], // 多选
 
       tags: null as Tags,
@@ -70,50 +70,50 @@ export default Vue.extend({
         pageSizes: [10, 20, 30],
         pageSize: 10,
         background: true,
-        layout: 'total, sizes, prev, pager, next, jumper'
+        layout: "total, sizes, prev, pager, next, jumper",
       },
       configDefault: {
-        tableKey: 'id',
+        tableKey: "id",
         showPagination: true,
         selection: true,
         reserveSelection: true,
-        initSearch: true
+        initSearch: true,
       },
       TableDefault: {
-        'element-loading-text': '拼命加载中',
-        'element-loading-spinner': 'el-icon-loading',
-        'element-loading-background': 'rgba(0, 0, 0, 0.8)'
+        "element-loading-text": "拼命加载中",
+        "element-loading-spinner": "el-icon-loading",
+        "element-loading-background": "rgba(0, 0, 0, 0.8)",
       },
       columnDefaultIndex: {
-        type: 'index',
-        label: '序号',
-        width: '50',
-        align: 'cetner'
+        type: "index",
+        label: "序号",
+        width: "50",
+        align: "cetner",
       },
       columnDefaultSelection: {
-        type: 'selection',
-        width: '50',
-        align: 'center'
+        type: "selection",
+        width: "50",
+        align: "center",
       },
       columnDefaultNormal: {
-        align: 'left',
-        showOverflowTooltip: true
+        align: "left",
+        showOverflowTooltip: true,
       },
       columnDefaultControl: {
-        align: 'center',
-        label: '操作',
-        fixed: 'right'
+        align: "center",
+        label: "操作",
+        fixed: "right",
       },
-      emptyWord: '暂无数据',
+      emptyWord: "暂无数据",
       emptyImg,
-      framework: 'element-ui',
+      framework: "element-ui",
       outerBtnDefault: {
-        size: 'samll'
+        size: "samll",
       },
       innerBtnDefault: {
-        size: 'samll'
+        size: "samll",
       },
-      elTable: null as ElTable
+      elTable: null as ElTable,
     };
   },
   computed: {
@@ -131,14 +131,14 @@ export default Vue.extend({
     /** 表格外按钮 */
     outerBtn_(this: any): MlTableOuterBtn[] {
       return this.outerBtn;
-    }
+    },
   },
   created() {
-    this.$watch('config', this.onConfigChange, { deep: true, immediate: true });
+    this.$watch("config", this.onConfigChange, { deep: true, immediate: true });
     this.defaultOptions = (this as any).MlTable;
     if (this.defaultOptions) {
       for (const key in this.defaultOptions) {
-        if (typeof this.defaultOptions[key] === 'object') {
+        if (typeof this.defaultOptions[key] === "object") {
           this[key] = merge(this[key], this.defaultOptions[key]);
         } else {
           this[key] = this.defaultOptions[key];
@@ -150,7 +150,7 @@ export default Vue.extend({
   mounted() {
     // 初始化的时候，是否直接搜索数据
     if (this.config_.initSearch === true) {
-      this.search('init');
+      this.search("init");
     }
     this.elTable = this.$refs.table as ElTable;
     // this.$nextTick(() => (this.elTable = this.$refs.table))
@@ -165,23 +165,23 @@ export default Vue.extend({
     // 内部处理删除逻辑
     async onDelete(data: any[], type?: string) {
       if (!data || data.length === 0) {
-        this.$message.warning('请选择要删除的内容');
+        this.$message.warning("请选择要删除的内容");
         return;
       }
       if (this.config_.api?.delete) {
-        const ids = data.map(_ => _[this.config_.tableKey]).join(',');
+        const ids = data.map(_ => _[this.config_.tableKey]).join(",");
         try {
-          await this.$confirm('此操作将永久删除该数据, 是否继续?');
+          await this.$confirm("此操作将永久删除该数据, 是否继续?");
           await this.config_.api?.delete(ids, data);
           this.refresh();
-          this.$message.success('删除成功');
-          this.$emit('delete-success', ids, data);
+          this.$message.success("删除成功");
+          this.$emit("delete-success", ids, data);
         } catch (error) {
           console.log(error);
-          this.$emit('delete-error', ids, data);
+          this.$emit("delete-error", ids, data);
         }
       } else {
-        if (type === 'inner') {
+        if (type === "inner") {
           this.$emit(type, data[0]);
         } else {
           this.$emit(type, this.multipleSelection);
@@ -191,8 +191,8 @@ export default Vue.extend({
     // 表格内部按钮点击处理
     handleInnerBtn(type: string, row: AnyObj, btn: MlTableInnerBtn) {
       switch (type) {
-        case 'mldelete':
-          this.onDelete([row], 'inner');
+        case "mldelete":
+          this.onDelete([row], "inner");
           break;
         default:
           btn?.callback?.(row);
@@ -203,7 +203,7 @@ export default Vue.extend({
     // 表格外按钮点击处理
     handleOuterBtn(type: string, btn: MlTableOuterBtn) {
       switch (type) {
-        case 'mldelete':
+        case "mldelete":
           this.onDelete(this.multipleSelection);
           break;
         default:
@@ -215,7 +215,7 @@ export default Vue.extend({
     // 按钮显示、可用判断
     showJudgeInner(btn: MlTableInnerBtn, row: AnyObj): boolean {
       if (btn.showJudge) {
-        if (typeof btn.showJudge === 'function') {
+        if (typeof btn.showJudge === "function") {
           return btn.showJudge(row);
         }
         return getJudge(btn.showJudge, row);
@@ -230,7 +230,7 @@ export default Vue.extend({
 
     // 刷新表格数据
     refresh() {
-      this.search('refresh');
+      this.search("refresh");
     },
 
     // 重置查询条件并搜索
@@ -238,19 +238,19 @@ export default Vue.extend({
     onReset(data: AnyObj = {}) {
       this.resetSort();
       this.resetPageNum();
-      this.search('reset', data || {});
+      this.search("reset", data || {});
     },
     // @Provide()
     onSearch(data: AnyObj = {}) {
       this.resetPageNum();
-      this.search('searchBtn', data || {});
+      this.search("searchBtn", data || {});
     },
     // 重置排序相关
     resetSort() {
       this.elTable?.clearSort();
       this.forceUpdateTableHeader();
-      this.sortProp = '';
-      this.sortType = '';
+      this.sortProp = "";
+      this.sortType = "";
     },
     // 如果是由搜索/重置按钮触发的,重置分页相关参数
     resetPageNum() {
@@ -261,21 +261,21 @@ export default Vue.extend({
     // 分页改变
     handleSizeChange(val: number) {
       this.pageSize = val;
-      this.search('size-change');
-      this.$emit('size-change', val);
+      this.search("size-change");
+      this.$emit("size-change", val);
     },
     handleCurrentChange(val: number) {
       this.currentPage = val;
-      this.search('current-change');
-      this.$emit('current-change', val);
+      this.search("current-change");
+      this.$emit("current-change", val);
     },
     // 排序
     onSortChange({ column, prop, order }: { column: MlTableColumn; prop: string; order: string }) {
       // const column = this.config_.columns.find(item => item.prop === prop)
-      if (column?.sortable === 'custom') {
+      if (column?.sortable === "custom") {
         this.sortProp = prop;
-        this.sortType = order === 'descending' ? 'DESC' : order === 'ascending' ? 'ASC' : ''; // ACS 顺序，从小到大， DESC倒序，从大到小
-        this.search('sort');
+        this.sortType = order === "descending" ? "DESC" : order === "ascending" ? "ASC" : ""; // ACS 顺序，从小到大， DESC倒序，从大到小
+        this.search("sort");
       }
     },
 
@@ -285,7 +285,7 @@ export default Vue.extend({
     },
 
     // 搜索
-    async search(type = '', data: AnyObj = {}) {
+    async search(type = "", data: AnyObj = {}) {
       if (!this.config_.api || !this.config_.api.list) {
         return;
       }
@@ -299,11 +299,11 @@ export default Vue.extend({
         ...pager,
         ...this.searchData,
         ...this.searchInput,
-        ...data
+        ...data,
       };
       if (this.sortProp && this.sortType) {
         params.sortColumn = this.sortProp;
-        params.sortAsc = this.sortType === 'ASC' ? true : false;
+        params.sortAsc = this.sortType === "ASC" ? true : false;
       }
 
       if (this.beforeGetList) {
@@ -316,13 +316,13 @@ export default Vue.extend({
         this.data = res?.content || [];
         if (this.data.length === 0 && this.currentPage > (Math.ceil(this.total / this.pageSize) || 1)) {
           this.currentPage = 1;
-          this.search('errorPage-reset');
+          this.search("errorPage-reset");
         }
       } catch (error) {
         console.error(error);
         res = error;
       }
-      if (type === 'sort') {
+      if (type === "sort") {
         this.forceUpdateTableHeader();
       }
       this.loading = false;
@@ -366,12 +366,12 @@ export default Vue.extend({
                   key={index}
                   {...{ attrs: { ...this.outerBtnDefault, ...btn } }}
                   disabled={
-                    (btn.selection === 'single' && this.multipleSelection.length !== 1) ||
-                    (btn.selection === 'multiple' && this.multipleSelection.length < 1)
+                    (btn.selection === "single" && this.multipleSelection.length !== 1) ||
+                    (btn.selection === "multiple" && this.multipleSelection.length < 1)
                   }
                   onClick={() => this.handleOuterBtn(btn.evtType, btn)}
                 >
-                  {btn.Elicon && <i class={['el-icon-' + btn.Elicon]} />}
+                  {btn.Elicon && <i class={["el-icon-" + btn.Elicon]} />}
                   {btn.icon && <svg-icon icon-class={btn.icon} />}
                   {btn.name}
                 </TagButton>
@@ -405,12 +405,12 @@ export default Vue.extend({
                       class="inner-btn"
                       onClick={() => this.handleInnerBtn(btn.evtType, scope.row, btn)}
                     >
-                      {btn.Elicon && <i class={['el-icon-' + btn.Elicon]} />}
+                      {btn.Elicon && <i class={["el-icon-" + btn.Elicon]} />}
                       {btn.icon && <svg-icon icon-class={btn.icon} />}
                       {btn.name}
                     </TagButton>
                   );
-                })
+                }),
           }}
         ></TagTableColumn>
       );
@@ -418,7 +418,7 @@ export default Vue.extend({
     renderColumn(h: CreateElement) {
       const { TagTableColumn } = this.tags;
       return this.config_.columns.map((item, index) => {
-        if (item.type === 'index' || item.type === 'selection') {
+        if (item.type === "index" || item.type === "selection") {
           return <TagTableColumn align="center" {...{ props: item }} />;
         }
         if (item.renderColumn) {
@@ -434,7 +434,7 @@ export default Vue.extend({
                   item.render(h, { column: item, row: scope.row, index: scope.$index })
                 ) : (
                   <span class="td-text">{scope.row[item.prop]}</span>
-                )
+                ),
             }}
           />
         );
@@ -448,7 +448,7 @@ export default Vue.extend({
             <img src={this.emptyImg} class="ml-table-empty-img" />
             <div>{this.emptyWord}</div>
           </div>
-        ) as VNode
+        ) as VNode,
       ];
 
       const slots: { [key: string]: VNode[] | undefined } = { empty, ...this.$slots };
@@ -469,20 +469,20 @@ export default Vue.extend({
     renderTable(h: CreateElement) {
       const tableNodeData = merge(
         {
-          attrs: this.TableDefault
+          attrs: this.TableDefault,
         },
         this.config_.nodeData,
         {
-          directives: [{ name: 'loading', value: this.loading }],
+          directives: [{ name: "loading", value: this.loading }],
           on: {
-            'sort-change': this.onSortChange,
-            'selection-change': this.handleSelectionChange
-          }
+            "sort-change": this.onSortChange,
+            "selection-change": this.handleSelectionChange,
+          },
         },
         {
           on: this.$listeners,
-          attrs: this.$attrs
-        }
+          attrs: this.$attrs,
+        },
       );
 
       const { TagTable, TagTableColumn } = this.tags;
@@ -514,11 +514,11 @@ export default Vue.extend({
           class="ml-table-pagination"
           {...{
             props: this.paginationConfig_,
-            on: { 'size-change': this.handleSizeChange, 'current-change': this.handleCurrentChange }
+            on: { "size-change": this.handleSizeChange, "current-change": this.handleCurrentChange },
           }}
         />
       );
-    }
+    },
   },
   render(h: CreateElement) {
     return (
@@ -530,5 +530,5 @@ export default Vue.extend({
         {this.renderPagination()}
       </div>
     );
-  }
+  },
 });

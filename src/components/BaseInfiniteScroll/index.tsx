@@ -2,17 +2,17 @@
  * 滚动分页组件
  */
 
-import style from 'index.module.scss';
-import Vue from 'vue';
+import style from "index.module.scss";
+import Vue from "vue";
 
 export default Vue.extend({
-  name: 'MlInfiniteScroll',
+  name: "MlInfiniteScroll",
   props: {
     page: { type: Number, default: 0 },
     size: { type: Number, default: 10 },
     data: { type: Array, default: [] }, // 静态数据
     getList: { type: Function, default: null }, // 获取数据列表
-    initSearch: { default: true } // 初始化的时候，是否直接搜索
+    initSearch: { default: true }, // 初始化的时候，是否直接搜索
   },
   data() {
     return {
@@ -20,11 +20,11 @@ export default Vue.extend({
       pageSize: 10,
       dataList: [], // 数据列表
       isAll: false, // 是否加载完所有数据
-      loading: false // 加载中
+      loading: false, // 加载中
     };
   },
   created() {
-    this.$watch('data', () => {
+    this.$watch("data", () => {
       this.dataList = this.data;
     });
     this.pageNum = this.page;
@@ -35,7 +35,7 @@ export default Vue.extend({
   methods: {
     // 加载数据
     async load() {
-      this.$emit('load');
+      this.$emit("load");
       if (!this.getList || this.isAll || this.loading) {
         return;
       }
@@ -47,7 +47,7 @@ export default Vue.extend({
         if (Array.isArray(data)) {
           this.dataList.push(...data);
         } else {
-          console.log('后台返回的数据不是数组形式');
+          console.log("后台返回的数据不是数组形式");
         }
       } catch (error) {
         console.log(error);
@@ -65,7 +65,7 @@ export default Vue.extend({
       this.dataList = [];
       this.isAll = false;
       await this.load();
-    }
+    },
   },
   render() {
     return (
@@ -84,5 +84,5 @@ export default Vue.extend({
         )}
       </div>
     );
-  }
+  },
 });

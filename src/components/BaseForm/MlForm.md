@@ -2,70 +2,68 @@
 
 ### 1.介绍
 
-通过配置config，生产表单
+通过配置 config，生产表单
 
 ### 2.说明
 
-
-参数 | 说明 | 类型 | 可选值 | 默认值 |
----|---|---|---|---|
-value | 表单输出的值 | object | —— | ——
-config | 表单配置项 | object | —— | ——
+| 参数   | 说明         | 类型   | 可选值 | 默认值 |
+| ------ | ------------ | ------ | ------ | ------ |
+| value  | 表单输出的值 | object | ——     | ——     |
+| config | 表单配置项   | object | ——     | ——     |
 
 **config**
 
-
-参数 | 说明 | 类型 | 可选值 | 默认值 |
----|---|---|---|---|
-labelWidth | label宽度 | string | —— | 100px |
-itemBoxWidth | 单项宽度 | string  | —— | 33.33% |
-itemWidth | 单项内容宽度 | string  | —— | 100% |
-uiType | UI展示类型  | string | line(下划线)/round(圆角)/border(边框) | border 
-format | 转换输入值与输出值 | object | —— | —— |
-columns | 具体配置项列表 | array | —— | —— |
-其他具体可参考elementui官方文档form | https://element.eleme.cn/#/zh-CN/component/form
-inline | 行内展示 | boolean | —— | true
-clearable | 清空按钮 | boolean | —— | true
-size | 输入项大小 | string | medium / small / mini | small |
+| 参数                                   | 说明                                            | 类型    | 可选值                                | 默认值 |
+| -------------------------------------- | ----------------------------------------------- | ------- | ------------------------------------- | ------ |
+| labelWidth                             | label 宽度                                      | string  | ——                                    | 100px  |
+| itemBoxWidth                           | 单项宽度                                        | string  | ——                                    | 33.33% |
+| itemWidth                              | 单项内容宽度                                    | string  | ——                                    | 100%   |
+| uiType                                 | UI 展示类型                                     | string  | line(下划线)/round(圆角)/border(边框) | border |
+| format                                 | 转换输入值与输出值                              | object  | ——                                    | ——     |
+| columns                                | 具体配置项列表                                  | array   | ——                                    | ——     |
+| 其他具体可参考 elementui 官方文档 form | https://element.eleme.cn/#/zh-CN/component/form |
+| inline                                 | 行内展示                                        | boolean | ——                                    | true   |
+| clearable                              | 清空按钮                                        | boolean | ——                                    | true   |
+| size                                   | 输入项大小                                      | string  | medium / small / mini                 | small  |
 
 **format**
 
-
-参数 | 说明 | 类型 | 可选值 | 默认值 |
----|---|---|---|---|
-toEleValue | 自定义值格式化为组件值 | function | —— | —— |
-toValue | 组件值转为自定义值 | function  | —— | —— |
+| 参数       | 说明                   | 类型     | 可选值 | 默认值 |
+| ---------- | ---------------------- | -------- | ------ | ------ |
+| toEleValue | 自定义值格式化为组件值 | function | ——     | ——     |
+| toValue    | 组件值转为自定义值     | function | ——     | ——     |
 
 **columns**
 
+| 参数           | 说明                                                 | 类型          | 可选值                                                                                                                                                                                                                                                    | 默认值                                                                                          | 必填 |
+| -------------- | ---------------------------------------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ---- |
+| type           | 输入项类型                                           | string        | 基本输入：string / input / textarea <br>时间日期：date / dates / daterange / datetime / datetimerange / time / timerange<br> 选择类型：radio / checkbox / select / selectTree(下拉树形) / tree(树形) / svg(svg 图标选择) / color<br> 其他：editor(富文本) | ——                                                                                              | true |
+| prop           | key 值                                               | string        | ——                                                                                                                                                                                                                                                        | ——                                                                                              | true |
+| label          | label 文本                                           | string        | ——                                                                                                                                                                                                                                                        | ——                                                                                              | true |
+| required       | 是否必填                                             | boolean       | ——                                                                                                                                                                                                                                                        | false                                                                                           |
+| value          | 默认值                                               | ——            | ——                                                                                                                                                                                                                                                        | ——                                                                                              |
+| placeholder    | 输入框内提示文本                                     | string        | ——                                                                                                                                                                                                                                                        | 根据 label 进行拼接                                                                             |
+| tag            | 渲染的标签名                                         | string        | ——                                                                                                                                                                                                                                                        | 不填会从组件内根据类型匹配                                                                      |
+| labelWidth     | 渲染的标签长度                                       | string        | ——                                                                                                                                                                                                                                                        | 不填会从父级继承                                                                                |
+| itemBoxWidth   | 单项宽度                                             | string        | ——                                                                                                                                                                                                                                                        | 33.33%                                                                                          |
+| itemWidth      | 单项内容宽度                                         | string        | ——                                                                                                                                                                                                                                                        | 100%                                                                                            |
+| error          | 输入不符合时的提示                                   | string        | ——                                                                                                                                                                                                                                                        | 根据 label 进行拼接                                                                             |
+| reg            | 正则校验                                             | string/object | ——                                                                                                                                                                                                                                                        | ——                                                                                              |
+| rules          | 校验规则                                             | array         | ——                                                                                                                                                                                                                                                        | [{msg: '错误', validator(value, rootValue){}}], //msg 可为空 value：当前值，rootValue：根对象表 |
+| show           | 显示条件                                             | function      | ——                                                                                                                                                                                                                                                        | show(rootValue) { //显示条件 rootValue：根对象 // return rootValue.eventType === 1 }            |
+| options        | 选择项列表                                           | array         | ——                                                                                                                                                                                                                                                        | ——                                                                                              |
+| optionsGet     | 异步选择项获取方法，返回 promise                     | function      | ——                                                                                                                                                                                                                                                        | ——                                                                                              |
+| optionLabel    | 下拉显示的名字 key                                   | string        | ——                                                                                                                                                                                                                                                        | label                                                                                           |
+| optionValue    | 下拉取值得 key                                       | string        | ——                                                                                                                                                                                                                                                        | value                                                                                           |
+| optionChildren | 树形的 children 取值                                 | array         | ——                                                                                                                                                                                                                                                        | children                                                                                        |
+| block          | 独占一行                                             | boolean       | ——                                                                                                                                                                                                                                                        | false                                                                                           |
+| format         | 格式化输入出，参考上个表格                           | object        | ——                                                                                                                                                                                                                                                        | ——                                                                                              |
+| children       | 输入项的子元素                                       | function      | ——                                                                                                                                                                                                                                                        | ——                                                                                              |
+| render         | 自定义输入项的渲染                                   | function      | ——                                                                                                                                                                                                                                                        | ——                                                                                              |
+| nodeData       | 其他扩展请参考 element，attrs 会通过渲染函数进行传值 | object        | ——                                                                                                                                                                                                                                                        | ——                                                                                              |
 
-参数 | 说明 | 类型 | 可选值 | 默认值 | 必填
----|---|---|---|---|---|
-type | 输入项类型 | string | 基本输入：string / input / textarea <br>时间日期：date / dates / daterange / datetime / datetimerange / time / timerange<br> 选择类型：radio / checkbox / select / selectTree(下拉树形) / tree(树形) / svg(svg图标选择) / color<br> 其他：editor(富文本) | —— | true |
-prop | key值 | string  | —— | —— | true |
-label | label文本 | string  | —— | —— | true |
-required | 是否必填 | boolean | —— | false
-value | 默认值 | —— | —— | ——
-placeholder | 输入框内提示文本 | string | —— | 根据label进行拼接 |
-tag | 渲染的标签名 | string | —— | 不填会从组件内根据类型匹配 |
-labelWidth | 渲染的标签长度 | string | —— | 不填会从父级继承 |
-itemBoxWidth | 单项宽度 | string | —— | 33.33% |
-itemWidth | 单项内容宽度 | string | —— | 100% |
-error | 输入不符合时的提示 | string | —— | 根据label进行拼接 |
-reg | 正则校验 | string/object | —— | —— |
-rules | 校验规则 | array | —— | [{msg: '错误', validator(value, rootValue){}}],  //msg可为空 value：当前值，rootValue：根对象表 | 
-show | 显示条件 | function | —— | show(rootValue) { //显示条件  rootValue：根对象 //        return rootValue.eventType === 1      } |
-options | 选择项列表 | array | —— | —— |
-optionsGet | 异步选择项获取方法，返回promise | function | —— | —— |
-optionLabel | 下拉显示的名字key | string | —— | label |
-optionValue | 下拉取值得key | string | —— | value |
-optionChildren |  树形的children取值 | array | —— | children |
-block | 独占一行 | boolean | —— | false |
-format | 格式化输入出，参考上个表格 | object | —— | —— |
-children | 输入项的子元素 | function | —— | —— |
-render | 自定义输入项的渲染 | function |  —— | —— |
-nodeData | 其他扩展请参考element，attrs会通过渲染函数进行传值 | object |  —— | —— |
 ### 3.在项目中使用:
+
 MlForm
 
 ```
@@ -297,4 +295,3 @@ export default class FormTest extends Vue {
 <style lang="scss" scoped></style>
 
 ```
-
