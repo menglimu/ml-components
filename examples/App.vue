@@ -24,8 +24,13 @@ html {
   width: 100%;
 }
 
-p {
+h3 {
+  font-size: 20px;
+}
+
+h5 {
   margin-top: 50px;
+  font-size: 18px;
 }
 
 .el-textarea__inner {

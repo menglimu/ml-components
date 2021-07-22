@@ -12,7 +12,7 @@ export default Vue.extend({
     options: { type: Array, required: true },
     optionLabel: { type: String, default: "label" },
     optionValue: { type: String, default: "value" },
-    value: { type: String, default: "" },
+    value: { type: [String, Number], default: "" },
     props: { type: Object, default: () => ({}) },
   },
   computed: {
@@ -52,7 +52,7 @@ export default Vue.extend({
     return (
       <el-cascader
         ref="cascader"
-        class={"custom-cascader"}
+        class="custom-cascader"
         popper-class="custom-cascader-popper"
         value={this.value}
         onInput={this.onInput}

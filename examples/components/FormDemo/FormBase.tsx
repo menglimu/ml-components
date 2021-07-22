@@ -3,6 +3,7 @@
  */
 import Vue from "vue";
 import { MlForm, MlFormConfig } from "types/form";
+import CustomCascader from "@/components/CustomCascader";
 
 function optionsGet() {
   return Promise.resolve([
@@ -16,27 +17,33 @@ export default Vue.extend({
   data() {
     return {
       formConfig: null as MlFormConfig,
-      formValue: {},
+      formValue: null,
     };
   },
   created() {
     this.formConfig = {
       columns: [
-        {
-          label: "姓名",
-          prop: "name",
-        },
+        { label: "姓名", placeholder: "姓名姓名姓名", prop: "name" },
         {
           type: "select",
           label: "性别",
           prop: "type",
           required: true,
+          value: 0,
           options: [
             { value: 1, label: "男" },
             { value: 0, label: "女" },
           ],
         },
         { label: "性别", prop: "sex", type: "select", optionsGet },
+        {
+          label: "自定义",
+          prop: "render",
+          type: "select",
+          required: true,
+          block: true,
+          render: () => <CustomCascader options={[{ label: "北京", value: 1 }]} />,
+        },
         { label: "备注", prop: "marks", type: "textarea", block: true },
       ],
     };
@@ -65,7 +72,7 @@ export default Vue.extend({
           </el-button>
           <el-button onClick={this.onReset}>重置</el-button>
         </div>
-        <div>当前表单输出值：{JSON.stringify(this.formValue)}</div>
+        <p>当前表单输出值：{JSON.stringify(this.formValue)}</p>
       </div>
     );
   },

@@ -14,7 +14,7 @@ export default Vue.extend({
   data() {
     return {
       formConfig: null as MlFormConfig,
-      formValue: {},
+      formValue: null,
     };
   },
   created() {
@@ -30,6 +30,14 @@ export default Vue.extend({
           type: "input",
           label: "姓名",
           prop: "name",
+          reg: /sdf/,
+          error: "请重新输入",
+        },
+        {
+          type: "input",
+          label: "长度",
+          prop: "length",
+          minlength: 12,
         },
         {
           type: "select",
@@ -39,6 +47,47 @@ export default Vue.extend({
           options: [
             { value: 1, label: "男" },
             { value: 0, label: "女" },
+          ],
+        },
+        {
+          type: "input",
+          label: "密码",
+          prop: "pass",
+          required: true,
+          rules: [
+            {
+              validator: (rule, value, callback) => {
+                if (value === "") {
+                  callback(new Error("请输入密码"));
+                } else {
+                  if (this.formValue.checkPass !== "") {
+                    (this.$refs.form as MlForm).validateField("checkPass");
+                  }
+                  callback();
+                }
+              },
+              trigger: "blur",
+            },
+          ],
+        },
+        {
+          type: "input",
+          label: "确认密码",
+          prop: "checkPass",
+          required: true,
+          rules: [
+            {
+              validator: (rule, value, callback) => {
+                if (value === "") {
+                  callback(new Error("请再次输入密码"));
+                } else if (value !== this.formValue.pass) {
+                  callback(new Error("两次输入密码不一致!"));
+                } else {
+                  callback();
+                }
+              },
+              trigger: "blur",
+            },
           ],
         },
       ],

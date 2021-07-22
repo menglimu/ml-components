@@ -1,5 +1,5 @@
-/*
- * @Description:
+/**
+ * @Description: 点击后提交并禁用按钮，展示加载中的状态。防止多次提交  v-submitClick={this.onSubmit}
  * @Author: Friends233
  */
 import { DirectiveOptions } from "vue/types/umd";
@@ -22,7 +22,6 @@ const submitBtn: DirectiveOptions = {
     if (!(el instanceof HTMLButtonElement)) {
       return;
     }
-    console.log(binding);
     const fn = async () => {
       try {
         addLoadingStatus(el);
