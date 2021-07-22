@@ -173,7 +173,7 @@ export interface MlFormConfig<D = AnyObj> {
    * form的整体校验规则，参考官方文档
    * @see https://element.eleme.cn/#/zh-CN/component/form
    */
-  rules?: object;
+  rules?: AnyObj;
 
   /** 是否禁用
    * @default false

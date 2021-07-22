@@ -9,7 +9,8 @@ import { MlFormColumn, MlFormConfig } from "types/form";
 import { getFormColumn } from "./config";
 
 import Tags from "../../../utils/tags";
-import { PropType } from "vue/types/umd";
+import { PropType, VNodeComponentOptions } from "vue/types/umd";
+import { ElFormItem } from "element-ui/types/form-item";
 
 export default Vue.extend({
   name: "FormItem",
@@ -107,7 +108,7 @@ export default Vue.extend({
         if (Array.isArray(res)) {
           this.options = res;
         }
-        if (res?.content && Array.isArray(res.content)) {
+        if ("content" in res && Array.isArray(res.content)) {
           this.options = res.content;
         }
       }
@@ -121,6 +122,7 @@ export default Vue.extend({
         val = this.config_.format.toValue(val, this.rootValue);
       }
       this.$emit("input", val);
+      (this.$refs?.formItem as ElFormItem)?.$emit("el.form.change");
     },
 
     renderChildren(h: CreateElement): VNode | VNode[] | Element | Element[] {
@@ -157,42 +159,47 @@ export default Vue.extend({
     if (!this.isShow) {
       return;
     }
-
-    // 渲染vnode
-    let vnode: VNode | Element;
     // 按钮等其他元素的渲染。 无prop属性名
     if (this.config_.render && !this.config_.prop) {
       let vnode = this.config_.render(h, this.value, this.onInput) as VNode;
       return vnode;
-    } else if (this.config_.prop && this.config_.render) {
+    }
+
+    // 渲染vnode
+    let vnode: VNode | Element;
+    // 将base基础的属性放入公共对象。因为子组件可能没有定义prop而直接取attr的时候。先将这些属性同时复制到attr和prop
+    let baseAttrs = {
+      size: this.rootConfig.size,
+      disabled: this.rootConfig.disabled,
+      clearable: this.rootConfig.clearable,
+      placeholder: this.config_.placeholder,
+    };
+
+    if (this.config_.prop && this.config_.render) {
       // 有prop属性名和render同时存在的时候。render作为输入元素
       vnode = this.config_.render(h, this.value, this.onInput) as VNode;
       // 绑定value和input事件
-      if (vnode.componentOptions) {
-        vnode.componentOptions = merge(
-          {
-            // webpack 的 merge 会合并 2个 方法 同时执行
-            listeners: { input: this.onInput },
-            propsData: {
-              size: this.rootConfig.size,
-              disabled: this.rootConfig.disabled,
-              clearable: this.rootConfig.clearable,
-              placeholder: this.config_.placeholder,
-              ...(this.config_?.nodeData?.props || {}),
-              ...(this.config_?.props || {}),
-              value: this.value,
-            },
+      // if (vnode.componentOptions) {
+      // props的合并
+      vnode.componentOptions = merge<VNodeComponentOptions>(
+        {
+          // webpack 的 merge 会合并 2个 方法 同时执行
+          listeners: { input: this.onInput },
+          propsData: {
+            ...baseAttrs,
+            ...(this.config_?.nodeData?.props || {}),
+            ...(this.config_?.props || {}),
+            value: this.value,
           },
-          vnode.componentOptions,
-        );
-      }
-      // vnode.data = vnode.data || {}
-      // vnode.data.attrs = vnode.data.attrs || { placeholder: this.config_.placeholder }
-      // vnode.data = merge({ attrs: { placeholder: this.config_.placeholder } }, vnode.data)
+        },
+        vnode.componentOptions || {},
+      );
+      // }
+      // attrs 的合并
       vnode.data = merge(
         {
           attrs: {
-            placeholder: this.config_.placeholder,
+            ...baseAttrs,
             ...(this.config_?.nodeData?.attrs || {}),
             ...(this.config_?.attrs || {}),
           },
@@ -207,31 +214,21 @@ export default Vue.extend({
       // */
 
       const defaultAttrs: VNodeData = {
-        attrs: {
-          placeholder: this.config_.placeholder,
-        },
         props: {
           value: this.value,
+          ...baseAttrs,
+        },
+        attrs: {
+          placeholder: this.config_.placeholder,
         },
         on: {
           input: this.onInput,
         },
       };
-      const nodeData: VNodeData = merge(
-        {
-          props: {
-            size: this.rootConfig.size, // input的size大小，element属性
-            clearable: this.rootConfig.clearable, // 是否显示清除，element属性
-            disabled: this.rootConfig.disabled, // 是否禁用
-          },
-        },
-        defaultAttrs,
-        this.config_.nodeData,
-        {
-          props: this.config_.props || {},
-          attrs: this.config_.attrs || {},
-        },
-      );
+      const nodeData: VNodeData = merge(defaultAttrs, this.config_.nodeData, {
+        props: this.config_.props || {},
+        attrs: this.config_.attrs || {},
+      });
 
       const Tag = this.config_.tag || this.tags.prefix + this.config_.type;
       vnode = <Tag {...nodeData}>{this.renderChildren(h)}</Tag>;
@@ -257,6 +254,7 @@ export default Vue.extend({
             "ml-form-item-block": this.config_.block,
             // 'is-not-value': this.isNotValue
           }}
+          ref="formItem"
           rules={this.config_.rules}
           style={{ width: this.itemWidth, maxWidth: this.itemMaxWidth }}
           label={this.config_.label}
