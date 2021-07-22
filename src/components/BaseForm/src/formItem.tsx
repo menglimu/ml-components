@@ -23,13 +23,11 @@ export default Vue.extend({
     tags: { type: Object as PropType<Tags>, required: true },
   },
   data() {
-    const options: AnyObj[] = []; // 下拉，单选，多选等的选择项
-    const config_: MlFormColumn = null;
     return {
-      show: null, // 是否显示隐藏
-      beforeHideValue: null, // 隐藏前的值，进行保存，显示的时候，再进行回显
-      options, // 下拉，单选，多选等的选择项
-      config_,
+      // show: null, // 是否显示隐藏
+      // beforeHideValue: null, // 隐藏前的值，进行保存，显示的时候，再进行回显
+      options: [] as AnyObj[], // 下拉，单选，多选等的选择项
+      config_: null as MlFormColumn,
     };
   },
   computed: {
@@ -48,14 +46,15 @@ export default Vue.extend({
         isShow = this.config_.show;
       }
 
+      // 显示隐藏。不删除隐藏掉的值。暂时不用处理
       // 重新显示的时候，将之前的值抛出给父组件
-      if (isShow && this.show === false) {
-        this.$emit("show", this.beforeHideValue);
-      } else if (!isShow && this.show === true) {
-        // 切换不显示的时候，重置值
-        this.beforeHideValue = cloneDeep(this.value);
-        this.$emit("hide", this.config_.prop);
-      }
+      // if (isShow && this.show === false) {
+      //   this.$emit("show", this.beforeHideValue);
+      // } else if (!isShow && this.show === true) {
+      //   // 切换不显示的时候，重置值
+      //   this.beforeHideValue = cloneDeep(this.value);
+      //   this.$emit("hide", this.config_.prop);
+      // }
       this.show = isShow;
       return this.show;
     },
