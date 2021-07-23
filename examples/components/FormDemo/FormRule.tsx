@@ -6,11 +6,6 @@ import { MlForm, MlFormConfig } from "types/form";
 
 export default Vue.extend({
   name: "FormRule",
-  props: {
-    name: {
-      type: Number,
-    },
-  },
   data() {
     return {
       formConfig: null as MlFormConfig,

@@ -2,6 +2,8 @@ import Vue from "vue";
 import FormBase from "./../components/FormDemo/FormBase";
 import FormRule from "./../components/FormDemo/FormRule";
 import FormWidth from "./../components/FormDemo/FormWidth";
+import FormProps from "./../components/FormDemo/FormProps";
+import FormRender from "./../components/FormDemo/FormRender";
 
 export const title = "表单快速上手"; // 左侧自动导入时，菜单的名称
 export const sort = 200; // 菜单的排序
@@ -12,6 +14,8 @@ export default Vue.extend({
       sourceFormBase: "",
       sourceFormRule: "",
       sourceFormWidth: "",
+      sourceFormProps: "",
+      sourceFormRender: "",
     };
   },
   created() {
@@ -23,6 +27,12 @@ export default Vue.extend({
     });
     import(`./../components/FormDemo/FormWidth.tsx?raw`).then((res) => {
       this.sourceFormWidth = res.default;
+    });
+    import(`./../components/FormDemo/FormProps.tsx?raw`).then((res) => {
+      this.sourceFormProps = res.default;
+    });
+    import(`./../components/FormDemo/FormRender.tsx?raw`).then((res) => {
+      this.sourceFormRender = res.default;
     });
   },
   methods: {},
@@ -67,6 +77,27 @@ export default Vue.extend({
         </p>
         <base-source-view source={this.sourceFormWidth}>
           <FormWidth />
+        </base-source-view>
+
+        <h5>表单参数控制控制</h5>
+        <p>
+          <div>
+            nodeData: 同vue官方的
+            <a href="https://cn.vuejs.org/v2/guide/render-function.html#%E6%B7%B1%E5%85%A5%E6%95%B0%E6%8D%AE%E5%AF%B9%E8%B1%A1">
+              nodeData介绍
+            </a>
+          </div>
+          <div> props: nodeData.props的代理</div>
+          <div> attrs: nodeData.attrs的代理</div>
+        </p>
+        <base-source-view source={this.sourceFormProps}>
+          <FormProps />
+        </base-source-view>
+
+        <h5>表单自定义内容</h5>
+        <p></p>
+        <base-source-view source={this.sourceFormRender}>
+          <FormRender />
         </base-source-view>
       </div>
     );

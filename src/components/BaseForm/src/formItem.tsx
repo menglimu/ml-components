@@ -146,26 +146,27 @@ export default Vue.extend({
     if (this.config_.prop && this.config_.render) {
       // 有prop属性名和render同时存在的时候。render作为输入元素
       vnode = this.config_.render(h, this.value, this.onInput) as VNode;
+
       // 绑定value和input事件
-      // if (vnode.componentOptions) {
-      // props的合并
-      vnode.componentOptions = merge<VNodeComponentOptions>(
-        {
-          // webpack 的 merge 会合并 2个 方法 同时执行
-          listeners: { input: this.onInput },
-          propsData: {
-            ...baseAttrs,
-            ...(this.config_?.nodeData?.props || {}),
-            ...(this.config_?.props || {}),
-            value: this.value,
+      if (vnode.componentOptions) {
+        // props的合并
+        vnode.componentOptions = merge<VNodeComponentOptions>(
+          {
+            // webpack 的 merge 会合并 2个 方法 同时执行
+            listeners: { input: this.onInput },
+            propsData: {
+              ...baseAttrs,
+              ...(this.config_?.nodeData?.props || {}),
+              ...(this.config_?.props || {}),
+              value: this.value,
+            },
           },
-        },
-        vnode.componentOptions || {},
-      );
-      if (this.options.length) {
-        vnode.componentOptions.propsData["options"] = this.options;
+          vnode.componentOptions || {},
+        );
+        if (this.options.length) {
+          vnode.componentOptions.propsData["options"] = this.options;
+        }
       }
-      // }
       // attrs 的合并
       vnode.data = merge(
         {
@@ -175,7 +176,7 @@ export default Vue.extend({
             ...(this.config_?.attrs || {}),
           },
         },
-        vnode.data,
+        vnode.data || {},
       );
     } else {
       // /* 一些基础类型的配置
