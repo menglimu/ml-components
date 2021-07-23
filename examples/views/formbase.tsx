@@ -105,6 +105,8 @@ export default Vue.extend({
           <div>在存在render, prop 名不存在时。将被当做普通元素处理。如，分割线、按钮这种不需要进行表单输入绑定的</div>
           <div>
             当render存在并返回一个vue组件时，会自动为组件注入value和input事件。需要在组件的prop接受value,并在值修改后触发this.$emit('input','xxx')
+            自定义组件会在input事件监听后，触发一个 $emit("el.form.change")
+            的form校验。想使用blur校验，可在组件内需要校验的时候触发this.$parent.$emit("el.form.blur")
           </div>
           <div>当render存在并且最外层为原生的HTMLelement时，如需双向绑定。需要自己处理value和input事件</div>
           <div>

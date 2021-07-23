@@ -8,7 +8,6 @@
 
 // TODO: 加入webpack 打包浏览器运行代码。 import.meta
 // TODO: md文档编写
-// TODO: rule change自定义组件的触发
 // TODO: 表格某一项的显示隐藏
 
 import { VueConstructor } from "vue/types/umd";

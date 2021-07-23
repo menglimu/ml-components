@@ -1,7 +1,5 @@
 /**
  * 表单的单项
- *
- * TODO: options给所有的组件注入
  */
 import Vue, { VNode, CreateElement, VNodeData } from "vue";
 import { isNull } from "@/utils";
