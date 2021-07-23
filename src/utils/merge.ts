@@ -7,6 +7,7 @@
  */
 
 import { mergeWith, cloneDeep } from "lodash";
+import { isNull } from "./index";
 
 let customMerge = (a: any, b: any) => {
   if (Array.isArray(a) && Array.isArray(b)) return cloneDeep(b);
@@ -34,21 +35,25 @@ function merge<T = any>(...options: any[]): T;
  * @param options 要merge的东西，可以多个
  * @returns T
  */
-function merge(...options: any[]) {
+function merge(...args: any[]) {
+  let options = args.filter((item) => Object.prototype.toString.call(item) === "[object Object]");
   // 数组的合并方式
-  if (
-    options.length > 1 &&
-    Object.prototype.toString.call(options[0]) === "[object Object]" &&
-    Object.prototype.toString.call(options[1]) === "[object Object]"
-  ) {
+  if (options.length > 0) {
     return mergeWith({}, ...options, customMerge);
   }
-  if (options.length === 1) {
-    return cloneDeep(options[0]);
-  } else if (options.length > 1) {
-    let [obj, source] = options;
+  if (args.length === 1) {
+    return args[0];
+  }
+  if (args.length > 1) {
+    let [obj, source] = args;
     return mergeWith(obj, ...source, customMerge);
   }
+  // if (options.length === 1) {
+  //   return cloneDeep(options[0]);
+  // } else if (options.length > 1) {
+  //   let [obj, source] = options;
+  //   return mergeWith(obj, ...source, customMerge);
+  // }
 }
 
 export default merge;

@@ -9,6 +9,9 @@ test("merge 基础测试", () => {
     c: { a: 1, b: 1 },
     d: 1,
   });
+  expect(merge({ a: 1 }, undefined)).toEqual({ a: 1 });
+  expect(merge(undefined, { a: 1 })).toEqual({ a: 1 });
+  expect(merge({ a: 1 }, undefined, undefined)).toEqual({ a: 1 });
 });
 test("merge 原始值更改", () => {
   let a = { a: 1, c: { a: 1 } };
@@ -24,14 +27,14 @@ test("merge function", () => {
   let b = 1;
   let data = merge(
     {
-      a: function() {
+      a: function () {
         a = 2;
         return String(a);
       },
       b: 2346,
     },
     {
-      a: function() {
+      a: function () {
         b = 2;
         return b;
       },
