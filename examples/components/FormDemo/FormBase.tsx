@@ -22,6 +22,7 @@ export default Vue.extend({
   },
   created() {
     this.formConfig = {
+      labelPosition: "top",
       columns: [
         { label: "姓名", placeholder: "姓名姓名姓名", prop: "name" },
         {

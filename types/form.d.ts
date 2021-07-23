@@ -113,7 +113,7 @@ export interface MlFormConfig<D = AnyObj> {
   /** 具体表单项的配置 */
   columns: Array<MlFormColumn<D>>;
 
-  /** 表单的基础样式，默认line为下划线，round为圆角, border为边框
+  /** 表单的基础样式，line为下划线，round为圆角, border为边框
    * @default line
    */
   uiType?: "line" | "round" | "border";
