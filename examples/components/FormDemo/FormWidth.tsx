@@ -14,7 +14,7 @@ export default Vue.extend({
   },
   created() {
     this.formConfig = {
-      labelWidth: "120px",
+      labelWidth: "100px",
       itemWidth: "400px",
       // itemMaxWidth: "100%",
       columns: [
@@ -25,12 +25,15 @@ export default Vue.extend({
           placeholder: "姓名姓名姓名",
           prop: "name",
         },
-        { label: "姓名", labelWidth: "80px", placeholder: "姓名姓名姓名", prop: "name" },
+        { label: "姓名", placeholder: "姓名姓名姓名", prop: "name" },
+        { label: "姓名", labelWidth: "120px", placeholder: "姓名姓名姓名", prop: "name" },
+        { label: "姓名", placeholder: "姓名姓名姓名", prop: "name" },
+        { label: "姓名", placeholder: "姓名姓名姓名", prop: "name" },
         { label: "姓名", placeholder: "姓名姓名姓名", prop: "name" },
         { label: "姓名", placeholder: "姓名姓名姓名", prop: "name" },
         { label: "姓名", placeholder: "姓名姓名姓名", prop: "name" },
         { label: "姓名", block: true, placeholder: "姓名姓名姓名", prop: "name" },
-        { label: "姓名", placeholder: "姓名姓名姓名", prop: "name" },
+        { label: "姓名", itemMaxWidth: "230px", placeholder: "姓名姓名姓名", prop: "name" },
       ],
     };
   },

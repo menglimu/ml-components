@@ -5,7 +5,7 @@
  */
 import Vue, { VNode, CreateElement, VNodeData } from "vue";
 import { isNull } from "@/utils";
-import { cloneDeep, isEqual } from "lodash";
+import { isEqual } from "lodash";
 import merge from "@/utils/merge";
 import { MlFormColumn, MlFormConfig } from "types/form";
 import { getFormColumn } from "./config";
@@ -162,6 +162,9 @@ export default Vue.extend({
         },
         vnode.componentOptions || {},
       );
+      if (this.options.length) {
+        vnode.componentOptions.propsData["options"] = this.options;
+      }
       // }
       // attrs 的合并
       vnode.data = merge(

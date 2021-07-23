@@ -69,8 +69,8 @@ interface MlFormColumn<D = AnyObj> extends MlOptions {
    */
   itemWidth?: string;
   /**
-   * 输入项内容的最大长度，默认400px
-   * @default 400px
+   * 输入项内容的最大长度，默认100%
+   * @default 100%
    */
   itemMaxWidth?: string;
   /** 输入不符合时的提示 */
@@ -139,7 +139,7 @@ export interface MlFormConfig<D = AnyObj> {
   itemWidth?: string;
 
   /** 输入项内容的最大长度
-   * @default 400px
+   * @default 100%
    */
   itemMaxWidth?: string;
 

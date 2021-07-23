@@ -42,6 +42,7 @@ export default Vue.extend({
           type: "select",
           required: true,
           block: true,
+          optionsGet,
           render: () => <CustomCascader options={[{ label: "北京", value: 1 }]} />,
         },
         { label: "备注", prop: "marks", type: "textarea", block: true },
