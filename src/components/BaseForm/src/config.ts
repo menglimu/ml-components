@@ -5,7 +5,7 @@
  * @LastEditTime: 2020-12-28 16:59:13
  * @Description:  获取表单子项的配置
  */
-import { MlFormRule, MlFormColumn, ComponentsPreset, MlFormType } from "types/form";
+import { MlFormRule, MlFormColumn, ComponentsPreset, MlFormType, MlFormConfig } from "types/form";
 import { cloneDeep } from "lodash";
 import merge from "@/utils/merge";
 
@@ -157,6 +157,34 @@ function getRules(config: MlFormColumn, prefix: string) {
     config.rules = [...(config.rules || []), ...rules];
   }
 }
+// 获取基本配置
+function getBaseConfig(config: MlFormColumn, rootConfig: MlFormConfig, prefix: string) {
+  let config_: AnyObj = {
+    itemMaxWidth: rootConfig.itemMaxWidth || "100%",
+    show: true, // 初始化显示条件
+  };
+  // 初始化正则验证及提示
+  if (config.label) {
+    config_.placeholder = `请${prefix}${config.label}`;
+  }
+
+  let itemBoxWidth = "100%";
+  if (rootConfig.inline) {
+    itemBoxWidth = rootConfig.itemBoxWidth || "33.33%";
+  }
+  if (config.block) {
+    itemBoxWidth = "100%";
+  }
+  config_.itemBoxWidth = itemBoxWidth;
+
+  let itemWidth = "100%";
+  if (!config.block) {
+    itemWidth = rootConfig.itemWidth || "100%";
+  }
+  config_.itemWidth = itemWidth;
+  return config_;
+}
+
 // 根据类型获取是输入还是选择的
 function getPrefix(type?: MlFormType) {
   let placeholderPrefix = "输入";
@@ -181,18 +209,14 @@ function getPrefix(type?: MlFormType) {
   return placeholderPrefix;
 }
 // 获取表单某项的配置
-export function getFormColumn(mlFormColumn: MlFormColumn): MlFormColumn {
+export function getFormColumn(mlFormColumn: MlFormColumn, mlFormConfig: MlFormConfig): MlFormColumn {
   let config = cloneDeep(mlFormColumn);
   let prefix = getPrefix(config.type);
-  // 初始化正则验证及提示
-  if (!config.placeholder && config.label) {
-    config.placeholder = `请${prefix}${config.label}`;
-  }
-  // 初始化显示条件
-  if (!config.hasOwnProperty("show")) {
-    config.show = true;
-  }
+  // 获取基本配置
+  let base = getBaseConfig(config, mlFormConfig, prefix);
+  // 设置组件内的默认属性
+  let preset = getPreset(config);
   // 通过config类型，初始化规则和匹配预设组件默认值
   getRules(config, prefix);
-  return merge(getPreset(config), config);
+  return merge(base, preset, config);
 }

@@ -59,8 +59,9 @@ export default Vue.extend({
 
         <h5>表单长度控制</h5>
         <p>
-          <div>required: 是否必填</div>
-          <div>reg: 正则表单式</div>
+          <div>labelWidth: label的宽度，可在form中全部配置</div>
+          <div>itemBoxWidth: 单项输入框box的长度，可在form中全部配置。block的时候，长度不受form的控制，默认100%</div>
+          <div>itemWidth: 输入项内容的长度,label也包含在其中，可在form中全部配置</div>
         </p>
         <base-source-view source={this.sourceFormWidth}>
           <FormWidth />

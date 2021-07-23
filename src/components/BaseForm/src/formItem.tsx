@@ -1,5 +1,7 @@
 /**
  * 表单的单项
+ *
+ * TODO: options给所有的组件注入
  */
 import Vue, { VNode, CreateElement, VNodeData } from "vue";
 import { isNull } from "@/utils";
@@ -8,7 +10,7 @@ import merge from "@/utils/merge";
 import { MlFormColumn, MlFormConfig } from "types/form";
 import { getFormColumn } from "./config";
 
-import Tags from "../../../utils/tags";
+import Tags from "@/utils/tags";
 import { PropType, VNodeComponentOptions } from "vue/types/umd";
 import { ElFormItem } from "element-ui/types/form-item";
 
@@ -55,41 +57,8 @@ export default Vue.extend({
       //   this.beforeHideValue = cloneDeep(this.value);
       //   this.$emit("hide", this.config_.prop);
       // }
-      this.show = isShow;
-      return this.show;
-    },
-
-    itemBoxWidth(this: any) {
-      let width = this.config_.itemBoxWidth || this.rootConfig.itemBoxWidth;
-      if (this.rootConfig.inline) {
-        if (this.config_.block) {
-          width = this.config_.itemBoxWidth || "100%";
-        } else {
-          width = width || "33.33%";
-        }
-      } else {
-        width = width || "100%";
-      }
-      return width;
-    },
-    itemWidth(this: any) {
-      let width = "100%";
-      if (this.config_.block) {
-        width = this.config_.itemWidth || "100%";
-      } else {
-        width = this.config_.itemWidth || this.rootConfig.itemWidth || "100%";
-      }
-      return width;
-    },
-
-    itemMaxWidth(this: any) {
-      let width = "400px";
-      if (this.config_.block) {
-        width = this.config_.itemMaxWidth || "100%";
-      } else {
-        width = this.config_.itemMaxWidth || this.rootConfig.itemMaxWidth || "400px";
-      }
-      return width;
+      // this.show = isShow;
+      return isShow;
     },
   },
   created() {
@@ -98,7 +67,7 @@ export default Vue.extend({
   },
   methods: {
     async onConfigChange() {
-      this.config_ = getFormColumn(this.configItem);
+      this.config_ = getFormColumn(this.configItem, this.rootConfig);
     },
 
     async onOptionsGetChange() {
@@ -236,7 +205,7 @@ export default Vue.extend({
     const { TagFormItem } = this.tags;
     return (
       <div
-        style={{ width: this.itemBoxWidth }}
+        style={{ width: this.config_.itemBoxWidth }}
         class={[
           this.config_.className,
           {
@@ -255,10 +224,10 @@ export default Vue.extend({
           }}
           ref="formItem"
           rules={this.config_.rules}
-          style={{ width: this.itemWidth, maxWidth: this.itemMaxWidth }}
+          style={{ width: this.config_.itemWidth, maxWidth: this.config_.itemMaxWidth }}
           label={this.config_.label}
           prop={this.config_.prop}
-          labelWidth={this.config_.labelWidth === undefined ? this.rootConfig.labelWidth : this.config_.labelWidth}
+          labelWidth={this.config_.labelWidth}
         >
           {vnode}
         </TagFormItem>
