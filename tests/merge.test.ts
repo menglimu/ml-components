@@ -40,8 +40,9 @@ test("merge function", () => {
       },
     },
   );
+  data.a();
   expect(data.b).toBe(2346);
   expect(data.a()).toBe(2);
-  expect(a).toBe(1);
+  expect(a).toBe(2);
   expect(b).toBe(2);
 });

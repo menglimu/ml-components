@@ -146,7 +146,6 @@ export default Vue.extend({
     if (this.config_.prop && this.config_.render) {
       // 有prop属性名和render同时存在的时候。render作为输入元素
       vnode = this.config_.render(h, this.value, this.onInput) as VNode;
-
       // 绑定value和input事件
       if (vnode.componentOptions) {
         // props的合并
@@ -156,6 +155,7 @@ export default Vue.extend({
             listeners: { input: this.onInput },
             propsData: {
               ...baseAttrs,
+              labelWidth: this.config_.labelWidth,
               ...(this.config_?.nodeData?.props || {}),
               ...(this.config_?.props || {}),
               value: this.value,

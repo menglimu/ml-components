@@ -11,6 +11,12 @@ import { isNull } from "./index";
 
 let customMerge = (a: any, b: any) => {
   if (Array.isArray(a) && Array.isArray(b)) return cloneDeep(b);
+  if (typeof a === "function" && typeof b === "function") {
+    return function (...arg) {
+      a(...arg);
+      return b(...arg);
+    };
+  }
 };
 
 function merge<TSource1 extends Object, TSource2 extends Object>(
