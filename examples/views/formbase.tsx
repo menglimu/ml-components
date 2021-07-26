@@ -11,7 +11,6 @@ export const sort = 200; // 菜单的排序
 export default Vue.extend({
   data() {
     return {
-      value: null,
       sourceFormBase: "",
       sourceFormRule: "",
       sourceFormWidth: "",

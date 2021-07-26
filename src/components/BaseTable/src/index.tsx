@@ -169,7 +169,7 @@ export default Vue.extend({
         return;
       }
       if (this.config_.api?.delete) {
-        const ids = data.map(_ => _[this.config_.tableKey]).join(",");
+        const ids = data.map((_) => _[this.config_.tableKey]).join(",");
         try {
           await this.$confirm("此操作将永久删除该数据, 是否继续?");
           await this.config_.api?.delete(ids, data);
@@ -335,7 +335,7 @@ export default Vue.extend({
     renderSearch() {
       return this.$scopedSlots.search ? (
         this.$scopedSlots.search({ search: this.onSearch, reset: this.onReset })
-      ) : (
+      ) : this.searchConfig?.config?.columns?.length ? (
         <TableSearch
           ref="tableSearch"
           framework={this.framework}
@@ -344,7 +344,7 @@ export default Vue.extend({
           onReset={this.onReset}
           {...{ props: this.searchConfig }}
         />
-      );
+      ) : null;
     },
     // 外部按钮
     renderOuerBtn(h: CreateElement) {
@@ -355,7 +355,7 @@ export default Vue.extend({
       return (
         <div class="outer-btn-box">
           {this.outerBtn_
-            .filter(btn => (btn.showJudge ? btn.showJudge(this.data) : true))
+            .filter((btn) => (btn.showJudge ? btn.showJudge(this.data) : true))
             .map((btn, index) => {
               if (btn.render) {
                 return btn.render(h);
@@ -392,7 +392,7 @@ export default Vue.extend({
           scopedSlots={{
             default: (scope: any) =>
               this.innerBtn_
-                .filter(btn => this.showJudgeInner(btn, scope.row))
+                .filter((btn) => this.showJudgeInner(btn, scope.row))
                 .map((btn, index) => {
                   if (btn.render) {
                     return btn.render(h, scope);
@@ -462,7 +462,7 @@ export default Vue.extend({
           ary.push(<template slot={key}>{slots[key]}</template>);
         }
       }
-      return ary.map(item => item);
+      return ary.map((item) => item);
     },
 
     //   <!-- 表格内容 -->

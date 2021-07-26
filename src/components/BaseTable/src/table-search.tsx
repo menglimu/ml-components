@@ -10,7 +10,7 @@ export default Vue.extend({
   name: "TableSearch",
   props: {
     isBtnInForm: { type: Boolean, default: true }, // 搜索和重置按钮在输入项后显示，！输入项不能占满元素
-    isOverHide: { type: Boolean, default: false }, // 超过一行隐藏
+    isOverHide: { type: Boolean, default: true }, // 超过一行隐藏
     config: { type: Object as PropType<MlFormConfig> }, // 搜索表单配置
     hideUIType: { type: String, default: "button" }, // 'button' | 'bottom' // 底部隐藏的按钮的样式
     value: { type: Object as PropType<AnyObj>, required: true },
@@ -114,12 +114,6 @@ export default Vue.extend({
           >
             {this.isBtnInForm && !(this.isOverHide && this.showMoreStatus) && btn}
           </ml-form>
-          {this.isOverHide && this.hideUIType === "bottom" && (
-            <div class="more" onClick={this.onChangeHideStatus}>
-              {this.showMoreStatus ? <i class="el-icon-caret-bottom" /> : <i class="el-icon-caret-top" />}
-              {this.showMoreStatus ? "展开更多" : "收起查询"}
-            </div>
-          )}
         </div>
         {(!this.isBtnInForm || (this.isOverHide && this.showMoreStatus)) && btn}
       </div>

@@ -180,14 +180,11 @@ export interface TableSearchProp<D = AnyObj> {
   /** 搜索和重置按钮在输入项后显示，！输入项不能占满元素 默认 true */
   isBtnInForm?: boolean;
 
-  /** 超过一行隐藏。默认 false */
+  /** 超过一行隐藏。默认 true */
   isOverHide?: boolean;
 
   /** 搜索表单配置 */
   config?: MlFormConfig<D>;
-
-  /** 隐藏按钮的样式 */
-  hideUIType?: "button" | "bottom";
 }
 
 /** 表格配置 */
@@ -220,9 +217,7 @@ export interface MlTableConfig<D = AnyObj, S = AnyObj> extends Partial<ElTable> 
     delete?: (ids: string, data?: D[]) => Promise<any>;
 
     /** 查询列表数据 */
-    list?: (
-      data: S & TableParams,
-    ) => Promise<{
+    list?: (data: S & TableParams) => Promise<{
       total: number;
       content: D[];
     }>;
