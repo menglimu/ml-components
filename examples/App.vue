@@ -37,6 +37,16 @@ h5 {
   font-family: inherit;
 }
 
+.page {
+  li {
+    label {
+      display: inline-block;
+      width: 120px;
+      color: #666;
+    }
+  }
+}
+
 // table:not(.el-table__header):not(.el-table__body) {
 //   width: 100%;
 //   margin-bottom: 45px;

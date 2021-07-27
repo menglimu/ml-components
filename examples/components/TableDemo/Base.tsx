@@ -36,7 +36,8 @@ const tableData = [
 ];
 
 const tableRes = {
-  content: tableData, // Array(6).fill(tableData[0]),
+  content: tableData,
+  // content: [], // tableData, // Array(6).fill(tableData[0]),
   total: 1,
 };
 
@@ -50,8 +51,6 @@ export default Vue.extend({
   created() {
     this.tableConfig = {
       searchConfig: {
-        isBtnInForm: false,
-        isOverHide: true,
         config: {
           columns: [
             {

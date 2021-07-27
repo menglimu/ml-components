@@ -1,5 +1,5 @@
 .ml-table {
-  padding: 0 8px;
+  // padding: 0 8px;
   overflow: hidden;
 
   .ml-table-empty {
@@ -94,6 +94,10 @@
       background-color: #f1f5f7;
     }
   }
+
+  .el-table__empty-block {
+    width: 100% !important;
+  }
 }
 
 // 因为优先级的问题。放在外层来
@@ -144,90 +148,34 @@
   display: flex;
   align-items: flex-start;
   max-width: 1400px;
+  margin: 0 -15px;
 
-  > .search-btn-box {
-    margin-left: 20px;
+  .ml-form {
+    flex: 1;
   }
 
-  &.label-top {
-    > .search-btn-box {
-      margin-top: 26px;
-    }
-  }
-
-  &.btn-in-form {
-    max-width: 1200px;
-
-    .ml-form {
-      .search-btn-box {
-        flex: 1;
-        min-width: 120px;
-        margin: 0 15px;
-        text-align: right;
-      }
-    }
-
-    .ml-form.label-top {
-      .search-btn-box {
-        margin-top: 26px;
-      }
-    }
+  .ml-form-item-box {
+    flex-shrink: 0;
   }
 
   &.hide-more {
     .ml-form {
-      height: 62px;
+      flex-wrap: nowrap;
       overflow: hidden;
-
-      &.medium {
-        height: 58px;
-      }
-
-      &.small {
-        height: 51px;
-      }
-
-      &.mini {
-        height: 47px;
-      }
-    }
-
-    .ml-form.label-top {
-      height: 88px;
-
-      &.medium {
-        height: 84px;
-      }
-
-      &.small {
-        height: 67px;
-      }
-
-      &.mini {
-        height: 63px;
-      }
     }
   }
 
-  .search-form-box {
-    flex: 1;
+  > .search-btn-box {
+    flex-shrink: 0;
+    padding-right: 15px;
+    padding-left: 20px;
+    margin-left: auto;
+  }
 
-    .more {
-      width: 120px;
-      height: 16px;
-      margin: -10px auto 0;
-      font-size: 14px;
-      color: #d3dce6;
-      cursor: pointer;
-
-      &:hover {
-        color: #409eff;
-      }
-    }
-
-    &.hide-more {
-      .more {
-        margin: 5px auto 0;
+  &.btn-in-form {
+    .ml-form {
+      .search-btn-box {
+        margin-left: 15px;
       }
     }
   }

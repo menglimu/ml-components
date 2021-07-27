@@ -146,6 +146,9 @@ export default Vue.extend({
       }
     }
     this.tags = new Tags(this.framework);
+    if (this.searchConfig?.initialValue) {
+      this.searchInput = merge(this.searchInput, this.searchConfig.initialValue);
+    }
   },
   mounted() {
     // 初始化的时候，是否直接搜索数据
@@ -235,15 +238,15 @@ export default Vue.extend({
 
     // 重置查询条件并搜索
     // @Provide()
-    onReset(data: AnyObj = {}) {
+    async onReset(data: AnyObj = {}) {
       this.resetSort();
       this.resetPageNum();
-      this.search("reset", data || {});
+      await this.search("reset", data || {});
     },
     // @Provide()
-    onSearch(data: AnyObj = {}) {
+    async onSearch(data: AnyObj = {}) {
       this.resetPageNum();
-      this.search("searchBtn", data || {});
+      await this.search("searchBtn", data || {});
     },
     // 重置排序相关
     resetSort() {

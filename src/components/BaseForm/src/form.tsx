@@ -73,6 +73,7 @@ export default Vue.extend({
       this.value_ = val;
     },
     // 自动size相关
+    // TODO: 自动设置 没个元素的默认宽度 itemBoxWidth
     autoSize() {
       // 自适应form的size
       let timer: number;

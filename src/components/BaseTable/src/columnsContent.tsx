@@ -42,7 +42,7 @@ export function formatterFormValue<D>(
   let label = cellValue;
   if (config.type === "select") {
     const valueArr = Array.isArray(cellValue) ? cellValue : [cellValue];
-    label = valueArr.map(id => getTreeLabel(id, config.options, config)).filter(label => !isNull(label));
+    label = valueArr.map((id) => getTreeLabel(id, config.options, config)).filter((label) => !isNull(label));
   }
   return Array.isArray(label) ? label.join(",") : label;
 }
@@ -63,7 +63,7 @@ function getStatusNames(className: string[], statusJudge: AnyObj, row: AnyObj) {
     return statusJudge(row);
   }
   if (statusJudge) {
-    Object.keys(statusJudge).map(status => getJudge(statusJudge[status], row) && className.push(status));
+    Object.keys(statusJudge).map((status) => getJudge(statusJudge[status], row) && className.push(status));
   }
   return className;
 }
@@ -124,11 +124,14 @@ function getBaseRender<D>(column: MlTableColumn<D>) {
 }
 
 export function columnsHandler(config: MlTableConfig<any, any>) {
-  config.columns.forEach(column => {
+  config.columns.forEach((column) => {
     if (typeof column.optionsGet === "function") {
       column.options = [];
-      column.optionsGet().then(res => {
-        if (Array.isArray(res.content)) {
+      column.optionsGet().then((res) => {
+        if (Array.isArray(res)) {
+          column.options = res;
+        }
+        if ("content" in res && Array.isArray(res.content)) {
           column.options = res.content;
         }
       });

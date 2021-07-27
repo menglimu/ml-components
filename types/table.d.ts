@@ -177,11 +177,13 @@ interface MlTableColumn<D = AnyObj> extends MlOptions, ElTableColumnAny {
 
 /** 搜索相关配置 */
 export interface TableSearchProp<D = AnyObj> {
-  /** 搜索和重置按钮在输入项后显示，！输入项不能占满元素 默认 true */
+  /** 搜索和重置按钮在输入项后显示，！输入项不能占满元素 默认 false */
   isBtnInForm?: boolean;
 
-  /** 超过一行隐藏。默认 true */
+  /** 超过一行隐藏。不传会根据config中的column的长度判断，长度大于3的时候开启 */
   isOverHide?: boolean;
+  /** 表单的初始值 */
+  initialValue?: AnyObj;
 
   /** 搜索表单配置 */
   config?: MlFormConfig<D>;
