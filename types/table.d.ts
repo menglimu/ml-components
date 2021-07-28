@@ -212,7 +212,7 @@ export interface MlTableConfig<D = AnyObj, S = AnyObj> extends Partial<ElTable> 
   /** 请求的接口列表 */
   api?: {
     /**
-     * 删除接口，evtType为mldelete时触发内部删除并使用改方法
+     * 删除接口，evtType为mldelete时触发内部删除并使用该方法
      * @param {String} ids id拼接的字符串
      * @param {Array} data 要删除的数据列表
      */

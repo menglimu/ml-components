@@ -73,7 +73,9 @@ export default Vue.extend({
             </li>
             <li>
               <label>evtType、callback</label>
-              evtType点击按钮的时候触发的类型。callback点击事件的执行函数。二者任选其一即可，行内按钮参数为一个数据对象。表格外按钮参数为数据对象数组
+              evtType点击按钮的时候触发的类型。callback点击事件的执行函数。二者任选其一即可，行内按钮参数为一个数据对象。表格外按钮参数为数据对象数组。
+              <br />
+              evtType为mldelete会触发内部的删除逻辑。确认删除，然后删除
             </li>
             <li>
               <label>showJudge</label>
