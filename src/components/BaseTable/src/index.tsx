@@ -1,5 +1,6 @@
 /**
  * 表格组件
+ * TODO: 表格自定义 render
  */
 import Vue from "vue";
 import "./table.scss";
@@ -41,7 +42,8 @@ export default Vue.extend({
     outerBtn: { type: Array, default: (): MlTableOuterBtn[] => [] },
 
     /** 分页配置 */
-    paginationConfig: { type: Object as PropType<Pagination>, default: () => ({}) },
+    paginationConfig: { type: Object as PropType<Pagination | false>, default: () => ({}) },
+
     /** 数据加载前的钩子函数 */
     beforeGetList: { type: Function as PropType<(type: string, params: any) => any> },
 
@@ -74,7 +76,6 @@ export default Vue.extend({
       },
       configDefault: {
         tableKey: "id",
-        showPagination: true,
         selection: false,
         reserveSelection: true,
         initSearch: true,
@@ -295,9 +296,8 @@ export default Vue.extend({
       // expand-row-keys
       this.loading = true;
       this.data = [];
-      const pager: TableParams = this.config_.showPagination
-        ? { pageSize: this.pageSize, pageNum: this.currentPage }
-        : {};
+      const pager: TableParams =
+        this.paginationConfig !== false ? { pageSize: this.pageSize, pageNum: this.currentPage } : {};
       let params = {
         ...pager,
         ...this.searchData,
@@ -506,7 +506,7 @@ export default Vue.extend({
     },
     //   <!-- 分页 -->
     renderPagination() {
-      if (!this.config_.showPagination) {
+      if (this.paginationConfig === false) {
         return;
       }
       const { TagPagination } = this.tags;

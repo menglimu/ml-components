@@ -55,7 +55,7 @@ export interface MlTableProps<D = AnyObj, S = AnyObj> {
   config: MlTableConfig<D, S>;
 
   /** 分页相关配置项 */
-  paginationConfig?: Pagination;
+  paginationConfig?: Pagination | false;
 
   /** 搜索表单附加值，会被输入框中的值覆盖 */
   searchData?: AnyObj;
@@ -239,9 +239,6 @@ export interface MlTableConfig<D = AnyObj, S = AnyObj> extends Partial<ElTable> 
   };
   /** 初始化的时候，是否直接请求数据，默认 true */
   initSearch?: boolean;
-
-  /** 是否显示分页，默认 true */
-  showPagination?: boolean;
 
   /** 表格的具体项 */
   columns: Array<MlTableColumn<D>>;
