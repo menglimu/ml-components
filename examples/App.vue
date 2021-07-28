@@ -14,6 +14,10 @@ html {
   height: 100%;
   padding: 0;
   margin: 0;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
 }
 
 * {
@@ -38,10 +42,17 @@ h5 {
 }
 
 .page {
+  line-height: 1.5em;
+
   li {
+    display: flex;
+    margin: 10px 0;
+    color: #333;
+
     label {
       display: inline-block;
-      width: 120px;
+      flex-shrink: 0;
+      width: 140px;
       color: #666;
     }
   }

@@ -75,7 +75,7 @@ export default Vue.extend({
       configDefault: {
         tableKey: "id",
         showPagination: true,
-        selection: true,
+        selection: false,
         reserveSelection: true,
         initSearch: true,
       },
@@ -108,10 +108,10 @@ export default Vue.extend({
       emptyImg,
       framework: "element-ui",
       outerBtnDefault: {
-        size: "samll",
+        size: Vue.prototype.$ELEMENT?.size || "small",
       },
       innerBtnDefault: {
-        size: "samll",
+        size: Vue.prototype.$ELEMENT?.size || "small",
       },
       elTable: null as ElTable,
     };
@@ -183,7 +183,7 @@ export default Vue.extend({
           console.log(error);
           this.$emit("delete-error", ids, data);
         }
-      } else {
+      } else if (type) {
         if (type === "inner") {
           this.$emit(type, data[0]);
         } else {
@@ -199,7 +199,7 @@ export default Vue.extend({
           break;
         default:
           btn?.callback?.(row);
-          this.$emit(type, row);
+          type && this.$emit(type, row);
           break;
       }
     },
@@ -211,7 +211,7 @@ export default Vue.extend({
           break;
         default:
           btn?.callback?.(this.multipleSelection);
-          this.$emit(type, this.multipleSelection);
+          type && this.$emit(type, this.multipleSelection);
           break;
       }
     },

@@ -85,7 +85,7 @@ interface Pagination extends AnyObj, Partial<ElPagination> {}
 
 interface TableButton<D = AnyObj> extends Partial<ElButton> {
   /** 按钮内的文字 */
-  name: string;
+  name?: string;
 
   /** 触发的事件类型，在表格组件上使用@xxx来监听事件 */
   evtType?: string;
@@ -104,7 +104,7 @@ interface MlTableInnerBtn<D = AnyObj> extends TableButton<D> {
   callback?: (row: D) => void;
 
   /** 可使用函数返回true/false，判断显示，参数为行数据，使用对象的时候，对象内的每个属性和行数据相等时可用 */
-  showJudge?: AnyObj | ((data: D) => boolean); // {status: 1,title: '123'}
+  showJudge?: AnyObj | ((row: D) => boolean); // {status: 1,title: '123'}
 }
 
 /** 表格外按钮配置 */
@@ -116,7 +116,7 @@ interface MlTableOuterBtn<D = AnyObj> extends TableButton<D> {
   showJudge?: (data: D[]) => boolean;
 
   /** 点击的回调函数，可以不通过事件监听的方式 */
-  callback?: (row: D[]) => void;
+  callback?: (rows: D[]) => void;
 }
 
 /** 重新element的单项配置，解决兼容性 */
@@ -191,7 +191,7 @@ export interface TableSearchProp<D = AnyObj> {
 
 /** 表格配置 */
 export interface MlTableConfig<D = AnyObj, S = AnyObj> extends Partial<ElTable> {
-  /** 多选，默认true */
+  /** 多选，默认false */
   selection?: boolean;
 
   /** 多选时候，分页，保存选择状态 */
