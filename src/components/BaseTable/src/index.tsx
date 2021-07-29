@@ -367,7 +367,7 @@ export default Vue.extend({
                 <TagButton
                   class="outer-btn"
                   key={index}
-                  {...{ attrs: { ...this.outerBtnDefault, ...btn } }}
+                  {...{ props: { ...this.outerBtnDefault, ...btn } }}
                   disabled={
                     (btn.selection === "single" && this.multipleSelection.length !== 1) ||
                     (btn.selection === "multiple" && this.multipleSelection.length < 1)
@@ -390,7 +390,7 @@ export default Vue.extend({
       const { TagTableColumn, TagButton } = this.tags;
       return (
         <TagTableColumn
-          {...{ attrs: this.columnDefaultControl }}
+          {...{ props: this.columnDefaultControl }}
           width={this.config_.tableOptWidth}
           scopedSlots={{
             default: (scope: any) =>
@@ -404,7 +404,7 @@ export default Vue.extend({
                     //     <!-- <el-tooltip v-for="(btn, index) in innerBtnGroup" :key="index" :content="btn.name" effect="dark" placement="top"> -->
                     <TagButton
                       key={index}
-                      {...{ attrs: { ...this.innerBtnDefault, ...btn } }}
+                      {...{ props: { ...this.innerBtnDefault, ...btn } }}
                       class="inner-btn"
                       onClick={() => this.handleInnerBtn(btn.evtType, scope.row, btn)}
                     >
@@ -473,6 +473,9 @@ export default Vue.extend({
       const tableNodeData = merge(
         {
           attrs: this.TableDefault,
+        },
+        {
+          props: this.config_,
         },
         this.config_.nodeData,
         {

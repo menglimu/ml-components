@@ -1,13 +1,14 @@
 /**
- * 表格搜索项
+ * 表格配置
  */
 import Vue from "vue";
-import { MlTableProps } from "types/table";
+import { MlTable, MlTableProps } from "types/table";
 
 let data = {
   content: [
     { name: "辛弃疾", sentence: "醉里挑灯看剑，梦回吹角连营", occupation: "起义军", remark: "杀贼！杀贼！杀贼" },
     { name: "苏东坡", sentence: "一蓑烟雨任平生", occupation: "老饕", remark: "问汝平生功业" },
+    { name: "李清照", sentence: "至今思项羽，不肯过江东", occupation: "怼怼", remark: "易安大人" },
   ],
   total: 1,
 };
@@ -21,21 +22,14 @@ export default Vue.extend({
   },
   created() {
     this.tableConfig = {
-      searchData: { name: 123, date: "2020 20-20-20" },
-      searchConfig: {
-        // isBtnInForm: true,
-        // isOverHide: false,
-        initialValue: { name: "霍去病" },
-        config: {
-          columns: [
-            { label: "姓名", prop: "name" },
-            { label: "名句", prop: "sentence", value: "竹杖芒鞋轻胜马" },
-            { label: "职业", prop: "occupation" },
-            { label: "备注", prop: "remark" },
-          ],
-        },
-      },
+      innerBtn: [{ name: "打榜", type: "text" }],
       config: {
+        selection: true,
+        index: true,
+        tableOptWidth: "80px",
+        height: 300,
+        maxHeight: 600,
+        initSearch: false,
         api: {
           list: (params) => {
             console.log(params);
@@ -51,8 +45,14 @@ export default Vue.extend({
       },
     };
   },
+  mounted() {
+    setTimeout(() => {
+      let mlTable = this.$refs.mainTable as MlTable;
+      mlTable.refresh();
+    }, 6000);
+  },
   methods: {},
   render() {
-    return <ml-table props={this.tableConfig}></ml-table>;
+    return <ml-table ref="mainTable" props={this.tableConfig}></ml-table>;
   },
 });

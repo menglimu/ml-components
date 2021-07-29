@@ -44,6 +44,7 @@ export default Vue.extend({
         },
       },
       config: {
+        selection: true,
         api: {
           list: (params) => {
             console.log(params);

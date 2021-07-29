@@ -1,5 +1,6 @@
 /**
  * 表单组件
+ * TODO: 增加columns key
  */
 import Vue from "vue";
 import { PropType } from "vue/types/umd";

@@ -250,7 +250,6 @@ export default Vue.extend({
             },
           },
           {
-            type: "image",
             label: "自定义列",
             prop: "fileIds",
             renderColumn(h) {
