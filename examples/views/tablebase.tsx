@@ -209,7 +209,6 @@ export default Vue.extend({
 
         <h5>表格slot/scopedSlots</h5>
         <p>
-          <div>通过 config.columns 对表格的每一列进行控制</div>
           <ul>
             <li>
               <label>slot.default</label> 默认的slot 位于搜索框和表格之间

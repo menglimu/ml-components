@@ -3,7 +3,7 @@
  * TODO: 添加播放视频流。对象。判断重复
  */
 import Vue from "vue";
-import Dplayer from "@/components/BaseDplayer";
+import Dplayer from "@/components/CustomDplayer";
 import "./index.scss";
 
 export default Vue.extend({

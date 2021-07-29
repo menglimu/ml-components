@@ -13,9 +13,9 @@ import { VueConstructor } from "vue/types/umd";
 // 所有基础组件
 import MlTable from "./components/BaseTable";
 import MlForm from "./components/BaseForm";
-import MlEcharts from "./components/BaseCharts";
-import MlEchartsLineArea from "./components/BaseCharts/LineArea";
-import MlEchartsPieRate from "./components/BaseCharts/PieRate";
+import MlEcharts from "./components/CustomEcharts";
+import MlEchartsLineArea from "./components/CustomEcharts/LineArea";
+import MlEchartsPieRate from "./components/CustomEcharts/PieRate";
 import MlCascader from "./components/CustomCascader";
 // 全局组件
 import GlobalVideoPlayer from "./components/GlobalVideoPlayer";
