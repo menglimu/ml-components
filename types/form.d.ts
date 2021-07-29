@@ -35,7 +35,7 @@ interface MlFormColumn<D = AnyObj> extends MlOptions {
    * @default false
    */
   required?: boolean;
-  /** 默认值，初始化的时候，会有一次默认值计算，该项有值得时候，取该值 */
+  /** 默认值，初始化的时候，会有一次默认值计算，该项有值得时候，取该值。重置时也会重置到该值 */
   value?: any;
   /** 自定义输入项的渲染 */
   render?: (h: CreateElement, value: any, onInput: (value?: any) => void) => VNode | Element;

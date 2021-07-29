@@ -36,7 +36,7 @@ export default Vue.extend({
             { value: 0, label: "女" },
           ],
         },
-        { label: "性别", prop: "sex", type: "select", optionsGet },
+        { label: "性别", prop: "sex", type: "select", optionsGet, show: (data) => data.type === 1 },
         {
           label: "自定义",
           prop: "render",
