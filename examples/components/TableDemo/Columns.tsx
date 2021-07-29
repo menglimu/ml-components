@@ -72,7 +72,7 @@ export default Vue.extend({
         },
         columns: [
           { label: "姓名", prop: "name" },
-          { label: "名句", prop: "sentence", width: "300" },
+          { label: "名句", prop: "sentence", minWidth: "200" },
           { label: "职业", prop: "occupation" },
           { label: "备注", prop: "remark" },
 
