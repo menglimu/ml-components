@@ -46,7 +46,6 @@ export default Vue.extend({
         <h3>表单基础使用</h3>
         <p>本文介绍属性主要基于config.columns中的配置，一些地方</p>
         <h5>表单基础属性</h5>
-        key
         <p>
           <ul>
             <li>
@@ -66,7 +65,7 @@ export default Vue.extend({
               默认值，初始化的时候，会有一次默认值计算，该项有值得时候，取该值。重置时也会重置到该值
             </li>
             <li>
-              <label>show</label> 控制表单是否显示
+              <label>show</label> 控制表单项是否显示
             </li>
           </ul>
         </p>

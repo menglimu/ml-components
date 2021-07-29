@@ -126,7 +126,6 @@ export default Vue.extend({
         tableKey: "idCcNewsManage", // 主键，默认id
         tableOptWidth: "130px", // 表格操作宽度
         initSearch: true, // 初始化的时候，是否直接请求数据，
-        showPagination: true, // 是否显示分页
         nodeData: {
           props: {
             height: "500px",

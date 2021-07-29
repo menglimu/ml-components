@@ -1,6 +1,5 @@
 /**
  * 表格组件
- * TODO: 表格自定义 render
  */
 import Vue from "vue";
 import "./table.scss";
@@ -535,7 +534,9 @@ export default Vue.extend({
         {this.renderSearch()}
         {this.renderOuerBtn(h)}
         {this.$slots.default}
-        {this.renderTable(h)}
+        {this.$scopedSlots.table
+          ? this.$scopedSlots.table({ data: this.data, columns: this.config_.columns })
+          : this.renderTable(h)}
         {this.renderPagination()}
       </div>
     );

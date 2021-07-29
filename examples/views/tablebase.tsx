@@ -5,6 +5,7 @@ import Search from "./../components/TableDemo/Search";
 import Btn from "./../components/TableDemo/Btn";
 import Config from "./../components/TableDemo/Config";
 import Columns from "./../components/TableDemo/Columns";
+import Slot from "./../components/TableDemo/Slot";
 
 export const title = "表格快速上手"; // 左侧自动导入时，菜单的名称
 export const sort = 300; // 菜单的排序
@@ -16,6 +17,7 @@ export default Vue.extend({
       sourceBtn: "",
       sourceConfig: "",
       sourceColumns: "",
+      sourceSlot: "",
     };
   },
   created() {
@@ -33,6 +35,9 @@ export default Vue.extend({
     });
     import(`./../components/TableDemo/Columns.tsx?raw`).then((res) => {
       this.sourceColumns = res.default;
+    });
+    import(`./../components/TableDemo/Slot.tsx?raw`).then((res) => {
+      this.sourceSlot = res.default;
     });
   },
   methods: {},
@@ -200,6 +205,30 @@ export default Vue.extend({
         </p>
         <base-source-view source={this.sourceColumns}>
           <Columns />
+        </base-source-view>
+
+        <h5>表格slot/scopedSlots</h5>
+        <p>
+          <div>通过 config.columns 对表格的每一列进行控制</div>
+          <ul>
+            <li>
+              <label>slot.default</label> 默认的slot 位于搜索框和表格之间
+            </li>
+            <li>
+              <label>slot.empty</label> 表格为空的时候的展示内容
+            </li>
+            <li>
+              <label>scopedSlots.search</label> 自定义搜索头， 入参为一个对象，{"{search, reset}"}
+              search为表格搜索方法，reset为重置方法。2个方法都会重置分页条件
+            </li>
+            <li>
+              <label>scopedSlots.table</label> 自定义表格内容， 入参为一个对象，{"{data, columns}"}
+              data为当前页的数据，columns为处理后的内容列
+            </li>
+          </ul>
+        </p>
+        <base-source-view source={this.sourceSlot}>
+          <Slot />
         </base-source-view>
       </div>
     );
