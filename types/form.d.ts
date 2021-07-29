@@ -22,6 +22,8 @@ interface MlFormColumn<D = AnyObj> extends MlOptions {
 
   /** 表单项的数据key名 */
   prop?: string;
+  /** 表单项的vue组件唯一key名。默认使用prop || index，当prop重复是，需要传入该参数 */
+  key?: string;
 
   /**
    * 表单的类型，自定义的时候，传''或者不传

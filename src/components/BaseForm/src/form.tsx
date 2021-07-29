@@ -1,6 +1,5 @@
 /**
  * 表单组件
- * TODO: 增加columns key
  */
 import Vue from "vue";
 import { PropType } from "vue/types/umd";
@@ -222,7 +221,7 @@ export default Vue.extend({
           return (
             <FormItem
               tags={this.tags}
-              key={index}
+              key={item.key || item.prop || index}
               configItem={item}
               originalValue={this.value_[item.prop]}
               rootValue={this.value_}
