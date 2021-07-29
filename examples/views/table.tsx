@@ -1,13 +1,13 @@
 import Vue from "vue";
 
-import Base from "./../components/TableDemo/Base";
-import Search from "./../components/TableDemo/Search";
-import Btn from "./../components/TableDemo/Btn";
-import Config from "./../components/TableDemo/Config";
-import Columns from "./../components/TableDemo/Columns";
-import Slot from "./../components/TableDemo/Slot";
+import Base from "../components/TableDemo/Base";
+import Search from "../components/TableDemo/Search";
+import Btn from "../components/TableDemo/Btn";
+import Config from "../components/TableDemo/Config";
+import Columns from "../components/TableDemo/Columns";
+import Slot from "../components/TableDemo/Slot";
 
-export const title = "表格快速上手"; // 左侧自动导入时，菜单的名称
+export const title = "基础表格"; // 左侧自动导入时，菜单的名称
 export const sort = 300; // 菜单的排序
 export default Vue.extend({
   data() {

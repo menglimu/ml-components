@@ -7,6 +7,7 @@
  */
 import { getJudge } from "@/utils";
 import { isNull } from "lodash";
+import { MlOptions } from "types/common";
 import { MlTableColumn, MlTableConfig } from "types/table";
 import { CreateElement } from "vue/types/umd";
 
@@ -37,7 +38,7 @@ function getTreeLabel(
  */
 export function formatterFormValue<D>(
   cellValue: string | number | Array<string | number>,
-  config: MlTableColumn<D>,
+  config: MlOptions & { type?: string },
 ): string | number {
   let label = cellValue;
   if (config.type === "select") {
@@ -45,6 +46,42 @@ export function formatterFormValue<D>(
     label = valueArr.map((id) => getTreeLabel(id, config.options, config)).filter((label) => !isNull(label));
   }
   return Array.isArray(label) ? label.join(",") : label;
+}
+/**
+ * 获取图片的render
+ * @param preList 图片链接地址
+ * @param column 配置项
+ * @param className 类名
+ * @returns
+ */
+// eslint-disable-next-line max-params
+export function getImage(
+  preList: string | [string],
+  column?: { baseUrl?: string; noPre?: boolean },
+  className?: string,
+  h?: CreateElement,
+) {
+  let preList_: string[];
+  if (!Array.isArray(preList)) {
+    preList_ = [preList];
+  } else {
+    preList_ = preList;
+  }
+
+  if (column.baseUrl) {
+    preList_ = preList_.map((url: string) => column.baseUrl + url);
+  }
+  return (
+    <div class={className}>
+      {preList_.map((item: string) => {
+        if (column.noPre) {
+          return <img class="td-img" src={item} />;
+        } else {
+          return <el-image class="td-img" fit="cover" src={item} preview-src-list={preList_} />;
+        }
+      })}
+    </div>
+  );
 }
 
 /**
@@ -72,26 +109,10 @@ function getBaseRender<D>(column: MlTableColumn<D>) {
   if (column.type === "image") {
     return (h: CreateElement, params: RowParams<D>) => {
       let preList = params.row[column.prop];
-      if (preList) {
-        if (!Array.isArray(preList)) {
-          preList = [preList];
-        }
+      const className = getStatusNames(["td-img-box"], column.statusJudge, params.row);
 
-        if (column.baseUrl) {
-          preList = preList.map((url: string) => column.baseUrl + url);
-        }
-        const className = getStatusNames(["td-img-box"], column.statusJudge, params.row);
-        return (
-          <div class={className}>
-            {preList.map((item: string) => {
-              if (column.noPre) {
-                return <img class="td-img" src={item} />;
-              } else {
-                return <el-image class="td-img" fit="cover" src={item} preview-src-list={preList} />;
-              }
-            })}
-          </div>
-        );
+      if (preList) {
+        return getImage(preList, column, className, h);
       } else {
         return <span></span>;
       }

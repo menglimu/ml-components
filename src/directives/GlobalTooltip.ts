@@ -4,14 +4,14 @@
 
 import Vue, { DirectiveOptions } from "vue";
 import { Tooltip } from "element-ui";
-
 // tooltip 的实例
 let tooltip: any = null;
 // 挂载tooltip
 function mountTooltip() {
+  if (tooltip) return;
   // 创建vue实例
   const Component = Vue.extend(Tooltip);
-  const tooltip = new Component({
+  tooltip = new Component({
     propsData: {
       placement: "top-start",
       content: "",
@@ -23,12 +23,12 @@ function mountTooltip() {
 
 // 全局指令处理
 const directive: DirectiveOptions = {
-  bind: function(el: HTMLElement) {
+  bind: function (el: HTMLElement) {
     if (!tooltip) mountTooltip();
     el.addEventListener("mouseenter", onMouseEnter);
     el.addEventListener("mouseleave", onMouseLeave);
   },
-  unbind: function(el: HTMLElement) {
+  unbind: function (el: HTMLElement) {
     el.removeEventListener("mouseenter", onMouseEnter);
     el.removeEventListener("mouseleave", onMouseLeave);
   },

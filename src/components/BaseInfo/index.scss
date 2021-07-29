@@ -24,7 +24,6 @@
     padding: 15px 0 8px 0;
     font-size: 14px;
     font-weight: 400;
-    color: #fff;
   }
 
   .ml-info-content {
@@ -33,10 +32,11 @@
 
     .ml-info-item {
       display: flex;
+      margin-bottom: 10px;
       font-size: 14px;
       font-weight: 400;
-      line-height: 32px;
-      color: rgba(255, 255, 255, 0.85);
+      line-height: 22px;
+      color: rgba(0, 0, 0, 0.85);
 
       .ml-info-label {
         flex: none;
@@ -46,6 +46,16 @@
         flex: 1;
         margin-right: 8px;
         overflow: hidden;
+
+        .td-img {
+          width: 80px;
+          height: 80px;
+          margin-right: 10px;
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
       }
 
       &.ml-info-ell {

@@ -1,12 +1,12 @@
 import Vue from "vue";
-import FormBase from "./../components/FormDemo/FormBase";
-import FormRule from "./../components/FormDemo/FormRule";
-import FormWidth from "./../components/FormDemo/FormWidth";
-import FormProps from "./../components/FormDemo/FormProps";
-import FormRender from "./../components/FormDemo/FormRender";
-import FormSet from "./../components/FormDemo/FormSet";
+import FormBase from "../components/FormDemo/FormBase";
+import FormRule from "../components/FormDemo/FormRule";
+import FormWidth from "../components/FormDemo/FormWidth";
+import FormProps from "../components/FormDemo/FormProps";
+import FormRender from "../components/FormDemo/FormRender";
+import FormSet from "../components/FormDemo/FormSet";
 
-export const title = "表单快速上手"; // 左侧自动导入时，菜单的名称
+export const title = "基础表单"; // 左侧自动导入时，菜单的名称
 export const sort = 200; // 菜单的排序
 export default Vue.extend({
   data() {
@@ -44,7 +44,7 @@ export default Vue.extend({
     return (
       <div class="page">
         <h3>表单基础使用</h3>
-        <p>本文介绍属性主要基于config.columns中的配置，一些地方</p>
+        <p>本文介绍属性主要基于config.columns中的配置，指出全局，整体等配置，可以配置在config中</p>
         <h5>表单基础属性</h5>
         <p>
           <ul>

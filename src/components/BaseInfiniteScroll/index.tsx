@@ -44,6 +44,7 @@ export default Vue.extend({
       let data = [];
       try {
         data = await this.getList({ pageNum: this.pageNum, pageSize: this.pageSize });
+        // TODO: 兼容 content: []
         if (Array.isArray(data)) {
           this.dataList.push(...data);
         } else {
@@ -77,7 +78,7 @@ export default Vue.extend({
         element-loading-background="rgba(0, 0, 0, 0.4)"
       >
         <div v-infinite-scroll={this.load} class={style.list}>
-          {this.dataList.map(item => this.$scopedSlots?.default?.(item))}
+          {this.dataList.map((item) => this.$scopedSlots?.default?.(item))}
         </div>
         {!this.loading && (!this.dataList || this.dataList.length === 0) && (
           <div class={style.noData}>暂无相关数据</div>

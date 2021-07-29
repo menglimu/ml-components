@@ -13,6 +13,7 @@ import { VueConstructor } from "vue/types/umd";
 // 所有基础组件
 import MlTable from "./components/BaseTable";
 import MlForm from "./components/BaseForm";
+import MlInfo from "./components/BaseInfo";
 import MlEcharts from "./components/CustomEcharts";
 import MlEchartsLineArea from "./components/CustomEcharts/LineArea";
 import MlEchartsPieRate from "./components/CustomEcharts/PieRate";
@@ -24,30 +25,23 @@ import preventReClick from "@/directives/preventReClick";
 import globalTooltip from "@/directives/globalTooltip";
 import clickOutside from "@/directives/clickOutside";
 import submitClick from "@/directives/submitClick";
-
-export const components = {
-  MlTable,
-  MlForm,
-  MlEcharts,
-  MlEchartsLineArea,
-  MlEchartsPieRate,
-  MlCascader,
-};
+// 需install的组件集合
+export const components = [MlTable, MlForm, MlInfo, MlEcharts, MlEchartsLineArea, MlEchartsPieRate, MlCascader];
 
 // 为所有基础组件添加注册方法
-Object.values(components).forEach((component: any) => {
-  let key = component.options.name;
-  components[key].install = function (Vue: VueConstructor, opts = {}) {
-    Vue.prototype[key] = opts;
-    Vue.component(key, components[key]);
+components.forEach((component: any) => {
+  let name = component.options.name;
+  component.install = function (Vue: VueConstructor, opts = {}) {
+    Vue.prototype[name] = opts;
+    Vue.component(name, component);
   };
 });
 
-// 因为ts和混淆的原因，不能使用name
 const install = function (Vue: VueConstructor, opts = {}) {
-  Object.values(components).forEach((component: any) => {
-    let key = component.options.name;
-    Vue.use(component, opts[key]);
+  // 调用所有组件的install方法注入 组件
+  components.forEach((component: any) => {
+    let name = component.options.name;
+    Vue.use(component, opts[name]);
   });
 
   Vue.use(GlobalVideoPlayer);
