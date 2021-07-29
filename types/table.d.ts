@@ -142,6 +142,9 @@ interface MlTableColumn<D = AnyObj> extends MlOptions, ElTableColumnAny {
   /** tableColumn的key，默认使用prop，存在相同prop时，传入key */
   key?: string;
 
+  /** 隐藏列 默认 false */
+  hide?: boolean;
+
   /** 状态处理。对象内分别为状态名和满足的条件
    * success: 绿色，error：红色，warning：橙色，done：蓝色，failed：灰色
    */

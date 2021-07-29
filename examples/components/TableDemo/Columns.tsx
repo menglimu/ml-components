@@ -62,7 +62,7 @@ export default Vue.extend({
   },
   created() {
     this.tableConfig = {
-      innerBtn: [{ name: "打榜", type: "text" }],
+      innerBtn: [{ name: "显示隐藏", type: "text", callback: this.onDetail }],
       config: {
         api: {
           list: (params) => {
@@ -133,6 +133,7 @@ export default Vue.extend({
             type: "svg",
             label: "svg矢量图",
             prop: "svg",
+            hide: true,
           },
           {
             label: "自定义列",
@@ -163,6 +164,9 @@ export default Vue.extend({
   methods: {
     onDetail() {
       this.$message("点击");
+      this.tableConfig.config.columns.find((item) => item.prop === "svg").hide = !this.tableConfig.config.columns.find(
+        (item) => item.prop === "svg",
+      ).hide;
     },
   },
   render() {

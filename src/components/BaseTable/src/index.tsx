@@ -161,7 +161,7 @@ export default Vue.extend({
   },
   methods: {
     onConfigChange() {
-      const config = Object.assign(this.configDefault, cloneDeep(this.config));
+      const config = { ...this.configDefault, ...cloneDeep(this.config) };
       // 处理表格中每一项的值的显示
       columnsHandler(config);
       this.config_ = config;
@@ -421,6 +421,9 @@ export default Vue.extend({
     renderColumn(h: CreateElement) {
       const { TagTableColumn } = this.tags;
       return this.config_.columns.map((item, index) => {
+        if (item.hide) {
+          return null;
+        }
         if (item.type === "index" || item.type === "selection") {
           return <TagTableColumn align="center" {...{ props: item }} />;
         }

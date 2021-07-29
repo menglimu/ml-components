@@ -176,6 +176,10 @@ export default Vue.extend({
               <label>key</label> 供vue使用，默认同prop的值，当同时存在2个的时候，可设置不同的prop来处理key相同的情况
             </li>
             <li>
+              <label>hide</label> 是否隐藏列，默认 false
+            </li>
+
+            <li>
               <label>statusJudge</label> 状态处理。对象内分别为状态名和满足的条件 success:
               绿色，error：红色，warning：橙色，done：蓝色，failed：灰色
               <br /> 传入judge对象或方法，传入方法时需要返回对应的string 可自定义返回不同的，然后写全局样式

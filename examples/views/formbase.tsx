@@ -44,14 +44,13 @@ export default Vue.extend({
     return (
       <div>
         <h3>表单基础使用</h3>
-
+        <p>本文介绍属性主要基于config.columns中的配置，一些地方</p>
         <h5>表单基础整理</h5>
+        key
         <p>基础的表单，包含异步数据源，校验等</p>
-
         <base-source-view source={this.sourceFormBase}>
           <FormBase />
         </base-source-view>
-
         <h5>表单校验</h5>
         <p>
           <div>required: 是否必填</div>
@@ -70,7 +69,6 @@ export default Vue.extend({
         <base-source-view source={this.sourceFormRule}>
           <FormRule />
         </base-source-view>
-
         <h5>表单长度控制</h5>
         <p>
           <div>labelWidth: label的宽度，可在form中全部配置</div>
@@ -82,7 +80,6 @@ export default Vue.extend({
         <base-source-view source={this.sourceFormWidth}>
           <FormWidth />
         </base-source-view>
-
         <h5>表单参数控制控制</h5>
         <p>
           <div>
@@ -100,7 +97,6 @@ export default Vue.extend({
         <base-source-view source={this.sourceFormProps}>
           <FormProps />
         </base-source-view>
-
         <h5>表单自定义内容</h5>
         <p>
           <div>在一些复杂情况，现有组件不满足，或需要插入一些东西的时候。可以使用render进行组件的内容</div>
@@ -119,7 +115,6 @@ export default Vue.extend({
         <base-source-view source={this.sourceFormRender}>
           <FormRender />
         </base-source-view>
-
         <h5>表单整体的通用属性</h5>
         <p>
           <div>uiType: line为下划线，round为圆角, border为边框</div>
