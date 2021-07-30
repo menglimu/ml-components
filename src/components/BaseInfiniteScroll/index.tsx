@@ -41,12 +41,13 @@ export default Vue.extend({
       }
       this.loading = true;
       this.pageNum++;
-      let data = [];
+      let data: any = [];
       try {
         data = await this.getList({ pageNum: this.pageNum, pageSize: this.pageSize });
-        // TODO: 兼容 content: []
         if (Array.isArray(data)) {
           this.dataList.push(...data);
+        } else if (Array.isArray(data?.content)) {
+          this.dataList.push(...data.content);
         } else {
           console.log("后台返回的数据不是数组形式");
         }
