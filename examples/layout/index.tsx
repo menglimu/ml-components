@@ -9,9 +9,11 @@ export default Vue.extend({
     return (
       <div class={style.layout}>
         <header class={style.layoutHeader} />
-        <div class={[style.container, "container-page"]}>
+        <div class={[style.container]}>
           <siderbar class={style.siderbar} />
-          <router-view class={[style.page]} />
+          <div class={[style.page, "container-page"]}>
+            <router-view class={style.pageRoute} />
+          </div>
         </div>
       </div>
     );

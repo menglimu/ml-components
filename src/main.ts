@@ -44,10 +44,10 @@ const install = function (Vue: VueConstructor, opts = {}) {
     Vue.use(component, opts[name]);
   });
 
-  Vue.use(GlobalVideoPlayer);
+  // Vue.use(GlobalVideoPlayer);
 
-  Vue.directive("clickPreventRe", clickPreventRe);
   Vue.directive("globalTooltip", globalTooltip);
+  Vue.directive("clickPreventRe", clickPreventRe);
   Vue.directive("clickOutside", clickOutside);
   Vue.directive("clickSubmit", clickSubmit);
 };
@@ -56,7 +56,8 @@ export default {
   install,
   ...components,
   GlobalVideoPlayer,
-  clickPreventRe,
   globalTooltip,
+  clickPreventRe,
+  clickOutside,
   clickSubmit,
 };
