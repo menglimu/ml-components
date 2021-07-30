@@ -8,7 +8,7 @@
 
 import { DirectiveOptions } from "vue";
 
-const preventReClick: DirectiveOptions = {
+const clickPreventRe: DirectiveOptions = {
   inserted(el: HTMLElement, value: any) {
     // 判断按钮
     if (el instanceof HTMLButtonElement) {
@@ -23,4 +23,4 @@ const preventReClick: DirectiveOptions = {
     }
   },
 };
-export default preventReClick;
+export default clickPreventRe;

@@ -69,7 +69,7 @@ export default Vue.extend({
       <div>
         <ml-form ref="form" config={this.formConfig} v-model={this.formValue}></ml-form>
         <div>
-          <el-button type="primary" v-submitClick={this.onSubmit}>
+          <el-button type="primary" v-clickSubmit={this.onSubmit}>
             提交
           </el-button>
           <el-button onClick={this.onReset}>重置</el-button>

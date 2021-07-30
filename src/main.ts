@@ -21,12 +21,12 @@ import MlCascader from "./components/CustomCascader";
 // 全局组件
 import GlobalVideoPlayer from "./components/GlobalVideoPlayer";
 // 指令
-import preventReClick from "@/directives/preventReClick";
 import globalTooltip from "@/directives/globalTooltip";
+import clickPreventRe from "@/directives/clickPreventRe";
 import clickOutside from "@/directives/clickOutside";
-import submitClick from "@/directives/submitClick";
+import clickSubmit from "@/directives/clickSubmit";
 // 需install的组件集合
-export const components = [MlTable, MlForm, MlInfo, MlEcharts, MlEchartsLineArea, MlEchartsPieRate, MlCascader];
+export const components = [MlTable, MlForm, MlInfo]; //  MlEcharts, MlEchartsLineArea, MlEchartsPieRate, MlCascader
 
 // 为所有基础组件添加注册方法
 components.forEach((component: any) => {
@@ -46,17 +46,17 @@ const install = function (Vue: VueConstructor, opts = {}) {
 
   Vue.use(GlobalVideoPlayer);
 
-  Vue.directive("preventReClick", preventReClick);
+  Vue.directive("clickPreventRe", clickPreventRe);
   Vue.directive("globalTooltip", globalTooltip);
   Vue.directive("clickOutside", clickOutside);
-  Vue.directive("submitClick", submitClick);
+  Vue.directive("clickSubmit", clickSubmit);
 };
 
 export default {
   install,
   ...components,
   GlobalVideoPlayer,
-  preventReClick,
+  clickPreventRe,
   globalTooltip,
-  submitClick,
+  clickSubmit,
 };

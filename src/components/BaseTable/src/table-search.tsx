@@ -4,7 +4,7 @@
 import Vue from "vue";
 import { PropType, VNode } from "vue/types/umd";
 import { MlFormConfig, MlForm } from "types/form";
-import submitClick from "@/directives/submitClick";
+import submitClick from "@/directives/clickSubmit";
 // import style from 'index.module.scss'
 
 export default Vue.extend({
@@ -85,10 +85,10 @@ export default Vue.extend({
     const TagButton = { cui: "c-button", "element-ui": "el-button" }[this.framework];
     const btn = (
       <div class="search-btn-box">
-        <TagButton type="primary" ref="searchBtn" class="search" size={size} v-submitClick={this.onSearch_}>
+        <TagButton type="primary" ref="searchBtn" class="search" size={size} v-clickSubmit={this.onSearch_}>
           查询
         </TagButton>
-        <TagButton class="reset" size={size} v-submitClick={this.onReset_}>
+        <TagButton class="reset" size={size} v-clickSubmit={this.onReset_}>
           重置
         </TagButton>
         {this.isOverHide_ && (

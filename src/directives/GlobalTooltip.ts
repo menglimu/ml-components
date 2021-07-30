@@ -22,7 +22,7 @@ function mountTooltip() {
 }
 
 // 全局指令处理
-const directive: DirectiveOptions = {
+const globalTooltip: DirectiveOptions = {
   bind: function (el: HTMLElement) {
     if (!tooltip) mountTooltip();
     el.addEventListener("mouseenter", onMouseEnter);
@@ -50,6 +50,6 @@ function onMouseLeave(this: HTMLElement, e: MouseEvent) {
   tooltip.handleClosePopper();
 }
 
-export default directive;
+export default globalTooltip;
 
 // Vue.directive('global-tooltip', directive);
