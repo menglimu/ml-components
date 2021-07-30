@@ -35,7 +35,7 @@ const globalTooltip: DirectiveOptions = {
 };
 // 鼠标进入事件
 function onMouseEnter(this: HTMLElement, e: MouseEvent) {
-  if (this.clientWidth < this.scrollWidth) {
+  if (this.clientWidth < this.scrollWidth || this.clientHeight < this.scrollHeight) {
     tooltip.$props.content = this.innerText || this.textContent;
     tooltip.referenceElm = this;
     tooltip.$refs.popper && (tooltip.$refs.popper.style.display = "none");

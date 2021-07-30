@@ -27,6 +27,9 @@ interface MlInfoColumn<D = AnyObj> extends MlOptions {
   /** 数据项的总宽度 */
   width?: string;
 
+  /** 数据的行数，默认一行。设置为0的时候，表示不限制行数 */
+  rows?: number;
+
   /** 数据类型 */
   type?: MlTableType;
 
@@ -42,5 +45,5 @@ interface MlInfoColumn<D = AnyObj> extends MlOptions {
   /** 格式处理函数 */
   formatter?: (value: string, data: D) => string | VNode | Element;
   /** 自定义显示 */
-  render?: (h: CreateElement, item: MlInfoColumn<D>) => VNode | Element;
+  render?: (h: CreateElement, value: string, data: D, item: MlInfoColumn<D>) => VNode | Element;
 }

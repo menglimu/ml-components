@@ -1,6 +1,4 @@
 /**
- * TODO: 请求接口
- * TODO: 加载中的状态
  * 回显组件
  */
 import { isNull } from "@/utils";
@@ -27,27 +25,33 @@ export default Vue.extend({
   },
   data() {
     return {
-      columns_: [],
       loading: false,
       data_: {},
     };
   },
+  computed: {
+    // TODO: 多次修改，请求接口的优化   此处修改了原值。。
+    columns_() {
+      return this.columns.map((column) => {
+        if (typeof column.optionsGet === "function") {
+          // column.options = [];
+          this.$set(column, "options", []);
+          column.optionsGet().then((res) => {
+            let list = [];
+            if (Array.isArray(res)) {
+              list = res;
+            }
+            if ("content" in res && Array.isArray(res.content)) {
+              list = res.content;
+            }
+            column.options.push(...list);
+          });
+        }
+        return column;
+      });
+    },
+  },
   async created() {
-    // 只在初始化的时候，生成一次columns 会使后面修改的不会生效
-    this.columns_ = this.columns.map((column) => {
-      if (typeof column.optionsGet === "function") {
-        column.options = [];
-        column.optionsGet().then((res) => {
-          if (Array.isArray(res)) {
-            column.options = res;
-          }
-          if ("content" in res && Array.isArray(res.content)) {
-            column.options = res.content;
-          }
-        });
-      }
-      return column;
-    });
     this.$watch(
       "data",
       () => {
@@ -60,8 +64,9 @@ export default Vue.extend({
       try {
         this.data_ = await this.request();
       } catch (error) {
-        this.loading = false;
+        console.error(error);
       }
+      this.loading = false;
     }
   },
   methods: {
@@ -85,17 +90,23 @@ export default Vue.extend({
         typeof column.formatter === "function" ? column.formatter(value, this.data_) : this.getValue(h, column);
       return (
         <div
-          class={["ml-info-item", column.className, column.width !== "100%" ? "ml-info-ell" : ""]}
+          class={[
+            "ml-info-item",
+            column.className,
+            column.rows ? "ml-info-ells" : column.rows !== 0 ? "ml-info-ell" : "",
+          ]}
           style={{ width: column.width || this.width }}
         >
-          <span class="ml-info-label" style={{ width: column.labelWidth || this.labelWidth }}>
-            {column.label}
-            {this.labelSuffix}
-          </span>
+          {column.label && (
+            <span class="ml-info-label" style={{ width: column.labelWidth || this.labelWidth }}>
+              {column.label}
+              {this.labelSuffix}
+            </span>
+          )}
           {column.render ? (
-            column.render(h, column)
+            column.render(h, value, this.data_, column)
           ) : (
-            <span v-global-tooltip class="ml-info-value">
+            <span v-global-tooltip class="ml-info-value" style={{ webkitLineClamp: column.rows }}>
               {isNull(content) ? "--" : content}
             </span>
           )}
@@ -108,9 +119,9 @@ export default Vue.extend({
       <div
         class="ml-info"
         v-loading={this.loading}
-        element-loading-text="拼命加载中"
+        element-loading-text="数据加载中"
         element-loading-spinner="el-icon-loading"
-        element-loading-background="rgba(0, 0, 0, 0.2)"
+        element-loading-background="rgba(0, 0, 0, 0.8)"
         attrs={this.$attrs}
       >
         {this.title ? <div class="ml-info-title">{this.title}</div> : null}

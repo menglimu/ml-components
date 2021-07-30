@@ -63,6 +63,18 @@
           @include ell();
         }
       }
+
+      &.ml-info-ells {
+        .ml-info-value {
+          display: -webkit-box;
+          // max-height: $line-height * $line + 10px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          word-break: break-all;
+          // -webkit-line-clamp: $line;
+          -webkit-box-orient: vertical;
+        }
+      }
     }
   }
 }
