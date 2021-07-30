@@ -1,7 +1,7 @@
 /**
  * 表格的基础使用
  */
-import { MlTableProps } from "types/table";
+import { MlTable, MlTableProps } from "types/table";
 import Vue from "vue";
 
 const tableData = [
@@ -41,6 +41,11 @@ const tableRes = {
   total: 1,
 };
 
+let options = [
+  { label: "怼怼", value: 1 },
+  { label: "冠军", value: 2 },
+];
+
 export default Vue.extend({
   name: "TableBase",
   data() {
@@ -62,6 +67,7 @@ export default Vue.extend({
               type: "select",
               label: "通知类型",
               prop: "type",
+              optionsGet: () => Promise.resolve(options),
             },
             {
               type: "datetimerange",
@@ -81,9 +87,7 @@ export default Vue.extend({
       afterGetList: (type, data) => console.log(type, data),
       searchData: {},
       outerBtn: [
-        { evtType: "add", size: "small", name: "获取输入值", type: "primary" },
-        { evtType: "reset", size: "small", name: "重置搜索条件", type: "primary" },
-        { evtType: "setValue", size: "small", name: "设置表单的值", type: "primary" },
+        { size: "small", name: "重新请求options", type: "primary", callback: this.reFormOptions },
         {
           evtType: "setValue",
           size: "small",
@@ -96,14 +100,6 @@ export default Vue.extend({
           evtType: "mldelete",
           name: "删除",
         },
-        // {
-        //   evtType: 'add',
-        //   Elicon: 'circle-plus-outline',
-        //   name: '新增'
-        // // selection: 'none' // false   不选,(其他值)， 单选，多选，single   multiple
-        // // icon: svg图标
-        // // showJudge : {name: 1 ,type: 2} // showJudge: function(data){return false/true} // 可使用函数返回true/false，判断显示，参数为行数据
-        // }
       ],
 
       innerBtn: [
@@ -292,8 +288,12 @@ export default Vue.extend({
     onDetail() {
       this.$message.success("查看详情");
     },
+    reFormOptions() {
+      options = [{ label: "易安", value: 1 }];
+      (this.$refs.mainTable as MlTable).mlForm.reloadOptions("type");
+    },
   },
   render() {
-    return <ml-table props={this.tableConfig}></ml-table>;
+    return <ml-table ref="mainTable" props={this.tableConfig}></ml-table>;
   },
 });

@@ -1,6 +1,6 @@
 /**
  * 表单组件
- * TODO: 增加方法 调用后 根据传入的prop 刷新选项的列表数据
+ *
  */
 import Vue from "vue";
 import { PropType } from "vue/types/umd";
@@ -133,6 +133,11 @@ export default Vue.extend({
       this.emitValue();
     },
 
+    // 重新加载options
+    reloadOptions(name: string) {
+      (this.$refs?.[name] as any)?.onOptionsGetChange?.();
+    },
+
     // 合并表单配置项， 通过 Object.assign 简写初始化
     getConfig_() {
       const config = merge<MlFormConfig>(
@@ -223,6 +228,7 @@ export default Vue.extend({
             <FormItem
               tags={this.tags}
               key={item.key || item.prop || index}
+              ref={item.key || item.prop}
               configItem={item}
               originalValue={this.value_[item.prop]}
               rootValue={this.value_}

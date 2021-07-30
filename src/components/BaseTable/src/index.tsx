@@ -114,6 +114,7 @@ export default Vue.extend({
         size: Vue.prototype.$ELEMENT?.size || "small",
       },
       elTable: null as ElTable,
+      mlForm: null,
     };
   },
   computed: {
@@ -156,6 +157,7 @@ export default Vue.extend({
       this.search("init");
     }
     this.elTable = this.$refs.table as ElTable;
+    this.mlForm = (this.$refs as any).tableSearch?.$refs?.searchForm;
     // this.$nextTick(() => (this.elTable = this.$refs.table))
   },
   methods: {

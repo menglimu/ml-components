@@ -13,6 +13,8 @@ import { AnyObj, MlOptions, Partial } from "./common";
 export class MlForm extends ElForm {
   /** 重置初始值 */
   public reset(): void;
+  /** 重新刷新options name 为需要刷新的那项 key 或者 prop */
+  public reloadOptions(name: string): void;
 }
 
 /** 表单的具体项配置 */

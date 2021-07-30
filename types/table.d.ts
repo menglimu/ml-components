@@ -11,7 +11,7 @@ import { ElTable } from "element-ui/types/table";
 import { ElButton } from "element-ui/types/button";
 import { ElPagination } from "element-ui/types/pagination";
 import { VNode, CreateElement, VNodeData } from "vue/types/umd";
-import { MlFormConfig } from "./form";
+import { MlForm, MlFormConfig } from "./form";
 import { AnyObj, MlOptions, Partial } from "./common";
 import { VueComponentInstall } from "./components";
 
@@ -35,6 +35,8 @@ export class MlTable<D = AnyObj, S = AnyObj> extends VueComponentInstall {
   public multipleSelection: D[];
   /** element的表格对象 */
   public elTable: ElTable;
+  /** 搜索的输入表单 */
+  public mlForm: MlForm;
 
   /** 刷新表格数据 */
   public refresh(): void;
