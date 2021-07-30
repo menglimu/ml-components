@@ -3,7 +3,7 @@ import Vue from "vue";
 import Base from "../components/InfoDemo/Base";
 import Props from "../components/InfoDemo/Props";
 
-export const title = "信息回显"; // 左侧自动导入时，菜单的名称
+export const title = "MlInfo信息回显"; // 左侧自动导入时，菜单的名称
 export const sort = 400; // 菜单的排序
 export default Vue.extend({
   data() {

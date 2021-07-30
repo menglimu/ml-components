@@ -7,7 +7,7 @@ import Config from "../components/TableDemo/Config";
 import Columns from "../components/TableDemo/Columns";
 import Slot from "../components/TableDemo/Slot";
 
-export const title = "基础表格"; // 左侧自动导入时，菜单的名称
+export const title = "MlTable基础表格"; // 左侧自动导入时，菜单的名称
 export const sort = 300; // 菜单的排序
 export default Vue.extend({
   data() {

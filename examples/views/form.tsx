@@ -6,7 +6,7 @@ import FormProps from "../components/FormDemo/FormProps";
 import FormRender from "../components/FormDemo/FormRender";
 import FormSet from "../components/FormDemo/FormSet";
 
-export const title = "基础表单"; // 左侧自动导入时，菜单的名称
+export const title = "MlForm基础表单"; // 左侧自动导入时，菜单的名称
 export const sort = 200; // 菜单的排序
 export default Vue.extend({
   data() {
