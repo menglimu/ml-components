@@ -560,10 +560,10 @@
     "@types/yargs" "^16.0.0"
     chalk "^4.0.0"
 
-"@ml/lint@^1.1.10":
-  version "1.1.10"
-  resolved "http://10.12.102.194:4873/@ml%2flint/-/lint-1.1.10.tgz#8dd8e56391ca032743b3d2072bea23d6efd3d77a"
-  integrity sha512-5subgV4Nuqv5sjhFju24UlILcmzmIMpp+TZrXsFzL0DWbO6GEZZfABiQs41AgexBXtxc68KV9uezIiwZ1nvsCg==
+"@ml/lint@^1.2.0":
+  version "1.2.0"
+  resolved "http://10.12.102.194:4873/@ml%2flint/-/lint-1.2.0.tgz#a80c31916135349cd05f68f0885a82514e2a411b"
+  integrity sha512-o3jCSF4ep63Dz47RRUME6CtSUqDiixtnuWDteBC3IGWt5wCGAqUG2aQp61DKU6g86jboog8wjKuIw3ipombiGw==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^4.26.1"
     "@typescript-eslint/parser" "^4.26.1"
