@@ -14,6 +14,7 @@ import { VueConstructor } from "vue/types/umd";
 import MlTable from "./components/BaseTable";
 import MlForm from "./components/BaseForm";
 import MlInfo from "./components/BaseInfo";
+// 业务组件
 import MlEcharts from "./components/CustomEcharts";
 import MlEchartsLineArea from "./components/CustomEcharts/LineArea";
 import MlEchartsPieRate from "./components/CustomEcharts/PieRate";
@@ -46,16 +47,29 @@ const install = function (Vue: VueConstructor, opts = {}) {
 
   // Vue.use(GlobalVideoPlayer);
 
-  Vue.directive("globalTooltip", globalTooltip);
-  Vue.directive("clickPreventRe", clickPreventRe);
-  Vue.directive("clickOutside", clickOutside);
-  Vue.directive("clickSubmit", clickSubmit);
+  // Vue.directive("globalTooltip", globalTooltip);
+  // Vue.directive("clickPreventRe", clickPreventRe);
+  // Vue.directive("clickOutside", clickOutside);
+  // Vue.directive("clickSubmit", clickSubmit);
 };
 
 export default {
   install,
-  ...components,
+};
+
+export {
+  // 基础组件
+  MlTable,
+  MlForm,
+  MlInfo,
+  // 业务组件
+  MlEcharts,
+  MlEchartsLineArea,
+  MlEchartsPieRate,
+  MlCascader,
+  // 全局组件
   GlobalVideoPlayer,
+  // 指令
   globalTooltip,
   clickPreventRe,
   clickOutside,
