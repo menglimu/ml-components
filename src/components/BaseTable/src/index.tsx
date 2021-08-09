@@ -422,7 +422,10 @@ export default Vue.extend({
     renderColumn(h: CreateElement) {
       const { TagTableColumn } = this.tags;
       return this.config_.columns.map((item, index) => {
-        if (item.hide) {
+        if (item.hide === true) {
+          return null;
+        }
+        if (typeof item.hide === "function" && item.hide()) {
           return null;
         }
         if (item.type === "index" || item.type === "selection") {
@@ -492,7 +495,7 @@ export default Vue.extend({
         {
           on: this.$listeners,
           attrs: this.$attrs,
-        },
+        }
       );
 
       const { TagTable, TagTableColumn } = this.tags;

@@ -14,7 +14,7 @@ const tableData = [
     publishTime: "2020-01-14 16:36:55",
     newsSource: "1002",
     newsStatus: "0",
-    newsPromulgator: "",
+    newsPromulgator: "发布人",
     newsModel: "2",
     delFlag: "",
     creatTime: "2020-01-14 16:19:56",
@@ -51,6 +51,7 @@ export default Vue.extend({
   data() {
     return {
       tableConfig: null as MlTableProps,
+      hideOneColumn: false,
     };
   },
   created() {
@@ -177,6 +178,7 @@ export default Vue.extend({
             type: "string",
             label: "发布人",
             prop: "newsPromulgator",
+            hide: () => this.hideOneColumn,
           },
           {
             type: "string",
@@ -287,6 +289,7 @@ export default Vue.extend({
     },
     onDetail() {
       this.$message.success("查看详情");
+      this.hideOneColumn = !this.hideOneColumn;
     },
     reFormOptions() {
       options = [{ label: "易安", value: 1 }];

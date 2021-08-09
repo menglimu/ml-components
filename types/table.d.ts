@@ -145,7 +145,7 @@ interface MlTableColumn<D = AnyObj> extends MlOptions, ElTableColumnAny {
   key?: string;
 
   /** 隐藏列 默认 false */
-  hide?: boolean;
+  hide?: boolean | (() => boolean);
 
   /** 状态处理。对象内分别为状态名和满足的条件
    * success: 绿色，error：红色，warning：橙色，done：蓝色，failed：灰色
@@ -174,7 +174,7 @@ interface MlTableColumn<D = AnyObj> extends MlOptions, ElTableColumnAny {
       column: MlTableColumn<D>;
       row: D;
       index: number;
-    },
+    }
   ) => VNode | Element;
   /** 自定义整列内容，应返回<el-table-column></c-table-column> */
   renderColumn?: (h: CreateElement) => VNode | Element;
