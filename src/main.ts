@@ -15,17 +15,17 @@ import MlTable from "./components/BaseTable";
 import MlForm from "./components/BaseForm";
 import MlInfo from "./components/BaseInfo";
 // 业务组件
-import MlEcharts from "./components/CustomEcharts";
-import MlEchartsLineArea from "./components/CustomEcharts/LineArea";
-import MlEchartsPieRate from "./components/CustomEcharts/PieRate";
-import MlCascader from "./components/CustomCascader";
-// 全局组件
-import GlobalVideoPlayer from "./components/GlobalVideoPlayer";
-// 指令
-import globalTooltip from "@/directives/globalTooltip";
-import clickPreventRe from "@/directives/clickPreventRe";
-import clickOutside from "@/directives/clickOutside";
-import clickSubmit from "@/directives/clickSubmit";
+// export { default as MlEcharts } from "./components/CustomEcharts";
+// export { default as MlEchartsLineArea } from "./components/CustomEcharts/LineArea";
+// export { default as MlEchartsPieRate } from "./components/CustomEcharts/PieRate";
+// export { default as MlCascader } from "./components/CustomCascader";
+// // 全局组件
+// export { default as GlobalVideoPlayer } from "./components/GlobalVideoPlayer";
+// // 指令
+// export { default as globalTooltip } from "@/directives/globalTooltip";
+// export { default as clickPreventRe } from "@/directives/clickPreventRe";
+// export { default as clickOutside } from "@/directives/clickOutside";
+// export { default as clickSubmit } from "@/directives/clickSubmit";
 // 需install的组件集合
 export const components = [MlTable, MlForm, MlInfo]; //  MlEcharts, MlEchartsLineArea, MlEchartsPieRate, MlCascader
 
@@ -62,16 +62,16 @@ export {
   MlTable,
   MlForm,
   MlInfo,
-  // 业务组件
-  MlEcharts,
-  MlEchartsLineArea,
-  MlEchartsPieRate,
-  MlCascader,
-  // 全局组件
-  GlobalVideoPlayer,
-  // 指令
-  globalTooltip,
-  clickPreventRe,
-  clickOutside,
-  clickSubmit,
+  // // 业务组件
+  // MlEcharts,
+  // MlEchartsLineArea,
+  // MlEchartsPieRate,
+  // MlCascader,
+  // // 全局组件
+  // GlobalVideoPlayer,
+  // // 指令
+  // globalTooltip,
+  // clickPreventRe,
+  // clickOutside,
+  // clickSubmit,
 };

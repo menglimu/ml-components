@@ -6,7 +6,7 @@ import { MlInfoColumn } from "types/info";
 import Vue from "vue";
 import { CreateElement } from "vue/types/umd";
 import { formatterFormValue, getImage } from "../BaseTable/src/columnsContent";
-import("./index.scss");
+import "./index.scss";
 
 export default Vue.extend({
   name: "MlInfo",
@@ -57,7 +57,7 @@ export default Vue.extend({
       () => {
         this.data_ = this.data;
       },
-      { immediate: true, deep: true },
+      { immediate: true, deep: true }
     );
     if (this.request) {
       this.loading = true;
