@@ -37,7 +37,7 @@ export default Vue.extend({
         labelWidth: "100px",
         // uiType: 'round',
         clearable: true,
-        "label-suffix": "：",
+        "label-suffix": ":",
         // size: "small",
       },
     };
@@ -146,7 +146,7 @@ export default Vue.extend({
           // autoSize: this.config.size ? false : true,
           labelPosition: this.config.uiType === "round" ? "center" : "right",
         },
-        this.config,
+        this.config
       );
       if (!config.inline) {
         config.itemMaxWidth = "inherit";
