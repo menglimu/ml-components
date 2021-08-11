@@ -5,8 +5,7 @@
  * @LastEditTime: 2020-12-28 11:36:43
  * @Description:  只保留form中的公共方法
  */
-import { getJudge } from "@/utils";
-import { isNull } from "lodash";
+import { getJudge, isNull } from "@/utils";
 import { MlOptions } from "types/common";
 import { MlTableColumn, MlTableConfig } from "types/table";
 import { CreateElement } from "vue/types/umd";
@@ -15,7 +14,7 @@ import { CreateElement } from "vue/types/umd";
 function getTreeLabel(
   id: string | number,
   options: any[] = [],
-  { optionLabel = "label", optionValue = "value", optionChildren = "children" } = {},
+  { optionLabel = "label", optionValue = "value", optionChildren = "children" } = {}
 ): string {
   let result;
   for (const item of options) {
@@ -38,7 +37,7 @@ function getTreeLabel(
  */
 export function formatterFormValue<D>(
   cellValue: string | number | Array<string | number>,
-  config: MlOptions & { type?: string },
+  config: MlOptions & { type?: string }
 ): string | number {
   let label = cellValue;
   if (config.type === "select") {
@@ -59,7 +58,7 @@ export function getImage(
   preList: string | [string],
   column?: { baseUrl?: string; noPre?: boolean },
   className?: string,
-  h?: CreateElement,
+  h?: CreateElement
 ) {
   let preList_: string[];
   if (!Array.isArray(preList)) {

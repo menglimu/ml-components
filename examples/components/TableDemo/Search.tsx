@@ -25,13 +25,16 @@ export default Vue.extend({
       searchConfig: {
         // isBtnInForm: true,
         // isOverHide: false,
+        // aloneLineBtn: false,
         initialValue: { name: "霍去病" },
         config: {
+          itemBoxWidth: "33.33%",
           columns: [
             { label: "姓名", prop: "name" },
             { label: "名句", prop: "sentence", value: "竹杖芒鞋轻胜马" },
-            { label: "职业", prop: "occupation" },
+            { label: "职业", prop: "occupation", itemBoxWidth: "50%" },
             { label: "备注", prop: "remark" },
+            { label: "备注1", prop: "remark1", itemBoxWidth: "50%" },
           ],
         },
       },

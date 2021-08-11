@@ -187,7 +187,14 @@ export interface TableSearchProp<D = AnyObj> {
 
   /** 超过一行隐藏。不传会根据config中的column的长度判断，长度大于3的时候开启 */
   isOverHide?: boolean;
-  /** 表单的初始值 */
+
+  /** 从第几个开始隐藏。默认会根据 表单的长度进行处理。有不属于表单标准长度的自行传入 */
+  hideIndex?: number;
+
+  /** 展开状态下。默认会根据 表单的长度进行处理。按钮是否是独自一行。该状态会增加bottom间距，在label在top时，单独显示隐藏掉btn的top间距。 */
+  aloneLineBtn?: boolean;
+
+  /** 表单的初始值，重置会使该值对象下的搜索项还原为默认值 */
   initialValue?: AnyObj;
 
   /** 搜索表单配置 */

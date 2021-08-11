@@ -54,6 +54,7 @@ export default Vue.extend({
 
         <h5>表格搜索头</h5>
         <p>
+          <div>表格搜索头的搜索项默认宽度为25%, labelPosition为top</div>
           <div>设置表格搜索的初始值，使用searchData</div>
           <div>表格搜索头 searchConfig 中包含以下属性</div>
           <ul>
@@ -67,7 +68,14 @@ export default Vue.extend({
               <label>config</label> 搜索表单配置，详情参考mlform表单配置
             </li>
             <li>
-              <label>initialValue</label> 搜索表单的初始值，该值重置会被清空
+              <label>initialValue</label> 表单的初始值，重置会使该值对象下的搜索项还原为默认值
+            </li>
+            <li>
+              <label>hideIndex</label> 从第几个开始隐藏。默认会根据 表单的长度进行处理。有不属于表单标准长度的自行传入
+            </li>
+            <li>
+              <label>aloneLineBtn</label> 展开状态下。默认会根据 表单的长度进行处理。按钮是否是独自一行。该状态会在
+              label在top时，单独显示隐藏掉btn的top间距。增加bottom间距
             </li>
           </ul>
         </p>

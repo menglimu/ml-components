@@ -90,8 +90,8 @@
     thead th {
       position: relative; //loading层级问题
       font-weight: 500;
-      color: #909399;
-      background-color: #f1f5f7;
+      color: #333;
+      background-color: #fafafa;
     }
   }
 
@@ -145,9 +145,7 @@
 }
 
 .ml-table-search {
-  display: flex;
-  align-items: flex-start;
-  max-width: 1400px;
+  position: relative;
   margin: 0 -15px;
 
   .ml-form {
@@ -165,11 +163,50 @@
     }
   }
 
-  > .search-btn-box {
-    flex-shrink: 0;
+  .search-btn-box {
     padding-right: 15px;
-    padding-left: 20px;
     margin-left: auto;
+    text-align: right;
+
+    .arrow {
+      padding-right: 10px;
+      padding-left: 10px;
+    }
+  }
+
+  > .search-btn-box {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  &.search-label-top {
+    .search-btn-box {
+      margin-top: 22px;
+    }
+  }
+
+  &:not(.hide-more).aloneLineBtn {
+    .search-btn-box {
+      margin-top: 0;
+      margin-bottom: 18px;
+    }
+  }
+
+  @for $i from 1 to 5 {
+    &.hide-more.hide-index-#{$i} {
+      .ml-form-item-box:nth-child(#{$i}) {
+        visibility: hidden;
+      }
+    }
+
+    // .paper:nth-child(#{$i}) {
+    //   /**
+    //     有顺序之分
+    //     transform: translate() rotate() !== transform: rotate() translate()
+    //     */
+    //   transform: translate(-50%, -40%) rotate(#{$i}5deg);
+    // }
   }
 
   &.btn-in-form {
