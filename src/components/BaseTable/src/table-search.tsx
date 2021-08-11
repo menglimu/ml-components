@@ -47,7 +47,8 @@ export default Vue.extend({
       let length = 0;
       for (let i = 0; i < this.config_?.columns?.length; i++) {
         const item = this.config_?.columns?.[i];
-        length += parseFloat(item.itemBoxWidth || (item.block && 100) || this.config_?.itemBoxWidth);
+        const nowLength = parseFloat(item.itemBoxWidth || (item.block && 100) || this.config_?.itemBoxWidth) || 0;
+        length += nowLength;
         if (Math.round(length) >= 100) {
           return i + 1;
         }
@@ -55,11 +56,13 @@ export default Vue.extend({
     },
     aloneLineBtn_(this: any) {
       if (this.aloneLineBtn !== undefined) return this.aloneLineBtn;
+      if (this.config_?.columns?.[this.config_?.columns?.length - 1]?.itemBoxWidth === "auto") return false;
       const allLength = Math.round(
         this.config_?.columns?.reduce((val, item) => {
-          let all = val + parseFloat(item.itemBoxWidth || (item.block && 100) || this.config_?.itemBoxWidth);
+          const nowLength = parseFloat(item.itemBoxWidth || (item.block && 100) || this.config_?.itemBoxWidth) || 0;
+          let all = val + nowLength;
           if (val < 100 && all > 100) {
-            return parseFloat(item.itemBoxWidth || (item.block && 100) || this.config_?.itemBoxWidth);
+            return nowLength;
           }
           if (all > 100) {
             return all - 100;
@@ -163,9 +166,10 @@ export default Vue.extend({
           class="search-form"
         >
           {/* {!(this.isOverHide_ && this.showMoreStatus) && btn} */}
-          {(!this.showMoreStatus || this.isBtnInForm) && btn}
+          {/* {(!this.showMoreStatus || this.isBtnInForm) && btn} */}
+          {btn}
         </ml-form>
-        {this.showMoreStatus && !this.isBtnInForm && btn}
+        {/* {this.showMoreStatus && !this.isBtnInForm && btn} */}
       </div>
     );
   },
