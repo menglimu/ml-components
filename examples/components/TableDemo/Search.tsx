@@ -34,7 +34,7 @@ export default Vue.extend({
             { label: "名句", prop: "sentence", value: "竹杖芒鞋轻胜马" },
             { label: "职业", prop: "occupation", itemBoxWidth: "50%" },
             { label: "备注", prop: "remark" },
-            { label: "备注1", prop: "remark1", itemBoxWidth: "auto" },
+            { label: "备注1", prop: "remark1", itemBoxWidth: "100%" },
           ],
         },
       },

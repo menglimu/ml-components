@@ -17,6 +17,7 @@ export default Vue.extend({
     isOverHide: { type: Boolean, default: undefined }, // 超过一行隐藏
     hideIndex: { type: Number, default: undefined }, // 从第几个开始隐藏。默认会根据 表单的长度进行处理。有不属于表单标准长度的自行传入
     aloneLineBtn: { type: Boolean, default: undefined }, // 展开状态下。按钮是否是独自一行
+    removeBtnHight: { type: Boolean, default: false }, // 是否消除按钮单独一行的高度，默认根据外部按钮是否有来进行处理。消除时。会将按钮使用positionabsolute定位的方式
     config: { type: Object as PropType<MlFormConfig> }, // 搜索表单配置
     value: { type: Object as PropType<AnyObj>, required: true },
     // initialValue: { type: Object as PropType<AnyObj> },
@@ -152,6 +153,7 @@ export default Vue.extend({
             "hide-more": this.showMoreStatus,
             "btn-in-form": this.isBtnInForm,
             aloneLineBtn: this.aloneLineBtn_,
+            removeBtnHight: this.removeBtnHight,
           },
         ]}
       >

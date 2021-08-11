@@ -346,7 +346,7 @@ export default Vue.extend({
           v-model={this.searchInput}
           onSearch={this.onSearch}
           onReset={this.onReset}
-          {...{ props: this.searchConfig }}
+          {...{ props: { removeBtnHight: !!this.outerBtn.length, ...this.searchConfig } }}
         />
       ) : null;
     },

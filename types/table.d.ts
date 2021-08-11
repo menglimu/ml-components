@@ -194,6 +194,9 @@ export interface TableSearchProp<D = AnyObj> {
   /** 展开状态下。默认会根据 表单的长度进行处理。按钮是否是独自一行。该状态会增加bottom间距，在label在top时，单独显示隐藏掉btn的top间距。 */
   aloneLineBtn?: boolean;
 
+  /** 是否消除按钮单独一行的高度，默认根据外部按钮是否有来进行处理。消除时。会将按钮使用positionabsolute定位的方式 */
+  removeBtnHight?: boolean;
+
   /** 表单的初始值，重置会使该值对象下的搜索项还原为默认值 */
   initialValue?: AnyObj;
 

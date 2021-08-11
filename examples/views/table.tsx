@@ -77,6 +77,11 @@ export default Vue.extend({
               <label>aloneLineBtn</label> 展开状态下。默认会根据 表单的长度进行处理。按钮是否是独自一行。该状态会在
               label在top时，单独显示隐藏掉btn的top间距。增加bottom间距
             </li>
+            <li>
+              <label>removeBtnHight</label>
+              是否消除按钮单独一行的高度，默认根据外部按钮是否有来进行处理。消除时。会将按钮使用position
+              absolute定位的方式
+            </li>
           </ul>
         </p>
         <base-source-view source={this.sourceSearch}>
