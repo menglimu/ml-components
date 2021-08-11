@@ -7,7 +7,7 @@
     "types"
   ],
   "types": "types",
-  "main": "./dist/ml-components.es.js",
+  "module": "./dist/ml-components.es.js",
   "exports": {
     ".": {
       "import": "./dist/ml-components.es.js"
