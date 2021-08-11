@@ -1,6 +1,6 @@
 {
   "name": "@ml/ml-components",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "ml组件库",
   "files": [
     "dist",
