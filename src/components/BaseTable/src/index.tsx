@@ -135,7 +135,6 @@ export default Vue.extend({
     },
   },
   created() {
-    this.$watch("config", this.onConfigChange, { deep: true, immediate: true });
     this.defaultOptions = (this as any).MlTable;
     if (this.defaultOptions) {
       for (const key in this.defaultOptions) {
@@ -150,6 +149,7 @@ export default Vue.extend({
     if (this.searchConfig?.initialValue) {
       this.searchInput = merge(this.searchInput, this.searchConfig.initialValue);
     }
+    this.$watch("config", this.onConfigChange, { deep: true, immediate: true });
   },
   mounted() {
     // 初始化的时候，是否直接搜索数据
