@@ -36,6 +36,9 @@
   },
   "homepage": "https://github.com/menglimu/ml-components#readme",
   "devDependencies": {
+    "dplayer": "^1.26.0",
+    "echarts": "^5.1.2",
+    "element-ui": "^2.15.2",
     "@ml/lint": "^1.2.0",
     "@types/jest": "^26.0.23",
     "@types/lodash": "^4.14.170",
@@ -51,9 +54,6 @@
   },
   "peerDependencies": {},
   "dependencies": {
-    "dplayer": "^1.26.0",
-    "echarts": "^5.1.2",
-    "element-ui": "^2.15.2",
     "lodash": "^4.17.21",
     "vue": "^2.6.13"
   }

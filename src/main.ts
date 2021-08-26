@@ -22,10 +22,10 @@ import MlInfo from "./components/BaseInfo";
 // // 全局组件
 // export { default as GlobalVideoPlayer } from "./components/GlobalVideoPlayer";
 // // 指令
-// export { default as globalTooltip } from "@/directives/globalTooltip";
-// export { default as clickPreventRe } from "@/directives/clickPreventRe";
-// export { default as clickOutside } from "@/directives/clickOutside";
-// export { default as clickSubmit } from "@/directives/clickSubmit";
+export { default as globalTooltip } from "@/directives/globalTooltip";
+export { default as clickPreventRe } from "@/directives/clickPreventRe";
+export { default as clickOutside } from "@/directives/clickOutside";
+export { default as clickSubmit } from "@/directives/clickSubmit";
 // 需install的组件集合
 export const components = [MlTable, MlForm, MlInfo]; //  MlEcharts, MlEchartsLineArea, MlEchartsPieRate, MlCascader
 
