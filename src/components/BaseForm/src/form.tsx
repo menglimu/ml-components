@@ -149,7 +149,7 @@ export default Vue.extend({
         this.config
       );
       if (!config.inline) {
-        config.itemMaxWidth = "inherit";
+        config.itemMaxWidth = config.itemMaxWidth || "inherit";
       }
       if (this.config_?.autoSize && this.config_?.size) {
         config.size = this.config_.size;
