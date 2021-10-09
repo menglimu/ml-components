@@ -18,7 +18,8 @@
     "build": "vite build",
     "docs": "vite build --config vite.docs.ts",
     "test": "jest",
-    "prettier": "prettier --write ./**"
+    "prettier": "prettier --write ./**",
+    "patch": "npm run build && npm version patch && npm publish"
   },
   "repository": {
     "type": "git",
