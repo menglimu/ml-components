@@ -1,6 +1,7 @@
 /**
  * 表格搜索
  * TODO: 切换隐藏时的动画
+ * TODO: 宽度使用固定像素的处理问题。考虑使用dom元素的宽度进行计算
  */
 import Vue from "vue";
 import { PropType, VNode } from "vue/types/umd";
