@@ -41,13 +41,16 @@ export default Vue.extend({
     outerBtn: { type: Array, default: (): MlTableOuterBtn[] => [] },
 
     /** 分页配置 */
-    paginationConfig: { type: Object as PropType<Pagination | false>, default: () => ({}) },
+    paginationConfig: { type: null as PropType<Pagination | false>, default: () => ({}) },
 
     /** 数据加载前的钩子函数 */
     beforeGetList: { type: Function as PropType<(type: string, params: any) => any> },
 
     /** 数据加载后的钩子函数 */
     afterGetList: { type: Function as PropType<(type: string, res: any) => void> },
+
+    /** 前端静态数据 */
+    dataSource: { type: Array, default: () => null },
   },
   data() {
     return {
@@ -80,6 +83,7 @@ export default Vue.extend({
         initSearch: true,
       },
       TableDefault: {
+        size: "medium",
         "element-loading-text": "拼命加载中",
         "element-loading-spinner": "el-icon-loading",
         "element-loading-background": "rgba(0, 0, 0, 0.8)",
@@ -88,7 +92,7 @@ export default Vue.extend({
         type: "index",
         label: "序号",
         width: "50",
-        align: "cetner",
+        align: "center",
       },
       columnDefaultSelection: {
         type: "selection",
@@ -100,7 +104,7 @@ export default Vue.extend({
         showOverflowTooltip: true,
       },
       columnDefaultControl: {
-        align: "center",
+        align: "left",
         label: "操作",
         fixed: "right",
       },
@@ -150,6 +154,7 @@ export default Vue.extend({
       this.searchInput = merge(this.searchInput, this.searchConfig.initialValue);
     }
     this.$watch("config", this.onConfigChange, { deep: true, immediate: true });
+    this.$watch("dataSource", this.search);
   },
   mounted() {
     // 初始化的时候，是否直接搜索数据
@@ -291,6 +296,14 @@ export default Vue.extend({
 
     // 搜索
     async search(type = "", data: AnyObj = {}) {
+      if (this.dataSource) {
+        this.data = this.pageSize
+          ? this.dataSource.slice(this.pageSize * (this.currentPage - 1), this.pageSize * this.currentPage)
+          : this.dataSource;
+
+        this.total = this.dataSource.length;
+        return;
+      }
       if (!this.config_.api || !this.config_.api.list) {
         return;
       }

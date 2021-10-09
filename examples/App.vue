@@ -34,27 +34,6 @@ h5 {
   font-size: 18px;
 }
 
-.el-textarea__inner {
-  font-family: inherit;
-}
-
-.page {
-  line-height: 1.5em;
-
-  li {
-    display: flex;
-    margin: 10px 0;
-    color: #333;
-
-    label {
-      display: inline-block;
-      flex-shrink: 0;
-      width: 140px;
-      color: #666;
-    }
-  }
-}
-
 // table:not(.el-table__header):not(.el-table__body) {
 //   width: 100%;
 //   margin-bottom: 45px;

@@ -9,7 +9,23 @@ let data = {
     { name: "辛弃疾", sentence: "醉里挑灯看剑，梦回吹角连营", occupation: "起义军", remark: "杀贼！杀贼！杀贼" },
     { name: "苏东坡", sentence: "一蓑烟雨任平生", occupation: "老饕", remark: "问汝平生功业" },
     { name: "李清照", sentence: "至今思项羽，不肯过江东", occupation: "怼怼", remark: "易安大人" },
-  ],
+    { name: "李清照", sentence: "至今思项羽，不肯过江东", occupation: "怼怼", remark: "易安大人" },
+    { name: "李清照", sentence: "至今思项羽，不肯过江东", occupation: "怼怼", remark: "易安大人" },
+    { name: "李清照", sentence: "至今思项羽，不肯过江东", occupation: "怼怼", remark: "易安大人" },
+    { name: "李清照", sentence: "至今思项羽，不肯过江东", occupation: "怼怼", remark: "易安大人" },
+    { name: "李清照", sentence: "至今思项羽，不肯过江东", occupation: "怼怼", remark: "易安大人" },
+    { name: "李清照", sentence: "至今思项羽，不肯过江东", occupation: "怼怼", remark: "易安大人" },
+    { name: "李清照", sentence: "至今思项羽，不肯过江东", occupation: "怼怼", remark: "易安大人" },
+    { name: "李清照", sentence: "至今思项羽，不肯过江东", occupation: "怼怼", remark: "易安大人" },
+    { name: "李清照", sentence: "至今思项羽，不肯过江东", occupation: "怼怼", remark: "易安大人" },
+    { name: "李清照", sentence: "至今思项羽，不肯过江东", occupation: "怼怼", remark: "易安大人" },
+    { name: "李清照", sentence: "至今思项羽，不肯过江东", occupation: "怼怼", remark: "易安大人" },
+    { name: "李清照", sentence: "至今思项羽，不肯过江东", occupation: "怼怼", remark: "易安大人" },
+    { name: "李清照", sentence: "至今思项羽，不肯过江东", occupation: "怼怼", remark: "易安大人" },
+    { name: "李清照", sentence: "至今思项羽，不肯过江东", occupation: "怼怼", remark: "易安大人" },
+    { name: "李清照", sentence: "至今思项羽，不肯过江东", occupation: "怼怼", remark: "易安大人" },
+    { name: "李清照", sentence: "至今思项羽，不肯过江东", occupation: "怼怼", remark: "易安大人" },
+  ].map((item, i) => ({ ...item, id: i })),
   total: 1,
 };
 
@@ -23,6 +39,7 @@ export default Vue.extend({
   created() {
     this.tableConfig = {
       innerBtn: [{ name: "打榜", type: "text" }],
+      paginationConfig: false,
       config: {
         selection: true,
         index: true,
@@ -30,12 +47,12 @@ export default Vue.extend({
         height: 300,
         maxHeight: 600,
         initSearch: false,
-        api: {
-          list: (params) => {
-            console.log(params);
-            return Promise.resolve(data);
-          },
-        },
+        // api: {
+        //   list: (params) => {
+        //     console.log(params);
+        //     return Promise.resolve(data);
+        //   },
+        // },
         columns: [
           { label: "姓名", prop: "name" },
           { label: "名句", prop: "sentence" },
@@ -53,6 +70,6 @@ export default Vue.extend({
   },
   methods: {},
   render() {
-    return <ml-table ref="mainTable" props={this.tableConfig}></ml-table>;
+    return <ml-table ref="mainTable" dataSource={data.content} props={this.tableConfig}></ml-table>;
   },
 });

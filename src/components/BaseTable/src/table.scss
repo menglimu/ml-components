@@ -3,15 +3,15 @@
   overflow: hidden;
 
   .ml-table-empty {
-    margin-top: 40px;
     font-size: 14px;
-    color: #666;
+    line-height: 1.5;
+    color: #c0c0c0;
     text-align: center;
 
     &-img {
       display: block;
-      width: 160px;
-      margin: 0 auto 10px;
+      width: 56px;
+      margin: 0 auto;
     }
   }
 
@@ -19,8 +19,14 @@
     margin-bottom: 16px;
   }
 
+  .el-table--medium td,
+  .el-table--medium th {
+    padding: 7px 0;
+  }
+
   .el-table {
     width: 100%;
+    color: #666;
 
     .cell {
       .td-text {
@@ -92,6 +98,10 @@
       font-weight: 500;
       color: #333;
       background-color: #fafafa;
+
+      &.is-leaf {
+        border-bottom: 1px solid rgba(230, 230, 230, 0.6);
+      }
     }
   }
 

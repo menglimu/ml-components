@@ -72,6 +72,9 @@ export interface MlTableProps<D = AnyObj, S = AnyObj> {
   beforeGetList?: (type: string, params: S & TableParams) => AnyObj;
   /** 数据加载后的钩子函数 */
   afterGetList?: (type: string, res: AnyObj) => void;
+
+  /** 前端静态数据,会自动进行前端分页展示。不需要分页时。设置paginationConfig */
+  dataSource?: D[];
 }
 
 interface TableParams {
