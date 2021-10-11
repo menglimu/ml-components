@@ -91,12 +91,12 @@ export default Vue.extend({
       columnDefaultIndex: {
         type: "index",
         label: "序号",
-        width: "50",
+        width: "64",
         align: "center",
       },
       columnDefaultSelection: {
         type: "selection",
-        width: "50",
+        width: "64",
         align: "center",
       },
       columnDefaultNormal: {
