@@ -20,21 +20,12 @@
     margin-bottom: 16px;
   }
 
-  .el-table--medium td,
-  .el-table--medium th {
-    padding: 7px 0;
-  }
-
   .el-table {
     width: 100%;
     color: #666;
 
     .cell {
       .td-text {
-        // @include text-overflow();
-        // overflow: hidden; //超出的文本隐藏
-        // text-overflow: ellipsis; //溢出用省略号显示
-        // white-space: nowrap; //溢出不换行
         line-height: 20px;
       }
 
@@ -95,14 +86,12 @@
     }
 
     thead th {
-      position: relative; //loading层级问题
-      font-weight: 500;
-      color: #333;
-      background-color: #fafafa;
+      // position: relative; //loading层级问题
+    }
 
-      &.is-leaf {
-        border-bottom: 1px solid rgba(230, 230, 230, 0.6);
-      }
+    .el-button--text {
+      padding-top: 0;
+      padding-bottom: 0;
     }
   }
 
