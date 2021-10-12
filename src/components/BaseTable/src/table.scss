@@ -137,6 +137,10 @@
       color: #666;
     }
 
+    .el-pagination__sizes {
+      display: inline-flex;
+    }
+
     .el-pagination__sizes .el-input__inner {
       padding-left: 12px;
       text-align: left;
