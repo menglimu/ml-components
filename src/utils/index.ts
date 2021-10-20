@@ -47,7 +47,7 @@ export function parseTime(time: Date | number | string, format = "yyyy-mm-dd hh:
  * @param format 自定义格式的格式内容
  */
 export function formatTime(time: string | number | Date, format?: string) {
-  let date: Date = null;
+  let date: Date;
   if (time instanceof Date) {
     date = time;
   } else {
@@ -83,9 +83,7 @@ export function createRandomId() {
     "-" +
     new Date().getTime() +
     "-" +
-    Math.random()
-      .toString()
-      .substr(2, 5)
+    Math.random().toString().substr(2, 5)
   );
 }
 

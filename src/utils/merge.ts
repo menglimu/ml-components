@@ -7,7 +7,6 @@
  */
 
 import { mergeWith, cloneDeep } from "lodash";
-import { isNull } from "./index";
 
 let customMerge = (a: any, b: any) => {
   if (Array.isArray(a) && Array.isArray(b)) return cloneDeep(b);
@@ -21,18 +20,18 @@ let customMerge = (a: any, b: any) => {
 
 function merge<TSource1 extends Object, TSource2 extends Object>(
   source1: TSource1,
-  source2: TSource2,
+  source2: TSource2
 ): TSource1 & TSource2;
 function merge<TSource1 extends Object, TSource2 extends Object, TSource3 extends Object>(
   source1: TSource1,
   source2: TSource2,
-  source3: TSource3,
+  source3: TSource3
 ): TSource1 & TSource2 & TSource3;
 function merge<TSource1 extends Object, TSource2 extends Object, TSource3 extends Object, TSource4 extends Object>(
   source1: TSource1,
   source2: TSource2,
   source3: TSource3,
-  source4: TSource4,
+  source4: TSource4
 ): TSource1 & TSource2 & TSource3 & TSource3;
 function merge<T = any>(...options: any[]): T;
 /**
