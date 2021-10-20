@@ -57,6 +57,9 @@ export default Vue.extend({
   created() {
     this.tableConfig = {
       searchConfig: {
+        hideIndex: 6,
+        aloneLineBtn: false,
+        // isOverHide: false,
         config: {
           columns: [
             {
@@ -76,24 +79,32 @@ export default Vue.extend({
               prop: "times",
             },
             {
-              type: "string",
-              label: "通知公告",
-              prop: "title1",
+              type: "datetimerange",
+              label: "创建时间",
+              prop: "times",
             },
             {
-              type: "string",
-              label: "通知公告",
-              prop: "title1",
+              type: "datetimerange",
+              label: "创建时间",
+              prop: "times",
             },
             {
-              type: "string",
-              label: "通知公告",
-              prop: "title1",
+              type: "datetimerange",
+              label: "创建时间",
+              prop: "times",
+              show: () => false,
             },
             {
-              type: "string",
-              label: "通知公告",
-              prop: "title1",
+              type: "datetimerange",
+              label: "创建时间",
+              prop: "times",
+              show: () => false,
+            },
+            {
+              type: "datetimerange",
+              label: "创建时间",
+              prop: "times",
+              show: () => false,
             },
           ],
         },

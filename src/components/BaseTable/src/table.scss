@@ -150,14 +150,15 @@
 
 .ml-table-search {
   position: relative;
-  margin: 0 -15px;
+  margin: 0 -15px 0 0;
 
   .ml-form {
     flex: 1;
-  }
 
-  .ml-form-item-box {
-    flex-shrink: 0;
+    .ml-form-item-box {
+      flex-shrink: 0;
+      padding: 0 15px 0 0;
+    }
   }
 
   // &.hide-more {
@@ -169,6 +170,7 @@
 
   .search-btn-box {
     padding-right: 15px;
+    margin-bottom: 18px;
     margin-left: auto;
     text-align: right;
 
@@ -189,13 +191,15 @@
     }
   }
 
-  &.aloneLineBtn {
-    margin-bottom: -32px;
+  &.aloneLineBtn.removeBtnHight {
+    margin-bottom: -50px;
   }
 
   &.hide-more.removeBtnHight {
-    margin-bottom: -32px;
+    margin-bottom: -50px;
   }
+
+  // &:not(.hide-more).aloneLineBtn {
 
   @for $i from 1 to 20 {
     &.hide-more.hide-index-#{$i} {
@@ -203,14 +207,6 @@
         // nth-child(#{$i})
         // visibility: hidden;
         display: none;
-      }
-    }
-  }
-
-  &.btn-in-form {
-    .ml-form {
-      .search-btn-box {
-        margin-left: 15px;
       }
     }
   }

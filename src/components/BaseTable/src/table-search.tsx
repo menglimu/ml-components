@@ -14,7 +14,6 @@ export default Vue.extend({
   name: "TableSearch",
   directives: { submitClick },
   props: {
-    isBtnInForm: { type: Boolean, default: false }, // 搜索和重置按钮在输入项后显示，！输入项不能占满元素
     isOverHide: { type: Boolean, default: undefined }, // 超过一行隐藏
     hideIndex: { type: Number, default: undefined }, // 从第几个开始隐藏。默认会根据 表单的长度进行处理。有不属于表单标准长度的自行传入
     aloneLineBtn: { type: Boolean, default: undefined }, // 展开状态下。按钮是否是独自一行
@@ -152,7 +151,6 @@ export default Vue.extend({
           "hide-index-" + (this.hideIndex_ + 1),
           {
             "hide-more": this.showMoreStatus,
-            "btn-in-form": this.isBtnInForm,
             aloneLineBtn: this.aloneLineBtn_,
             removeBtnHight: this.removeBtnHight,
           },
@@ -168,11 +166,8 @@ export default Vue.extend({
           config={this.config_}
           class="search-form"
         >
-          {/* {!(this.isOverHide_ && this.showMoreStatus) && btn} */}
-          {/* {(!this.showMoreStatus || this.isBtnInForm) && btn} */}
           {btn}
         </ml-form>
-        {/* {this.showMoreStatus && !this.isBtnInForm && btn} */}
       </div>
     );
   },
