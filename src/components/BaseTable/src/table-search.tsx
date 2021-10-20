@@ -33,7 +33,7 @@ export default Vue.extend({
     config_(this: any): MlFormConfig {
       let searchFormConfig = {
         itemBoxWidth: "25%",
-        labelPosition: "left",
+        labelPosition: "right",
         // labelSuffix: "",
       };
       if (this.MlTable?.searchConfigDefault?.config) {
@@ -42,7 +42,7 @@ export default Vue.extend({
       return { ...searchFormConfig, ...this.config };
     },
     isOverHide_(this: any) {
-      return this.isOverHide !== undefined ? this.isOverHide : this.config_?.columns?.length > 3 ? true : false;
+      return this.isOverHide !== undefined ? this.isOverHide : this.config_?.columns?.length > 4 ? true : false;
     },
     hideIndex_(this: any) {
       if (!isNull(this.hideIndex)) return this.hideIndex;
@@ -149,7 +149,7 @@ export default Vue.extend({
         class={[
           "ml-table-search",
           "search-label-" + this.config_?.labelPosition,
-          "hide-index-" + this.hideIndex_,
+          "hide-index-" + (this.hideIndex_ + 1),
           {
             "hide-more": this.showMoreStatus,
             "btn-in-form": this.isBtnInForm,

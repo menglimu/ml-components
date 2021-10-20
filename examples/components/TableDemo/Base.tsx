@@ -80,6 +80,21 @@ export default Vue.extend({
               label: "通知公告",
               prop: "title1",
             },
+            {
+              type: "string",
+              label: "通知公告",
+              prop: "title1",
+            },
+            {
+              type: "string",
+              label: "通知公告",
+              prop: "title1",
+            },
+            {
+              type: "string",
+              label: "通知公告",
+              prop: "title1",
+            },
           ],
         },
       },

@@ -176,7 +176,8 @@
       padding-right: 10px;
       padding-left: 10px;
 
-      .el-icon-arrow-down {
+      .el-icon-arrow-down,
+      .el-icon-arrow-up {
         margin-right: 0;
       }
     }
@@ -188,39 +189,22 @@
     }
   }
 
-  &:not(.hide-more).aloneLineBtn {
-    .search-btn-box {
-      margin-top: 0;
-      margin-bottom: 18px;
-    }
-
-    &.removeBtnHight {
-      .search-btn-box {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        margin-bottom: 0;
-        transform: translate(0, 100%);
-      }
-    }
+  &.aloneLineBtn {
+    margin-bottom: -32px;
   }
 
-  @for $i from 1 to 5 {
+  &.hide-more.removeBtnHight {
+    margin-bottom: -32px;
+  }
+
+  @for $i from 1 to 20 {
     &.hide-more.hide-index-#{$i} {
-      .ml-form-item-box:nth-of-type(n + #{$i}) {
+      .ml-form-item-box:nth-of-type(n + 5) {
         // nth-child(#{$i})
         // visibility: hidden;
         display: none;
       }
     }
-
-    // .paper:nth-child(#{$i}) {
-    //   /**
-    //     有顺序之分
-    //     transform: translate() rotate() !== transform: rotate() translate()
-    //     */
-    //   transform: translate(-50%, -40%) rotate(#{$i}5deg);
-    // }
   }
 
   &.btn-in-form {
