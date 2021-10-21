@@ -31,14 +31,14 @@ export default Vue.extend({
     };
   },
   computed: {
-    value(this: any) {
+    value(): any {
       let value = this.originalValue;
       if (this.config_?.format?.toEleValue) {
         value = this.config_.format.toEleValue(value, this.rootValue);
       }
       return value;
     },
-    isShow(this: any): boolean | undefined {
+    isShow(): boolean | undefined {
       let isShow: boolean | undefined;
       if (typeof this.config_.show === "function") {
         isShow = this.config_.show(this.rootValue);
@@ -159,7 +159,7 @@ export default Vue.extend({
               value: this.value,
             },
           },
-          vnode.componentOptions || {},
+          vnode.componentOptions || {}
         );
         if (this.options.length) {
           vnode.componentOptions.propsData["options"] = this.options;
@@ -174,7 +174,7 @@ export default Vue.extend({
             ...(this.config_?.attrs || {}),
           },
         },
-        vnode.data || {},
+        vnode.data || {}
       );
     } else {
       // /* 一些基础类型的配置

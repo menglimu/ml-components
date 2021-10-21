@@ -17,7 +17,7 @@ export default Vue.extend({
     isOverHide: { type: Boolean, default: undefined }, // 超过一行隐藏
     hideIndex: { type: Number, default: undefined }, // 从第几个开始隐藏。默认会根据 表单的长度进行处理。有不属于表单标准长度的自行传入
     aloneLineBtn: { type: Boolean, default: undefined }, // 展开状态下。按钮是否是独自一行
-    removeBtnHight: { type: Boolean, default: false }, // 是否消除按钮单独一行的高度，默认根据外部按钮是否有来进行处理。消除时。会将按钮使用positionabsolute定位的方式
+    removeBtnHight: { type: Boolean, default: false }, // 是否消除按钮单独一行的高度，默认根据外部按钮是否有来进行处理。消除时。会将下面的margin-top 设为 负值
     config: { type: Object as PropType<MlFormConfig> }, // 搜索表单配置
     value: { type: Object as PropType<AnyObj>, required: true },
     // initialValue: { type: Object as PropType<AnyObj> },
@@ -25,61 +25,51 @@ export default Vue.extend({
   },
   data() {
     return {
-      showMoreStatus: false,
+      hided: true,
+      aloneLineBtn_: this.aloneLineBtn !== undefined ? this.aloneLineBtn : false,
+      isOverHide_: false,
+      hideIndex_: this.hideIndex,
     };
   },
   computed: {
-    config_(this: any): MlFormConfig {
-      let searchFormConfig = {
+    config_(): MlFormConfig {
+      let searchFormConfig: any = {
         itemBoxWidth: "25%",
         labelPosition: "right",
         // labelSuffix: "",
       };
-      if (this.MlTable?.searchConfigDefault?.config) {
-        Object.assign(searchFormConfig, this.MlTable?.searchConfigDefault?.config);
+      const set = (this as any).MlTable?.searchConfigDefault;
+      if (set?.config) {
+        Object.assign(searchFormConfig, set?.config);
       }
       return { ...searchFormConfig, ...this.config };
     },
-    isOverHide_(this: any) {
-      return this.isOverHide !== undefined ? this.isOverHide : this.config_?.columns?.length > 4 ? true : false;
-    },
-    hideIndex_(this: any) {
-      if (!isNull(this.hideIndex)) return this.hideIndex;
-      let length = 0;
-      for (let i = 0; i < this.config_?.columns?.length; i++) {
-        const item = this.config_?.columns?.[i];
-        const nowLength = parseFloat(item.itemBoxWidth || (item.block && 100) || this.config_?.itemBoxWidth) || 0;
-        length += nowLength;
-        if (Math.round(length) >= 100) {
-          return i + 1;
-        }
-      }
-    },
-    aloneLineBtn_(this: any) {
-      if (this.aloneLineBtn !== undefined) return this.aloneLineBtn;
-      if (this.config_?.columns?.[this.config_?.columns?.length - 1]?.itemBoxWidth === "auto") return false;
-      const allLength = Math.round(
-        this.config_?.columns?.reduce((val, item) => {
-          const nowLength = parseFloat(item.itemBoxWidth || (item.block && 100) || this.config_?.itemBoxWidth) || 0;
-          let all = val + nowLength;
-          if (val < 100 && all > 100) {
-            return nowLength;
-          }
-          if (all > 100) {
-            return all - 100;
-          }
-          return all;
-        }, 0)
-      );
-      if (allLength % 100 === 0) {
-        return true;
-      }
-    },
   },
-  created() {
-    if (this.isOverHide_) {
-      this.showMoreStatus = true;
+  mounted() {
+    const num = this.$el.querySelectorAll(".ml-table-search .el-form .ml-form-item-box").length;
+
+    if (!this.removeBtnHight) {
+      this.hideIndex_ = 8;
+    } else {
+      this.hideIndex_ = 5;
     }
+    if (num % 4 === 0) {
+      this.aloneLineBtn_ = true;
+    }
+    if (num <= 4) {
+      this.isOverHide_ = false;
+    }
+    if (num > 4 && this.removeBtnHight) {
+      this.isOverHide_ = true;
+    }
+    if (num > 7 && !this.removeBtnHight) {
+      this.isOverHide_ = true;
+    }
+
+    if (!this.isOverHide_) {
+      this.hided = false;
+    }
+    // console.log(this.$el.querySelectorAll(".ml-table-search .el-form"));
   },
   methods: {
     reset() {
@@ -87,7 +77,7 @@ export default Vue.extend({
     },
 
     onChangeHideStatus() {
-      this.showMoreStatus = !this.showMoreStatus;
+      this.hided = !this.hided;
     },
 
     onSubmit(e: KeyboardEvent) {
@@ -120,7 +110,7 @@ export default Vue.extend({
       await (this.$parent as any)?.onReset();
     },
   },
-  render() {
+  render(): VNode {
     if (!this.config_?.columns?.length) {
       return;
     }
@@ -136,7 +126,7 @@ export default Vue.extend({
         </TagButton>
         {this.isOverHide_ && (
           <TagButton onClick={this.onChangeHideStatus} class="arrow">
-            {this.showMoreStatus ? <i class="el-icon-arrow-down" /> : <i class="el-icon-arrow-up" />}
+            {this.hided ? <i class="el-icon-arrow-down" /> : <i class="el-icon-arrow-up" />}
           </TagButton>
         )}
       </div>
@@ -148,9 +138,9 @@ export default Vue.extend({
         class={[
           "ml-table-search",
           "search-label-" + this.config_?.labelPosition,
-          "hide-index-" + (this.hideIndex_ + 1),
+          "hide-index-" + this.hideIndex_,
           {
-            "hide-more": this.showMoreStatus,
+            "hide-more": this.hided,
             aloneLineBtn: this.aloneLineBtn_,
             removeBtnHight: this.removeBtnHight,
           },

@@ -57,8 +57,8 @@ export default Vue.extend({
   created() {
     this.tableConfig = {
       searchConfig: {
-        hideIndex: 6,
-        aloneLineBtn: false,
+        // hideIndex: 6,
+        // aloneLineBtn: false,
         // isOverHide: false,
         config: {
           columns: [
@@ -68,43 +68,14 @@ export default Vue.extend({
               prop: "title",
             },
             {
-              type: "select",
-              label: "通知类型",
-              prop: "type",
-              optionsGet: () => Promise.resolve(options),
+              type: "string",
+              label: "通知公告",
+              prop: "title",
             },
             {
-              type: "datetimerange",
-              label: "创建时间",
-              prop: "times",
-            },
-            {
-              type: "datetimerange",
-              label: "创建时间",
-              prop: "times",
-            },
-            {
-              type: "datetimerange",
-              label: "创建时间",
-              prop: "times",
-            },
-            {
-              type: "datetimerange",
-              label: "创建时间",
-              prop: "times",
-              show: () => false,
-            },
-            {
-              type: "datetimerange",
-              label: "创建时间",
-              prop: "times",
-              show: () => false,
-            },
-            {
-              type: "datetimerange",
-              label: "创建时间",
-              prop: "times",
-              show: () => false,
+              type: "string",
+              label: "通知公告",
+              prop: "title",
             },
           ],
         },
@@ -113,21 +84,21 @@ export default Vue.extend({
       beforeGetList: (type, params) => ({ ...params, a: 123 }),
       afterGetList: (type, data) => console.log(type, data),
       searchData: {},
-      outerBtn: [
-        { size: "small", name: "重新请求options", type: "primary", callback: this.reFormOptions },
-        {
-          evtType: "setValue",
-          size: "small",
-          name: "显示隐藏",
-          type: "primary",
-          showJudge: (data) => data.length > 0,
-        },
-        {
-          type: "text",
-          evtType: "mldelete",
-          name: "删除",
-        },
-      ],
+      // outerBtn: [
+      //   { size: "small", name: "重新请求options", type: "primary", callback: this.reFormOptions },
+      //   {
+      //     evtType: "setValue",
+      //     size: "small",
+      //     name: "显示隐藏",
+      //     type: "primary",
+      //     showJudge: (data) => data.length > 0,
+      //   },
+      //   {
+      //     type: "text",
+      //     evtType: "mldelete",
+      //     name: "删除",
+      //   },
+      // ],
 
       innerBtn: [
         {

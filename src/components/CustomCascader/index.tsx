@@ -16,7 +16,7 @@ export default Vue.extend({
     props: { type: Object, default: () => ({}) },
   },
   computed: {
-    propsObj(this: any) {
+    propsObj(): AnyObj {
       return {
         checkStrictly: true,
         expandTrigger: "hover",

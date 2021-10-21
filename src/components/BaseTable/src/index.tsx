@@ -122,7 +122,7 @@ export default Vue.extend({
     };
   },
   computed: {
-    paginationConfig_(this: any) {
+    paginationConfig_(): any {
       const obj = Object.assign(this.paginationConfigDefault, this.paginationConfig || {});
       if (!this.pageSize) {
         this.pageSize = obj.pageSize;
@@ -130,11 +130,11 @@ export default Vue.extend({
       return obj;
     },
     /** 表格内按钮 */
-    innerBtn_(this: any): MlTableInnerBtn[] {
+    innerBtn_(): MlTableInnerBtn[] {
       return this.innerBtn;
     },
     /** 表格外按钮 */
-    outerBtn_(this: any): MlTableOuterBtn[] {
+    outerBtn_(): MlTableOuterBtn[] {
       return this.outerBtn;
     },
   },
@@ -359,7 +359,7 @@ export default Vue.extend({
           v-model={this.searchInput}
           onSearch={this.onSearch}
           onReset={this.onReset}
-          {...{ props: { removeBtnHight: !!this.outerBtn.length, ...this.searchConfig } }}
+          {...{ props: { removeBtnHight: !!this.outerBtn_?.length, ...this.searchConfig } }}
         />
       ) : null;
     },
