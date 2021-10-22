@@ -63,9 +63,19 @@ export default Vue.extend({
         config: {
           columns: [
             {
-              type: "string",
+              type: "select",
               label: "通知公告",
+              prop: "show",
+              options: [
+                { label: "1", value: 1 },
+                { label: "2", value: 2 },
+              ],
+            },
+            {
+              type: "string",
+              label: "通知公告23",
               prop: "title",
+              show: (data) => data.show === 1,
             },
             {
               type: "string",
@@ -77,6 +87,16 @@ export default Vue.extend({
               label: "通知公告",
               prop: "title",
             },
+            {
+              type: "string",
+              label: "通知公告",
+              prop: "title",
+            },
+            // {
+            //   type: "string",
+            //   label: "通知公告",
+            //   prop: "title",
+            // },
           ],
         },
       },
@@ -84,21 +104,21 @@ export default Vue.extend({
       beforeGetList: (type, params) => ({ ...params, a: 123 }),
       afterGetList: (type, data) => console.log(type, data),
       searchData: {},
-      // outerBtn: [
-      //   { size: "small", name: "重新请求options", type: "primary", callback: this.reFormOptions },
-      //   {
-      //     evtType: "setValue",
-      //     size: "small",
-      //     name: "显示隐藏",
-      //     type: "primary",
-      //     showJudge: (data) => data.length > 0,
-      //   },
-      //   {
-      //     type: "text",
-      //     evtType: "mldelete",
-      //     name: "删除",
-      //   },
-      // ],
+      outerBtn: [
+        { size: "small", name: "重新请求options", type: "primary", callback: this.reFormOptions },
+        {
+          evtType: "setValue",
+          size: "small",
+          name: "显示隐藏",
+          type: "primary",
+          showJudge: (data) => data.length > 0,
+        },
+        {
+          type: "text",
+          evtType: "mldelete",
+          name: "删除",
+        },
+      ],
 
       innerBtn: [
         {

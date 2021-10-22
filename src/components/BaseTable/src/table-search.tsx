@@ -29,6 +29,7 @@ export default Vue.extend({
       aloneLineBtn_: this.aloneLineBtn !== undefined ? this.aloneLineBtn : false,
       isOverHide_: false,
       hideIndex_: this.hideIndex,
+      observer: null,
     };
   },
   computed: {
@@ -46,32 +47,54 @@ export default Vue.extend({
     },
   },
   mounted() {
-    const num = this.$el.querySelectorAll(".ml-table-search .el-form .ml-form-item-box").length;
+    this.init();
+    // 选择需要观察变动的节点
+    const targetNode: any = this.$el.querySelector(".ml-table-search .el-form");
 
-    if (!this.removeBtnHight) {
-      this.hideIndex_ = 8;
-    } else {
-      this.hideIndex_ = 5;
-    }
-    if (num % 4 === 0) {
-      this.aloneLineBtn_ = true;
-    }
-    if (num <= 4) {
-      this.isOverHide_ = false;
-    }
-    if (num > 4 && this.removeBtnHight) {
-      this.isOverHide_ = true;
-    }
-    if (num > 7 && !this.removeBtnHight) {
-      this.isOverHide_ = true;
-    }
+    // 观察器的配置（需要观察什么变动）
+    const config = { attributes: false, childList: true, subtree: false };
+    // 创建一个观察器实例并传入回调函数
+    this.observer = new MutationObserver(this.onDomChange);
 
-    if (!this.isOverHide_) {
-      this.hided = false;
-    }
-    // console.log(this.$el.querySelectorAll(".ml-table-search .el-form"));
+    // 以上述配置开始观察目标节点
+    this.observer.observe(targetNode, config);
+  },
+  beforeDestroy() {
+    this.observer.disconnect();
   },
   methods: {
+    init() {
+      const num = this.$el.querySelectorAll(".ml-table-search .el-form .ml-form-item-box").length;
+
+      if (!this.removeBtnHight) {
+        this.hideIndex_ = 8;
+      } else {
+        this.hideIndex_ = 5;
+      }
+      if (num % 4 === 0) {
+        this.aloneLineBtn_ = true;
+      } else {
+        this.aloneLineBtn_ = false;
+      }
+      if (num <= 4) {
+        this.isOverHide_ = false;
+      } else if (num > 4 && this.removeBtnHight) {
+        this.isOverHide_ = true;
+      } else if (num > 7 && !this.removeBtnHight) {
+        this.isOverHide_ = true;
+      }
+
+      if (!this.isOverHide_) {
+        this.hided = false;
+      } else {
+        this.hided = true;
+      }
+    },
+    onDomChange() {
+      const isHided = this.hided;
+      this.init();
+      this.hided = isHided;
+    },
     reset() {
       (this.$refs.searchForm as MlForm)?.reset();
     },

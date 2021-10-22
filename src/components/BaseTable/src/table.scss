@@ -173,14 +173,15 @@
   // }
 
   .search-btn-box {
+    display: inline-flex;
     padding-right: 15px;
-    margin-bottom: 18px;
+    margin-bottom: 19px;
     margin-left: auto;
     text-align: right;
 
     .arrow {
-      padding-right: 10px;
-      padding-left: 10px;
+      height: 32px;
+      padding: 0 10px;
 
       .el-icon-arrow-down,
       .el-icon-arrow-up {
@@ -196,11 +197,11 @@
   }
 
   &.aloneLineBtn.removeBtnHight {
-    margin-bottom: -50px;
+    margin-bottom: -51px;
   }
 
   &.hide-more.removeBtnHight {
-    margin-bottom: -50px;
+    margin-bottom: -51px;
   }
 
   // &:not(.hide-more).aloneLineBtn {
