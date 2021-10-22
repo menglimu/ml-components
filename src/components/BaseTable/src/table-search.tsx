@@ -141,14 +141,14 @@ export default Vue.extend({
     const TagButton = { cui: "c-button", "element-ui": "el-button" }[this.framework];
     const btn = (
       <div class="search-btn-box">
-        <TagButton type="primary" ref="searchBtn" class="search" v-submitClick={this.onSearch_}>
+        <TagButton type="primary" ref="searchBtn" size="small" class="search" v-submitClick={this.onSearch_}>
           查询
         </TagButton>
-        <TagButton class="reset" v-submitClick={this.onReset_}>
+        <TagButton size="small" class="reset" v-submitClick={this.onReset_}>
           重置
         </TagButton>
         {this.isOverHide_ && (
-          <TagButton onClick={this.onChangeHideStatus} class="arrow">
+          <TagButton size="small" onClick={this.onChangeHideStatus} class="arrow">
             {this.hided ? <i class="el-icon-arrow-down" /> : <i class="el-icon-arrow-up" />}
           </TagButton>
         )}
