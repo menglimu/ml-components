@@ -61,6 +61,7 @@ export default Vue.extend({
         // aloneLineBtn: false,
         // isOverHide: false,
         config: {
+          labelPosition: "top",
           columns: [
             {
               type: "select",
@@ -92,11 +93,11 @@ export default Vue.extend({
               label: "通知公告",
               prop: "title",
             },
-            // {
-            //   type: "string",
-            //   label: "通知公告",
-            //   prop: "title",
-            // },
+            {
+              type: "string",
+              label: "通知公告",
+              prop: "title",
+            },
           ],
         },
       },

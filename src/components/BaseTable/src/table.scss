@@ -174,6 +174,12 @@
 
   .search-btn-box {
     display: inline-flex;
+    align-self: flex-end;
+
+    .el-button {
+      height: 32px;
+    }
+
     padding-right: 15px;
     margin-bottom: 19px;
     margin-left: auto;
@@ -187,12 +193,6 @@
       .el-icon-arrow-up {
         margin-right: 0;
       }
-    }
-  }
-
-  &.search-label-top {
-    .search-btn-box {
-      margin-top: 22px;
     }
   }
 

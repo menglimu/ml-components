@@ -36,7 +36,7 @@ export default Vue.extend({
     config_(): MlFormConfig {
       let searchFormConfig: any = {
         itemBoxWidth: "25%",
-        labelPosition: "right",
+        // labelPosition: "right",
         // labelSuffix: "",
       };
       const set = (this as any).MlTable?.searchConfigDefault;
