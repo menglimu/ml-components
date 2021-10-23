@@ -195,6 +195,18 @@
       }
     }
   }
+  &.cm {
+    display: flex;
+    .search-btn-box {
+      display: inline-flex;
+      align-self: flex-start;
+    }
+    &.search-label-top {
+      .search-btn-box {
+        margin-top: 22px;
+      }
+    }
+  }
 
   &.aloneLineBtn.removeBtnHight {
     margin-bottom: -51px;

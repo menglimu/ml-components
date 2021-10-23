@@ -185,6 +185,8 @@ interface MlTableColumn<D = AnyObj> extends MlOptions, ElTableColumnAny {
 
 /** 搜索相关配置 */
 export interface TableSearchProp<D = AnyObj> {
+  /** cm。城管的隐藏按钮方式 */
+  btnType?: string;
   /** 搜索和重置按钮在输入项后显示，！输入项不能占满元素 默认 false */
   // isBtnInForm?: boolean;
 

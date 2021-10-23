@@ -8,12 +8,14 @@ import { PropType, VNode } from "vue/types/umd";
 import { MlFormConfig, MlForm } from "types/form";
 import submitClick from "@/directives/clickSubmit";
 import { isNull } from "@/utils";
+import merge from "@/utils/merge";
 // import style from 'index.module.scss'
 
 export default Vue.extend({
   name: "TableSearch",
   directives: { submitClick },
   props: {
+    btnType: { type: String, default: "" }, //   cm。城管的隐藏按钮方式
     isOverHide: { type: Boolean, default: undefined }, // 超过一行隐藏
     hideIndex: { type: Number, default: undefined }, // 从第几个开始隐藏。默认会根据 表单的长度进行处理。有不属于表单标准长度的自行传入
     aloneLineBtn: { type: Boolean, default: undefined }, // 展开状态下。按钮是否是独自一行
@@ -30,6 +32,7 @@ export default Vue.extend({
       isOverHide_: false,
       hideIndex_: this.hideIndex,
       observer: null,
+      btnType_: this.btnType,
     };
   },
   computed: {
@@ -45,6 +48,21 @@ export default Vue.extend({
       }
       return { ...searchFormConfig, ...this.config };
     },
+  },
+  created() {
+    const defaultOptions = (this as any).MlTable?.searchConfigDefault;
+    if (defaultOptions) {
+      for (const key in defaultOptions) {
+        if (key === "config") {
+          continue;
+        }
+        if (typeof defaultOptions[key] === "object") {
+          this[key] = merge(this[key], defaultOptions[key]);
+        } else {
+          this[key] = defaultOptions[key];
+        }
+      }
+    }
   },
   mounted() {
     this.init();
@@ -82,6 +100,11 @@ export default Vue.extend({
         this.isOverHide_ = true;
       } else if (num > 7 && !this.removeBtnHight) {
         this.isOverHide_ = true;
+      }
+
+      if (this.btnType_ === "cm") {
+        this.hideIndex_ = 5;
+        this.aloneLineBtn_ = false;
       }
 
       if (!this.isOverHide_) {
@@ -132,28 +155,60 @@ export default Vue.extend({
       // this.$emit("reset");
       await (this.$parent as any)?.onReset();
     },
+    renderBtn() {
+      const TagButton = { cui: "c-button", "element-ui": "el-button" }[this.framework];
+      return this.btnType_ === "cm" ? (
+        <div class="search-btn-box">
+          {this.isOverHide_ && (
+            <TagButton key="arrow" size="small" type="text" onClick={this.onChangeHideStatus} class="arrow">
+              {this.hided ? "更多" : "收起"}
+              {this.hided ? <i class="el-icon-arrow-down" /> : <i class="el-icon-arrow-up" />}
+            </TagButton>
+          )}
+          <TagButton
+            key="search"
+            type="primary"
+            ref="searchBtn"
+            size="small"
+            class="search"
+            v-submitClick={this.onSearch_}
+          >
+            查询
+          </TagButton>
+          <TagButton key="reset" size="small" class="reset" v-submitClick={this.onReset_}>
+            重置
+          </TagButton>
+        </div>
+      ) : (
+        <div class="search-btn-box">
+          <TagButton
+            key="search"
+            type="primary"
+            ref="searchBtn"
+            size="small"
+            class="search"
+            v-submitClick={this.onSearch_}
+          >
+            查询
+          </TagButton>
+          <TagButton key="reset" size="small" class="reset" v-submitClick={this.onReset_}>
+            重置
+          </TagButton>
+          {this.isOverHide_ && (
+            <TagButton key="arrow" size="small" onClick={this.onChangeHideStatus} class="arrow">
+              {this.hided ? <i class="el-icon-arrow-down" /> : <i class="el-icon-arrow-up" />}
+            </TagButton>
+          )}
+        </div>
+      );
+    },
   },
   render(): VNode {
     if (!this.config_?.columns?.length) {
       return;
     }
 
-    const TagButton = { cui: "c-button", "element-ui": "el-button" }[this.framework];
-    const btn = (
-      <div class="search-btn-box">
-        <TagButton type="primary" ref="searchBtn" size="small" class="search" v-submitClick={this.onSearch_}>
-          查询
-        </TagButton>
-        <TagButton size="small" class="reset" v-submitClick={this.onReset_}>
-          重置
-        </TagButton>
-        {this.isOverHide_ && (
-          <TagButton size="small" onClick={this.onChangeHideStatus} class="arrow">
-            {this.hided ? <i class="el-icon-arrow-down" /> : <i class="el-icon-arrow-up" />}
-          </TagButton>
-        )}
-      </div>
-    );
+    const btn = this.renderBtn();
 
     // v-preventReClick
     return (
@@ -163,9 +218,10 @@ export default Vue.extend({
           "search-label-" + this.config_?.labelPosition,
           "hide-index-" + this.hideIndex_,
           {
+            cm: this.btnType_ === "cm",
             "hide-more": this.hided,
             aloneLineBtn: this.aloneLineBtn_,
-            removeBtnHight: this.removeBtnHight,
+            removeBtnHight: this.removeBtnHight && this.btnType_ !== "cm",
           },
         ]}
       >
@@ -179,8 +235,9 @@ export default Vue.extend({
           config={this.config_}
           class="search-form"
         >
-          {btn}
+          {this.btnType_ !== "cm" && btn}
         </ml-form>
+        {this.btnType_ === "cm" && btn}
       </div>
     );
   },
