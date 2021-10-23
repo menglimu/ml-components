@@ -29,7 +29,7 @@ export default Vue.extend({
     return {
       hided: true,
       aloneLineBtn_: this.aloneLineBtn !== undefined ? this.aloneLineBtn : false,
-      isOverHide_: false,
+      isOverHide_: this.isOverHide !== undefined ? this.isOverHide : false,
       hideIndex_: this.hideIndex,
       observer: null,
       btnType_: this.btnType,
@@ -94,17 +94,22 @@ export default Vue.extend({
       } else {
         this.aloneLineBtn_ = false;
       }
-      if (num <= 4) {
-        this.isOverHide_ = false;
-      } else if (num > 4 && this.removeBtnHight) {
-        this.isOverHide_ = true;
-      } else if (num > 7 && !this.removeBtnHight) {
-        this.isOverHide_ = true;
+      if (this.isOverHide === undefined) {
+        if (num <= 4) {
+          this.isOverHide_ = false;
+        } else if (num > 4 && this.removeBtnHight) {
+          this.isOverHide_ = true;
+        } else if (num > 7 && !this.removeBtnHight) {
+          this.isOverHide_ = true;
+        }
       }
 
       if (this.btnType_ === "cm") {
         this.hideIndex_ = 5;
         this.aloneLineBtn_ = false;
+        if (num > 4 && this.isOverHide === undefined) {
+          this.isOverHide_ = true;
+        }
       }
 
       if (!this.isOverHide_) {
