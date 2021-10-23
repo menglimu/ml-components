@@ -36,9 +36,9 @@ const tableData = [
 ];
 
 const tableRes = {
-  content: tableData,
-  // content: [], // tableData, // Array(6).fill(tableData[0]),
-  total: 1,
+  // content: tableData,
+  content: [], // tableData, // Array(6).fill(tableData[0]),
+  total: 0,
 };
 
 let options = [
@@ -316,6 +316,6 @@ export default Vue.extend({
     },
   },
   render() {
-    return <ml-table ref="mainTable" props={this.tableConfig}></ml-table>;
+    return <ml-table ref="mainTable" props={this.tableConfig} scopedSlots={{ table: () => <div>1</div> }}></ml-table>;
   },
 });

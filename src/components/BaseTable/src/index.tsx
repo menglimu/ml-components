@@ -547,15 +547,27 @@ export default Vue.extend({
     },
   },
   render(h: CreateElement) {
+    console.log(this.renderTableSlot());
     return (
       <div class="ml-table">
         {this.renderSearch()}
         {this.$slots.beforeOuterBtn}
         {this.renderOuterBtn(h)}
         {this.$slots.default}
-        {this.$scopedSlots.table
-          ? this.$scopedSlots.table({ data: this.data, columns: this.config_.columns })
-          : this.renderTable(h)}
+        {this.$scopedSlots.table ? (
+          <div attrs={this.TableDefault} v-loading={this.loading}>
+            {this.data?.length ? (
+              this.$scopedSlots.table({ data: this.data, columns: this.config_.columns })
+            ) : (
+              <div class="ml-table-empty">
+                <img src={this.emptyImg} class="ml-table-empty-img" />
+                <div>{this.emptyWord}</div>
+              </div>
+            )}
+          </div>
+        ) : (
+          this.renderTable(h)
+        )}
         {this.renderPagination()}
       </div>
     );
