@@ -364,7 +364,7 @@ export default Vue.extend({
       ) : null;
     },
     // 外部按钮
-    renderOuerBtn(h: CreateElement) {
+    renderOuterBtn(h: CreateElement) {
       if (!this.outerBtn_ || this.outerBtn_.length === 0) {
         return;
       }
@@ -550,7 +550,8 @@ export default Vue.extend({
     return (
       <div class="ml-table">
         {this.renderSearch()}
-        {this.renderOuerBtn(h)}
+        {this.$slots.beforeOuterBtn}
+        {this.renderOuterBtn(h)}
         {this.$slots.default}
         {this.$scopedSlots.table
           ? this.$scopedSlots.table({ data: this.data, columns: this.config_.columns })
