@@ -279,4 +279,5 @@ export interface MlTableDefaultOptions {
   framework?: "cui" | "element-ui";
   outerBtnDefault?: Partial<ElButton>;
   innerBtnDefault?: Partial<ElButton>;
+  searchConfigDefault?: { config?: Partial<MlFormConfig> };
 }
