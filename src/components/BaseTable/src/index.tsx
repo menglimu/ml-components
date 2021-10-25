@@ -547,7 +547,6 @@ export default Vue.extend({
     },
   },
   render(h: CreateElement) {
-    console.log(this.renderTableSlot());
     return (
       <div class="ml-table">
         {this.renderSearch()}
