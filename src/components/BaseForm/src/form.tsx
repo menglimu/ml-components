@@ -141,11 +141,11 @@ export default Vue.extend({
     // 合并表单配置项， 通过 Object.assign 简写初始化
     getConfig_() {
       const config = merge<MlFormConfig>(
-        this.configDefault,
         {
           // autoSize: this.config.size ? false : true,
           labelPosition: this.config.uiType === "round" ? "center" : "right",
         },
+        this.configDefault,
         this.config
       );
       if (!config.inline) {

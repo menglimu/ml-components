@@ -11,6 +11,9 @@ Vue.use(mlComponents, {
       config: { labelPosition: "top", labelSuffix: "", uiType: "border" },
     },
   },
+  MlForm: {
+    configDefault: { labelPosition: "top" },
+  },
 }).component("BaseSourceView", BaseSourceView);
 
 Vue.prototype.$ELEMENT = { size: "small", zIndex: 2000 };
