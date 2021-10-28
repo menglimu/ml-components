@@ -60,7 +60,7 @@ export default Vue.extend({
         // hideIndex: 6,
         // aloneLineBtn: false,
         // isOverHide: false,
-        // btnType: "cm",
+        btnType: "cm",
         config: {
           labelPosition: "top",
           columns: [

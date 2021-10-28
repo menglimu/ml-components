@@ -63,9 +63,11 @@ export default Vue.extend({
         }
       }
     }
+    this.init(this.config_.columns.length);
   },
   mounted() {
-    this.init();
+    const num = this.$el.querySelectorAll(".ml-table-search .el-form .ml-form-item-box").length;
+    this.init(num);
     // 选择需要观察变动的节点
     const targetNode: any = this.$el.querySelector(".ml-table-search .el-form");
 
@@ -81,9 +83,7 @@ export default Vue.extend({
     this.observer.disconnect();
   },
   methods: {
-    init() {
-      const num = this.$el.querySelectorAll(".ml-table-search .el-form .ml-form-item-box").length;
-
+    init(num: number) {
       if (!this.removeBtnHight) {
         this.hideIndex_ = 8;
       } else {
@@ -120,7 +120,8 @@ export default Vue.extend({
     },
     onDomChange() {
       const isHided = this.hided;
-      this.init();
+      const num = this.$el.querySelectorAll(".ml-table-search .el-form .ml-form-item-box").length;
+      this.init(num);
       this.hided = isHided;
     },
     reset() {
