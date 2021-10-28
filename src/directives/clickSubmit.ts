@@ -5,15 +5,37 @@
 import { DirectiveOptions } from "vue/types/umd";
 
 function addLoadingStatus(el: HTMLElement & { disabled?: boolean }) {
-  el.className += " is-loading";
-  const dom = '<i class="el-icon-loading"></i>';
-  el.innerHTML = dom + el.innerHTML;
+  const dom = document.createElement("span");
+  dom.id = "btn-directive-loding";
+  dom.className += " is-loading";
+  dom.style.position = "absolute";
+  dom.style.top = "50%";
+  dom.style.left = "50%";
+  dom.style.transform = "translate(-7px,-7px)";
+  dom.innerHTML += '<i class="el-icon-loading"></i>';
+
+  if (el.children?.[0]) {
+    const childDom = el.children[0] as any;
+    childDom.style.opacity = "0";
+  }
+
+  //  el.className += " is-loading";
+  //  const dom = '<i class="el-icon-loading"></i>';
+  //  el.innerHTML = dom + el.innerHTML;
+  el.style.position = "relative";
+  el.appendChild(dom);
   el.disabled = true;
 }
 
 function removeLoadingStatus(el: HTMLElement & { disabled?: boolean }) {
-  el.className = el.className.replace(/ is-loading/, "");
-  el.innerHTML = el.innerHTML.replace(/<i class="el-icon-loading"><\/i>/, "");
+  //  el.className = el.className.replace(/ is-loading/, "");
+  //  el.innerHTML = el.innerHTML.replace(/<i class="el-icon-loading"><\/i>/, "");
+  if (el.children?.[0]) {
+    const childDom = el.children[0] as any;
+    childDom.style.opacity = "1";
+  }
+  const dom = document.querySelector("#btn-directive-loding") as Node;
+  el.removeChild(dom);
   el.disabled = false;
 }
 

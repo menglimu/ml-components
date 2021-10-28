@@ -155,6 +155,11 @@ export default Vue.extend({
     }
     this.$watch("config", this.onConfigChange, { deep: true, immediate: true });
     this.$watch("dataSource", this.search);
+    this.$watch("paginationConfig.pageSize", (val) => {
+      if (val) {
+        this.pageSize = val;
+      }
+    });
   },
   mounted() {
     // 初始化的时候，是否直接搜索数据

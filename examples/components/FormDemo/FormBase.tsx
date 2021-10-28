@@ -35,6 +35,8 @@ export default Vue.extend({
             { value: 1, label: "男" },
             { value: 0, label: "女" },
           ],
+
+          props: { multiple: true, "collapse-tags": true },
         },
         { label: "性别", prop: "sex", type: "select", optionsGet, show: (data) => data.type === 1 },
         {
