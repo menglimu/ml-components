@@ -277,6 +277,7 @@ export interface MlTableDefaultOptions {
   columnDefaultNormal?: ElTableColumnAny;
   columnDefaultControl?: ElTableColumnAny;
   emptyWord?: string;
+  delWord?: string;
   emptyImg?: any;
   framework?: "cui" | "element-ui";
   outerBtnDefault?: Partial<ElButton>;

@@ -109,6 +109,7 @@ export default Vue.extend({
         fixed: "right",
       },
       emptyWord: "暂无数据",
+      delWord: "此操作不可恢复，确认是否删除？",
       emptyImg,
       framework: "element-ui",
       outerBtnDefault: {
@@ -186,7 +187,7 @@ export default Vue.extend({
       if (this.config_.api?.delete) {
         const ids = data.map((_) => _[this.config_.tableKey]).join(",");
         try {
-          await this.$confirm("此操作将永久删除该数据, 是否继续?");
+          await this.$confirm(this.delWord);
           await this.config_.api?.delete(ids, data);
           this.refresh();
           this.$message.success("删除成功");
