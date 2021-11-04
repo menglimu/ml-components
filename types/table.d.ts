@@ -68,6 +68,9 @@ export interface MlTableProps<D = AnyObj, S = AnyObj> {
   /** 表格外按钮 */
   outerBtn?: MlTableOuterBtn<D>[];
 
+  /** 删除的提示文案 */
+  deleteWord?: string;
+
   /** 数据加载前的钩子函数，可处理请求参数，也可在api中的list方法中处理请求 */
   beforeGetList?: (type: string, params: S & TableParams) => AnyObj;
   /** 数据加载后的钩子函数 */

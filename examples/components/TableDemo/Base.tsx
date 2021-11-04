@@ -36,8 +36,8 @@ const tableData = [
 ];
 
 const tableRes = {
-  // content: tableData,
-  content: [], // tableData, // Array(6).fill(tableData[0]),
+  content: tableData,
+  // content: [], // tableData, // Array(6).fill(tableData[0]),
   total: 0,
 };
 
@@ -127,7 +127,6 @@ export default Vue.extend({
           type: "text",
           evtType: "mldelete",
           name: "删除",
-          showJudge: { newsTitle: "1", newsModel: "2" },
         },
       ],
       paginationConfig: {
@@ -153,8 +152,9 @@ export default Vue.extend({
             console.log(JSON.stringify(params));
             // const data = new Array(10).fill(tableData)
             return new Promise((resolve) => {
+              resolve(tableRes);
               setTimeout(() => {
-                resolve(tableRes);
+                // tableRes.content = [{ idCcNewsManage: "123" }];
               }, 5000);
             });
           },
@@ -316,6 +316,7 @@ export default Vue.extend({
     },
   },
   render() {
-    return <ml-table ref="mainTable" props={this.tableConfig} scopedSlots={{ table: () => <div>1</div> }}></ml-table>;
+    // scopedSlots={{ table: () => <div>1</div> }}
+    return <ml-table ref="mainTable" props={this.tableConfig}></ml-table>;
   },
 });

@@ -1,5 +1,6 @@
 /**
  * 表格组件
+ * FIXME: 删除后清空之前选中状态
  */
 import Vue from "vue";
 import "./table.scss";
@@ -39,6 +40,9 @@ export default Vue.extend({
 
     /** 表格外按钮 */
     outerBtn: { type: Array, default: (): MlTableOuterBtn[] => [] },
+
+    /** 删除的提示文案 */
+    deleteWord: { type: String },
 
     /** 分页配置 */
     paginationConfig: { type: null as PropType<Pagination | false>, default: () => ({}) },
@@ -187,9 +191,12 @@ export default Vue.extend({
       if (this.config_.api?.delete) {
         const ids = data.map((_) => _[this.config_.tableKey]).join(",");
         try {
-          await this.$confirm(this.delWord);
+          await this.$confirm(this.deleteWord || this.delWord);
           await this.config_.api?.delete(ids, data);
           this.refresh();
+          data.forEach((item) => {
+            this.elTable.toggleRowSelection(item, false);
+          });
           this.$message.success("删除成功");
           this.$emit("delete-success", ids, data);
         } catch (error) {
