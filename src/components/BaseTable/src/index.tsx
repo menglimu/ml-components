@@ -1,6 +1,5 @@
 /**
  * 表格组件
- * FIXME: 删除后清空之前选中状态
  */
 import Vue from "vue";
 import "./table.scss";
