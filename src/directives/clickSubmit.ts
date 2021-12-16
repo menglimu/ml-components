@@ -15,27 +15,23 @@ function addLoadingStatus(el: HTMLElement & { disabled?: boolean }) {
   dom.innerHTML += '<i class="el-icon-loading"></i>';
 
   if (el.children?.[0]) {
-    const childDom = el.children[0] as any;
+    const childDom = el.children[0] as HTMLElement;
     childDom.style.opacity = "0";
   }
-
-  //  el.className += " is-loading";
-  //  const dom = '<i class="el-icon-loading"></i>';
-  //  el.innerHTML = dom + el.innerHTML;
   el.style.position = "relative";
   el.appendChild(dom);
   el.disabled = true;
 }
 
 function removeLoadingStatus(el: HTMLElement & { disabled?: boolean }) {
-  //  el.className = el.className.replace(/ is-loading/, "");
-  //  el.innerHTML = el.innerHTML.replace(/<i class="el-icon-loading"><\/i>/, "");
   if (el.children?.[0]) {
-    const childDom = el.children[0] as any;
+    const childDom = el.children[0] as HTMLElement;
     childDom.style.opacity = "1";
   }
-  const dom = document.querySelector("#btn-directive-loding") as Node;
-  el.removeChild(dom);
+  const dom = el.querySelector("#btn-directive-loding");
+  if (dom && el.contains(dom)) {
+    el.removeChild(dom);
+  }
   el.disabled = false;
 }
 
