@@ -15,7 +15,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, "src/main"),
-      name: "ml-components",
+      name: "ml-component",
       formats: ["es"],
     },
     rollupOptions: {

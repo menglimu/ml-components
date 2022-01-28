@@ -1,5 +1,5 @@
 {
-  "name": "ml-components",
+  "name": "ml-component",
   "version": "1.1.25",
   "description": "ml组件库",
   "private": false,
@@ -8,10 +8,10 @@
     "types"
   ],
   "types": "types",
-  "module": "./dist/ml-components.es.js",
+  "module": "./dist/ml-component.es.js",
   "exports": {
     ".": {
-      "import": "./dist/ml-components.es.js"
+      "import": "./dist/ml-component.es.js"
     }
   },
   "scripts": {
@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/menglimu/ml-components.git"
+    "url": "git+https://github.com/menglimu/ml-component.git"
   },
   "keywords": [
     "vite",
@@ -34,9 +34,9 @@
   "author": "wenlin",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/menglimu/ml-components/issues"
+    "url": "https://github.com/menglimu/ml-component/issues"
   },
-  "homepage": "https://github.com/menglimu/ml-components#readme",
+  "homepage": "https://github.com/menglimu/ml-component#readme",
   "devDependencies": {
     "@types/jest": "^26.0.23",
     "@types/lodash": "^4.14.170",
