@@ -4,7 +4,7 @@ module.exports = {
     node: true,
   },
   globals: {},
-  extends: ["./node_modules/@ml/lint/.eslintrc.js"],
+  extends: ["./node_modules/ml-lint/.eslintrc.js"],
   // overrides: [
   //   {
   //     files: ['*.ts', '*.tsx'],

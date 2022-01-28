@@ -560,25 +560,6 @@
     "@types/yargs" "^16.0.0"
     chalk "^4.0.0"
 
-"@ml/lint@^1.2.0":
-  version "1.2.0"
-  resolved "http://10.12.102.194:4873/@ml%2flint/-/lint-1.2.0.tgz#a80c31916135349cd05f68f0885a82514e2a411b"
-  integrity sha512-o3jCSF4ep63Dz47RRUME6CtSUqDiixtnuWDteBC3IGWt5wCGAqUG2aQp61DKU6g86jboog8wjKuIw3ipombiGw==
-  dependencies:
-    "@typescript-eslint/eslint-plugin" "^4.26.1"
-    "@typescript-eslint/parser" "^4.26.1"
-    "@vue/eslint-config-typescript" "^7.0.0"
-    babel-eslint "^10.1.0"
-    eslint "^7.28.0"
-    eslint-config-alloy "^3.10.0"
-    eslint-plugin-vue "^7.11.0"
-    stylelint "^13.13.1"
-    stylelint-config-recess-order "^2.4.0"
-    stylelint-config-standard "^22.0.0"
-    stylelint-order "^4.1.0"
-    stylelint-scss "^3.19.0"
-    typescript "^4.3.2"
-
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "http://10.12.102.194:4873/@nodelib%2ffs.scandir/-/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"
@@ -3810,6 +3791,25 @@ mkdirp@1.x:
   version "1.0.4"
   resolved "http://10.12.102.194:4873/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha1-PrXtYmInVteaXw4qIh3+utdcL34=
+
+ml-lint@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.npmjs.org/ml-lint/-/ml-lint-1.2.3.tgz#4feea634c3cd80c6e8577a604bd64ab5beb23df3"
+  integrity sha512-tyBeW0DmyaO2SkWFKcD2njGAgPeyvBbg/e+5QcQ0UWgptY8RiCTiglsgVDMHKdhQoC3ikDyO8j4IpNbccBEJ1A==
+  dependencies:
+    "@typescript-eslint/eslint-plugin" "^4.26.1"
+    "@typescript-eslint/parser" "^4.26.1"
+    "@vue/eslint-config-typescript" "^7.0.0"
+    babel-eslint "^10.1.0"
+    eslint "^7.28.0"
+    eslint-config-alloy "^3.10.0"
+    eslint-plugin-vue "^7.11.0"
+    stylelint "^13.13.1"
+    stylelint-config-recess-order "^2.4.0"
+    stylelint-config-standard "^22.0.0"
+    stylelint-order "^4.1.0"
+    stylelint-scss "^3.19.0"
+    typescript "^4.3.2"
 
 ms@2.0.0:
   version "2.0.0"

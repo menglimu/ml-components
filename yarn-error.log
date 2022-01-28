@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\ASUS\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add @ml/lint
+  C:\Program Files\nodejs\node.exe C:\Users\ASUS\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add ml-lint
 
 PATH: 
   C:\Program Files (x86)\NetSarang\Xshell 6\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\TortoiseGit\bin;C:\Program Files\Git\cmd;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\nodejs\;C:\Users\ASUS\AppData\Local\Microsoft\WindowsApps;C:\Users\ASUS\AppData\Roaming\npm;
@@ -643,7 +643,7 @@ Lockfile:
       "@types/yargs" "^16.0.0"
       chalk "^4.0.0"
   
-  "@ml/lint@^1.1.6":
+  "ml-lint@^1.1.6":
     version "1.1.6"
     resolved "http://10.12.102.194:4873/@ml%2flint/-/lint-1.1.6.tgz#06f5b6808a014437e15bbcb4d7ab0147d7048726"
     integrity sha512-8OcVxiv3Hv87w0ZFZiv7gpRGkb0KMe6qrkGDPwRSqax8AtdqZQC6hCPTE/xwEAd5r2Z+IyZ452gn6h8oz4tZjA==

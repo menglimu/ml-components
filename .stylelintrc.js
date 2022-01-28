@@ -4,6 +4,6 @@ module.exports = {
     node: true,
   },
   globals: {},
-  extends: ["./node_modules/@ml/lint/.stylelintrc.js"],
+  extends: ["./node_modules/ml-lint/.stylelintrc.js"],
   rules: {},
 };
