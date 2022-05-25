@@ -1,1 +1,75 @@
-export default'/**\r\n * 表格按钮\r\n */\r\nimport Vue from "vue";\r\nimport { MlTableProps } from "types/table";\r\n\r\nlet data = {\r\n  content: [\r\n    { name: "辛弃疾", sentence: "醉里挑灯看剑，梦回吹角连营", occupation: "起义军", remark: "杀贼！杀贼！杀贼" },\r\n    { name: "苏东坡", sentence: "一蓑烟雨任平生", occupation: "老饕", remark: "问汝平生功业" },\r\n    { name: "李清照", sentence: "至今思项羽，不肯过江东", occupation: "怼怼", remark: "易安大人" },\r\n  ],\r\n  total: 1,\r\n};\r\n\r\nexport default Vue.extend({\r\n  name: "TableSearch",\r\n  data() {\r\n    return {\r\n      tableConfig: null as MlTableProps,\r\n      user: "管理员",\r\n    };\r\n  },\r\n  created() {\r\n    this.tableConfig = {\r\n      innerBtn: [\r\n        { name: "修改", showJudge: (row) => row.name !== "李清照" },\r\n        { name: "打榜", type: "text", showJudge: { name: "李清照" } },\r\n      ],\r\n      outerBtn: [\r\n        { name: "单选可用", selection: "single", showJudge: () => this.user === "管理员" },\r\n        { name: "新增evt", type: "primary", Elicon: "", evtType: "add" },\r\n        { name: "新增callback", icon: "", callback: this.onAdd },\r\n        { render: () => <el-button>自定义按钮</el-button> },\r\n      ],\r\n      searchConfig: {\r\n        config: {\r\n          columns: [\r\n            { label: "姓名", prop: "name" },\r\n            { label: "名句", prop: "sentence" },\r\n            { label: "职业", prop: "occupation" },\r\n            { label: "备注", prop: "remark" },\r\n          ],\r\n        },\r\n      },\r\n      config: {\r\n        selection: true,\r\n        api: {\r\n          list: (params) => {\r\n            console.log(params);\r\n            return Promise.resolve(data);\r\n          },\r\n        },\r\n        columns: [\r\n          { label: "姓名", prop: "name" },\r\n          { label: "名句", prop: "sentence" },\r\n          { label: "职业", prop: "occupation" },\r\n          { label: "备注", prop: "remark" },\r\n        ],\r\n      },\r\n    };\r\n  },\r\n  methods: {\r\n    onAdd() {\r\n      this.$message("callback 点击回调");\r\n    },\r\n    onAddEvt() {\r\n      this.$message("evt 点击回调");\r\n    },\r\n  },\r\n  render() {\r\n    return <ml-table props={this.tableConfig} onAdd={this.onAddEvt}></ml-table>;\r\n  },\r\n});\r\n';
+var n=`/**\r
+ * \u8868\u683C\u6309\u94AE\r
+ */\r
+import Vue from "vue";\r
+import { MlTableProps } from "types/table";\r
+\r
+let data = {\r
+  content: [\r
+    { name: "\u8F9B\u5F03\u75BE", sentence: "\u9189\u91CC\u6311\u706F\u770B\u5251\uFF0C\u68A6\u56DE\u5439\u89D2\u8FDE\u8425", occupation: "\u8D77\u4E49\u519B", remark: "\u6740\u8D3C\uFF01\u6740\u8D3C\uFF01\u6740\u8D3C" },\r
+    { name: "\u82CF\u4E1C\u5761", sentence: "\u4E00\u84D1\u70DF\u96E8\u4EFB\u5E73\u751F", occupation: "\u8001\u9955", remark: "\u95EE\u6C5D\u5E73\u751F\u529F\u4E1A" },\r
+    { name: "\u674E\u6E05\u7167", sentence: "\u81F3\u4ECA\u601D\u9879\u7FBD\uFF0C\u4E0D\u80AF\u8FC7\u6C5F\u4E1C", occupation: "\u603C\u603C", remark: "\u6613\u5B89\u5927\u4EBA" },\r
+  ],\r
+  total: 1,\r
+};\r
+\r
+export default Vue.extend({\r
+  name: "TableSearch",\r
+  data() {\r
+    return {\r
+      tableConfig: null as MlTableProps,\r
+      user: "\u7BA1\u7406\u5458",\r
+    };\r
+  },\r
+  created() {\r
+    this.tableConfig = {\r
+      innerBtn: [\r
+        { name: "\u4FEE\u6539", showJudge: (row) => row.name !== "\u674E\u6E05\u7167" },\r
+        { name: "\u6253\u699C", type: "text", showJudge: { name: "\u674E\u6E05\u7167" } },\r
+      ],\r
+      outerBtn: [\r
+        { name: "\u5355\u9009\u53EF\u7528", selection: "single", showJudge: () => this.user === "\u7BA1\u7406\u5458" },\r
+        { name: "\u65B0\u589Eevt", type: "primary", Elicon: "", evtType: "add" },\r
+        { name: "\u65B0\u589Ecallback", icon: "", callback: this.onAdd },\r
+        { render: () => <el-button>\u81EA\u5B9A\u4E49\u6309\u94AE</el-button> },\r
+      ],\r
+      searchConfig: {\r
+        config: {\r
+          columns: [\r
+            { label: "\u59D3\u540D", prop: "name" },\r
+            { label: "\u540D\u53E5", prop: "sentence" },\r
+            { label: "\u804C\u4E1A", prop: "occupation" },\r
+            { label: "\u5907\u6CE8", prop: "remark" },\r
+          ],\r
+        },\r
+      },\r
+      config: {\r
+        selection: true,\r
+        api: {\r
+          list: (params) => {\r
+            console.log(params);\r
+            return Promise.resolve(data);\r
+          },\r
+        },\r
+        columns: [\r
+          { label: "\u59D3\u540D", prop: "name" },\r
+          { label: "\u540D\u53E5", prop: "sentence" },\r
+          { label: "\u804C\u4E1A", prop: "occupation" },\r
+          { label: "\u5907\u6CE8", prop: "remark" },\r
+        ],\r
+      },\r
+    };\r
+  },\r
+  methods: {\r
+    onAdd() {\r
+      this.$message("callback \u70B9\u51FB\u56DE\u8C03");\r
+    },\r
+    onAddEvt() {\r
+      this.$message("evt \u70B9\u51FB\u56DE\u8C03");\r
+    },\r
+  },\r
+  render() {\r
+    return <ml-table props={this.tableConfig} onAdd={this.onAddEvt}></ml-table>;\r
+  },\r
+});\r
+`;export{n as default};

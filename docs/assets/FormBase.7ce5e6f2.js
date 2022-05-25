@@ -1,1 +1,82 @@
-export default'/**\r\n * 表单基础\r\n */\r\nimport Vue from "vue";\r\nimport { MlForm, MlFormConfig } from "types/form";\r\nimport CustomCascader from "@/components/CustomCascader";\r\n\r\nfunction optionsGet() {\r\n  return Promise.resolve([\r\n    { value: 1, label: "男" },\r\n    { value: 0, label: "女" },\r\n  ]);\r\n}\r\n\r\nexport default Vue.extend({\r\n  name: "FormBase",\r\n  data() {\r\n    return {\r\n      formConfig: null as MlFormConfig,\r\n      formValue: null,\r\n    };\r\n  },\r\n  created() {\r\n    this.formConfig = {\r\n      labelPosition: "top",\r\n      columns: [\r\n        { label: "姓名", placeholder: "姓名姓名姓名", prop: "name" },\r\n        {\r\n          type: "select",\r\n          label: "性别",\r\n          prop: "type",\r\n          required: true,\r\n          value: 0,\r\n          options: [\r\n            { value: 1, label: "男" },\r\n            { value: 0, label: "女" },\r\n          ],\r\n        },\r\n        { label: "性别", prop: "sex", type: "select", optionsGet, show: (data) => data.type === 1 },\r\n        {\r\n          label: "自定义",\r\n          prop: "render",\r\n          type: "select",\r\n          required: true,\r\n          block: true,\r\n          optionsGet,\r\n          render: () => <CustomCascader options={[{ label: "北京", value: 1 }]} />,\r\n        },\r\n        { label: "备注", prop: "marks", type: "textarea", block: true },\r\n      ],\r\n    };\r\n  },\r\n  methods: {\r\n    async onSubmit() {\r\n      await (this.$refs.form as MlForm).validate();\r\n      return new Promise((resolve) => {\r\n        setTimeout(() => {\r\n          this.$message.success("提交成功");\r\n          resolve(1);\r\n        }, 5000);\r\n      });\r\n    },\r\n    onReset() {\r\n      (this.$refs.form as MlForm).reset();\r\n    },\r\n  },\r\n  render() {\r\n    return (\r\n      <div>\r\n        <ml-form ref="form" config={this.formConfig} v-model={this.formValue}></ml-form>\r\n        <div>\r\n          <el-button type="primary" onClick={this.onSubmit}>\r\n            提交\r\n          </el-button>\r\n          <el-button onClick={this.onReset}>重置</el-button>\r\n        </div>\r\n        <p>当前表单输出值：{JSON.stringify(this.formValue)}</p>\r\n      </div>\r\n    );\r\n  },\r\n});\r\n';
+var r=`/**\r
+ * \u8868\u5355\u57FA\u7840\r
+ */\r
+import Vue from "vue";\r
+import { MlForm, MlFormConfig } from "types/form";\r
+import CustomCascader from "@/components/CustomCascader";\r
+\r
+function optionsGet() {\r
+  return Promise.resolve([\r
+    { value: 1, label: "\u7537" },\r
+    { value: 0, label: "\u5973" },\r
+  ]);\r
+}\r
+\r
+export default Vue.extend({\r
+  name: "FormBase",\r
+  data() {\r
+    return {\r
+      formConfig: null as MlFormConfig,\r
+      formValue: null,\r
+    };\r
+  },\r
+  created() {\r
+    this.formConfig = {\r
+      labelPosition: "top",\r
+      columns: [\r
+        { label: "\u59D3\u540D", placeholder: "\u59D3\u540D\u59D3\u540D\u59D3\u540D", prop: "name" },\r
+        {\r
+          type: "select",\r
+          label: "\u6027\u522B",\r
+          prop: "type",\r
+          required: true,\r
+          value: 0,\r
+          options: [\r
+            { value: 1, label: "\u7537" },\r
+            { value: 0, label: "\u5973" },\r
+          ],\r
+        },\r
+        { label: "\u6027\u522B", prop: "sex", type: "select", optionsGet, show: (data) => data.type === 1 },\r
+        {\r
+          label: "\u81EA\u5B9A\u4E49",\r
+          prop: "render",\r
+          type: "select",\r
+          required: true,\r
+          block: true,\r
+          optionsGet,\r
+          render: () => <CustomCascader options={[{ label: "\u5317\u4EAC", value: 1 }]} />,\r
+        },\r
+        { label: "\u5907\u6CE8", prop: "marks", type: "textarea", block: true },\r
+      ],\r
+    };\r
+  },\r
+  methods: {\r
+    async onSubmit() {\r
+      await (this.$refs.form as MlForm).validate();\r
+      return new Promise((resolve) => {\r
+        setTimeout(() => {\r
+          this.$message.success("\u63D0\u4EA4\u6210\u529F");\r
+          resolve(1);\r
+        }, 5000);\r
+      });\r
+    },\r
+    onReset() {\r
+      (this.$refs.form as MlForm).reset();\r
+    },\r
+  },\r
+  render() {\r
+    return (\r
+      <div>\r
+        <ml-form ref="form" config={this.formConfig} v-model={this.formValue}></ml-form>\r
+        <div>\r
+          <el-button type="primary" onClick={this.onSubmit}>\r
+            \u63D0\u4EA4\r
+          </el-button>\r
+          <el-button onClick={this.onReset}>\u91CD\u7F6E</el-button>\r
+        </div>\r
+        <p>\u5F53\u524D\u8868\u5355\u8F93\u51FA\u503C\uFF1A{JSON.stringify(this.formValue)}</p>\r
+      </div>\r
+    );\r
+  },\r
+});\r
+`;export{r as default};

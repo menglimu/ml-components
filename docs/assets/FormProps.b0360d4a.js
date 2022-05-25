@@ -1,1 +1,55 @@
-export default'/**\r\n * 表单参数传入\r\n */\r\nimport Vue from "vue";\r\nimport { MlForm, MlFormConfig } from "types/form";\r\n\r\nexport default Vue.extend({\r\n  name: "FormProps",\r\n  data() {\r\n    return {\r\n      formConfig: null as MlFormConfig,\r\n      formValue: null,\r\n    };\r\n  },\r\n  created() {\r\n    this.formConfig = {\r\n      columns: [\r\n        {\r\n          type: "select",\r\n          label: "长度",\r\n          prop: "length",\r\n          options: [\r\n            { label: "杜甫", value: 1 },\r\n            { label: "李白", value: 2 },\r\n            { label: "辛弃疾", value: 12 },\r\n          ],\r\n          nodeData: {\r\n            props: { placeholder: "请选择123" },\r\n            attrs: { style: "width: 600px;" },\r\n          },\r\n          props: {\r\n            multiple: true,\r\n          },\r\n          attrs: {\r\n            class: "select1235",\r\n          },\r\n        },\r\n      ],\r\n    };\r\n  },\r\n  methods: {\r\n    onSubmit() {\r\n      let form = this.$refs.form as MlForm;\r\n      form.validate();\r\n    },\r\n  },\r\n  render() {\r\n    return (\r\n      <div>\r\n        <ml-form ref="form" config={this.formConfig} v-model={this.formValue}></ml-form>\r\n      </div>\r\n    );\r\n  },\r\n});\r\n';
+var r=`/**\r
+ * \u8868\u5355\u53C2\u6570\u4F20\u5165\r
+ */\r
+import Vue from "vue";\r
+import { MlForm, MlFormConfig } from "types/form";\r
+\r
+export default Vue.extend({\r
+  name: "FormProps",\r
+  data() {\r
+    return {\r
+      formConfig: null as MlFormConfig,\r
+      formValue: null,\r
+    };\r
+  },\r
+  created() {\r
+    this.formConfig = {\r
+      columns: [\r
+        {\r
+          type: "select",\r
+          label: "\u957F\u5EA6",\r
+          prop: "length",\r
+          options: [\r
+            { label: "\u675C\u752B", value: 1 },\r
+            { label: "\u674E\u767D", value: 2 },\r
+            { label: "\u8F9B\u5F03\u75BE", value: 12 },\r
+          ],\r
+          nodeData: {\r
+            props: { placeholder: "\u8BF7\u9009\u62E9123" },\r
+            attrs: { style: "width: 600px;" },\r
+          },\r
+          props: {\r
+            multiple: true,\r
+          },\r
+          attrs: {\r
+            class: "select1235",\r
+          },\r
+        },\r
+      ],\r
+    };\r
+  },\r
+  methods: {\r
+    onSubmit() {\r
+      let form = this.$refs.form as MlForm;\r
+      form.validate();\r
+    },\r
+  },\r
+  render() {\r
+    return (\r
+      <div>\r
+        <ml-form ref="form" config={this.formConfig} v-model={this.formValue}></ml-form>\r
+      </div>\r
+    );\r
+  },\r
+});\r
+`;export{r as default};

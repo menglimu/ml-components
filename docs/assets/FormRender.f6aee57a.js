@@ -1,1 +1,79 @@
-export default'/**\r\n * 表单自定义组件\r\n */\r\nimport Vue from "vue";\r\nimport { MlForm, MlFormConfig } from "types/form";\r\n\r\nexport default Vue.extend({\r\n  name: "FormProps",\r\n  data() {\r\n    return {\r\n      formConfig: null as MlFormConfig,\r\n      formValue: null,\r\n    };\r\n  },\r\n  created() {\r\n    this.formConfig = {\r\n      inline: false,\r\n      columns: [\r\n        {\r\n          type: "",\r\n          prop: "list1",\r\n          label: "细化指标1234",\r\n          required: true,\r\n          // eslint-disable-next-line\r\n          render: () => {\r\n            // 自定义组件。会自动绑定value和input事件。上面的细化指标demo。可通过自定义组件来实现。\r\n            // disabled={true}\r\n            // console.log(this, 12);\r\n            return <el-input onInput={() => console.log(123567)} />;\r\n          },\r\n        },\r\n        {\r\n          render: () => (\r\n            <div style={{ height: "1px", background: "#e6e6e6", width: "100%", marginBottom: "20px" }}></div>\r\n          ),\r\n        },\r\n        {\r\n          label: "长度",\r\n          prop: "length",\r\n          render(h, value, onInput) {\r\n            return (\r\n              <div>\r\n                <el-button\r\n                  onClick={() => {\r\n                    const val = value ? [...value] : [];\r\n                    val.push(val.length + 1);\r\n                    onInput(val);\r\n                  }}\r\n                >\r\n                  新增\r\n                </el-button>\r\n                <ul>\r\n                  {value?.map((item: any) => (\r\n                    <li>{item}</li>\r\n                  ))}\r\n                </ul>\r\n              </div>\r\n            );\r\n          },\r\n        },\r\n      ],\r\n    };\r\n  },\r\n  methods: {\r\n    onSubmit() {\r\n      let form = this.$refs.form as MlForm;\r\n      form.validate();\r\n    },\r\n  },\r\n  render() {\r\n    return (\r\n      <div>\r\n        <ml-form ref="form" config={this.formConfig} v-model={this.formValue}></ml-form>\r\n        {JSON.stringify(this.formValue)}\r\n      </div>\r\n    );\r\n  },\r\n});\r\n';
+var r=`/**\r
+ * \u8868\u5355\u81EA\u5B9A\u4E49\u7EC4\u4EF6\r
+ */\r
+import Vue from "vue";\r
+import { MlForm, MlFormConfig } from "types/form";\r
+\r
+export default Vue.extend({\r
+  name: "FormProps",\r
+  data() {\r
+    return {\r
+      formConfig: null as MlFormConfig,\r
+      formValue: null,\r
+    };\r
+  },\r
+  created() {\r
+    this.formConfig = {\r
+      inline: false,\r
+      columns: [\r
+        {\r
+          type: "",\r
+          prop: "list1",\r
+          label: "\u7EC6\u5316\u6307\u68071234",\r
+          required: true,\r
+          // eslint-disable-next-line\r
+          render: () => {\r
+            // \u81EA\u5B9A\u4E49\u7EC4\u4EF6\u3002\u4F1A\u81EA\u52A8\u7ED1\u5B9Avalue\u548Cinput\u4E8B\u4EF6\u3002\u4E0A\u9762\u7684\u7EC6\u5316\u6307\u6807demo\u3002\u53EF\u901A\u8FC7\u81EA\u5B9A\u4E49\u7EC4\u4EF6\u6765\u5B9E\u73B0\u3002\r
+            // disabled={true}\r
+            // console.log(this, 12);\r
+            return <el-input onInput={() => console.log(123567)} />;\r
+          },\r
+        },\r
+        {\r
+          render: () => (\r
+            <div style={{ height: "1px", background: "#e6e6e6", width: "100%", marginBottom: "20px" }}></div>\r
+          ),\r
+        },\r
+        {\r
+          label: "\u957F\u5EA6",\r
+          prop: "length",\r
+          render(h, value, onInput) {\r
+            return (\r
+              <div>\r
+                <el-button\r
+                  onClick={() => {\r
+                    const val = value ? [...value] : [];\r
+                    val.push(val.length + 1);\r
+                    onInput(val);\r
+                  }}\r
+                >\r
+                  \u65B0\u589E\r
+                </el-button>\r
+                <ul>\r
+                  {value?.map((item: any) => (\r
+                    <li>{item}</li>\r
+                  ))}\r
+                </ul>\r
+              </div>\r
+            );\r
+          },\r
+        },\r
+      ],\r
+    };\r
+  },\r
+  methods: {\r
+    onSubmit() {\r
+      let form = this.$refs.form as MlForm;\r
+      form.validate();\r
+    },\r
+  },\r
+  render() {\r
+    return (\r
+      <div>\r
+        <ml-form ref="form" config={this.formConfig} v-model={this.formValue}></ml-form>\r
+        {JSON.stringify(this.formValue)}\r
+      </div>\r
+    );\r
+  },\r
+});\r
+`;export{r as default};

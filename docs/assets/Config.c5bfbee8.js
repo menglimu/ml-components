@@ -1,1 +1,59 @@
-export default'/**\r\n * 表格配置\r\n */\r\nimport Vue from "vue";\r\nimport { MlTable, MlTableProps } from "types/table";\r\n\r\nlet data = {\r\n  content: [\r\n    { name: "辛弃疾", sentence: "醉里挑灯看剑，梦回吹角连营", occupation: "起义军", remark: "杀贼！杀贼！杀贼" },\r\n    { name: "苏东坡", sentence: "一蓑烟雨任平生", occupation: "老饕", remark: "问汝平生功业" },\r\n    { name: "李清照", sentence: "至今思项羽，不肯过江东", occupation: "怼怼", remark: "易安大人" },\r\n  ],\r\n  total: 1,\r\n};\r\n\r\nexport default Vue.extend({\r\n  name: "TableSearch",\r\n  data() {\r\n    return {\r\n      tableConfig: null as MlTableProps,\r\n    };\r\n  },\r\n  created() {\r\n    this.tableConfig = {\r\n      innerBtn: [{ name: "打榜", type: "text" }],\r\n      config: {\r\n        selection: true,\r\n        index: true,\r\n        tableOptWidth: "80px",\r\n        height: 300,\r\n        maxHeight: 600,\r\n        initSearch: false,\r\n        api: {\r\n          list: (params) => {\r\n            console.log(params);\r\n            return Promise.resolve(data);\r\n          },\r\n        },\r\n        columns: [\r\n          { label: "姓名", prop: "name" },\r\n          { label: "名句", prop: "sentence" },\r\n          { label: "职业", prop: "occupation" },\r\n          { label: "备注", prop: "remark" },\r\n        ],\r\n      },\r\n    };\r\n  },\r\n  mounted() {\r\n    setTimeout(() => {\r\n      let mlTable = this.$refs.mainTable as MlTable;\r\n      mlTable.refresh();\r\n    }, 6000);\r\n  },\r\n  methods: {},\r\n  render() {\r\n    return <ml-table ref="mainTable" props={this.tableConfig}></ml-table>;\r\n  },\r\n});\r\n';
+var r=`/**\r
+ * \u8868\u683C\u914D\u7F6E\r
+ */\r
+import Vue from "vue";\r
+import { MlTable, MlTableProps } from "types/table";\r
+\r
+let data = {\r
+  content: [\r
+    { name: "\u8F9B\u5F03\u75BE", sentence: "\u9189\u91CC\u6311\u706F\u770B\u5251\uFF0C\u68A6\u56DE\u5439\u89D2\u8FDE\u8425", occupation: "\u8D77\u4E49\u519B", remark: "\u6740\u8D3C\uFF01\u6740\u8D3C\uFF01\u6740\u8D3C" },\r
+    { name: "\u82CF\u4E1C\u5761", sentence: "\u4E00\u84D1\u70DF\u96E8\u4EFB\u5E73\u751F", occupation: "\u8001\u9955", remark: "\u95EE\u6C5D\u5E73\u751F\u529F\u4E1A" },\r
+    { name: "\u674E\u6E05\u7167", sentence: "\u81F3\u4ECA\u601D\u9879\u7FBD\uFF0C\u4E0D\u80AF\u8FC7\u6C5F\u4E1C", occupation: "\u603C\u603C", remark: "\u6613\u5B89\u5927\u4EBA" },\r
+  ],\r
+  total: 1,\r
+};\r
+\r
+export default Vue.extend({\r
+  name: "TableSearch",\r
+  data() {\r
+    return {\r
+      tableConfig: null as MlTableProps,\r
+    };\r
+  },\r
+  created() {\r
+    this.tableConfig = {\r
+      innerBtn: [{ name: "\u6253\u699C", type: "text" }],\r
+      config: {\r
+        selection: true,\r
+        index: true,\r
+        tableOptWidth: "80px",\r
+        height: 300,\r
+        maxHeight: 600,\r
+        initSearch: false,\r
+        api: {\r
+          list: (params) => {\r
+            console.log(params);\r
+            return Promise.resolve(data);\r
+          },\r
+        },\r
+        columns: [\r
+          { label: "\u59D3\u540D", prop: "name" },\r
+          { label: "\u540D\u53E5", prop: "sentence" },\r
+          { label: "\u804C\u4E1A", prop: "occupation" },\r
+          { label: "\u5907\u6CE8", prop: "remark" },\r
+        ],\r
+      },\r
+    };\r
+  },\r
+  mounted() {\r
+    setTimeout(() => {\r
+      let mlTable = this.$refs.mainTable as MlTable;\r
+      mlTable.refresh();\r
+    }, 6000);\r
+  },\r
+  methods: {},\r
+  render() {\r
+    return <ml-table ref="mainTable" props={this.tableConfig}></ml-table>;\r
+  },\r
+});\r
+`;export{r as default};

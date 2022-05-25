@@ -1,1 +1,303 @@
-export default'/**\r\n * 表格的基础使用\r\n */\r\nimport { MlTable, MlTableProps } from "types/table";\r\nimport Vue from "vue";\r\n\r\nconst tableData = [\r\n  {\r\n    idCcNewsManage: "8f3122df-d0a0-4ee5-8d00-65c559c8d8e3",\r\n    newsCategory: "",\r\n    newsTitle: "1",\r\n    glanceNum: 0,\r\n    newsSort: 0,\r\n    publishTime: "2020-01-14 16:36:55",\r\n    newsSource: "1002",\r\n    newsStatus: "0",\r\n    newsPromulgator: "发布人",\r\n    newsModel: "2",\r\n    delFlag: "",\r\n    creatTime: "2020-01-14 16:19:56",\r\n    creatUser: "",\r\n    updateTime: "2020-02-25 16:58:06",\r\n    updateUser: "",\r\n    delUser: "",\r\n    remark: "",\r\n    newsContent: "<p>111111</p>",\r\n    sourceName: "",\r\n    modelName: "",\r\n    ids: "",\r\n    fileIds: [\r\n      "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606369809299&di=af56d824b57283f20e7b5edd0bf99c05&imgtype=0&src=http%3A%2F%2Fa2.att.hudong.com%2F18%2F37%2F01300000342079124824374452584.jpg",\r\n      "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606369809299&di=af56d824b57283f20e7b5edd0bf99c05&imgtype=0&src=http%3A%2F%2Fa2.att.hudong.com%2F18%2F37%2F01300000342079124824374452584.jpg",\r\n    ],\r\n    svg: "activate",\r\n  },\r\n];\r\n\r\nconst tableRes = {\r\n  content: tableData,\r\n  // content: [], // tableData, // Array(6).fill(tableData[0]),\r\n  total: 1,\r\n};\r\n\r\nlet options = [\r\n  { label: "怼怼", value: 1 },\r\n  { label: "冠军", value: 2 },\r\n];\r\n\r\nexport default Vue.extend({\r\n  name: "TableBase",\r\n  data() {\r\n    return {\r\n      tableConfig: null as MlTableProps,\r\n      hideOneColumn: false,\r\n    };\r\n  },\r\n  created() {\r\n    this.tableConfig = {\r\n      searchConfig: {\r\n        config: {\r\n          columns: [\r\n            {\r\n              type: "string",\r\n              label: "通知公告",\r\n              prop: "title",\r\n            },\r\n            {\r\n              type: "select",\r\n              label: "通知类型",\r\n              prop: "type",\r\n              optionsGet: () => Promise.resolve(options),\r\n            },\r\n            {\r\n              type: "datetimerange",\r\n              label: "创建时间",\r\n              prop: "times",\r\n            },\r\n            {\r\n              type: "string",\r\n              label: "通知公告",\r\n              prop: "title1",\r\n            },\r\n          ],\r\n        },\r\n      },\r\n      // 参数的转换函数。可以直接在api、的list中处理\r\n      beforeGetList: (type, params) => ({ ...params, a: 123 }),\r\n      afterGetList: (type, data) => console.log(type, data),\r\n      searchData: {},\r\n      outerBtn: [\r\n        { size: "small", name: "重新请求options", type: "primary", callback: this.reFormOptions },\r\n        {\r\n          evtType: "setValue",\r\n          size: "small",\r\n          name: "显示隐藏",\r\n          type: "primary",\r\n          showJudge: (data) => data.length > 0,\r\n        },\r\n        {\r\n          type: "text",\r\n          evtType: "mldelete",\r\n          name: "删除",\r\n        },\r\n      ],\r\n\r\n      innerBtn: [\r\n        {\r\n          type: "text",\r\n          evtType: "mldelete",\r\n          name: "删除",\r\n          showJudge: { newsTitle: "1", newsModel: "2" },\r\n        },\r\n      ],\r\n      paginationConfig: {\r\n        background: true,\r\n        pageSizes: [10, 20, 30, 40],\r\n        pageSize: 10,\r\n      },\r\n      config: {\r\n        selection: true, // 多选，默认true\r\n        index: true, // 序号 默认false\r\n        // tableTree: true, // 是否tree，属性表格，根据业务加上的\r\n        tableKey: "idCcNewsManage", // 主键，默认id\r\n        tableOptWidth: "130px", // 表格操作宽度\r\n        initSearch: true, // 初始化的时候，是否直接请求数据，\r\n        nodeData: {\r\n          props: {\r\n            height: "500px",\r\n          },\r\n        },\r\n        // 表格操作接口\r\n        api: {\r\n          list: (params) => {\r\n            console.log(JSON.stringify(params));\r\n            // const data = new Array(10).fill(tableData)\r\n            return new Promise((resolve) => {\r\n              setTimeout(() => {\r\n                resolve(tableRes);\r\n              }, 5000);\r\n            });\r\n          },\r\n          delete: (ids, data) => {\r\n            console.log(ids, data);\r\n            this.onDelete();\r\n            return Promise.resolve();\r\n          },\r\n        },\r\n        columns: [\r\n          {\r\n            type: "string",\r\n            label: "排序",\r\n            prop: "newsSort",\r\n            sortable: "custom",\r\n          },\r\n          {\r\n            type: "string",\r\n            label: "标题",\r\n            prop: "newsTitle",\r\n            key: "newsTitle1", // 重复prop时，需要给其中一个指定一个不同的key\r\n            // sortable: true,\r\n            render: (h, params) => {\r\n              return (\r\n                <div\r\n                  onClick={this.onDetail.bind(this, params.row)}\r\n                  style={`color: #1EA1FF; text-decoration: underline;cursor: pointer;`}\r\n                >\r\n                  {params.row.newsTitle}\r\n                </div>\r\n              );\r\n            },\r\n          },\r\n          {\r\n            type: "string",\r\n            label: "标题",\r\n            prop: "newsTitle",\r\n          },\r\n          {\r\n            type: "string",\r\n            label: "发布人",\r\n            prop: "newsPromulgator",\r\n            hide: () => this.hideOneColumn,\r\n          },\r\n          {\r\n            type: "string",\r\n            label: "浏览量",\r\n            prop: "glanceNum",\r\n          },\r\n          {\r\n            type: "svg",\r\n            label: "图标",\r\n            prop: "svg",\r\n            statusJudge: () => "success",\r\n            // icons: icons\r\n          },\r\n          {\r\n            label: "发布时间",\r\n            prop: "publishTime",\r\n            statusJudge: {\r\n              success: { newsTitle: "1", newsModel: "2" },\r\n              error: { newsTitle: "1", newsModel: "2" },\r\n              warning: { newsTitle: "1", newsModel: "2" },\r\n              done: { newsTitle: "1", newsModel: "2" },\r\n              failed: { newsTitle: "1", newsModel: "2" },\r\n            },\r\n            formatter: () => "slajdfkld",\r\n          },\r\n          {\r\n            label: "更新时间",\r\n            prop: "updateTime",\r\n          },\r\n          {\r\n            label: "创建时间",\r\n            prop: "creatTime",\r\n          },\r\n          {\r\n            type: "select",\r\n            label: "状态",\r\n            prop: "newsStatus",\r\n            options: [\r\n              { label: "已提交", value: "0" },\r\n              { label: "已上架", value: "1" },\r\n              { label: "已下架", value: "2" },\r\n            ],\r\n          },\r\n\r\n          {\r\n            type: "select",\r\n            label: "结构模式",\r\n            prop: "newsModel",\r\n            options: [\r\n              {\r\n                value: "1",\r\n                label: "上下结构",\r\n              },\r\n              {\r\n                value: "2",\r\n                label: "左右结构",\r\n              },\r\n            ],\r\n          },\r\n          {\r\n            type: "image",\r\n            label: "封面图片",\r\n            prop: "fileIds",\r\n            statusJudge: {\r\n              error: { newsTitle: "1", newsModel: "2" },\r\n            },\r\n          },\r\n          {\r\n            label: "自定义列",\r\n            prop: "fileIds",\r\n            renderColumn(h) {\r\n              return (\r\n                <el-table-column\r\n                  label="自定义列"\r\n                  scopedSlots={{\r\n                    default: () => {\r\n                      return <span>1234</span>;\r\n                    },\r\n                  }}\r\n                ></el-table-column>\r\n              );\r\n            },\r\n          },\r\n          // {\r\n          //   tag: \'ml-editor\', //\'c-table\',\r\n          //   label: \'新闻内容\',\r\n          //   prop: \'newsContent\',\r\n          //   block: true,\r\n          //   showTable: false\r\n          // }\r\n\r\n          // {\r\n          //   type: \'string\',\r\n          //   label: \'图标名称\',\r\n          //   prop: \'icon\',\r\n          //   showTable: true, // 是否在表格中展示\r\n          //    // 搜索时使用，默认false\r\n          //   addForm: true, // 新增时使用，默认true\r\n          //   editForm: true, // 编辑时使用，默认true\r\n          //   viewForm: true, // 查看是使用，默认true\r\n        ],\r\n      },\r\n    };\r\n  },\r\n  methods: {\r\n    onDelete() {\r\n      this.$message.success("删除xxxxx");\r\n    },\r\n    onDetail() {\r\n      this.$message.success("查看详情");\r\n      this.hideOneColumn = !this.hideOneColumn;\r\n    },\r\n    reFormOptions() {\r\n      options = [{ label: "易安", value: 1 }];\r\n      (this.$refs.mainTable as MlTable).mlForm.reloadOptions("type");\r\n    },\r\n  },\r\n  render() {\r\n    return <ml-table ref="mainTable" props={this.tableConfig}></ml-table>;\r\n  },\r\n});\r\n';
+var r=`/**\r
+ * \u8868\u683C\u7684\u57FA\u7840\u4F7F\u7528\r
+ */\r
+import { MlTable, MlTableProps } from "types/table";\r
+import Vue from "vue";\r
+\r
+const tableData = [\r
+  {\r
+    idCcNewsManage: "8f3122df-d0a0-4ee5-8d00-65c559c8d8e3",\r
+    newsCategory: "",\r
+    newsTitle: "1",\r
+    glanceNum: 0,\r
+    newsSort: 0,\r
+    publishTime: "2020-01-14 16:36:55",\r
+    newsSource: "1002",\r
+    newsStatus: "0",\r
+    newsPromulgator: "\u53D1\u5E03\u4EBA",\r
+    newsModel: "2",\r
+    delFlag: "",\r
+    creatTime: "2020-01-14 16:19:56",\r
+    creatUser: "",\r
+    updateTime: "2020-02-25 16:58:06",\r
+    updateUser: "",\r
+    delUser: "",\r
+    remark: "",\r
+    newsContent: "<p>111111</p>",\r
+    sourceName: "",\r
+    modelName: "",\r
+    ids: "",\r
+    fileIds: [\r
+      "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606369809299&di=af56d824b57283f20e7b5edd0bf99c05&imgtype=0&src=http%3A%2F%2Fa2.att.hudong.com%2F18%2F37%2F01300000342079124824374452584.jpg",\r
+      "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606369809299&di=af56d824b57283f20e7b5edd0bf99c05&imgtype=0&src=http%3A%2F%2Fa2.att.hudong.com%2F18%2F37%2F01300000342079124824374452584.jpg",\r
+    ],\r
+    svg: "activate",\r
+  },\r
+];\r
+\r
+const tableRes = {\r
+  content: tableData,\r
+  // content: [], // tableData, // Array(6).fill(tableData[0]),\r
+  total: 1,\r
+};\r
+\r
+let options = [\r
+  { label: "\u603C\u603C", value: 1 },\r
+  { label: "\u51A0\u519B", value: 2 },\r
+];\r
+\r
+export default Vue.extend({\r
+  name: "TableBase",\r
+  data() {\r
+    return {\r
+      tableConfig: null as MlTableProps,\r
+      hideOneColumn: false,\r
+    };\r
+  },\r
+  created() {\r
+    this.tableConfig = {\r
+      searchConfig: {\r
+        config: {\r
+          columns: [\r
+            {\r
+              type: "string",\r
+              label: "\u901A\u77E5\u516C\u544A",\r
+              prop: "title",\r
+            },\r
+            {\r
+              type: "select",\r
+              label: "\u901A\u77E5\u7C7B\u578B",\r
+              prop: "type",\r
+              optionsGet: () => Promise.resolve(options),\r
+            },\r
+            {\r
+              type: "datetimerange",\r
+              label: "\u521B\u5EFA\u65F6\u95F4",\r
+              prop: "times",\r
+            },\r
+            {\r
+              type: "string",\r
+              label: "\u901A\u77E5\u516C\u544A",\r
+              prop: "title1",\r
+            },\r
+          ],\r
+        },\r
+      },\r
+      // \u53C2\u6570\u7684\u8F6C\u6362\u51FD\u6570\u3002\u53EF\u4EE5\u76F4\u63A5\u5728api\u3001\u7684list\u4E2D\u5904\u7406\r
+      beforeGetList: (type, params) => ({ ...params, a: 123 }),\r
+      afterGetList: (type, data) => console.log(type, data),\r
+      searchData: {},\r
+      outerBtn: [\r
+        { size: "small", name: "\u91CD\u65B0\u8BF7\u6C42options", type: "primary", callback: this.reFormOptions },\r
+        {\r
+          evtType: "setValue",\r
+          size: "small",\r
+          name: "\u663E\u793A\u9690\u85CF",\r
+          type: "primary",\r
+          showJudge: (data) => data.length > 0,\r
+        },\r
+        {\r
+          type: "text",\r
+          evtType: "mldelete",\r
+          name: "\u5220\u9664",\r
+        },\r
+      ],\r
+\r
+      innerBtn: [\r
+        {\r
+          type: "text",\r
+          evtType: "mldelete",\r
+          name: "\u5220\u9664",\r
+          showJudge: { newsTitle: "1", newsModel: "2" },\r
+        },\r
+      ],\r
+      paginationConfig: {\r
+        background: true,\r
+        pageSizes: [10, 20, 30, 40],\r
+        pageSize: 10,\r
+      },\r
+      config: {\r
+        selection: true, // \u591A\u9009\uFF0C\u9ED8\u8BA4true\r
+        index: true, // \u5E8F\u53F7 \u9ED8\u8BA4false\r
+        // tableTree: true, // \u662F\u5426tree\uFF0C\u5C5E\u6027\u8868\u683C\uFF0C\u6839\u636E\u4E1A\u52A1\u52A0\u4E0A\u7684\r
+        tableKey: "idCcNewsManage", // \u4E3B\u952E\uFF0C\u9ED8\u8BA4id\r
+        tableOptWidth: "130px", // \u8868\u683C\u64CD\u4F5C\u5BBD\u5EA6\r
+        initSearch: true, // \u521D\u59CB\u5316\u7684\u65F6\u5019\uFF0C\u662F\u5426\u76F4\u63A5\u8BF7\u6C42\u6570\u636E\uFF0C\r
+        nodeData: {\r
+          props: {\r
+            height: "500px",\r
+          },\r
+        },\r
+        // \u8868\u683C\u64CD\u4F5C\u63A5\u53E3\r
+        api: {\r
+          list: (params) => {\r
+            console.log(JSON.stringify(params));\r
+            // const data = new Array(10).fill(tableData)\r
+            return new Promise((resolve) => {\r
+              setTimeout(() => {\r
+                resolve(tableRes);\r
+              }, 5000);\r
+            });\r
+          },\r
+          delete: (ids, data) => {\r
+            console.log(ids, data);\r
+            this.onDelete();\r
+            return Promise.resolve();\r
+          },\r
+        },\r
+        columns: [\r
+          {\r
+            type: "string",\r
+            label: "\u6392\u5E8F",\r
+            prop: "newsSort",\r
+            sortable: "custom",\r
+          },\r
+          {\r
+            type: "string",\r
+            label: "\u6807\u9898",\r
+            prop: "newsTitle",\r
+            key: "newsTitle1", // \u91CD\u590Dprop\u65F6\uFF0C\u9700\u8981\u7ED9\u5176\u4E2D\u4E00\u4E2A\u6307\u5B9A\u4E00\u4E2A\u4E0D\u540C\u7684key\r
+            // sortable: true,\r
+            render: (h, params) => {\r
+              return (\r
+                <div\r
+                  onClick={this.onDetail.bind(this, params.row)}\r
+                  style={\`color: #1EA1FF; text-decoration: underline;cursor: pointer;\`}\r
+                >\r
+                  {params.row.newsTitle}\r
+                </div>\r
+              );\r
+            },\r
+          },\r
+          {\r
+            type: "string",\r
+            label: "\u6807\u9898",\r
+            prop: "newsTitle",\r
+          },\r
+          {\r
+            type: "string",\r
+            label: "\u53D1\u5E03\u4EBA",\r
+            prop: "newsPromulgator",\r
+            hide: () => this.hideOneColumn,\r
+          },\r
+          {\r
+            type: "string",\r
+            label: "\u6D4F\u89C8\u91CF",\r
+            prop: "glanceNum",\r
+          },\r
+          {\r
+            type: "svg",\r
+            label: "\u56FE\u6807",\r
+            prop: "svg",\r
+            statusJudge: () => "success",\r
+            // icons: icons\r
+          },\r
+          {\r
+            label: "\u53D1\u5E03\u65F6\u95F4",\r
+            prop: "publishTime",\r
+            statusJudge: {\r
+              success: { newsTitle: "1", newsModel: "2" },\r
+              error: { newsTitle: "1", newsModel: "2" },\r
+              warning: { newsTitle: "1", newsModel: "2" },\r
+              done: { newsTitle: "1", newsModel: "2" },\r
+              failed: { newsTitle: "1", newsModel: "2" },\r
+            },\r
+            formatter: () => "slajdfkld",\r
+          },\r
+          {\r
+            label: "\u66F4\u65B0\u65F6\u95F4",\r
+            prop: "updateTime",\r
+          },\r
+          {\r
+            label: "\u521B\u5EFA\u65F6\u95F4",\r
+            prop: "creatTime",\r
+          },\r
+          {\r
+            type: "select",\r
+            label: "\u72B6\u6001",\r
+            prop: "newsStatus",\r
+            options: [\r
+              { label: "\u5DF2\u63D0\u4EA4", value: "0" },\r
+              { label: "\u5DF2\u4E0A\u67B6", value: "1" },\r
+              { label: "\u5DF2\u4E0B\u67B6", value: "2" },\r
+            ],\r
+          },\r
+\r
+          {\r
+            type: "select",\r
+            label: "\u7ED3\u6784\u6A21\u5F0F",\r
+            prop: "newsModel",\r
+            options: [\r
+              {\r
+                value: "1",\r
+                label: "\u4E0A\u4E0B\u7ED3\u6784",\r
+              },\r
+              {\r
+                value: "2",\r
+                label: "\u5DE6\u53F3\u7ED3\u6784",\r
+              },\r
+            ],\r
+          },\r
+          {\r
+            type: "image",\r
+            label: "\u5C01\u9762\u56FE\u7247",\r
+            prop: "fileIds",\r
+            statusJudge: {\r
+              error: { newsTitle: "1", newsModel: "2" },\r
+            },\r
+          },\r
+          {\r
+            label: "\u81EA\u5B9A\u4E49\u5217",\r
+            prop: "fileIds",\r
+            renderColumn(h) {\r
+              return (\r
+                <el-table-column\r
+                  label="\u81EA\u5B9A\u4E49\u5217"\r
+                  scopedSlots={{\r
+                    default: () => {\r
+                      return <span>1234</span>;\r
+                    },\r
+                  }}\r
+                ></el-table-column>\r
+              );\r
+            },\r
+          },\r
+          // {\r
+          //   tag: 'ml-editor', //'c-table',\r
+          //   label: '\u65B0\u95FB\u5185\u5BB9',\r
+          //   prop: 'newsContent',\r
+          //   block: true,\r
+          //   showTable: false\r
+          // }\r
+\r
+          // {\r
+          //   type: 'string',\r
+          //   label: '\u56FE\u6807\u540D\u79F0',\r
+          //   prop: 'icon',\r
+          //   showTable: true, // \u662F\u5426\u5728\u8868\u683C\u4E2D\u5C55\u793A\r
+          //    // \u641C\u7D22\u65F6\u4F7F\u7528\uFF0C\u9ED8\u8BA4false\r
+          //   addForm: true, // \u65B0\u589E\u65F6\u4F7F\u7528\uFF0C\u9ED8\u8BA4true\r
+          //   editForm: true, // \u7F16\u8F91\u65F6\u4F7F\u7528\uFF0C\u9ED8\u8BA4true\r
+          //   viewForm: true, // \u67E5\u770B\u662F\u4F7F\u7528\uFF0C\u9ED8\u8BA4true\r
+        ],\r
+      },\r
+    };\r
+  },\r
+  methods: {\r
+    onDelete() {\r
+      this.$message.success("\u5220\u9664xxxxx");\r
+    },\r
+    onDetail() {\r
+      this.$message.success("\u67E5\u770B\u8BE6\u60C5");\r
+      this.hideOneColumn = !this.hideOneColumn;\r
+    },\r
+    reFormOptions() {\r
+      options = [{ label: "\u6613\u5B89", value: 1 }];\r
+      (this.$refs.mainTable as MlTable).mlForm.reloadOptions("type");\r
+    },\r
+  },\r
+  render() {\r
+    return <ml-table ref="mainTable" props={this.tableConfig}></ml-table>;\r
+  },\r
+});\r
+`;export{r as default};
